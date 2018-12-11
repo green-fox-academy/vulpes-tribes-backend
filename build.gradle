@@ -38,6 +38,7 @@ dependencies {
     testImplementation('org.springframework.security:spring-security-test')
     //flyway
     compile('org.flywaydb:flyway-core')
+    //jdbc
     compile('org.springframework.boot:spring-boot-starter-jdbc')
 
 }
