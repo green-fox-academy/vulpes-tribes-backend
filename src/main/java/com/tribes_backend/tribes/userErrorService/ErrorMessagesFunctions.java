@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ErrorMessagesFunctions {
-    
+
 
     public ErrorResponseModel usernameAlreadyTaken(){
         ErrorResponseModel toReturn = new ErrorResponseModel();
@@ -14,13 +14,11 @@ public class ErrorMessagesFunctions {
         return toReturn;
     }
 
-    public Object usernameIsEmpty(TribesUser user){
-        if (user.getUsername()==null || user.getUsername().isEmpty()){
+    public ErrorResponseModel usernameIsEmpty(){
             ErrorResponseModel toReturn = new ErrorResponseModel();
             toReturn.setStatus("error");
             toReturn.setErrorMessage("Missing parameter(s): username!");
             return toReturn;
-        }
-        else return user;
+
     }
 }
