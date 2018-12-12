@@ -7,21 +7,21 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class TestKingdom {
-    Kingdom kingdom;
     String name;
 
+
+
     @Test
-    public void testKingdomNameIsNotValid() {
-
+    public void testKingdomNameIsNotValid(){
         name = null;
-        if (kingdom.getName().equals( null )) {
-            try {
+        Kingdom kingdom = new Kingdom( name );
+        assertEquals(null, kingdom.getName());
+    }
 
-            } catch (Exception e) {
-
-            }
-        } else {
-            assertEquals( name, kingdom.getName() );
-        }
+    @Test
+    public void testKingdomNameIsValid(){
+        name = "Ondra";
+        Kingdom kingdom = new Kingdom( name );
+        assertEquals( "Ondra", kingdom.getName() );
     }
 }

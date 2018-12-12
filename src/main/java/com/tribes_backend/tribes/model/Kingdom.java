@@ -14,7 +14,7 @@ public class Kingdom {
 
     @NotNull
     @Size(min = 2, message = "Name of Kingdom should have atleast 2 characters")
-    private String name;
+    public String name;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribeUser_id", nullable = false)
