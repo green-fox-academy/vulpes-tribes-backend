@@ -14,6 +14,8 @@ public interface UserTRepository extends JpaRepository<TribesUser, Long> {
     @Override
     List<TribesUser> findAll();
 
+    TribesUser findByUsername(String username);
+
 
 
 }

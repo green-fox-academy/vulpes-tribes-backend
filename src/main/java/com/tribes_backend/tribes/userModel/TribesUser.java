@@ -19,6 +19,14 @@ public class TribesUser {
         this.username = username;
     }
 
+    public TribesUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    public TribesUser() {
+    }
+
     public Long getId() {
         return id;
     }
@@ -43,15 +51,7 @@ public class TribesUser {
         this.password = password;
     }
 
-  public TribesUser(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 
-    public TribesUser() {
-    }
-    // to be specified later - jsousek
-    public boolean checked (){
-        return false;
-    }
+
+
 }
