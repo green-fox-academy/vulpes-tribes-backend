@@ -38,6 +38,7 @@ public class UserRestController {
         else if (newUser.getUsername() == null || newUser.getUsername().isEmpty()){
             return new ResponseEntity(errorMessages.usernameIsEmpty(), HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity(newUser, HttpStatus.OK);
+        else userTRepository.save(newUser);
+            return new ResponseEntity(newUser, HttpStatus.OK);
     }
 }
