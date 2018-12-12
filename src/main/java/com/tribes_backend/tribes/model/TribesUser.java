@@ -1,6 +1,7 @@
 package com.tribes_backend.tribes.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.Entity;
@@ -13,6 +14,7 @@ import javax.persistence.Table;
 public class TribesUser {
     @Id
     @GeneratedValue
+    @JsonIgnore
     Long id;
     String username;
     String password;
@@ -50,10 +52,10 @@ public class TribesUser {
         this.password = password;
     }
 
-    public TribesUser() {
-    }
-
-    public boolean checked (){
-
-    }
+//    public TribesUser() {
+//    }
+//
+//    public boolean checked (){
+//
+//    }
 }
