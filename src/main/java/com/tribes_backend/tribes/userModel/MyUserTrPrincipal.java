@@ -1,4 +1,4 @@
-package com.tribes_backend.tribes.userModel;
+/*package com.tribes_backend.tribes.userModel;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -46,4 +46,4 @@ public class MyUserTrPrincipal implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-}
+}*/
