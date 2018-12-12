@@ -46,4 +46,11 @@ public class MyUserTrPrincipal implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+
+    public boolean isValid (){
+
+    }
+
+
 }

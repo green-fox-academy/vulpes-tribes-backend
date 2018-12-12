@@ -53,7 +53,5 @@ public class TribesUser {
     public TribesUser() {
     }
 
-    public boolean checked (){
 
-    }
 }
