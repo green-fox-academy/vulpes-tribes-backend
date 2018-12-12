@@ -9,13 +9,13 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table
+@Table(name = "users")
 public class TribesUser {
     @Id
     @GeneratedValue
     Long id;
     @NotNull
-    @Size(min=2, message="Username should have atleast 2 characters")
+    @Size(min=2, max=45, message="Username should have atleast 2, maximum 45 characters")
     String username;
     @NotNull
     @Size(min=8, message="Password should have atleast 2 characters")
