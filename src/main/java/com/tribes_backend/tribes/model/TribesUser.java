@@ -19,6 +19,8 @@ public class TribesUser {
     @NotNull
     @Size(min=2, message="Username should have atleast 2 characters")
     String username;
+    @NotNull
+    @Size(min=8, message="Password should have atleast 2 characters")
     String password;
 
     public TribesUser(String username) {
