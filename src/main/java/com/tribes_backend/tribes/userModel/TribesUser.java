@@ -1,7 +1,5 @@
-package com.tribes_backend.tribes.model;
+package com.tribes_backend.tribes.userModel;
 
-
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,8 +50,8 @@ public class TribesUser {
 
     public TribesUser() {
     }
-
+    // to be specified later - jsousek
     public boolean checked (){
-
+        return false;
     }
 }
