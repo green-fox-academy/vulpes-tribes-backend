@@ -1,12 +1,13 @@
 package com.tribes_backend.tribes.userModel;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 
 public class MyUserTrPrincipal implements UserDetails {
-
+    @Autowired
     private TribesUser tribesUser;
 
     public MyUserTrPrincipal(TribesUser tribesUser) {
