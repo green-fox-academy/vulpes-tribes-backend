@@ -48,9 +48,7 @@ public class MyUserTrPrincipal implements UserDetails {
     }
 
 
-    public boolean isValid (){
 
-    }
 
 
 }

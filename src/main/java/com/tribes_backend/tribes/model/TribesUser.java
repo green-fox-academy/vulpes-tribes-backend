@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table
@@ -14,6 +16,8 @@ public class TribesUser {
     @Id
     @GeneratedValue
     Long id;
+    @NotNull
+    @Size(min=2, message="Username should have atleast 2 characters")
     String username;
     String password;
 
