@@ -24,4 +24,16 @@ public class UserModelHelpersMethods {
         }
         return false;
     }
+    public String getErrorParameter (TribesUser user){
+        String toReturn = "";
+        if (user.getUsername().isEmpty() || user.getUsername() == null){
+            toReturn = "username";
+            return toReturn;
+        }
+        else if (user.getPassword().isEmpty() || user.getPassword() == null){
+            toReturn = "password";
+            return toReturn;
+        }
+        return null;
+    }
 }
