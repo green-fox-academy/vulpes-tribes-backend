@@ -18,10 +18,10 @@ public class UserController {
         return new ResponseEntity<String>(token, HttpStatus.OK);
     }
 
-    @PostMapping("/register")
-    public TribesUser register() {
-        return new TribesUser("newUser");
-    }
+//    @PostMapping("/register")
+//    public TribesUser register() {
+//        return new TribesUser("newUser");
+//    }
 
     @PostMapping("/logout")
     public String logout() {

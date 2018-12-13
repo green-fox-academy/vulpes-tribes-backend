@@ -19,8 +19,7 @@ public class TribesUser {
     String username;
     String password;
 
-    public TribesUser(String username) {
-        this.username = username;
+    public TribesUser() {
     }
 
     public Long getId() {
