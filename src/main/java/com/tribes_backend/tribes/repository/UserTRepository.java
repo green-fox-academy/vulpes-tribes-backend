@@ -10,6 +10,7 @@ import java.util.List;
 
 @Service
 public interface UserTRepository extends JpaRepository<TribesUser, Long> {
+    TribesUser findTribesUserByUsername (String username);
 
     @Override
     List<TribesUser> findAll();
