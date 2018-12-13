@@ -17,7 +17,7 @@ public class UserModelHelpersMethods {
 
 
 
-    public boolean isValid(TribesUser tribesUser) {
+   static public boolean isValid(TribesUser tribesUser) {
         if (tribesUser.getUsername() == null || tribesUser.getPassword() == null) {
             return false;
         } else return true;
