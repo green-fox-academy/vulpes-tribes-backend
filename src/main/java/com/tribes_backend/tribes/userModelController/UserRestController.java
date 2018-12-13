@@ -23,17 +23,17 @@ public class UserRestController {
     }
 
 
-    @PostMapping(value = "/login")
-
-    public ResponseEntity loginUser(@RequestBody TribesUser tribesUser) {
-        if (userMethods.isValid(tribesUser)) {
-            if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword() ==
-                    tribesUser.getPassword()){
-                return new ResponseEntity(,HttpStatus.OK)
-            }
-
-
-        }
-
-    }
+//    @PostMapping(value = "/login")
+//
+//    public ResponseEntity loginUser(@RequestBody TribesUser tribesUser) {
+//        if (userMethods.isValid(tribesUser)) {
+//            if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword() ==
+//                    tribesUser.getPassword()){
+//                return new ResponseEntity(,HttpStatus.OK)
+//            }
+//
+//
+//        }
+//
+//    }
 }
