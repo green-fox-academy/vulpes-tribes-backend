@@ -1,12 +1,19 @@
 package com.tribes_backend.tribes.userModel;
 
+
+import com.tribes_backend.tribes.repository.UserTRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class UserModelHelpersMethods {
-//    @Autowired
-//    TribesUser tribesUser = new TribesUser();
+    UserTRepository userRepo;
+
+    @Autowired
+    public UserModelHelpersMethods(UserTRepository userRepo) {
+        this.userRepo = userRepo;
+    }
 
 
 
@@ -15,4 +22,17 @@ public class UserModelHelpersMethods {
             return false;
         } else return true;
     }
+
+
+
+
+    public boolean usernameAlreadyTaken(TribesUser user) {
+        TribesUser toCompare = userRepo.findByUsername(user.getUsername());
+        if (user.getUsername().equals(toCompare.getUsername())) {
+            return true;
+        }
+        return false;
+    }
+
 }
+
