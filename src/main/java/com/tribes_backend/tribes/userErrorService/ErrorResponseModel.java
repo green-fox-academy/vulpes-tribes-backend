@@ -4,7 +4,10 @@ package com.tribes_backend.tribes.userErrorService;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 00664bd380a8b5d864007bf72d6f1e5edf856cff
 @Getter
 @Setter
 @NoArgsConstructor
@@ -42,6 +45,6 @@ public class ErrorResponseModel {
     public String toString() {
         return "Error Message from ErrorResponseModel class: " +
                 "error='" + status + '\'' +
-                ", errorMessage='" + errorMessage ;
+                ", errorMessage='" + errorMessage;
     }
 }

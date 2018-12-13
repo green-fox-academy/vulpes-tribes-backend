@@ -5,14 +5,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
-@Table
+@Table(name = "users")
 public class TribesUser {
     @Id
     @GeneratedValue
     Long id;
+    @NotNull
+    @Size(min = 2, max = 45, message = "Username should have atleast 2, maximum 45 characters")
     String username;
+    @NotNull
+    @Size(min = 8, message = "Password should have atleast 2 characters")
     String password;
 
     public TribesUser(String username) {
@@ -50,8 +56,4 @@ public class TribesUser {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-
-
 }
