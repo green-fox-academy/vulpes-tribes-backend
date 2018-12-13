@@ -1,8 +1,8 @@
-package com.tribes_backend.tribes.model;
+package com.tribes_backend.tribes.userModel;
+
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.GeneratorType;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,6 +18,12 @@ public class TribesUser {
     Long id;
     String username;
     String password;
+
+
+    public TribesUser(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
     public TribesUser() {
     }
@@ -46,15 +52,6 @@ public class TribesUser {
         this.password = password;
     }
 
-  public TribesUser(String username, String password) {
-        this.username = username;
-        this.password = password;
-    }
 
-//    public TribesUser() {
-//    }
-//
-//    public boolean checked (){
-//
-//    }
+
 }

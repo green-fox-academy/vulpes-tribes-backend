@@ -1,6 +1,6 @@
 package com.tribes_backend.tribes.controller;
 
-import com.tribes_backend.tribes.model.TribesUser;
+import com.tribes_backend.tribes.userModel.TribesUser;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

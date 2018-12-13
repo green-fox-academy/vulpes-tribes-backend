@@ -1,4 +1,4 @@
-package com.tribes_backend.tribes.model;
+package com.tribes_backend.tribes.userModel;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
