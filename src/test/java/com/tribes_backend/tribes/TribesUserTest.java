@@ -9,43 +9,33 @@ import static org.junit.Assert.assertEquals;
 
 
 public class TribesUserTest {
-String username;
-String password;
 
 
 
     @Test
     public void userOK(){
-        username = "ddd";
-        password = "123456789";
+        TribesUser tribesUser = new TribesUser("ddd", "1235");
         UserModelHelpersMethods userHelp = new UserModelHelpersMethods();
-        boolean result = userHelp.isValid(username, password);
-        assertEquals(true, userHelp.isValid(username, password));
+        assertEquals(true, userHelp.isValid(tribesUser));
     }
     @Test
     public void usernameMissing(){
-        username = null;
-        password = "123456789";
+        TribesUser tribesUser = new TribesUser(null, "1235");
         UserModelHelpersMethods userHelp = new UserModelHelpersMethods();
-        boolean result = userHelp.isValid(username, password);
-        assertEquals(false, userHelp.isValid(username, password));
+        assertEquals(false, userHelp.isValid(tribesUser));
     }
 
     @Test
     public void passwordMissing(){
-        username = "ddd";
-        password = null;
+        TribesUser tribesUser = new TribesUser("ddd", null);
         UserModelHelpersMethods userHelp = new UserModelHelpersMethods();
-        boolean result = userHelp.isValid(username, password);
-        assertEquals(false, userHelp.isValid(username, password));
+        assertEquals(false, userHelp.isValid(tribesUser));
     }
     @Test
     public void bothMissing(){
-        username = null;
-        password = null;
+        TribesUser tribesUser = new TribesUser(null, null);
         UserModelHelpersMethods userHelp = new UserModelHelpersMethods();
-        boolean result = userHelp.isValid(username, password);
-        assertEquals(false, userHelp.isValid(username, password));
+        assertEquals(false, userHelp.isValid(tribesUser));
     }
 
 }

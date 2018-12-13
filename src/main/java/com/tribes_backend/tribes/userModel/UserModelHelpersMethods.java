@@ -5,13 +5,13 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserModelHelpersMethods {
+//    @Autowired
+//    TribesUser tribesUser = new TribesUser();
 
 
-    public UserModelHelpersMethods() {
-    }
 
-    public boolean isValid(String username, String password) {
-        if (username == null || password == null) {
+    public boolean isValid(TribesUser tribesUser) {
+        if (tribesUser.getUsername() == null || tribesUser.getPassword() == null) {
             return false;
         } else return true;
     }
