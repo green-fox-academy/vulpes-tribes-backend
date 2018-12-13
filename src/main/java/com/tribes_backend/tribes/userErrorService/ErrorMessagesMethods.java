@@ -6,11 +6,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class ErrorMessagesMethods {
 
-
     public ErrorResponseModel usernameAlreadyTaken(){
         ErrorResponseModel toReturn = new ErrorResponseModel();
         toReturn.setStatus("error");
-        toReturn.setErrorMessage("Username already taken, please choose an other one.");
+        toReturn.setErrorMessage("Username already taken, please choose another one.");
         return toReturn;
     }
 
@@ -22,14 +21,15 @@ public class ErrorMessagesMethods {
     }
 
     public String getErrorParameter (TribesUser user){
-        String toReturn = "";
-        StringBuffer concatBuffer = new StringBuffer(toReturn);
+        StringBuffer concatBuffer = new StringBuffer();
         if (user.getUsername().isEmpty() || user.getUsername() == null){
             concatBuffer.append("username");
         }
         if (user.getPassword().isEmpty() || user.getPassword() == null){
-            concatBuffer.append(", password");
+            if (concatBuffer.length() != 0){
+            concatBuffer.append(", password");}
+            else concatBuffer.append("password");
         }
-        return toReturn;
+        return concatBuffer.toString();
     }
 }
