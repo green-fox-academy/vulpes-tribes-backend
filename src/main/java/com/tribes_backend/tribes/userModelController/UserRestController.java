@@ -9,6 +9,7 @@ import com.tribes_backend.tribes.userModel.UserModelHelpersMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -33,13 +34,13 @@ public class UserRestController {
 
 
     @PostMapping(value = "/register")
-    public ResponseEntity<Object> registerUser ( @RequestBody TribesUser newUser)  {
+    public ResponseEntity<Object> registerUser ( @Validated  @RequestBody TribesUser newUser)  {
 
         if (userMethods.usernameAlreadyTaken(newUser)){
             return new ResponseEntity(errorMessages.usernameAlreadyTaken(), HttpStatus.CONFLICT);
         }
         else if (newUser.getUsername() == null || newUser.getUsername().isEmpty()){
-            return new ResponseEntity(errorMessages.usernameIsEmpty(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(errorMessages.usernameIsEmpty(newUser), HttpStatus.BAD_REQUEST);
         }
         else userTRepository.save(newUser);
         return ResponseEntity.ok(newUser);

@@ -14,11 +14,23 @@ public class ErrorMessagesFunctions {
         return toReturn;
     }
 
-    public ErrorResponseModel usernameIsEmpty(){
+    public ErrorResponseModel usernameIsEmpty(TribesUser user){
             ErrorResponseModel toReturn = new ErrorResponseModel();
             toReturn.setStatus("error");
-            toReturn.setErrorMessage("Missing parameter(s): username!");
+            toReturn.setErrorMessage("Missing parameter(s): "+getErrorParameter(user));
             return toReturn;
+    }
 
+    public String getErrorParameter (TribesUser user){
+        String toReturn = "";
+        if (user.getUsername().isEmpty() || user.getUsername() == null){
+            toReturn += " username ";
+            return toReturn;
+        }
+        else if (user.getPassword().isEmpty() || user.getPassword() == null){
+            toReturn += " password ";
+            return toReturn;
+        }
+        return null;
     }
 }
