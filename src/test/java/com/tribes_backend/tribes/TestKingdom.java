@@ -1,7 +1,6 @@
 package com.tribes_backend.tribes;
 
-import com.tribes_backend.tribes.model.Kingdom;
-import com.tribes_backend.tribes.model.TribesUser;
+import com.tribes_backend.tribes.kingdomModel.Kingdom;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;

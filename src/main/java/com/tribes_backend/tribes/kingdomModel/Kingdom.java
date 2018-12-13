@@ -1,4 +1,4 @@
-package com.tribes_backend.tribes.model;
+package com.tribes_backend.tribes.kingdomModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
