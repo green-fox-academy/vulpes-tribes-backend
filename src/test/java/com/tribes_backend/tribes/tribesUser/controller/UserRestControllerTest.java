@@ -1,14 +1,14 @@
-package com.tribes_backend.tribes.userModelController;
+package com.tribes_backend.tribes.tribesUser.controller;
 
-import com.tribes_backend.tribes.userModel.TribesUser;
-import com.tribes_backend.tribes.userModel.UserModelHelpersMethods;
+import static org.junit.Assert.*;
+import com.tribes_backend.tribes.tribesUser.model.UserModelHelpersMethods;
+import com.tribes_backend.tribes.tribesUser.controller.UserRestController;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -16,7 +16,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserRestControllerTest {
 
@@ -37,7 +36,6 @@ public class UserRestControllerTest {
                 "  \"username\": \"adamgyulavari\",\n" +
                 "  \"password\": \"abc123\"\n" +
                 "}";
-//        Mockito.when(userMethods.usernameAlreadyTaken()).thenReturn(false)
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
