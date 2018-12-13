@@ -28,7 +28,6 @@ public class UserRestController {
 
 
 
-
     @PostMapping(value = "/register")
     public ResponseEntity<Object> registerUser ( @Validated  @RequestBody TribesUser newUser)  {
 

@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class UserModelHelpersMethods {
+
     UserTRepository userRepo;
     @Autowired
     public UserModelHelpersMethods(UserTRepository userRepo) {
