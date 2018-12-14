@@ -47,7 +47,7 @@ public class UserRestController {
 
 //    @PostMapping(value = "/login")
 //
-//    public ResponseEntity loginUser(@RequestBody TribesUser tribesuser) {
+//    public ResponseEntity loginUser(@RequestBody TribesUser tribesUser) {
 //        if (userMethods.isValid(tribesuser)) {
 //            if (userTRepository.findTribesUserByUsername(tribesuser.getUsername()).getPassword() ==
 //                    tribesuser.getPassword()){
