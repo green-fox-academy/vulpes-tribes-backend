@@ -48,18 +48,18 @@ public class UserRestControllerTest {
                 "  \"username\": \"adamgyulavari\",\n" +
                 "  \"password\": \"12345678ab\"\n" +
                 "}";
-        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
-        Mockito.when(userCrudService.save(newUser)).thenReturn(true);
-        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(false);
-        mockMvc.perform(MockMvcRequestBuilders.post("/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(json))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.username", Matchers.is("adamgyulavari")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.password", Matchers.is("12345678ab")));
-                Mockito.verify(userCrudService).save(refEq(newUser));
-                Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
-    }
+//        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
+//        Mockito.when(userCrudService.save(newUser)).thenReturn(true);
+//        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(false);
+//        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(json))
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.username", Matchers.is("adamgyulavari")))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.password", Matchers.is("12345678ab")));
+//                Mockito.verify(userCrudService).save(refEq(newUser));
+//                Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
+//    }
 
 //    @Test
 //    public void testRegisterTakenUsername() throws Exception {
@@ -100,5 +100,5 @@ public class UserRestControllerTest {
 //                .content(json))
 //                .andExpect(MockMvcResultMatchers.status().isConflict())
 //                .andDo(MockMvcResultHandlers.print());
-//    }
+    }
 }
