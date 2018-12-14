@@ -1,26 +1,22 @@
 package com.tribesbackend.tribes;
 
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
+import com.tribesbackend.tribes.tribeskingdom.model.KingdomModelHelpersMethods;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
 public class TestKingdom {
-    String name;
-
-
 
     @Test
-    public void testKingdomNameIsNotValid(){
-        name = null;
-        Kingdom kingdom = new Kingdom( name );
-        assertEquals(null, kingdom.getName());
+    public void kingdoNameIsValid(){
+        Kingdom kingdom = new Kingdom( "kingdom" );
+        assertEquals(true, KingdomModelHelpersMethods.isValid(kingdom));
     }
 
     @Test
-    public void testKingdomNameIsValid(){
-        name = "Ondra";
-        Kingdom kingdom = new Kingdom( name );
-        assertEquals( "Ondra", kingdom.getName() );
+    public void kingdoNameIsNotValid(){
+        Kingdom kingdom = new Kingdom( null );
+        assertEquals( false, KingdomModelHelpersMethods.isValid(kingdom) );
     }
 }
