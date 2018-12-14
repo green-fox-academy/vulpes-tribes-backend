@@ -48,9 +48,20 @@ public class UserRestController {
     }
 
 
-//    @PostMapping(value = "/login")
+    @PostMapping(value = "/login")
+
+    public ResponseEntity loginUser(@RequestBody TribesUser tribesUser) {
+
+        try {
+            return actorService.getActor(id);
+        } catch (ActorNotFoundException ex) {
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Actor Not Found", ex);
+        }
+
+
+
 //
-//    public ResponseEntity loginUser(@RequestBody TribesUser tribesUser) {
 //        if (userMethods.isValid(tribesUser)) {
 //            if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword() ==
 //                    tribesUser.getPassword()){
@@ -59,6 +70,6 @@ public class UserRestController {
 //
 //
 //        }
-//
-//    }
+
+    }
 }
