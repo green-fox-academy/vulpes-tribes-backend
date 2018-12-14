@@ -2,6 +2,8 @@ package com.tribes_backend.tribes.tribesUser.controller;
 
 
 import com.tribes_backend.tribes.tribesUser.errorService.ErrorMessagesMethods;
+import com.tribes_backend.tribes.tribesUser.exception.InvalidUserPasswordException;
+import com.tribes_backend.tribes.tribesUser.exception.TribesError;
 import com.tribes_backend.tribes.tribesUser.model.TribesUser;
 import com.tribes_backend.tribes.tribesUser.model.UserModelHelpersMethods;
 import com.tribes_backend.tribes.tribesUser.repository.UserTRepository;
@@ -12,6 +14,9 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 public class UserRestController {
@@ -44,34 +49,41 @@ public class UserRestController {
 
 
     @PostMapping(value = "/login")
-
     public ResponseEntity loginUser(@RequestBody TribesUser tribesUser) {
-
-        try {
-            if (userMethods.isValid(tribesUser)) {
-                if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword() ==
-                        tribesUser.getPassword()) {
-                    return new ResponseEntity(, HttpStatus.OK)
-                }
-
-
-                return actorService.getActor(id);
-            } catch(ActorNotFoundException ex){
-            throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "Actor Not Found", ex);
+        if (userMethods.isValid(tribesUser)) {
+            //username is in database andpassword matches
+            if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword() ==
+                    tribesUser.getPassword()) {
+                return new ResponseEntity("token", HttpStatus.OK);
+                //username is not empty, but is not in database
+            } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()) == null) {
+              //  throw new InvalidUserPasswordException("error", "Not such user: " + tribesUser.getUsername());
+                return new ResponseEntity(
+                        new InvalidUserPasswordException("error", "Not such user: " + tribesUser.getUsername())
+                        ,HttpStatus.UNAUTHORIZED);
+            } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword() !=
+                    tribesUser.getPassword()) {
+           //     throw new InvalidUserPasswordException("error", "Wrong password!");
+                return  new ResponseEntity(
+                        new InvalidUserPasswordException("error", "Wrong password!")
+                        ,HttpStatus.UNAUTHORIZED);
+            }
         }
-
-
-
-//
-//        if (userMethods.isValid(tribesUser)) {
-//            if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword() ==
-//                    tribesUser.getPassword()){
-//                return new ResponseEntity(,HttpStatus.OK)
-//            }
-//
-//
-//        }
-
+        //empty username or empty password or empty both
+     //   else {
+            String textError;
+            if (tribesUser.getUsername() == null && tribesUser.getPassword() == null) {
+                textError = "username, password";
+            } else if (tribesUser.getUsername() == null) {
+                textError = "username";
+            } else {
+                textError = "password";
+            }
+        //    throw new InvalidUserPasswordException("error", textError);
+            return  new ResponseEntity(
+                    new InvalidUserPasswordException("error", textError), HttpStatus.BAD_REQUEST);
+     //   }
+     //   return
     }
+
 }
