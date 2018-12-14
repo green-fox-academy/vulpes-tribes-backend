@@ -8,6 +8,7 @@ import com.tribes_backend.tribes.tribesUser.repository.UserTRepository;
 
 import com.tribes_backend.tribes.tribesUser.errorService.ErrorMessagesMethods;
 
+import com.tribes_backend.tribes.tribesUser.service.UserCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,18 +21,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class UserRestController {
-    UserTRepository userTRepository;
+    UserCrudService userCrudService;
     UserModelHelpersMethods userMethods;
     ErrorMessagesMethods errorMessages;
 
     @Autowired
-    public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods, ErrorMessagesMethods errorMessages) {
-        this.userTRepository = userTRepository;
+    public UserRestController(UserCrudService userCrudService, UserModelHelpersMethods userMethods, ErrorMessagesMethods errorMessages) {
+        this.userCrudService = userCrudService;
         this.userMethods = userMethods;
         this.errorMessages = errorMessages;
     }
-
-
 
     @PostMapping(value = "/register")
     public ResponseEntity<Object> registerUser ( @Validated  @RequestBody TribesUser newUser)  {
@@ -42,7 +41,7 @@ public class UserRestController {
         else if (newUser.getUsername() == null || newUser.getUsername().isEmpty()){
             return new ResponseEntity(errorMessages.jsonFieldIsEmpty(newUser), HttpStatus.BAD_REQUEST);
         }
-        else userTRepository.save(newUser);
+        else userCrudService.save(newUser);
         return ResponseEntity.ok(newUser);
            // return new ResponseEntity(newUser, HttpStatus.OK);
     }
