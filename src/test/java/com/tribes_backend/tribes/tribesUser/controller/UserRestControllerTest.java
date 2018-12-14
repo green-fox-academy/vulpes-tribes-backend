@@ -8,6 +8,7 @@ import com.tribes_backend.tribes.tribesUser.errorService.ErrorResponseModel;
 import com.tribes_backend.tribes.tribesUser.model.TribesUser;
 import com.tribes_backend.tribes.tribesUser.model.UserModelHelpersMethods;
 import com.tribes_backend.tribes.tribesUser.controller.UserRestController;
+import com.tribes_backend.tribes.tribesUser.repository.UserTRepository;
 import com.tribes_backend.tribes.tribesUser.service.UserCrudService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -37,6 +38,8 @@ public class UserRestControllerTest {
     private ErrorMessagesMethods errorMessagesMethods;
     @Mock
     private TribesUser mockedUser;
+    @Mock
+    private UserTRepository userTRepository;
     @InjectMocks
     private UserRestController userRestController;
 
@@ -110,4 +113,20 @@ public class UserRestControllerTest {
                 .content(json))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
+
+//    @Test
+//    public void testSuccesfulLogin() {
+//        String json = "{\n" +
+//                "  \"username\": \"adamgyulavari\",\n" +
+//                "  \"password\": \"1234ab\"\n" +
+//                "}";
+//        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
+//        Mockito.when(UserModelHelpersMethods.isValid(refEq(newUser))).thenReturn(true);
+//        Mockito.when(userTRepository.findTribesUserByUsername(refEq("adamgyulavari")).getPassword()).thenReturn("12345678ab");
+//        Mockito.when(.getPassword())
+//        mockMvc.perform(MockMvcRequestBuilders.post("/login")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(json))
+//                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+//    }
 }

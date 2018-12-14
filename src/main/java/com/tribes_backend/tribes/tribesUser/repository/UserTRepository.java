@@ -5,15 +5,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public interface UserTRepository extends JpaRepository<TribesUser, Long> {
-    TribesUser findTribesUserByUsername (String username);
+   TribesUser findTribesUserByUsername (String username);
 
     @Override
     List<TribesUser> findAll();
 
-    TribesUser findByUsername(String username);
+ Optional<TribesUser> findByUsername(String username);
 
 
 
