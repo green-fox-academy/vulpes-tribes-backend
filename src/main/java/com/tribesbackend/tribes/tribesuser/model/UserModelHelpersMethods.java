@@ -1,11 +1,11 @@
 package com.tribesbackend.tribes.tribesuser.model;
 import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-@Component
+@Service
 public class UserModelHelpersMethods {
     UserTRepository userRepo;
 
