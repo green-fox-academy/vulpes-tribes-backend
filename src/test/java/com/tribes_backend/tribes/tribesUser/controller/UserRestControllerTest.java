@@ -73,7 +73,7 @@ public class UserRestControllerTest {
                 "  \"password\": \"12345678ab\"\n" +
                 "}";
         TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
-        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(true);
+        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(refEq(newUser))).thenReturn(true);
         ErrorResponseModel toReturn = new ErrorResponseModel();
         toReturn.setStatus("error");
         toReturn.setErrorMessage("Username already taken, please choose another one.");
@@ -88,22 +88,26 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void testRegisterNullUsername() throws Exception {
+    public void testRegisterEmptyUsername() throws Exception {
         String json = "{\n" +
-                "  \"username\": null,\n" +
+                "  \"username\": \"\",\n" +
                 "  \"password\": \"12345678ab\"\n" +
                 "}";
-        mockedUser = new TribesUser("adamgyulavari", "12345678ab");
-        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(mockedUser)).thenReturn(false);
-        Mockito.when(mockedUser.getUsername()).thenReturn(null);
-        ErrorResponseModel toReturn = new ErrorResponseModel();
-        toReturn.setStatus("error");
-        toReturn.setErrorMessage("Missing parameter(s): username");
-        Mockito.when(errorMessagesMethods.usernameAlreadyTaken()).thenReturn(toReturn);
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
-                .andExpect(MockMvcResultMatchers.status().isConflict())
-                .andDo(MockMvcResultHandlers.print());
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    public void testRegisterShortPassword() throws Exception {
+        String json = "{\n" +
+                "  \"username\": \"adamgyulavari\",\n" +
+                "  \"password\": \"1234ab\"\n" +
+                "}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 }
