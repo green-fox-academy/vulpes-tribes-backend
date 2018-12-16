@@ -1,7 +1,7 @@
-package com.tribes_backend.tribes.tribesUser.controller;
+package com.tribesbackend.tribes.tribesuser.controller;
 
-import com.tribes_backend.tribes.tribesUser.exception.InvalidUserPasswordException;
-import com.tribes_backend.tribes.tribesUser.exception.TribesError;
+import com.tribesbackend.tribes.tribesuser.exception.InvalidUserPasswordException;
+import com.tribesbackend.tribes.tribesuser.exception.TribesError;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;

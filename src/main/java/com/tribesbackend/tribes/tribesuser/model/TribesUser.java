@@ -1,4 +1,4 @@
-
+package com.tribesbackend.tribes.tribesuser.model;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

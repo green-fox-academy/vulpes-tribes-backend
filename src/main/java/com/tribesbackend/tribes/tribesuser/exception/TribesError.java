@@ -1,4 +1,4 @@
-package com.tribes_backend.tribes.tribesUser.exception;
+package com.tribesbackend.tribes.tribesuser.exception;
 
 public class TribesError {
     String status;
