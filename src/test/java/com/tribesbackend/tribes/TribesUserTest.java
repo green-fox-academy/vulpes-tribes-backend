@@ -1,7 +1,8 @@
-package com.tribes_backend.tribes;
+package com.tribesbackend.tribes;
 
-import com.tribes_backend.tribes.tribesUser.model.TribesUser;
-import com.tribes_backend.tribes.tribesUser.model.UserModelHelpersMethods;
+import com.tribesbackend.tribes.tribesuser.model.TribesUser;
+import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
+import org.junit.Assert;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -14,7 +15,7 @@ public class TribesUserTest {
     @Test
     public void userOK(){
         TribesUser tribesUser = new TribesUser("ddd", "1235");
-        assertEquals(true, UserModelHelpersMethods.isValid(tribesUser));
+        Assert.assertEquals(true, UserModelHelpersMethods.isValid(tribesUser));
     }
     @Test
     public void usernameMissing(){

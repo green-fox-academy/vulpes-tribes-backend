@@ -1,4 +1,4 @@
-package com.tribes_backend.tribes;
+package com.tribesbackend.tribes;
 
 public @interface SpringBootTest {
 }

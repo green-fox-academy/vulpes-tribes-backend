@@ -1,4 +1,3 @@
-package com.tribes_backend.tribes.tribesUser.controller;
 
 
 import com.tribes_backend.tribes.tribesUser.errorService.ErrorMessagesMethods;
@@ -7,6 +6,7 @@ import com.tribes_backend.tribes.tribesUser.exception.TribesError;
 import com.tribes_backend.tribes.tribesUser.model.TribesUser;
 import com.tribes_backend.tribes.tribesUser.model.UserModelHelpersMethods;
 import com.tribes_backend.tribes.tribesUser.repository.UserTRepository;
+import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

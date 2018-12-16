@@ -1,9 +1,8 @@
-package com.tribes_backend.tribes.tribesUser.model;
 
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tribes_backend.tribes.tribesKingdom.model.Kingdom;
+import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
