@@ -25,4 +25,7 @@ public class OKstatus {
         this.status = status;
         this.token = token;
     }
+
+    public OKstatus() {
+    }
 }
