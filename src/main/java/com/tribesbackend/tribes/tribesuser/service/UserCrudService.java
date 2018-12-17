@@ -17,6 +17,4 @@ public class UserCrudService {
         userTRepository.save(newUser);
         return true;
     }
-
-
 }

@@ -22,20 +22,11 @@ public class UserModelHelpersMethods {
         } else return true;
     }
 
-<<<<<<< HEAD
-//    public boolean usernameAlreadyTaken(TribesUser user) {
-//        TribesUser toCompare = userRepo.findByUsername(user.getUsername());
-//        if (user.getUsername().equals(toCompare.getUsername())) {
-//            return true;
-//        }
-//        return false;
-//    }
-=======
+
     public boolean usernameAlreadyTaken(TribesUser userFromJSON) {
-        Optional<TribesUser> optionalUserFromRepo = userRepo.findByUsername(userFromJSON.getUsername());
+        Optional<TribesUser> optionalUserFromRepo = Optional.ofNullable( userRepo.findByUsername( userFromJSON.getUsername() ) );
         return (optionalUserFromRepo.isPresent());
     }
->>>>>>> c7cb720e935e69b58199a883fe50c6b5a9ee6847
 }
 
 

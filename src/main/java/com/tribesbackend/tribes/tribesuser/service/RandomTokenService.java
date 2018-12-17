@@ -1,8 +1,11 @@
-package com.tribesbackend.tribes.tribesuser.okstatusservice;
+package com.tribesbackend.tribes.tribesuser.service;
+
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
-public class RandomToken {
+@Service
+public class RandomTokenService {
 
     String randomToken;
 
@@ -14,7 +17,7 @@ public class RandomToken {
         this.randomToken = randomToken;
     }
 
-    public RandomToken() {
+    public RandomTokenService() {
         this.randomToken = UUID.randomUUID().toString();
     }
 }
