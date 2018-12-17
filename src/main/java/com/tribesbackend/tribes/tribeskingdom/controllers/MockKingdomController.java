@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping (value = "/mock")
 public class MockKingdomController {
+
         TribesUser mockUser = new TribesUser("mockUser", "strongOne");
         Kingdom mockKingdom = new Kingdom("mockdom", mockUser);
+
 
         @GetMapping(value = "/kingdom")
         public ResponseEntity<Kingdom> getMockKingdom() {

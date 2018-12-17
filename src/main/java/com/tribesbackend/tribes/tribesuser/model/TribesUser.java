@@ -16,10 +16,10 @@ public class TribesUser {
     @JsonIgnore
     Long id;
     @NotNull
-    @Size(min = 2, max = 45, message = "Username should have atleast 2, maximum 45 characters")
+    @Size(min = 2, max = 45, message = "Username should have at least 2, maximum 45 characters")
     String username;
     @NotNull
-    @Size(min = 8, message = "Password should have atleast 2 characters")
+    @Size(min = 8, message = "Password should have at least 2 characters")
     String password;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
