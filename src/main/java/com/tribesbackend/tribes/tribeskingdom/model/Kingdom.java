@@ -16,6 +16,7 @@ public class Kingdom {
 
     @NotNull
     @Size(min = 2, message = "Name of Kingdom should have atleast 2 characters")
+    @Column(nullable = false, unique = true)
     public String name;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)

@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @RestController
 public class UserRestController {
@@ -39,14 +37,19 @@ public class UserRestController {
 
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(errorMessages.usernameAlreadyTaken(), HttpStatus.CONFLICT);
-        } else userCrudService.save(newUser);
+        } else userTRepository.save(newUser);
         return ResponseEntity.ok(newUser);
         // return new ResponseEntity(newUser, HttpStatus.OK);
     }
 
     @PostMapping(value = "/login")
     public ResponseEntity loginUser(@RequestBody TribesUser tribesUser) {
-        if (userMethods.isValid(tribesUser)) {
+        if (tribesUser.getUsername() == null || tribesUser.getUsername().isEmpty() ||
+                tribesUser.getPassword() == null || tribesUser.getPassword().isEmpty()) {
+            return new ResponseEntity(errorMessages.jsonFieldIsEmpty(tribesUser), HttpStatus.BAD_REQUEST);
+
+        } else
+            //if (userMethods.isValid(tribesUser)) {
             //username is in database andpassword matches
             if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()) == null) {
                 //  throw new InvalidUserPasswordException("error", "Not such user: " + tribesUser.getUsername());
@@ -56,27 +59,15 @@ public class UserRestController {
             } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
                 return new ResponseEntity(
                         new OKstatus("ok", "token")
-                                , HttpStatus.OK);
+                        , HttpStatus.OK);
                 //username is not empty, but is not in database
-            } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword() !=
-                    tribesUser.getPassword()) {
+            } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
                 //     throw new InvalidUserPasswordException("error", "Wrong password!");
                 return new ResponseEntity(
                         new InvalidUserPasswordException("error", "Wrong password!")
                         , HttpStatus.UNAUTHORIZED);
+                //just to have a return statement, will never happen
             }
-        }
-        //empty username or empty password or empty both
-        String textError;
-        if (tribesUser.getUsername() == null && tribesUser.getPassword() == null) {
-            textError = "username, password";
-        } else if (tribesUser.getUsername() == null) {
-            textError = "username";
-        } else {
-            textError = "password";
-        }
-        //    throw new InvalidUserPasswordException("error", textError);
-        return new ResponseEntity(
-                new InvalidUserPasswordException("error", textError), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity(HttpStatus.CONFLICT);
     }
 }

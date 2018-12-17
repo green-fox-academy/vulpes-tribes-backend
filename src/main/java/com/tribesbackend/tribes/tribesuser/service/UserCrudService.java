@@ -13,7 +13,7 @@ public class UserCrudService {
         this.userTRepository = userTRepository;
     }
 
-    public void save(TribesUser newUser) {
+    public void save(TribesUser newUser) throws Exception{
         userTRepository.save(newUser);
     }
 }
