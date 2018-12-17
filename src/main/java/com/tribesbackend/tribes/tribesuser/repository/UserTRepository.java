@@ -12,5 +12,8 @@ public interface UserTRepository extends JpaRepository<TribesUser, Long> {
     @Override
     List<TribesUser> findAll();
 
-    TribesUser findByUsername(String username);
+    Optional<TribesUser> findByUsername(String username);
+
+    //Added by Jirina coz of login endpoint functionality - .getPassword by a TribesUser from database
+    TribesUser findTribesUserByUsername(String username);
 }

@@ -1,8 +1,9 @@
 package com.tribesbackend.tribes.tribesuser.errorservice;
-import com.tribesbackend.tribes.tribesuser.model.TribesUser;
-import org.springframework.stereotype.Service;
 
-@Service
+import com.tribesbackend.tribes.tribesuser.model.TribesUser;
+import org.springframework.stereotype.Component;
+
+@Component
 public class ErrorMessagesMethods {
 
     public ErrorResponseModel usernameAlreadyTaken() {
@@ -36,4 +37,3 @@ public class ErrorMessagesMethods {
     }
 
 }
-
