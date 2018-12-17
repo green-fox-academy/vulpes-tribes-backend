@@ -18,13 +18,13 @@ public class UserModelHelpersMethods {
         } else return true;
     }
 
-    public boolean usernameAlreadyTaken(TribesUser user) {
-        TribesUser toCompare = userRepo.findByUsername(user.getUsername());
-        if (user.getUsername().equals(toCompare.getUsername())) {
-            return true;
-        }
-        return false;
-    }
+//    public boolean usernameAlreadyTaken(TribesUser user) {
+//        TribesUser toCompare = userRepo.findByUsername(user.getUsername());
+//        if (user.getUsername().equals(toCompare.getUsername())) {
+//            return true;
+//        }
+//        return false;
+//    }
 }
 
 
