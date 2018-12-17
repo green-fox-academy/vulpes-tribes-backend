@@ -154,16 +154,47 @@ public class UserRestControllerTest {
     @Test
     public void testLoginEmptyUsername() throws Exception{
         String json = "{\n" +
-                "  \"username\": \"\",\n" +
+                "  \"username\": \"adamgyulavari\",\n" +
                 "  \"password\": \"123456ab\"\n" +
                 "}";
-        Mockito.when(errorMessagesMethods.jsonFieldIsEmpty(new TribesUser("", "123456ab"))).thenReturn(new ErrorResponseModel("error", "Missing parameter(s): username"));
+        TribesUser newUser = new TribesUser("", "123456ab");
+        Mockito.when(errorMessagesMethods.jsonFieldIsEmpty(refEq(newUser))).thenReturn(new ErrorResponseModel("error", "Missing parameter(s): username"));
+        mockMvc.perform(MockMvcRequestBuilders.post("/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.errorMessage", Matchers.is("Missing parameter(s): username")));
+        Mockito.verify(errorMessagesMethods).jsonFieldIsEmpty(refEq(newUser));
+    }
+
+    @Test
+    public void testLoginEmptyPassword() throws Exception{
+        String json = "{\n" +
+                "  \"username\": \"adamgyulavari\",\n" +
+                "  \"password\": \"\"\n" +
+                "}";
+        TribesUser newUser = new TribesUser("adamgyulavari", "");
+        Mockito.when(errorMessagesMethods.jsonFieldIsEmpty(refEq(newUser))).thenReturn(new ErrorResponseModel("error", "Missing parameter(s): password"));
+        mockMvc.perform(MockMvcRequestBuilders.post("/login")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.errorMessage", Matchers.is("Missing parameter(s): password")));
+        Mockito.verify(errorMessagesMethods).jsonFieldIsEmpty(refEq(newUser));
+    }
+
+    @Test
+    public void testLoginNullUsername() throws Exception{
+        String json = "{\n" +
+                "  \"username\": null,\n" +
+                "  \"password\": \"123456ab\"\n" +
+                "}";
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.errorMessage", Matchers.is("Missing parameter(s): username")));
     }
 
 
