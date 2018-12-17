@@ -1,13 +1,12 @@
 package com.tribesbackend.tribes.tribesuser.controller;
 
 
-import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
-import com.tribesbackend.tribes.tribesuser.model.TribesUser;
-
-
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
-
+import com.tribesbackend.tribes.tribesuser.model.TribesUser;
+import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
 import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

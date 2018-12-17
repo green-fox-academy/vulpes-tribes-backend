@@ -2,10 +2,10 @@ package com.tribesbackend.tribes.tribesuser.controller;
 
 import static org.mockito.ArgumentMatchers.refEq;
 
-import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
 import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
+import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
