@@ -1,9 +1,10 @@
 package com.tribesbackend.tribes.tribesuser.model;
+
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -21,6 +22,9 @@ public class TribesUser {
     @Size(min = 8, message = "Password should have atleast 2 characters")
     String password;
 
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "kingdom_id", nullable = false)
+    Kingdom kingdom;
 
     public TribesUser(String username, String password) {
         this.username = username;
@@ -54,4 +58,3 @@ public class TribesUser {
         this.password = password;
     }
 }
-
