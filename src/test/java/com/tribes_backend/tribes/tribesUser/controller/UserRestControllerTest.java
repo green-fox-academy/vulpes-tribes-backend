@@ -2,14 +2,13 @@ package com.tribes_backend.tribes.tribesUser.controller;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.refEq;
-
-import com.tribes_backend.tribes.tribesUser.errorService.ErrorMessagesMethods;
-import com.tribes_backend.tribes.tribesUser.errorService.ErrorResponseModel;
-import com.tribes_backend.tribes.tribesUser.model.TribesUser;
-import com.tribes_backend.tribes.tribesUser.model.UserModelHelpersMethods;
-import com.tribes_backend.tribes.tribesUser.controller.UserRestController;
-import com.tribes_backend.tribes.tribesUser.repository.UserTRepository;
-import com.tribes_backend.tribes.tribesUser.service.UserCrudService;
+import com.tribesbackend.tribes.tribesuser.controller.UserRestController;
+import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
+import com.tribesbackend.tribes.tribesuser.errorservice.ErrorResponseModel;
+import com.tribesbackend.tribes.tribesuser.model.TribesUser;
+import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
+import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
+import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
