@@ -13,10 +13,7 @@ public class UserCrudService {
         this.userTRepository = userTRepository;
     }
 
-    public boolean save(TribesUser newUser) {
+    public void save(TribesUser newUser) {
         userTRepository.save(newUser);
-        return true;
     }
-
-
 }

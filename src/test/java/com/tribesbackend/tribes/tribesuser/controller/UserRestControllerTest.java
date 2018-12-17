@@ -58,7 +58,6 @@ public class UserRestControllerTest {
                 "  \"password\": \"12345678ab\"\n" +
                 "}";
         TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
-        Mockito.when(userCrudService.save(newUser)).thenReturn(true);
         Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(false);
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -116,39 +115,32 @@ public class UserRestControllerTest {
     }
 
     @Test
-    public void testLoginNotSuchUser() {
+    public void testLoginNotSuchUser() throws Exception{
         TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
         Mockito.when(userModelHelpersMethods.isValid(refEq(newUser))).thenReturn(true);
         Mockito.when(userTRepository.findTribesUserByUsername(newUser.getUsername())).thenReturn(null);
-        try {
-            mockMvc.perform(MockMvcRequestBuilders.post("/login")
+        mockMvc.perform(MockMvcRequestBuilders.post("/login")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(asJsonString(newUser))
                     .accept(MediaType.APPLICATION_JSON))
                     .andExpect(MockMvcResultMatchers.status().isUnauthorized())
                     .andExpect(MockMvcResultMatchers.jsonPath("$.errortype", Matchers.is("error")));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
         Mockito.verify(userTRepository).findTribesUserByUsername(newUser.getUsername());
         Mockito.verify(userModelHelpersMethods).isValid(refEq(newUser));
     }
 
     @Test
-    public void testLoginSuccessful() {
+    public void testLoginSuccessful() throws Exception {
         TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
         Mockito.when(userModelHelpersMethods.isValid(refEq(newUser))).thenReturn(true);
         Mockito.when(userTRepository.findTribesUserByUsername(newUser.getUsername())).thenReturn(newUser);
-        try {
-            mockMvc.perform(MockMvcRequestBuilders.post("/login")
+        mockMvc.perform(MockMvcRequestBuilders.post("/login")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(asJsonString(newUser)))
                     .andExpect(MockMvcResultMatchers.status().isOk())
                     .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("ok")))
                     .andExpect(MockMvcResultMatchers.jsonPath("$.token", Matchers.is("token")));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
         Mockito.verify(userTRepository, Mockito.atLeast(2)).findTribesUserByUsername(newUser.getUsername());
         Mockito.verify(userModelHelpersMethods).isValid(refEq(newUser));
     }

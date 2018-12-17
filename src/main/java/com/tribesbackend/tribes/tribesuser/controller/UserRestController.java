@@ -7,6 +7,7 @@ import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.OKstatus;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.RandomToken;
 import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
+import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +24,14 @@ public class UserRestController {
     UserTRepository userTRepository;
     UserModelHelpersMethods userMethods;
     ErrorMessagesMethods errorMessages;
-    RandomToken randomToken;
+    UserCrudService userCrudService;
 
     @Autowired
-    public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods, ErrorMessagesMethods errorMessages) {
+    public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods, ErrorMessagesMethods errorMessages, UserCrudService userCrudService) {
         this.userTRepository = userTRepository;
         this.userMethods = userMethods;
         this.errorMessages = errorMessages;
+        this.userCrudService = userCrudService;
     }
 
     @PostMapping(value = "/register")
@@ -37,7 +39,7 @@ public class UserRestController {
 
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(errorMessages.usernameAlreadyTaken(), HttpStatus.CONFLICT);
-        } else userTRepository.save(newUser);
+        } else userCrudService.save(newUser);
         return ResponseEntity.ok(newUser);
         // return new ResponseEntity(newUser, HttpStatus.OK);
     }
