@@ -1,4 +1,4 @@
-package com.tribes_backend.tribes.tribesUser.controller;
+package com.tribesbackend.tribes.tribesuser.controller;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.refEq;
@@ -37,6 +37,8 @@ public class UserRestControllerTest {
     private UserModelHelpersMethods userModelHelpersMethods;
     @Mock
     private ErrorMessagesMethods errorMessagesMethods;
+    //    @Mock
+//    private TribesUser mockedUser;
     @Mock
     private UserTRepository userTRepository;
     @InjectMocks
@@ -128,23 +130,26 @@ public class UserRestControllerTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        Mockito.verify(userTRepository).findTribesUserByUsername(newUser.getUsername());
+        Mockito.verify(userModelHelpersMethods).isValid(refEq(newUser));
     }
 
     @Test
-    public void testLoginSucces() {
+    public void testLoginSuccessful() {
         TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
         Mockito.when(userModelHelpersMethods.isValid(refEq(newUser))).thenReturn(true);
-        Mockito.when(userTRepository.findTribesUserByUsername(newUser.getUsername()).getPassword()).thenReturn("12345678ab");
+        Mockito.when(userTRepository.findTribesUserByUsername(newUser.getUsername())).thenReturn(newUser);
         try {
-            mockMvc.perform(MockMvcRequestBuilders.post("/register")
+            mockMvc.perform(MockMvcRequestBuilders.post("/login")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(asJsonString(newUser)))
-                    .andExpect(MockMvcResultMatchers.status().isConflict())
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.errortype", Matchers.is("error")));
+                    .andExpect(MockMvcResultMatchers.status().isOk())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("ok")))
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.token", Matchers.is("token")));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        Mockito.verify(userTRepository).findTribesUserByUsername(newUser.getUsername()).getPassword();
+        Mockito.verify(userTRepository, Mockito.atLeast(2)).findTribesUserByUsername(newUser.getUsername());
         Mockito.verify(userModelHelpersMethods).isValid(refEq(newUser));
     }
 
