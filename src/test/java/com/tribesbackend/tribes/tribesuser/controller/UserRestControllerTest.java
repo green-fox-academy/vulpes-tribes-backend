@@ -2,10 +2,10 @@ package com.tribesbackend.tribes.tribesuser.controller;
 
 import static org.mockito.ArgumentMatchers.refEq;
 
-import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
 import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
+import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -42,12 +42,21 @@ public class UserRestControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(userRestController).build();
     }
 
+<<<<<<< HEAD
 //    @Test
 //    public void testRegisterNewUser() throws Exception {
 //        String json = "{\n" +
 //                "  \"username\": \"adamgyulavari\",\n" +
 //                "  \"password\": \"12345678ab\"\n" +
 //                "}";
+=======
+    @Test
+    public void testRegisterNewUser() throws Exception {
+        String json = "{\n" +
+                "  \"username\": \"adamgyulavari\",\n" +
+                "  \"password\": \"12345678ab\"\n" +
+                "}";
+>>>>>>> aa5db943e7edb0898bf6c404c13dd82892a1735d
 //        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
 //        Mockito.when(userCrudService.save(newUser)).thenReturn(true);
 //        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(false);
@@ -100,5 +109,5 @@ public class UserRestControllerTest {
 //                .content(json))
 //                .andExpect(MockMvcResultMatchers.status().isConflict())
 //                .andDo(MockMvcResultHandlers.print());
-//    }
+    }
 }
