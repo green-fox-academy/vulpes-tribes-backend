@@ -32,7 +32,7 @@ public class UserRestController {
         this.userMethods = userMethods;
         this.errorMessages = errorMessages;
     }
-
+  
     @PostMapping(value = "/register")
     public ResponseEntity<Object> registerUser(@Validated @RequestBody TribesUser newUser) {
 
