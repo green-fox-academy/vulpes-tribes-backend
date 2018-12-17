@@ -22,8 +22,9 @@ public class Kingdom {
     @JoinColumn(name = "tribeUser_id", nullable = false)
     private TribesUser tribesUser;
 
-    public Kingdom(String name) {
+    public Kingdom(String name, TribesUser tribesUser) {
         this.name = name;
+        this.tribesUser = tribesUser;
     }
 
     public Kingdom() {
