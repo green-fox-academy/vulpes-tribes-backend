@@ -1,11 +1,16 @@
-package com.tribesbackend.tribes.tribesuser.controller;
+package com.tribes_backend.tribes.tribesUser.controller;
 
+import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.refEq;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tribesbackend.tribes.tribesuser.controller.UserRestController;
+import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
+import com.tribesbackend.tribes.tribesuser.errorservice.ErrorResponseModel;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
+import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
 import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
-import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,10 +18,12 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -31,7 +38,7 @@ public class UserRestControllerTest {
     @Mock
     private ErrorMessagesMethods errorMessagesMethods;
     @Mock
-    private TribesUser mockedUser;
+    private UserTRepository userTRepository;
     @InjectMocks
     private UserRestController userRestController;
 
@@ -48,57 +55,106 @@ public class UserRestControllerTest {
                 "  \"username\": \"adamgyulavari\",\n" +
                 "  \"password\": \"12345678ab\"\n" +
                 "}";
-//        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
-//        Mockito.when(userCrudService.save(newUser)).thenReturn(true);
-//        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(false);
-//        mockMvc.perform(MockMvcRequestBuilders.post("/register")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(json))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.username", Matchers.is("adamgyulavari")))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.password", Matchers.is("12345678ab")));
-//                Mockito.verify(userCrudService).save(refEq(newUser));
-//                Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
-//    }
+        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
+        Mockito.when(userCrudService.save(newUser)).thenReturn(true);
+        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(false);
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username", Matchers.is("adamgyulavari")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.password", Matchers.is("12345678ab")));
+        Mockito.verify(userCrudService).save(refEq(newUser));
+        Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
+    }
 
-//    @Test
-//    public void testRegisterTakenUsername() throws Exception {
-//        String json = "{\n" +
-//                "  \"username\": \"adamgyulavari\",\n" +
-//                "  \"password\": \"12345678ab\"\n" +
-//                "}";
-//        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
-//        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(true);
-//        ErrorResponseModel toReturn = new ErrorResponseModel();
-//        toReturn.setStatus("error");
-//        toReturn.setErrorMessage("Username already taken, please choose another one.");
-//        Mockito.when(errorMessagesMethods.usernameAlreadyTaken()).thenReturn(toReturn);
-//        mockMvc.perform(MockMvcRequestBuilders.post("/register")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(json))
-//                .andExpect(MockMvcResultMatchers.status().isConflict())
-//                .andDo(MockMvcResultHandlers.print());
-//        Mockito.verify(errorMessagesMethods).usernameAlreadyTaken();
-//        Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
-//    }
-//
-//    @Test
-//    public void testRegisterNullUsername() throws Exception {
-//        String json = "{\n" +
-//                "  \"username\": null,\n" +
-//                "  \"password\": \"12345678ab\"\n" +
-//                "}";
-//        mockedUser = new TribesUser("adamgyulavari", "12345678ab");
-//        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(mockedUser)).thenReturn(false);
-//        Mockito.when(mockedUser.getUsername()).thenReturn(null);
-//        ErrorResponseModel toReturn = new ErrorResponseModel();
-//        toReturn.setStatus("error");
-//        toReturn.setErrorMessage("Missing parameter(s): username");
-//        Mockito.when(errorMessagesMethods.usernameAlreadyTaken()).thenReturn(toReturn);
-//        mockMvc.perform(MockMvcRequestBuilders.post("/register")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(json))
-//                .andExpect(MockMvcResultMatchers.status().isConflict())
-//                .andDo(MockMvcResultHandlers.print());
+    @Test
+    public void testRegisterTakenUsername() throws Exception {
+        String json = "{\n" +
+                "  \"username\": \"adamgyulavari\",\n" +
+                "  \"password\": \"12345678ab\"\n" +
+                "}";
+        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
+        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(refEq(newUser))).thenReturn(true);
+        ErrorResponseModel toReturn = new ErrorResponseModel();
+        toReturn.setStatus("error");
+        toReturn.setErrorMessage("Username already taken, please choose another one.");
+        Mockito.when(errorMessagesMethods.usernameAlreadyTaken()).thenReturn(toReturn);
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(MockMvcResultMatchers.status().isConflict())
+                .andDo(MockMvcResultHandlers.print());
+        Mockito.verify(errorMessagesMethods).usernameAlreadyTaken();
+        Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
+    }
+
+    @Test
+    public void testRegisterEmptyUsername() throws Exception {
+        String json = "{\n" +
+                "  \"username\": \"\",\n" +
+                "  \"password\": \"12345678ab\"\n" +
+                "}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    public void testRegisterShortPassword() throws Exception {
+        String json = "{\n" +
+                "  \"username\": \"adamgyulavari\",\n" +
+                "  \"password\": \"1234ab\"\n" +
+                "}";
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest());
+    }
+
+    @Test
+    public void testLoginNotSuchUser() {
+        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
+        Mockito.when(userModelHelpersMethods.isValid(refEq(newUser))).thenReturn(true);
+        Mockito.when(userTRepository.findTribesUserByUsername(newUser.getUsername())).thenReturn(null);
+        try {
+            mockMvc.perform(MockMvcRequestBuilders.post("/login")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(asJsonString(newUser))
+                    .accept(MediaType.APPLICATION_JSON))
+                    .andExpect(MockMvcResultMatchers.status().isUnauthorized())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.errortype", Matchers.is("error")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testLoginSucces() {
+        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
+        Mockito.when(userModelHelpersMethods.isValid(refEq(newUser))).thenReturn(true);
+        Mockito.when(userTRepository.findTribesUserByUsername(newUser.getUsername()).getPassword()).thenReturn("12345678ab");
+        try {
+            mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                    .contentType(MediaType.APPLICATION_JSON)
+                    .content(asJsonString(newUser)))
+                    .andExpect(MockMvcResultMatchers.status().isConflict())
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.errortype", Matchers.is("error")));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Mockito.verify(userTRepository).findTribesUserByUsername(newUser.getUsername()).getPassword();
+        Mockito.verify(userModelHelpersMethods).isValid(refEq(newUser));
+    }
+
+    public static String asJsonString(final TribesUser user) {
+        try {
+            final ObjectMapper mapper = new ObjectMapper();
+            final String jsonContent = mapper.writeValueAsString(user);
+            return jsonContent;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

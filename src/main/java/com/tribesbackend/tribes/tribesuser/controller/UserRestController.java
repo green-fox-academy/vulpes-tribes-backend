@@ -37,8 +37,6 @@ public class UserRestController {
 
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(errorMessages.usernameAlreadyTaken(), HttpStatus.CONFLICT);
-        } else if (newUser.getUsername() == null || newUser.getUsername().isEmpty()) {
-            return new ResponseEntity(errorMessages.jsonFieldIsEmpty(newUser), HttpStatus.BAD_REQUEST);
         } else userTRepository.save(newUser);
         return ResponseEntity.ok(newUser);
         // return new ResponseEntity(newUser, HttpStatus.OK);

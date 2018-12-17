@@ -16,7 +16,7 @@ public class UserModelHelpersMethods {
         this.userRepo = userRepo;
     }
 
-    public static boolean isValid(TribesUser tribesUser) {
+    public boolean isValid(TribesUser tribesUser) {
         if (tribesUser.getUsername() == null || tribesUser.getPassword() == null) {
             return false;
         } else return true;
