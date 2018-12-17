@@ -59,8 +59,8 @@ public class UserRestController {
                 return new ResponseEntity(
                         new InvalidUserPasswordException("error", "Not such user: " + tribesUser.getUsername())
                         , HttpStatus.UNAUTHORIZED);
-            } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword() ==
-                    tribesUser.getPassword()) {
+            } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(
+                    tribesUser.getPassword())) {
                 return new ResponseEntity(
                         new OKstatus("ok", randomToken.getRandomToken())
                         , HttpStatus.OK);
