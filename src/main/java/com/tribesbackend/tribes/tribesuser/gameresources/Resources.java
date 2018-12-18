@@ -2,14 +2,17 @@ package com.tribesbackend.tribes.tribesuser.gameresources;
 
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
+@Entity
+@Table(name = "GAME_RESOURCES")
 public class Resources {
-String type;
-int amount;
-int generation;
+    @Id @GeneratedValue
+    long resources_id;
+
+    String type;
+    int amount;
+    int generation;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribeUser_id", nullable = false)
@@ -26,7 +29,7 @@ int generation;
 
         switch(type){
             case "gold":
-                this.amount = 100;
+                this.amount = 100;// to be specified
                 break;
             case "food":
                 this.amount = 0;

@@ -26,6 +26,14 @@ public class TribesUser {
     @JoinColumn(name = "kingdom_id", nullable = false)
     Kingdom kingdom;
 
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "resources_id", nullable = false)
+    Kingdom resources;
+
+
+
+
+
     public TribesUser(String username, String password) {
         this.username = username;
         this.password = password;
