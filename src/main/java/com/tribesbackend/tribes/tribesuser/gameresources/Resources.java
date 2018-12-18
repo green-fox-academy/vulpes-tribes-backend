@@ -1,6 +1,7 @@
 package com.tribesbackend.tribes.tribesuser.gameresources;
 
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
+import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 
