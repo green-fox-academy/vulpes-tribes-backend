@@ -6,8 +6,8 @@ import com.tribesbackend.tribes.tribesuser.exception.InvalidUserPasswordExceptio
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.OKstatus;
+import com.tribesbackend.tribes.tribesuser.okstatusservice.RandomToken;
 import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
-import com.tribesbackend.tribes.tribesuser.service.RandomTokenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +24,7 @@ public class UserRestController {
     UserTRepository userTRepository;
     UserModelHelpersMethods userMethods;
     ErrorMessagesMethods errorMessages;
-    RandomTokenService randomToken;
+    RandomToken randomToken;
 
     @Autowired
     public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods, ErrorMessagesMethods errorMessages) {

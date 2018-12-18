@@ -16,4 +16,11 @@ public class KingdomModelHelpersMethods {
             return false;}
             else return true;
     }
+
+
+    public static boolean isEmpty(Kingdom kingdom) {
+        if (kingdom.getName()==""||kingdom.getName()==" "){
+            return true;}
+            else return false;
+    }
 }
