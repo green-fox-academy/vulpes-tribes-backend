@@ -2,6 +2,8 @@ package com.tribes_backend.tribes.tribesUser.controller;
 
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.refEq;
+
+import com.tribesbackend.tribes.tribeskingdom.controllers.MockKingdomController;
 import com.tribesbackend.tribes.tribesuser.controller.UserRestController;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorResponseModel;
@@ -41,6 +43,7 @@ public class UserRestControllerTest {
     private UserTRepository userTRepository;
     @InjectMocks
     private UserRestController userRestController;
+
 
     private MockMvc mockMvc;
 
@@ -113,6 +116,7 @@ public class UserRestControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
+
 //    @Test
 //    public void testSuccesfulLogin() {
 //        String json = "{\n" +
@@ -128,4 +132,5 @@ public class UserRestControllerTest {
 //                .content(json))
 //                .andExpect(MockMvcResultMatchers.status().isBadRequest());
 //    }
-}
+    }
+
