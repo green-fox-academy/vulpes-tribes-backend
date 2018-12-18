@@ -3,11 +3,13 @@ package com.tribesbackend.tribes.kingdom.mock.controller;
 import com.tribesbackend.tribes.tribeskingdom.controllers.MockKingdomController;
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
+import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -20,12 +22,6 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 public class MockKingdomControllerTest {
 
     private MockMvc mockMvc;
-
-    @Mock
-    private Kingdom kingdom;
-
-    @Mock
-    private TribesUser tribesUser;
 
     @InjectMocks
     private MockKingdomController mockKingdomController;

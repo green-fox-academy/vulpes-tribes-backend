@@ -1,24 +1,58 @@
 package com.tribesbackend.tribes.tribesuser.gameresources;
 
+import com.tribesbackend.tribes.tribesuser.model.TribesUser;
+
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 public class Resources {
-Type type;
+String type;
+int amount;
 int generation;
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "tribeUser_id", nullable = false)
+    public TribesUser tribesUser;
 
     public Resources() {
     }
 
-    public Resources(Type type) {
-        this.type = type;
-        //placeholder value, need to be changed according to real value of starting buildings
-        this.generation = 0;
+    public Resources(String type, int generation, TribesUser tribesUser) {
+        if (!type.equals("gold")||type.equals("food")){
+            throw new IllegalArgumentException();
+        }
+        else this.type = type;
+
+        switch(type){
+            case "gold":
+                this.amount = 100;
+                break;
+            case "food":
+                this.amount = 0;
+                break;
+        }
+        this.generation = generation;
+        this.tribesUser = tribesUser;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setType(String type) {
+        if (!type.equals("gold")||type.equals("food")){
+            throw new IllegalArgumentException();
+        }
+        else this.type = type;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public int getGeneration() {
@@ -27,14 +61,5 @@ int generation;
 
     public void setGeneration(int generation) {
         this.generation = generation;
-    }
-
-    //manually generated setters for type setting
-    public void setTypeGold (int goldAmount){
-        Type.gold.setAmount(goldAmount);
-    }
-
-    public void setTypeFood (int foodAmount){
-        Type.food.setAmount(foodAmount);
     }
 }
