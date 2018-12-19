@@ -3,7 +3,7 @@ package com.tribes_backend.tribes.tribesUser.controller;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.refEq;
 
-import com.tribesbackend.tribes.tribeskingdom.controllers.MockKingdomController;
+
 import com.tribesbackend.tribes.tribesuser.controller.UserRestController;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorResponseModel;
@@ -59,7 +59,6 @@ public class UserRestControllerTest {
                 "  \"password\": \"12345678ab\"\n" +
                 "}";
         TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
-        Mockito.when(userCrudService.save(newUser)).thenReturn(true);
         Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(false);
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
                 .contentType(MediaType.APPLICATION_JSON)

@@ -15,13 +15,26 @@ public class KingdomTest {
 
     @Test
     public void kingdomNameIsValid(){
+
         Kingdom kingdom = new Kingdom( "kingdom", testUser  );
         assertEquals(true, KingdomModelHelpersMethods.isValid(kingdom));
     }
 
     @Test
-    public void kingdoNameIsNotValid(){
+    public void kingdomNameIsNotValid(){
         Kingdom kingdom = new Kingdom( null, null );
         assertEquals( false, KingdomModelHelpersMethods.isValid(kingdom) );
+    }
+
+    @Test
+    public void kingdomNameIsEmpty(){
+        Kingdom kingdom = new Kingdom( "" ,null);
+        assertEquals( true, KingdomModelHelpersMethods.isEmpty(kingdom));
+    }
+
+    @Test
+    public void kingdomNameIsFilled(){
+        Kingdom kingdom = new Kingdom( "kingdomNameExample", null);
+        assertEquals( false, KingdomModelHelpersMethods.isEmpty( kingdom ));
     }
 }

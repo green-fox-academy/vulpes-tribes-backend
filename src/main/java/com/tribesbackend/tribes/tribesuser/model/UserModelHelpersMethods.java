@@ -17,13 +17,15 @@ public class UserModelHelpersMethods {
     }
 
     public static boolean isValid(TribesUser tribesUser) {
-        if (tribesUser.getUsername() == null || tribesUser.getPassword() == null) {
+        if (tribesUser.getUsername() == null || tribesUser.getPassword() == null ||
+        tribesUser.getUsername().equals("") || tribesUser.getPassword().equals("")) {
             return false;
         } else return true;
     }
 
+
     public boolean usernameAlreadyTaken(TribesUser userFromJSON) {
-        Optional<TribesUser> optionalUserFromRepo = userRepo.findByUsername(userFromJSON.getUsername());
+        Optional<TribesUser> optionalUserFromRepo = Optional.ofNullable( userRepo.findByUsername( userFromJSON.getUsername() ) );
         return (optionalUserFromRepo.isPresent());
     }
 }

@@ -1,9 +1,6 @@
 package com.tribesbackend.tribes.kingdom.mock.controller;
 
 import com.tribesbackend.tribes.tribeskingdom.controllers.MockKingdomController;
-import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
-import com.tribesbackend.tribes.tribesuser.model.TribesUser;
-import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
