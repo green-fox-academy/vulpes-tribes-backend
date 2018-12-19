@@ -45,27 +45,7 @@ public class Troop {
         this.finished_at = finished_at;
     }
 
-    public static Troop createSampleTroop() {
-        return new TroopBuilder()
-                .setLevel(1)
-                .setHp(100)
-                .setAttack(50)
-                .setDefence(20)
-                .setStarted_at(1231232312)
-                .setFinished_at(765214612)
-                .build();
-    }
 
-    public static Troop createIvalidSampleTroop() {
-        return new TroopBuilder()
-                .setLevel(-1)
-                .setHp(100)
-                .setAttack(-50)
-                .setDefence(20)
-                .setStarted_at(1231232312)
-                .setFinished_at(765214612)
-                .build();
-    }
     public static class TroopBuilder {
         @Id
         @GeneratedValue

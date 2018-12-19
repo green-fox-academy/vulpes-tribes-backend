@@ -28,10 +28,15 @@ public class TroopTest {
         validatorFactory = Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
     }
+    @After
+    public void close() {
+        validatorFactory.close();
+    }
+
     @Test
     public void isValid() {
-        Troop sampleTroop = Troop.createSampleTroop();
-        Troop invalidSampleTroop = Troop.createIvalidSampleTroop();
+        Troop sampleTroop = TroopFactory.createSampleTroop();
+        Troop invalidSampleTroop = TroopFactory.createInvalidSampleTroop();
 
         //when:
         Set<ConstraintViolation<Troop>> violations
@@ -43,7 +48,7 @@ public class TroopTest {
 
     @Test
     public void isNotValid() {
-        Troop invalidSampleTroop = Troop.createIvalidSampleTroop();
+        Troop invalidSampleTroop = TroopFactory.createInvalidSampleTroop();
         //when:
         Set<ConstraintViolation<Troop>> violations
                 = validator.validate(invalidSampleTroop);
@@ -53,14 +58,9 @@ public class TroopTest {
 
         ConstraintViolation<Troop> violation
                 = violations.iterator().next();
-        assertEquals("size must be between 3 and 3",
+        assertEquals("The value must be positive",
                 violation.getMessage());
-        assertEquals("name", violation.getPropertyPath().toString());
-        assertEquals("a", violation.getInvalidValue());
-    }
-
-    @After
-    public void close() {
-        validatorFactory.close();
+        assertEquals("attack", violation.getPropertyPath().toString());
+        assertEquals(-50, violation.getInvalidValue());
     }
 }
