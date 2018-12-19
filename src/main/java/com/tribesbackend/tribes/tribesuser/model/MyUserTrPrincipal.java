@@ -6,14 +6,16 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Optional;
 
 public class MyUserTrPrincipal implements UserDetails {
-    @Autowired
+
     private TribesUser tribesuser;
 
     public MyUserTrPrincipal(TribesUser tribesuser) {
         this.tribesuser = tribesuser;
     }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return null;
