@@ -154,7 +154,7 @@ public class UserRestControllerTest {
     @Test
     public void testLoginEmptyUsername() throws Exception{
         String json = "{\n" +
-                "  \"username\": \"adamgyulavari\",\n" +
+                "  \"username\": \"\",\n" +
                 "  \"password\": \"123456ab\"\n" +
                 "}";
         TribesUser newUser = new TribesUser("", "123456ab");
@@ -197,6 +197,28 @@ public class UserRestControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest());
     }
 
+    @Test
+    public void testSuccessfulLogout() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/logout")
+                .header("token", "blablabla"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Logged out successfully!")));
+    }
+
+    @Test
+    public void testLogoutEmptyHeader() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/logout")
+                .header("token", ""))
+                .andExpect(MockMvcResultMatchers.status().isForbidden())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Unauthorized request!")));
+    }
+
+    @Test
+    public void testLogoutNullHeader() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.delete("/logout"))
+                .andExpect(MockMvcResultMatchers.status().isForbidden())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Unauthorized request!")));
+    }
 
     public static String asJsonString(final TribesUser user) {
         try {
