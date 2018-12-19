@@ -6,6 +6,8 @@ import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.math.BigInteger;
+
 @Entity
 @Table(name = "troops")
 public class Troop {
@@ -25,7 +27,7 @@ public class Troop {
     @NotNull
     private int defence;
     private int started_at;
-    private int finished_at;
+    private long finished_at;
     @ManyToOne
     @JoinColumn(name = "KINGDOM_ID")
     private Kingdom kingdom;
@@ -34,7 +36,7 @@ public class Troop {
     }
 
 
-    public Troop(@Min(value = 0L, message = "The value must be positive") @NotNull int level, @Min(value = 0L, message = "The value must be positive") @NotNull int hp, @Min(value = 0L, message = "The value must be positive") @NotNull int attack, @Min(value = 0L, message = "The value must be positive") @NotNull int defence, int started_at, int finished_at) {
+    public Troop(@Min(value = 0L, message = "The value must be positive") @NotNull int level, @Min(value = 0L, message = "The value must be positive") @NotNull int hp, @Min(value = 0L, message = "The value must be positive") @NotNull int attack, @Min(value = 0L, message = "The value must be positive") @NotNull int defence, int started_at, long finished_at) {
         this.level = level;
         this.hp = hp;
         this.attack = attack;
@@ -43,6 +45,27 @@ public class Troop {
         this.finished_at = finished_at;
     }
 
+    public static Troop createSampleTroop() {
+        return new TroopBuilder()
+                .setLevel(1)
+                .setHp(100)
+                .setAttack(50)
+                .setDefence(20)
+                .setStarted_at(1231232312)
+                .setFinished_at(765214612)
+                .build();
+    }
+
+    public static Troop createIvalidSampleTroop() {
+        return new TroopBuilder()
+                .setLevel(-1)
+                .setHp(100)
+                .setAttack(-50)
+                .setDefence(20)
+                .setStarted_at(1231232312)
+                .setFinished_at(765214612)
+                .build();
+    }
     public static class TroopBuilder {
         @Id
         @GeneratedValue
@@ -60,7 +83,7 @@ public class Troop {
         @NotNull
         private int defence;
         private int started_at;
-        private int finished_at;
+        private long finished_at;
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "kingdom_id")
         private Kingdom kingdom;
@@ -93,7 +116,7 @@ public class Troop {
             return this;
         }
 
-        public TroopBuilder setFinished_at(int finished_at) {
+        public TroopBuilder setFinished_at(long finished_at) {
             this.finished_at = finished_at;
             return this;
         }
