@@ -10,13 +10,12 @@ import static org.junit.Assert.assertEquals;
 
 public class TribesUserTest {
 
-
-
     @Test
     public void userOK(){
         TribesUser tribesUser = new TribesUser("ddd", "1235");
         Assert.assertEquals(true, UserModelHelpersMethods.isValid(tribesUser));
     }
+
     @Test
     public void usernameMissing(){
         TribesUser tribesUser = new TribesUser(null, "1235");
@@ -28,6 +27,7 @@ public class TribesUserTest {
         TribesUser tribesUser = new TribesUser("ddd", null);
         assertEquals(false, UserModelHelpersMethods.isValid(tribesUser));
     }
+
     @Test
     public void bothMissing(){
         TribesUser tribesUser = new TribesUser(null, null);

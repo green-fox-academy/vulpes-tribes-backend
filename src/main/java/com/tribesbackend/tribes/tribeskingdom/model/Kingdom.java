@@ -1,5 +1,6 @@
 package com.tribesbackend.tribes.tribeskingdom.model;
 
+import com.tribesbackend.tribes.tribesresource.model.Resource;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.troop.model.Troop;
 
@@ -7,6 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -26,6 +28,9 @@ public class Kingdom {
     private TribesUser tribesUser;
     @OneToMany(mappedBy = "kingdom")
     private List<Troop> troops;
+
+    @OneToMany(mappedBy="kingdom")
+    private Set<Resource> recource ;
 
     public Kingdom(String name) {
         this.name = name;
