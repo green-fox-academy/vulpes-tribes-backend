@@ -2,7 +2,7 @@
 
 Variables properties setting:
 
-    <h3>NAME                 VALUE</h3>
+    **NAME                 VALUE**
     
 TRIBES_DB_PASSWORD      = 123456789
 
