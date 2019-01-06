@@ -1,10 +1,12 @@
 package com.tribesbackend.tribes.tribeskingdom.model;
 
+import com.tribesbackend.tribes.tribesbuilding.model.Building;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Table
@@ -22,6 +24,10 @@ public class Kingdom {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribeUser_id", nullable = false)
     private TribesUser tribesUser;
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "building_id", nullable = false)
+    List<Building> buildings;
 
     public Kingdom(String name) {
         this.name = name;
