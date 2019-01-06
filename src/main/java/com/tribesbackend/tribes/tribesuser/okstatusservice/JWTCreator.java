@@ -1,7 +1,9 @@
 package com.tribesbackend.tribes.tribesuser.okstatusservice;
 
 
-import com.sun.org.apache.xml.internal.security.algorithms.SignatureAlgorithm;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
@@ -9,8 +11,28 @@ import java.security.Key;
 import java.util.Date;
 
 public class JWTCreator {
+//1a
+String jwt = Jwts.builder()
+        .setClaims(claim)
+        .setSubject("email")
+        .setIssuedAt(new Date())
+        .setExpiration(new Date(System.currentTimeMillis()+ JWT_EXPIRATION_TIME))
+        .signWith(SignatureAlgorithm.HS256, JWT_SECRET)
+        .compact();
+// 1]
+    String jwt = Jwts.builder()
+            .setSubject("users/TzMUocMF4p")
+            .setExpiration(new Date(1300819380))
+            .claim("name", "Robert Token Man")
+            .claim("scope", "self groups/admins")
+            .signWith(
+                    SignatureAlgorithm.HS256,
+                    "secret".getBytes("UTF-8")
+            )
+            .compact();
 
-    private static String createJWT(String id, String issuer, String subject, long ttlMillis) {
+//2]
+    public static  String createJWT(String id, String issuer, String subject, long ttlMillis) {
         //The JWT signature algorithm we will be using to sign the token
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256;
 

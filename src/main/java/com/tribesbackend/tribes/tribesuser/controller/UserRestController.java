@@ -4,6 +4,7 @@ import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.exception.InvalidUserPasswordException;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
+import com.tribesbackend.tribes.tribesuser.okstatusservice.JWTCreator;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.OKstatus;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.RandomToken;
 import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
@@ -43,6 +44,8 @@ public class UserRestController {
 
     @PostMapping(value = "/login")
     public ResponseEntity loginUser(@RequestBody TribesUser tribesUser) {
+       // JWTCreator myxxtoken = new JWTCreator();
+
         if (tribesUser.getUsername() == null || tribesUser.getUsername().isEmpty() ||
                 tribesUser.getPassword() == null || tribesUser.getPassword().isEmpty()) {
             return new ResponseEntity(errorMessages.jsonFieldIsEmpty(tribesUser), HttpStatus.BAD_REQUEST);
@@ -57,7 +60,7 @@ public class UserRestController {
                         , HttpStatus.UNAUTHORIZED);
             } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
                 return new ResponseEntity(
-                        new OKstatus("ok", "token")
+                        new OKstatus("ok", JWTCreator.createJWT())
                         , HttpStatus.OK);
                 //username is not empty, but is not in database
             } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
