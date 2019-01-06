@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.sql.Timestamp;
@@ -15,13 +16,13 @@ public class Building {
     @JsonIgnore
     Long id;
     @NotNull
-    @Size(min = 2)
+    @Size(min = 2, message = "At least 2 charracters.")
     String type;
     @NotNull
-    @Size(min = 1)
+    @Min(value = 0L, message = "The value must be positive" )
     int level;
     @NotNull
-    @Size(min = 1)
+    @Min(value = 0L, message = "The value must be positive" )
     int HP;
     Timestamp started_at;
     Timestamp finished_at;
@@ -89,8 +90,9 @@ public class Building {
         this.kingdom = kingdom;
     }
 
-    public Building(@NotNull @Size(min = 2) String type, @NotNull @Size(min = 1) int level,
-                    @NotNull @Size(min = 1) int HP) {
+    public Building(@NotNull @Size(min = 2, message = "At least 2 charracters.") String type,
+                    @NotNull @Min(value = 0L, message = "The value must be positive" ) int level,
+                    @NotNull @Min(value = 0L, message = "The value must be positive" ) int HP) {
         this.type = type;
         this.level = level;
         this.HP = HP;

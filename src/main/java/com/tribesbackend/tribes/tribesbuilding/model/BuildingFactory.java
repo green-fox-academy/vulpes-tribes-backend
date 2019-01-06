@@ -5,12 +5,12 @@ import java.util.List;
 
 public class BuildingFactory {
 
-    public Building createSampleBuilding() {
+    public static Building createSampleBuilding() {
 
         return new Building("farm", 1, 10);
     }
 
-    public List<Building> createInvalidBuildingList() {
+    public static List<Building> createInvalidBuildingList() {
         List<Building> invalidBuildings = new ArrayList<Building>();
         invalidBuildings.add(new Building("mine", -1, -12));
         invalidBuildings.add(new Building(null, 1, 12));
