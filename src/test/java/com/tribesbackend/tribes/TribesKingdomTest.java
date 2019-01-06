@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class TestKingdom {
+public class TribesKingdomTest {
 
     @Test
     public void kingdomNameIsValid(){

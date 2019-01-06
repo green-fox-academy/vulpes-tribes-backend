@@ -11,6 +11,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class TribesUserTest {
+
     @Test
     public void allUsersFailed() {
         List<TribesUser> userlist = new ArrayList<TribesUser>();
@@ -32,6 +33,27 @@ public class TribesUserTest {
     public void userOK() {
         TribesUser tribesUser = new TribesUser("ddd", "1235");
         Assert.assertEquals(true, UserModelHelpersMethods.isValid(tribesUser));
+
+    }
+
+
+    @Test
+    public void usernameMissing(){
+        TribesUser tribesUser = new TribesUser(null, "1235");
+        assertEquals(false, UserModelHelpersMethods.isValid(tribesUser));
+    }
+
+    @Test
+    public void passwordMissing(){
+        TribesUser tribesUser = new TribesUser("ddd", null);
+        assertEquals(false, UserModelHelpersMethods.isValid(tribesUser));
+    }
+
+    @Test
+    public void bothMissing(){
+        TribesUser tribesUser = new TribesUser(null, null);
+        assertEquals(false, UserModelHelpersMethods.isValid(tribesUser));
+
     }
 }
 
