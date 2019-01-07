@@ -11,11 +11,7 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 public class TribesUserTest {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
->>>>>>> dfb1866df032ddeab63fc9e430c750343daf771d
     @Test
     public void allUsersFailed() {
         List<TribesUser> userlist = new ArrayList<TribesUser>();
@@ -37,10 +33,6 @@ public class TribesUserTest {
     public void userOK() {
         TribesUser tribesUser = new TribesUser("ddd", "1235");
         Assert.assertEquals(true, UserModelHelpersMethods.isValid(tribesUser));
-<<<<<<< HEAD
-=======
-=======
->>>>>>> dfb1866df032ddeab63fc9e430c750343daf771d
 
     }
 
@@ -61,11 +53,8 @@ public class TribesUserTest {
     public void bothMissing(){
         TribesUser tribesUser = new TribesUser(null, null);
         assertEquals(false, UserModelHelpersMethods.isValid(tribesUser));
-<<<<<<< HEAD
->>>>>>> db0743486600504e737c32c908fb4d776ea8c337
-=======
 
->>>>>>> dfb1866df032ddeab63fc9e430c750343daf771d
+
     }
 }
 
