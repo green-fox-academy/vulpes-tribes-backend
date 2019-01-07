@@ -21,7 +21,6 @@ public class TribesUser {
     @NotNull
     @Size(min = 8, message = "Password should have atleast 2 characters")
     String password;
-
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "kingdom_id", nullable = false)
     Kingdom kingdom;

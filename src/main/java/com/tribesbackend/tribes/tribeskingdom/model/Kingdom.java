@@ -13,12 +13,10 @@ public class Kingdom {
     @Id
     @GeneratedValue
     Long id;
-
     @NotNull
     @Size(min = 2, message = "Name of Kingdom should have atleast 2 characters")
     @Column(nullable = false, unique = true)
     public String name;
-
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribeUser_id", nullable = false)
     private TribesUser tribesUser;
