@@ -1,6 +1,10 @@
 package com.tribesbackend.tribes.tribeskingdom.model;
 
+
+import com.tribesbackend.tribes.tribesbuilding.model.Building;
+
 import com.tribesbackend.tribes.tribesresource.model.Resource;
+
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.troop.model.Troop;
 
@@ -8,7 +12,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
+
 import java.util.Set;
+
 
 @Entity
 @Table
@@ -35,7 +41,15 @@ public class Kingdom {
     private Set<Resource> recource ;
 
 
-    public Kingdom(@NotNull @Size(min = 2, message = "Name of Kingdom should have at least 2 characters") String name, TribesUser tribesUser) {
+
+
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name = "building_id", nullable = false)
+    List<Building> buildings;
+
+    public Kingdom(String name, TribesUser tribesUser) {
+
         this.name = name;
         this.tribesUser = tribesUser;
     }
