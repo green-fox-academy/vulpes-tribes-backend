@@ -31,7 +31,7 @@ public class Kingdom {
     @OneToMany(mappedBy = "kingdom")
     private List<Troop> troops;
 
-    @OneToMany(mappedBy="kingdom")
+    @OneToMany(mappedBy = "kingdom")
     private Set<Resource> recource ;
 
 
