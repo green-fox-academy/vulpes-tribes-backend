@@ -10,6 +10,7 @@ import static org.junit.Assert.assertEquals;
 public class TribesKingdomTest {
 
     TribesUser testUser;
+
     @Test
     public void kingdomNameIsValid(){
         Kingdom kingdom = new Kingdom( "kingdom", testUser );
@@ -25,6 +26,7 @@ public class TribesKingdomTest {
     @Test
     public void kingdomNameIsEmpty(){
         Kingdom kingdom = new Kingdom( "", testUser );
+
         assertEquals( true, KingdomModelHelpersMethods.isEmpty(kingdom) );
     }
 
