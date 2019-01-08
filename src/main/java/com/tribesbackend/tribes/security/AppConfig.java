@@ -21,9 +21,9 @@ public class AppConfig {
     public DataSource getDataSource(){
         BasicDataSource dataSource = new BasicDataSource ();
         dataSource.setDriverClassName(env.getProperty( "mysql.driver" ));
-        dataSource.setUrl(env.getProperty("mysql.jdbcUrl"));
-        dataSource.setUsername(env.getProperty("mysql.username"));
-        dataSource.setPassword(env.getProperty("mysql.password"));
+        dataSource.setUrl(env.getProperty("DATASOURCE_URL"));
+        dataSource.setUsername(env.getProperty("TRIBES_DB_USERNAME"));
+        dataSource.setPassword(env.getProperty("TRIBES_DB_PASSWORD"));
         return dataSource;
     }
 }
