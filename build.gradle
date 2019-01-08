@@ -47,6 +47,8 @@ dependencies {
     implementation('javax.servlet:javax.servlet-api');
     implementation('javax.servlet:javax.servlet.jsp-api');
     implementation('org.apache.commons:commons-dbcp2');
+    //token
+    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
 
     //flyway
     compile('org.flywaydb:flyway-core')

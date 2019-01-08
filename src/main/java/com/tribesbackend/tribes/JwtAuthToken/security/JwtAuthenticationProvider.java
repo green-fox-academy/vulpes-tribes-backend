@@ -1,13 +1,31 @@
 package com.tribesbackend.tribes.JwtAuthToken.security;
 
 import com.tribesbackend.tribes.JwtAuthToken.model.JwtAuthenticationToken;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
 
-public class JwtAuthenticationProvider implements AuthenticationProvider {
+@Component
+public class JwtAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
+
+    @Autowired
+    private JwtValidator validator;
     @Override
-    public Authentication authenticate(Authentication authentication) throws AuthenticationException {
+    protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+
+    }
+
+    @Override
+    protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
+        JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) usernamePasswordAuthenticationToken;
+
+        String token = jwtAuthenticationToken.getToken();
+        validator.validate(token);
         return null;
     }
 
