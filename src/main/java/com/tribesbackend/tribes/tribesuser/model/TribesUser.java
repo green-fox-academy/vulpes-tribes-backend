@@ -31,8 +31,9 @@ public class TribesUser {
     Kingdom resources;
 
 
-
-
+    public TribesUser(@NotNull @Size(min = 2, max = 45, message = "Username should have at least 2, maximum 45 characters") String username) {
+        this.username = username;
+    }
 
     public TribesUser(String username, String password) {
         this.username = username;

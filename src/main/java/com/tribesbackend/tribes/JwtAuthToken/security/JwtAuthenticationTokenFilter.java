@@ -14,8 +14,8 @@ import java.io.IOException;
 
 public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessingFilter {
 
-    public JwtAuthenticationTokenFilter(String defaultFilterProcessesUrl) {
-        super("**/rest/**");
+    public JwtAuthenticationTokenFilter() {
+        super("/hello");
     }
 
     @Override

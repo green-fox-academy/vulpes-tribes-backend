@@ -8,9 +8,14 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/token")
 public class TokenController {
 
+    private JwtGenerator jwtGenerator;
+
+    public TokenController(JwtGenerator jwtGenerator) {
+        this.jwtGenerator = jwtGenerator;
+    }
+
     @PostMapping
     public String generate(@RequestBody final TribesUser user) {
-        JwtGenerator jwtGenerator = new JwtGenerator();
-        jwtGenerator.generate(user)
+        return jwtGenerator.generate(user);
     }
 }

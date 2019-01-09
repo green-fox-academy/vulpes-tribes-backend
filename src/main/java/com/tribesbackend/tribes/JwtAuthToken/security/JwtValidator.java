@@ -1,7 +1,7 @@
 package com.tribesbackend.tribes.JwtAuthToken.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
+import com.tribesbackend.tribes.tribesuser.model.TribesUser;
+import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -9,12 +9,29 @@ public class JwtValidator {
 
     private String secret = "myBigSecret";
 
-    public Object validate(String token) {
-        Claims body = Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token)
-                .getBody();
+    public TribesUser validate(String token) {
+        TribesUser tribesUser = null;
 
-        body.getSubject()
+        try {
+            Claims body = Jwts.parser()
+                    .setSigningKey(secret)
+                    .parseClaimsJws(token)
+                    .getBody();
+
+            tribesUser = new TribesUser();
+            tribesUser.setUsername(body.getSubject());
+            tribesUser.setId((Long)body.get("userId"));
+        } catch (ExpiredJwtException e) {
+            e.printStackTrace();
+        } catch (UnsupportedJwtException e) {
+            e.printStackTrace();
+        } catch (MalformedJwtException e) {
+            e.printStackTrace();
+        } catch (SignatureException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        }
+        return tribesUser;
     }
 }
