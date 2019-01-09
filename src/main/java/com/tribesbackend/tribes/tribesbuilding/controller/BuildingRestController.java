@@ -1,6 +1,5 @@
 package com.tribesbackend.tribes.tribesbuilding.controller;
 
-
 import com.tribesbackend.tribes.tribesbuilding.model.Building;
 import com.tribesbackend.tribes.tribesbuilding.model.BuildingFactory;
 import com.tribesbackend.tribes.tribesbuilding.repository.BuildingRepository;
@@ -59,12 +58,24 @@ public class BuildingRestController {
 
     @PutMapping(value = "/kingdom/buildings/{id}")
     public ResponseEntity<Object> upgradeOrDowngradeBuilding(@Validated @PathVariable int id,
-                                                             @RequestBody String xTribesToken, int type) {
+                                                             @RequestBody String xTribesToken, Integer typeLevel) {
         // and enough resources
         if (TokenIsValid.isValid(xTribesToken) && (true)) {
-            buldingRepo.findById(id).get().setHP(type);
+            buldingRepo.findById(id).get().setHP(typeLevel);
             buldingRepo.save(buldingRepo.findById(id).get());
             return new ResponseEntity(buldingRepo.findById(id).get(), HttpStatus.OK);
+        } else if (typeLevel < 0 || typeLevel == null || typeLevel.toString().isEmpty()) {
+            return new ResponseEntity(new ErrorMessage("error", "Missing parameter(s): !"), HttpStatus.BAD_REQUEST);
+        } else if (!(buldingRepo.findById(id).isPresent())) {
+            return new ResponseEntity(new ErrorMessage("error", "Id not found"), HttpStatus.NOT_FOUND);
         }
-        else if (xTribesToken.isEmpty()||xTribesToken.equals("")||xTribesToken == null )
+        //not valid level of the building
+        else if (false) {
+            return new ResponseEntity(new ErrorMessage("error", "Invalid building level"), HttpStatus.NOT_ACCEPTABLE);
+        }
+        //not enough resource
+        else if (false) {
+            return new ResponseEntity(new ErrorMessage("error", "Not enough resource"), HttpStatus.CONFLICT);
+        } else return new ResponseEntity(new ErrorMessage("error", "Unexpected error"), HttpStatus.IM_USED);
     }
+}
