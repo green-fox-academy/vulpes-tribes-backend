@@ -35,7 +35,19 @@ public class Resources {
         else  throw new IllegalArgumentException();
     }
 
-    public static class ResourceBuilder{
+    public int getAmount() {
+        return amount;
+    }
+
+    public int getUpdated_at() {
+        return updated_at;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public static class ResourcesBuilder{
         @Id
         @GeneratedValue
         long resources_id;
@@ -48,32 +60,41 @@ public class Resources {
         @JoinColumn(name = "kingdom_id", nullable = false)
         Kingdom kingdom;
 
-        public ResourceBuilder() {
+        public ResourcesBuilder() {
         }
 
-        public ResourceBuilder setResources_id(long resources_id) {
+
+        public Kingdom getKingdom() {
+            return kingdom;
+        }
+
+        public ResourcesBuilder setResources_id(long resources_id) {
             this.resources_id = resources_id;
             return this;
         }
 
-        public ResourceBuilder setAmount(int amount) {
+        public ResourcesBuilder setAmount(int amount) {
             this.amount = amount;
             return this;
         }
 
-        public ResourceBuilder setUpdated_at(int updated_at) {
+        public ResourcesBuilder setUpdated_at(int updated_at) {
             this.updated_at = updated_at;
             return this;
         }
 
-        public ResourceBuilder setType(String type) {
+        public ResourcesBuilder setType(String type) {
             this.type = type;
             return this;
         }
 
-        public ResourceBuilder setKingdom(Kingdom kingdom) {
+        public ResourcesBuilder setKingdom(Kingdom kingdom) {
             this.kingdom = kingdom;
             return this;
+        }
+
+        public Resources build() {
+            return new Resources(type,updated_at,kingdom);
         }
     }
 }
