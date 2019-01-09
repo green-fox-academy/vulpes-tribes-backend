@@ -1,4 +1,4 @@
-package com.tribes_backend.tribes;
+package com.tribesbackend.tribes;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
