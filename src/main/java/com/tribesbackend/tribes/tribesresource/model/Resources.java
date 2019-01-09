@@ -17,7 +17,7 @@ public class Resources {
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
     int amount;
-    long updated_at;
+    int updated_at;
     String type;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "kingdom_id", nullable = false)
@@ -26,91 +26,54 @@ public class Resources {
     public Resources() {
     }
 
-    public Resources(@Min(value = 0L, message = "The value must be positive") @NotNull int amount, long updated_at,String type) {
-        if (!type.equals("gold")||!type.equals("food")){
-            throw new IllegalArgumentException();
+    public Resources(String type, int updated_at, Kingdom kingdom) {
+        if (type.equals("gold")||type.equals("food")){
+            this.type = type;
+            this.updated_at = updated_at;
+            this.kingdom = kingdom;
         }
-        else this.type = type;
-
-        switch(type){
-            case "gold":
-                this.amount = 0;
-                break;
-            case "food":
-                this.amount = 0;
-                break;
-        }
-        this.updated_at = updated_at;
+        else  throw new IllegalArgumentException();
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public long getUpdated_at() {
-        return updated_at;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public static class ResourcesBuilder {
+    public static class ResourceBuilder{
         @Id
         @GeneratedValue
         long resources_id;
         @Min(value = 0L, message = "The value must be positive")
         @NotNull
         int amount;
-        long updated_at;
+        int updated_at;
         String type;
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "kingdom_id", nullable = false)
         Kingdom kingdom;
 
-        public ResourcesBuilder(){
+        public ResourceBuilder() {
         }
 
-        public ResourcesBuilder setAmount(int amount) {
+        public ResourceBuilder setResources_id(long resources_id) {
+            this.resources_id = resources_id;
+            return this;
+        }
+
+        public ResourceBuilder setAmount(int amount) {
             this.amount = amount;
             return this;
         }
 
-        public ResourcesBuilder setUpdated_at(long updated_at) {
+        public ResourceBuilder setUpdated_at(int updated_at) {
             this.updated_at = updated_at;
             return this;
         }
 
-        public ResourcesBuilder setType(String type) {
-            if (!type.equals("gold")||!type.equals("food")){
-                throw new IllegalArgumentException();
-            }
-            else this.type = type;
+        public ResourceBuilder setType(String type) {
+            this.type = type;
             return this;
         }
 
-        public int getAmount() {
-            return amount;
-        }
-
-        public long getUpdated_at() {
-            return updated_at;
-        }
-
-        public String getType() {
-            return type;
-        }
-
-        public long getResources_id() {
-            return resources_id;
-        }
-
-        public Kingdom getKingdom() {
-            return kingdom;
-        }
-
-        public Resources build() {
-            return new Resources(amount,updated_at,type);
+        public ResourceBuilder setKingdom(Kingdom kingdom) {
+            this.kingdom = kingdom;
+            return this;
         }
     }
 }

@@ -8,15 +8,13 @@ import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.OKstatus;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.RandomToken;
 import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
+import com.tribesbackend.tribes.tribesuser.service.LogoutMessages;
 import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 @RestController
@@ -71,5 +69,13 @@ public class UserRestController {
                 //just to have a return statement, will never happen
             }
         return new ResponseEntity(HttpStatus.CONFLICT);
+    }
+
+    @DeleteMapping(value = "/logout")
+    public ResponseEntity logoutUser(@RequestHeader(name = "token", required = false) String token) {
+        if(token == null || token.isEmpty()) {
+            return new ResponseEntity(new LogoutMessages("Unauthorized request!"), HttpStatus.FORBIDDEN);
+        }
+        else return ResponseEntity.ok(new LogoutMessages("Logged out successfully!"));
     }
 }

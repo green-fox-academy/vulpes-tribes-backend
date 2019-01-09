@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface ResourceRepository extends JpaRepository<Resources, Long> {
     List<Resources> findAll();
+
 }
