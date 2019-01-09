@@ -1,6 +1,6 @@
-package com.tribesbackend.tribes.tribesresource.repository;
+package com.tribesbackend.tribes.tribesresources.repository;
 
-import com.tribesbackend.tribes.tribesresource.model.Resources;
+import com.tribesbackend.tribes.tribesresources.model.Resources;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

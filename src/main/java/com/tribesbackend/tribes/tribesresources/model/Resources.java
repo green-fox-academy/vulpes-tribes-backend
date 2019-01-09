@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.tribesresource.model;
+package com.tribesbackend.tribes.tribesresources.model;
 
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import org.springframework.validation.annotation.Validated;
@@ -17,6 +17,8 @@ public class Resources {
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
     int amount;
+    @Min(value = 0L, message = "The value must be positive")
+    @NotNull
     int updated_at;
     String type;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -26,8 +28,9 @@ public class Resources {
     public Resources() {
     }
 
-    public Resources(String type, int updated_at, Kingdom kingdom) {
+    public Resources(String type,@Min(value = 0L, message = "The value must be positive") @NotNull int amount, @Min(value = 0L, message = "The value must be positive") @NotNull int updated_at, Kingdom kingdom) {
         if (type.equals("gold")||type.equals("food")){
+            this.amount=amount;
             this.type = type;
             this.updated_at = updated_at;
             this.kingdom = kingdom;
@@ -54,6 +57,7 @@ public class Resources {
         @Min(value = 0L, message = "The value must be positive")
         @NotNull
         int amount;
+        @Min(value = 0L, message = "The value must be positive")
         int updated_at;
         String type;
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -94,7 +98,7 @@ public class Resources {
         }
 
         public Resources build() {
-            return new Resources(type,updated_at,kingdom);
+            return new Resources(type,amount, updated_at,kingdom);
         }
     }
 }

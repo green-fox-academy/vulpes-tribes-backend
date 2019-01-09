@@ -1,7 +1,7 @@
-package com.tribesbackend.tribes.tribesresource.model;
+package com.tribesbackend.tribes.tribesresources.model;
 
 public class ResourcesFactory {
-    public static Resources createValidSampleResource() {
+    public static Resources createValidSampleResources() {
         return new Resources.ResourcesBuilder()
                 .setAmount( 20 )
                 .setUpdated_at( 1234 )
@@ -9,15 +9,7 @@ public class ResourcesFactory {
                 .build();
     }
 
-    public static Resources createInalidSampleResource() {
-        return new Resources.ResourcesBuilder()
-                .setAmount( -20 )
-                .setUpdated_at( -1234 )
-                .setType("silver")
-                .build();
-    }
-
-    public static Resources createInvalidAmountSampleResource() {
+    public static Resources createInvalidAmountSampleResources() {
         return new Resources.ResourcesBuilder()
                 .setAmount( -5 )
                 .setUpdated_at( 987654321 )
@@ -25,7 +17,7 @@ public class ResourcesFactory {
                 .build();
     }
 
-    public static Resources createInvalidUpdated_atSampleResource() {
+    public static Resources createInvalidUpdated_atSampleResources() {
         return new Resources.ResourcesBuilder()
                 .setAmount( 5 )
                 .setUpdated_at( -987654321 )
@@ -33,7 +25,7 @@ public class ResourcesFactory {
                 .build();
     }
 
-    public static Resources createInvalidTypeSampleResource() {
+    public static Resources createInvalidTypeSampleResources() {
         return new Resources.ResourcesBuilder()
                 .setAmount( 5 )
                 .setUpdated_at( 987654321 )

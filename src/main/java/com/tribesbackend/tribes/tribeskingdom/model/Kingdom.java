@@ -3,8 +3,7 @@ package com.tribesbackend.tribes.tribeskingdom.model;
 
 import com.tribesbackend.tribes.tribesbuilding.model.Building;
 
-import com.tribesbackend.tribes.tribesresource.model.Resource;
-
+import com.tribesbackend.tribes.tribesresources.model.Resources;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.troop.model.Troop;
 
@@ -37,7 +36,7 @@ public class Kingdom {
     private List<Troop> troops;
 
     @OneToMany(mappedBy = "kingdom")
-    private Set<Resource> recource ;
+    private Set<Resources> recources ;
 
 
 
