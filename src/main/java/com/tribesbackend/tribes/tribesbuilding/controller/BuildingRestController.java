@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.websocket.server.PathParam;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,17 +33,21 @@ public class BuildingRestController {
     }
 
     @PostMapping(value = "/kingdom/buildings")
-    public ResponseEntity<Object> sendBuildings(@Validated String xTribesToken, @RequestParam String type) {
+    public ResponseEntity<Object> sendBuildings(@Validated String xTribesToken, @RequestBody String type) {
         if (type.equals("farm") || type.equals("mine") || type.equals("barrack") || type.equals("barrack")) {
             return new ResponseEntity(new Building(type), HttpStatus.OK);
-        } else if (type == null || type.equals("")) {
+        }
+        else if (type == null || type.equals("")) {
             return new ResponseEntity(new ErrorMessage("error", "Missing parameter(s): type!"), HttpStatus.BAD_REQUEST);
-        } else if (!(type.equals("farm") || type.equals("mine") || type.equals("barrack") || type.equals("barrack"))) {
-            return new ResponseEntity(new ErrorMessage("error", "Invalid building type"), HttpStatus.NOT_ACCEPTABLE))
-            //not enough resources
-        } else if (false) {
+        }
+        else if ((type.equals("farm") || type.equals("mine") || type.equals("barrack") || type.equals("barrack"))) {
+            return new ResponseEntity(new ErrorMessage("error", "Invalid building type"), HttpStatus.NOT_ACCEPTABLE);
+        }
+        //not enough resources
+        else if (false) {
             return new ResponseEntity(new ErrorMessage("error", "Not enough resources"), HttpStatus.CONFLICT);
         }
+        else return new ResponseEntity(new ErrorMessage("error", "Unexpected error"), HttpStatus.IM_USED);
     }
 
     @GetMapping(value = "/kingdom/buildings/{id}")
