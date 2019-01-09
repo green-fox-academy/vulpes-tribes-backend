@@ -1,5 +1,6 @@
-package com.tribesbackend.tribes.tribesbuilding.model;
+/*package com.tribesbackend.tribes.tribesbuilding.model;
 
+import javafx.beans.binding.ObjectExpression;
 import javafx.beans.binding.ObjectExpression;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -62,3 +63,4 @@ public class BuildingValidator implements Validator {
         return null;
     }
 }
+*/

@@ -9,18 +9,18 @@ public class KingdomModelHelpersMethods {
     KingdomRepository kingdomRepo;
 
     @Autowired
-    public  KingdomModelHelpersMethods (KingdomRepository kingdomRepo) {this.kingdomRepo = kingdomRepo;}
+    public  KingdomModelHelpersMethods (KingdomRepository kingdomRepo) {
+        this.kingdomRepo = kingdomRepo;
+    }
 
     public static boolean isValid(Kingdom kingdom) {
-        if (kingdom.getName()==null){
-            return false;}
-            else return true;
+        return kingdom.getName() != null;
     }
 
 
     public static boolean isEmpty(Kingdom kingdom) {
-        if (kingdom.getName()==""||kingdom.getName()==" "){
-            return true;}
-            else return false;
+        return kingdom.getName().isEmpty() || kingdom.getName().equals(" ");
     }
+
+
 }

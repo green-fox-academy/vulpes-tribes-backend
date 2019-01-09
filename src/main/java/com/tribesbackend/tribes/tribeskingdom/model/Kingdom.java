@@ -38,11 +38,7 @@ public class Kingdom {
     private List<Troop> troops;
 
     @OneToMany(mappedBy = "kingdom")
-    private Set<Resource> recource ;
-
-
-
-
+    public Set<Resource> resources ;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id", nullable = false)

@@ -6,6 +6,8 @@ import org.springframework.validation.annotation.Validated;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
+
 
 @Validated
 @Entity
@@ -14,11 +16,17 @@ public class Resource {
     @Id
     @GeneratedValue
     long resources_id;
+
+    String type;
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
     int amount;
-    int updated_at;
-    String type;
+
+    @Basic
+    private java.sql.Timestamp sqlTimestamp;
+
+    //int updated_at;//timestamp
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "kingdom_id", nullable = false)
     Kingdom kingdom;
@@ -26,7 +34,7 @@ public class Resource {
     public Resource() {
     }
 
-    public Resource(String type, int updated_at, Kingdom kingdom) {
+    public Resource(String type, Timestamp sqlTimestamp , Kingdom kingdom) {
         if (!type.equals("gold")||type.equals("food")){
             throw new IllegalArgumentException();
         }
@@ -40,7 +48,7 @@ public class Resource {
                 this.amount = 0;
                 break;
         }
-        this.updated_at = updated_at;
+        this.sqlTimestamp = sqlTimestamp;
         this.kingdom = kingdom;
     }
 
@@ -63,11 +71,11 @@ public class Resource {
         this.amount = amount;
     }
 
-    public int getUpdated_at() {
-        return updated_at;
+    public Timestamp getSqlTimestamp() {
+        return sqlTimestamp;
     }
 
-    public void setUpdated_at(int updated_at) {
-        this.updated_at = updated_at;
+    public void setSqlTimestamp(Timestamp sqlTimestamp) {
+        this.sqlTimestamp = sqlTimestamp;
     }
 }
