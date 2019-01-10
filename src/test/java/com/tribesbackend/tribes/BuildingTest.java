@@ -2,8 +2,8 @@ package com.tribesbackend.tribes;
 
 import com.tribesbackend.tribes.tribesbuilding.model.Building;
 import com.tribesbackend.tribes.tribesbuilding.model.BuildingFactory;
-import org.junit.After;
-import org.junit.Before;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -25,19 +25,20 @@ public class BuildingTest {
     private static ValidatorFactory validatorFactory;
     private static Validator validator;
 
-    @Before
+    @BeforeClass
     public void createValidator(){
+
         validatorFactory= Validation.buildDefaultValidatorFactory();
         validator = validatorFactory.getValidator();
     }
 
-    @After
+    @AfterClass
     public void close(){validatorFactory.close();}
 
     @Test
     public void buildingValid(){
         Building validSampleBuilding = BuildingFactory.createSampleBuilding();
-        List<Building> invalidSampleBUildingList = BuildingFactory.createInvalidBuildingList();
+      //  List<Building> invalidSampleBUildingList = BuildingFactory.createInvalidBuildingList();
         Set<ConstraintViolation<Building>> violations = validator.validate(validSampleBuilding);
         assertTrue(violations.isEmpty());
     }
