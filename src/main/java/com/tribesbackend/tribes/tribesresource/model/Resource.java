@@ -22,10 +22,7 @@ public class Resource {
     @NotNull
     int amount;
 
-    @Basic
-    private java.sql.Timestamp sqlTimestamp;
-
-    //int updated_at;//timestamp
+    long timeStampLastVisit;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "kingdom_id", nullable = false)
@@ -34,7 +31,7 @@ public class Resource {
     public Resource() {
     }
 
-    public Resource(String type, Timestamp sqlTimestamp , Kingdom kingdom) {
+    public Resource(String type, Kingdom kingdom) {
         if (!type.equals("gold")||type.equals("food")){
             throw new IllegalArgumentException();
         }
@@ -48,7 +45,6 @@ public class Resource {
                 this.amount = 0;
                 break;
         }
-        this.sqlTimestamp = sqlTimestamp;
         this.kingdom = kingdom;
     }
 
@@ -57,7 +53,7 @@ public class Resource {
     }
 
     public void setType(String type) {
-        if (!type.equals("gold")||type.equals("food")){
+        if (!type.equals("gold")||!type.equals("food")){
             throw new IllegalArgumentException();
         }
         else this.type = type;
@@ -71,11 +67,11 @@ public class Resource {
         this.amount = amount;
     }
 
-    public Timestamp getSqlTimestamp() {
-        return sqlTimestamp;
+    public long getTimeStampLastVisit() {
+        return timeStampLastVisit;
     }
 
-    public void setSqlTimestamp(Timestamp sqlTimestamp) {
-        this.sqlTimestamp = sqlTimestamp;
+    public void setTimeStampLastVisit(long timeStampLastVisit) {
+        this.timeStampLastVisit = timeStampLastVisit;
     }
 }
