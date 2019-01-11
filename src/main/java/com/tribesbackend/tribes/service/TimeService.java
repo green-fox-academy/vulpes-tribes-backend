@@ -9,5 +9,6 @@ public class TimeService {
         long milliseconds = timestamp2.getTime() - timestamp1.getTime();
         long minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds);
         return minutes;
+
     }
 }
