@@ -22,17 +22,4 @@ public class TribesKingdomTest {
         Kingdom kingdom = new Kingdom( null, testUser );
         assertEquals( false, KingdomModelHelpersMethods.isValid(kingdom) );
     }
-
-    @Test
-    public void kingdomNameIsEmpty(){
-        Kingdom kingdom = new Kingdom( "", testUser );
-
-        assertEquals( true, KingdomModelHelpersMethods.isEmpty(kingdom) );
-    }
-
-    @Test
-    public void kingdomNameIsFilled(){
-        Kingdom kingdom = new Kingdom( "kingdomNameExample", testUser );
-        assertEquals( false, KingdomModelHelpersMethods.isEmpty( kingdom ) );
-    }
 }

@@ -5,7 +5,6 @@ import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
 import com.tribesbackend.tribes.tribeskingdom.service.KingdomCrudService;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.OKstatus;
-import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,6 +30,6 @@ public class KingdomRestController {
 
     @GetMapping(value = "/kingdom")
     public ResponseEntity getKingdom(@RequestHeader(name = "username") String username) {
-        return new ResponseEntity(new OKstatus("ok", username), HttpStatus.OK);
+        return new ResponseEntity(new OKstatus("ok", kingdomRepository.findKingdomByTribesUserUsername(username)), HttpStatus.OK);
     }
 }

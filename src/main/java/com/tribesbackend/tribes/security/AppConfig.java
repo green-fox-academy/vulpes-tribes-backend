@@ -31,11 +31,4 @@ public class AppConfig {
         dataSource.setPassword(env.getProperty("TRIBES_DB_PASSWORD"));
         return dataSource;
     }
-
-    Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
-
-    TribesUser tribesUser;
-
-    String jws = Jwts.builder().setSubject(tribesUser.getUsername()).signWith(key).compact();
-
 }
