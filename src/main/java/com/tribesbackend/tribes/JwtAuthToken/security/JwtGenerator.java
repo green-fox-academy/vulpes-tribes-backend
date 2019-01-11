@@ -19,5 +19,6 @@ public class JwtGenerator {
                 .setClaims(claims)
                         .signWith(SignatureAlgorithm.HS512, "myBigSecret")
                         .compact();
+
     }
 }

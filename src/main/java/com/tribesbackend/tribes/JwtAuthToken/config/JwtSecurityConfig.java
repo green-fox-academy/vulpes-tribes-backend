@@ -56,5 +56,4 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http.headers().cacheControl();
     }
-
 }

@@ -21,21 +21,25 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
 
     @Autowired
     private JwtValidator validator;
+
+
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
+        System.out.println("Oh boy, provider1");
     }
 
     @Override
     protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
+        System.out.println("Oh boy, provider2");
         JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) usernamePasswordAuthenticationToken;
 
         String token = jwtAuthenticationToken.getToken();
         TribesUser tribesUser = validator.validate(token);
+        System.out.println("Oh, motherland! Provider3");
         if (tribesUser == null) {
             throw new RuntimeException("JWT is incorrect");
         }
-        List<GrantedAuthority> grantedAuthorities = AuthorityUtils
-                .commaSeparatedStringToAuthorityList(tribesUser.getPassword());
+
         return new MyUserTrPrincipal(tribesUser);
     }
 
