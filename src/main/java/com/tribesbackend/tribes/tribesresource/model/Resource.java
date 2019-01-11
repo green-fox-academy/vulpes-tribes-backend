@@ -18,9 +18,10 @@ public class Resource {
     long resources_id;
 
     String type;
+
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
-    int amount;
+    long amount;
 
     long timeStampLastVisit;
 
@@ -59,11 +60,11 @@ public class Resource {
         else this.type = type;
     }
 
-    public int getAmount() {
+    public long getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(long amount) {
         this.amount = amount;
     }
 
