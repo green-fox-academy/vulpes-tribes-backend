@@ -41,6 +41,8 @@ import static com.auth0.samples.authapi.springbootauthupdated.security.SecurityC
 import static com.auth0.samples.authapi.springbootauthupdated.security.SecurityConstants.SECRET;
 import static com.auth0.samples.authapi.springbootauthupdated.security.SecurityConstants.TOKEN_PREFIX;
 
+
+//added by Jirina
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
     private AuthenticationManager authenticationManager;
 
