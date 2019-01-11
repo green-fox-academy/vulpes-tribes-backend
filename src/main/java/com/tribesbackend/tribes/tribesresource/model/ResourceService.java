@@ -11,29 +11,26 @@ import java.util.Optional;
 
 @Service
 public class ResourceService {
-    ResourceRepository resourceRepository;
 
     @Autowired
-    private ResourceService(ResourceRepository resourceRepository) {
-        this.resourceRepository = resourceRepository;
-    }
+    ResourceRepository resourceRepository;
 
-    private Resource verifyResource (long id) {
+    public Resource verifyResource (long id) {
         Optional<Resource> optionalResource = resourceRepository.findByResources_id(id);
         if (optionalResource.isPresent()) {
             return optionalResource.get();
         } else throw new IllegalArgumentException();
     }
 
-    private Timestamp getCurrentTimestamp(){
+    public Timestamp getCurrentTimestamp(){
         return new Timestamp(System.currentTimeMillis());
     }
 
-    private Timestamp getLastTimestampFromDB (Resource verifiedResource) {
+    public Timestamp getLastTimestampFromDB (Resource verifiedResource) {
         return new Timestamp(verifiedResource.getTimeStampLastVisit());
     }
 
-    private Timestamp  verifyTimestampHasValue (Resource verifiedResource){
+    public Timestamp  verifyTimestampHasValue (Resource verifiedResource){
         if (verifiedResource.getTimeStampLastVisit() == 0){
             return getCurrentTimestamp();
         }
