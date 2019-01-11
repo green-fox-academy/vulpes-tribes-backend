@@ -39,9 +39,6 @@ public class Kingdom {
     private Set<Resources> recources ;
 
 
-
-
-
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id", nullable = false)
     List<Building> buildings;
