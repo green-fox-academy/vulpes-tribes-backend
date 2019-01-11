@@ -21,6 +21,7 @@ public class TribesUser {
     @NotNull
     @Size(min = 8, message = "Password should have at least 2 characters")
     String password;
+    private String role;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "kingdom_id", nullable = false)
@@ -31,11 +32,7 @@ public class TribesUser {
     Kingdom resources;
 
 
-    public TribesUser(@NotNull @Size(min = 2, max = 45, message = "Username should have at least 2, maximum 45 characters") String username) {
-        this.username = username;
-    }
-
-    public TribesUser(String username, String password) {
+    public TribesUser(@NotNull @Size(min = 2, max = 45, message = "Username should have at least 2, maximum 45 characters") String username, @NotNull @Size(min = 8, message = "Password should have at least 2 characters") String password) {
         this.username = username;
         this.password = password;
     }
@@ -65,5 +62,14 @@ public class TribesUser {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public TribesUser setRole(String role) {
+        this.role = role;
+        return this;
     }
 }

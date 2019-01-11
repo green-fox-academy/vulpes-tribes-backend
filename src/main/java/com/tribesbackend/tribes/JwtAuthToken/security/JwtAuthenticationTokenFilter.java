@@ -21,7 +21,7 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
 
-        String header = request.getHeader("Authorization");
+        String header = request.getHeader("X-Tribes-Token");
 
 
         if (header == null || !header.startsWith("Token")) {
@@ -32,7 +32,7 @@ public class JwtAuthenticationTokenFilter extends AbstractAuthenticationProcessi
         JwtAuthenticationToken token = new JwtAuthenticationToken(authenticationToken);
         System.out.println(authenticationToken);
         System.out.println(token);
-        Authentication authentication = (Authentication) getAuthenticationManager().authenticate(token);
+        Authentication authentication = getAuthenticationManager().authenticate(token);
         System.out.println("filter3");
         return authentication;
     }

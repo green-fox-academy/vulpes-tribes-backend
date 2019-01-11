@@ -15,6 +15,7 @@ public class MyUserTrPrincipal implements UserDetails {
 
 
 
+
     public MyUserTrPrincipal(TribesUser tribesuser) {
         this.tribesuser = tribesuser;
     }

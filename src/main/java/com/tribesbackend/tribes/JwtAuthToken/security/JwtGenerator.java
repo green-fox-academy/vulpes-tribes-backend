@@ -12,13 +12,13 @@ public class JwtGenerator {
 
         Claims claims = Jwts.claims()
                 .setSubject(user.getUsername());
-        claims.put("userId", String.valueOf(user.getId()));
+//        claims.put("userId", String.valueOf(user.getId()));
+        claims.put("role", user.getRole());
 
 
-                return Jwts.builder()
+        return Jwts.builder()
                 .setClaims(claims)
                         .signWith(SignatureAlgorithm.HS512, "myBigSecret")
                         .compact();
-
     }
 }

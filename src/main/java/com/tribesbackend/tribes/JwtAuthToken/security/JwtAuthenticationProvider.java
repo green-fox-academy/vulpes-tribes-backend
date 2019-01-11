@@ -3,6 +3,7 @@ package com.tribesbackend.tribes.JwtAuthToken.security;
 import com.tribesbackend.tribes.JwtAuthToken.model.JwtAuthenticationToken;
 import com.tribesbackend.tribes.tribesuser.model.MyUserTrPrincipal;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
+import com.tribesbackend.tribes.tribesuser.model.TribesUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -25,22 +26,27 @@ public class JwtAuthenticationProvider extends AbstractUserDetailsAuthentication
 
     @Override
     protected void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) throws AuthenticationException {
-        System.out.println("Oh boy, provider1");
+        System.out.println("provider1");
     }
 
     @Override
     protected UserDetails retrieveUser(String username, UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken) throws AuthenticationException {
-        System.out.println("Oh boy, provider2");
+        System.out.println("provider2");
         JwtAuthenticationToken jwtAuthenticationToken = (JwtAuthenticationToken) usernamePasswordAuthenticationToken;
 
         String token = jwtAuthenticationToken.getToken();
         TribesUser tribesUser = validator.validate(token);
-        System.out.println("Oh, motherland! Provider3");
+        System.out.println("Provider3");
         if (tribesUser == null) {
             throw new RuntimeException("JWT is incorrect");
         }
 
-        return new MyUserTrPrincipal(tribesUser);
+        List<GrantedAuthority> grantedAuthorities = AuthorityUtils
+                .commaSeparatedStringToAuthorityList(tribesUser.getRole());
+        System.out.println(tribesUser.getRole());
+        return new TribesUserDetails(tribesUser.getUsername(),
+                token,
+                grantedAuthorities);
     }
 
     @Override

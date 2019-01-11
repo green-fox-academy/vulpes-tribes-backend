@@ -5,6 +5,7 @@ import com.tribesbackend.tribes.JwtAuthToken.security.JwtAuthenticationEntryPoin
 import com.tribesbackend.tribes.JwtAuthToken.security.JwtAuthenticationProvider;
 import com.tribesbackend.tribes.JwtAuthToken.security.JwtAuthenticationTokenFilter;
 import com.tribesbackend.tribes.JwtAuthToken.security.JwtSuccessHandler;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,6 +19,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 @EnableWebSecurity
@@ -25,13 +28,14 @@ import java.util.Collections;
 @Configuration
 public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
 
-
+    @Autowired
     private JwtAuthenticationProvider authenticationProvider;
+    @Autowired
     private JwtAuthenticationEntryPoint entryPoint;
 
     @Bean
     public AuthenticationManager authenticationManager() {
-        return new ProviderManager(Collections.singletonList(authenticationProvider));
+        return new ProviderManager(new ArrayList<>(Arrays.asList(authenticationProvider)));
     }
     @Bean
     public JwtAuthenticationTokenFilter authenticationTokenFilter() {
@@ -47,7 +51,9 @@ public class JwtSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/hello").authenticated()
+                .authorizeRequests()
+                .antMatchers("/").permitAll()
+                .antMatchers("/kingdom/**","/logout/**", "/hello").authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(entryPoint)
                 .and()

@@ -1,11 +1,11 @@
 package com.tribesbackend.tribes.tribesuser.controller;
 
+import com.tribesbackend.tribes.JwtAuthToken.security.JwtGenerator;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.exception.InvalidUserPasswordException;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.OKstatus;
-import com.tribesbackend.tribes.tribesuser.okstatusservice.RandomToken;
 import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
 import com.tribesbackend.tribes.tribesuser.service.LogoutMessages;
 import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
@@ -22,13 +22,16 @@ public class UserRestController {
     UserModelHelpersMethods userMethods;
     ErrorMessagesMethods errorMessages;
     UserCrudService userCrudService;
+    private JwtGenerator jwtGenerator;
+
 
     @Autowired
-    public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods, ErrorMessagesMethods errorMessages, UserCrudService userCrudService) {
+    public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods, ErrorMessagesMethods errorMessages, UserCrudService userCrudService, JwtGenerator jwtGenerator) {
         this.userTRepository = userTRepository;
         this.userMethods = userMethods;
         this.errorMessages = errorMessages;
         this.userCrudService = userCrudService;
+        this.jwtGenerator = jwtGenerator;
     }
 
     @PostMapping(value = "/register")
@@ -39,6 +42,14 @@ public class UserRestController {
         } else userTRepository.save(newUser);
         return ResponseEntity.ok(newUser);
         // return new ResponseEntity(newUser, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/mocklogin")
+    public ResponseEntity mockloginUser() {
+        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
+        return new ResponseEntity(
+                new OKstatus("ok", jwtGenerator.generate(newUser))
+                , HttpStatus.OK);
     }
 
     @PostMapping(value = "/login")
@@ -57,7 +68,7 @@ public class UserRestController {
                         , HttpStatus.UNAUTHORIZED);
             } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
                 return new ResponseEntity(
-                        new OKstatus("ok", "token")
+                        new OKstatus("ok", jwtGenerator.generate(tribesUser))
                         , HttpStatus.OK);
                 //username is not empty, but is not in database
             } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {

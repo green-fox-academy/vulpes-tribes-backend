@@ -11,6 +11,7 @@ public class JwtValidator {
 
     public TribesUser validate(String token) {
         TribesUser tribesUser = null;
+        System.out.println("validation1");
 
         try {
             Claims body = Jwts.parser()
@@ -20,7 +21,11 @@ public class JwtValidator {
 
             tribesUser = new TribesUser();
             tribesUser.setUsername(body.getSubject());
-            tribesUser.setId((Long)body.get("userId"));
+//            System.out.println((String)body.get("userId"));
+//            tribesUser.setId(Long.parseLong((String)body.get("userId")));
+            tribesUser.setRole((String) body.get("role"));
+            System.out.println("validation2");
+
         } catch (ExpiredJwtException e) {
             e.printStackTrace();
         } catch (UnsupportedJwtException e) {
