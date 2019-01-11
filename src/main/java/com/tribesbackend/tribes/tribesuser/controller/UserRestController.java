@@ -5,7 +5,6 @@ import com.tribesbackend.tribes.tribesuser.exception.InvalidUserPasswordExceptio
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.OKstatus;
-import com.tribesbackend.tribes.tribesuser.okstatusservice.RandomToken;
 import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
 import com.tribesbackend.tribes.tribesuser.service.LogoutMessages;
 import com.tribesbackend.tribes.tribesuser.service.UserCrudService;

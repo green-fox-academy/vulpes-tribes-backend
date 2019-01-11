@@ -10,10 +10,6 @@ buildscript {
     }
     
 }
-buildScan {
-    termsOfServiceUrl = 'https://gradle.com/terms-of-service'
-    termsOfServiceAgree = 'yes'
-}
 
 apply plugin: 'java'
 apply plugin: 'org.springframework.boot'
@@ -39,9 +35,9 @@ dependencies {
     runtimeOnly('org.springframework.boot:spring-boot-devtools')
     runtimeOnly('mysql:mysql-connector-java')
     compile('org.flywaydb:flyway-core')
-    compile('org.springframework.boot:spring-boot-starter-jdbc')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile('mysql:mysql-connector-java')
+//    compile('org.springframework.boot:spring-boot-starter-jdbc')
+//    compile('org.springframework.boot:spring-boot-starter-web')
+//    compile('mysql:mysql-connector-java')
     compileOnly('org.projectlombok:lombok')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.springframework.security:spring-security-test')
@@ -51,14 +47,13 @@ dependencies {
 //    implementation('org.springframework.boot:spring-webmvc');
 //    implementation('javax.servlet:javax.servlet-api');
 //    implementation('javax.servlet:javax.servlet.jsp-api');
-    implementation('org.apache.commons:commons-dbcp2');
+//    implementation('org.apache.commons:commons-dbcp2');
 
     //flyway
-    compile('org.flywaydb:flyway-core')
+//    compile('org.flywaydb:flyway-core')
     //jdbc
     compile('org.springframework.boot:spring-boot-starter-jdbc')
-    compile('javax.xml.bind:jaxb-api:2.3.0')
-    compile("com.auth0:java-jwt:3.4.0")
-    
+    implementation 'com.auth0:java-jwt:3.5.0'
+//    compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
 
 }
