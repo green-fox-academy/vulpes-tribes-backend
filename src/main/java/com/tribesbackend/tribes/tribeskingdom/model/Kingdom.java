@@ -3,8 +3,7 @@ package com.tribesbackend.tribes.tribeskingdom.model;
 
 import com.tribesbackend.tribes.tribesbuilding.model.Building;
 
-import com.tribesbackend.tribes.tribesresource.model.Resource;
-
+import com.tribesbackend.tribes.tribesresources.model.Resources;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.troop.model.Troop;
 
@@ -23,13 +22,12 @@ public class Kingdom {
     @Id
     @GeneratedValue
     Long id;
-
     @NotNull
     @Size(min = 2, message = "Name of Kingdom should have at least 2 characters")
     @Column(nullable = false, unique = true)
     public String name;
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
 
-    @OneToOne (fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribeUser_id", nullable = false)
 
     public TribesUser tribesUser;
@@ -38,7 +36,8 @@ public class Kingdom {
     private List<Troop> troops;
 
     @OneToMany(mappedBy = "kingdom")
-    public Set<Resource> resources ;
+    private Set<Resources> recources ;
+
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id", nullable = false)
