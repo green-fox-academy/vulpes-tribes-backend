@@ -17,4 +17,6 @@ public interface UserTRepository extends JpaRepository<TribesUser, Long> {
     TribesUser findTribesUserByUsername(String username);
 
     TribesUser findTribesUserByPassword(String password);
+
+    TribesUser findTribesUserByToken (String token);
 }

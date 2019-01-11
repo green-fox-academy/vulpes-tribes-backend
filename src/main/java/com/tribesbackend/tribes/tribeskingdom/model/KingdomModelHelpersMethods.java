@@ -12,15 +12,8 @@ public class KingdomModelHelpersMethods {
     public  KingdomModelHelpersMethods (KingdomRepository kingdomRepo) {this.kingdomRepo = kingdomRepo;}
 
     public static boolean isValid(Kingdom kingdom) {
-        if (kingdom.getName()==null){
+        if (kingdom.getName()==null||kingdom.getName().equals("")){
             return false;}
             else return true;
-    }
-
-
-    public static boolean isEmpty(Kingdom kingdom) {
-        if (kingdom.getName()==""||kingdom.getName()==" "){
-            return true;}
-            else return false;
     }
 }

@@ -1,5 +1,9 @@
 package com.tribesbackend.tribes.security;
 
+import com.tribesbackend.tribes.tribesuser.model.TribesUser;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +12,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
+import java.security.Key;
 
 
 @Configuration
@@ -26,4 +31,11 @@ public class AppConfig {
         dataSource.setPassword(env.getProperty("TRIBES_DB_PASSWORD"));
         return dataSource;
     }
+
+    Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
+
+    TribesUser tribesUser;
+
+    String jws = Jwts.builder().setSubject(tribesUser.getUsername()).signWith(key).compact();
+
 }

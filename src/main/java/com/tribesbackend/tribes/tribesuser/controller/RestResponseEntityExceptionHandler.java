@@ -17,8 +17,4 @@ public class RestResponseEntityExceptionHandler
     protected ResponseEntity<Object> handleWrongPassword( InvalidUserPasswordException ex) {
         return new ResponseEntity<Object>(new TribesError(ex.getErrortype(), ex.getMessage()), HttpStatus.UNAUTHORIZED);
     }
-
-
 }
-
-
