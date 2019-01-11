@@ -11,12 +11,14 @@ import java.util.Optional;
 
 @Service
 public class ResourceService {
-
-    @Autowired
     ResourceRepository resourceRepository;
+    @Autowired
+    public ResourceService(ResourceRepository resourceRepository) {
+        this.resourceRepository = resourceRepository;
+    }
 
     public Resource verifyResource (long id) {
-        Optional<Resource> optionalResource = resourceRepository.findByResources_id(id);
+        Optional<Resource> optionalResource = resourceRepository.findResourceByResourcesId(id);
         if (optionalResource.isPresent()) {
             return optionalResource.get();
         } else throw new IllegalArgumentException();

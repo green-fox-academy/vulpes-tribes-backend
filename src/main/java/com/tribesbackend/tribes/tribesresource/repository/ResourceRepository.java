@@ -12,7 +12,7 @@ public interface ResourceRepository extends JpaRepository <Resource, Long> {
     @Override
     List<Resource> findAll();
 
-    Optional<Resource> findByResources_id(long id);
+    Optional<Resource> findResourceByResourcesId(long id);
 
 
 }

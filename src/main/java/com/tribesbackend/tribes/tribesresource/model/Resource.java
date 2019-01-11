@@ -15,9 +15,9 @@ import java.sql.Timestamp;
 public class Resource {
     @Id
     @GeneratedValue
-    long resources_id;
+    public long resourcesId;
 
-    String type;
+    public String type;
 
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
@@ -32,8 +32,8 @@ public class Resource {
     public Resource() {
     }
 
-    public Resource(String type, Kingdom kingdom) {
-        if (!type.equals("gold")||type.equals("food")){
+    /*public Resource(String type, Kingdom kingdom) {
+        if (!type.equals("gold")||!type.equals("food")){
             throw new IllegalArgumentException();
         }
         else this.type = type;
@@ -47,7 +47,7 @@ public class Resource {
                 break;
         }
         this.kingdom = kingdom;
-    }
+    }*/
 
     public String getType() {
         return type;

@@ -2,11 +2,13 @@ package com.tribesbackend.tribes.service;
 
 import com.tribesbackend.tribes.tribesresource.model.Resource;
 import com.tribesbackend.tribes.tribesresource.model.ResourceService;
+import com.tribesbackend.tribes.tribesresource.repository.ResourceRepository;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -22,7 +24,10 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ResourceServiceTest {
 
-    private MockMvc mockMvc;
+    MockMvc mockMvc;
+
+    @Mock
+    private ResourceRepository resourceRepository;
 
     @InjectMocks
     private ResourceService resourceService;
@@ -38,5 +43,10 @@ public class ResourceServiceTest {
         Timestamp now = new Timestamp(System.currentTimeMillis());
         Timestamp toTest = resourceService.getCurrentTimestamp();
         assertEquals(now, toTest);
+    }
+
+    @Test
+    public void verifyResource(){
+        Resource resource = new Resource();
     }
 }
