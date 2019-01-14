@@ -1,8 +1,8 @@
 package com.tribesbackend.tribes.service;
 
-import com.tribesbackend.tribes.tribesresource.model.ResourcesModel;
-import com.tribesbackend.tribes.tribesresource.model.ResourceService;
-import com.tribesbackend.tribes.tribesresource.repository.ResourceRepository;
+import com.tribesbackend.tribes.tribesresources.model.ResourcesModel;
+import com.tribesbackend.tribes.tribesresources.model.ResourceService;
+import com.tribesbackend.tribes.tribesresources.repository.ResourceRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

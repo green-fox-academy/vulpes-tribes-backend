@@ -1,6 +1,7 @@
 package com.tribesbackend.tribes.tribesresources.model;
 
 import com.tribesbackend.tribes.tribesresources.repository.ResourceRepository;
+import com.tribesbackend.tribes.tribesresources.model.Resources;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class ResourcesModelHelpersMethods {
