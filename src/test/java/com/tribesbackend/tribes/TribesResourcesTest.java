@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes;
+/*package com.tribesbackend.tribes;
 
 import com.tribesbackend.tribes.tribesresources.model.Resources;
 import com.tribesbackend.tribes.tribesresources.model.ResourcesFactory;
@@ -103,4 +103,4 @@ public class TribesResourcesTest {
         assertEquals("type", violation.getPropertyPath().toString());
         assertEquals("silver" , violation.getInvalidValue());
     }
-}
+}*/
