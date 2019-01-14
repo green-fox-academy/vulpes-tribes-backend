@@ -7,6 +7,8 @@ import com.tribes_backend.tribes.tribesUser.repository.UserTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @Component
 public class UserModelHelpersMethods {
     UserTRepository userRepo;
@@ -17,23 +19,17 @@ public class UserModelHelpersMethods {
     }
 
 
-
     public static boolean isValid(TribesUser tribesUser) {
         if (tribesUser.getUsername() == null || tribesUser.getPassword() == null) {
             return false;
         } else return true;
     }
 
-
-
-
     public boolean usernameAlreadyTaken(TribesUser user) {
-        TribesUser toCompare = userRepo.findByUsername(user.getUsername());
-        if (user.getUsername().equals(toCompare.getUsername())) {
+        Optional<TribesUser> toCompare = userRepo.findByUsername(user.getUsername());
+        if (toCompare.isPresent()) {
             return true;
-        }
-        return false;
+        } else return false;
     }
 
 }
-
