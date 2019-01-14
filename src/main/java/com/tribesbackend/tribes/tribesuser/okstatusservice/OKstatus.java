@@ -1,5 +1,7 @@
 package com.tribesbackend.tribes.tribesuser.okstatusservice;
 
+import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
+
 public class OKstatus {
 
     String status;
@@ -26,6 +28,6 @@ public class OKstatus {
         this.token = token;
     }
 
-    public OKstatus() {
+    public OKstatus(String ok, Kingdom kingdomByTribesUserUsername) {
     }
 }

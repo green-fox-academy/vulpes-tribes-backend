@@ -1,12 +1,10 @@
 package com.tribesbackend.tribes.tribesuser.controller;
 
-import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.exception.InvalidUserPasswordException;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.OKstatus;
-import com.tribesbackend.tribes.tribesuser.okstatusservice.RandomToken;
 import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
 import com.tribesbackend.tribes.tribesuser.service.LogoutMessages;
 import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
@@ -23,6 +21,7 @@ public class UserRestController {
     UserModelHelpersMethods userMethods;
     ErrorMessagesMethods errorMessages;
     UserCrudService userCrudService;
+    boolean loggedin;
 
     @Autowired
     public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods, ErrorMessagesMethods errorMessages, UserCrudService userCrudService) {
@@ -57,6 +56,7 @@ public class UserRestController {
                         new InvalidUserPasswordException("error", "Not such user: " + tribesUser.getUsername())
                         , HttpStatus.UNAUTHORIZED);
             } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
+                loggedin = true;
                 return new ResponseEntity(
                         new OKstatus("ok", "token")
                         , HttpStatus.OK);
@@ -73,9 +73,10 @@ public class UserRestController {
 
     @DeleteMapping(value = "/logout")
     public ResponseEntity logoutUser(@RequestHeader(name = "token", required = false) String token) {
-        if(token == null || token.isEmpty()) {
+        if (token == null || token.isEmpty()) {
             return new ResponseEntity(new LogoutMessages("Unauthorized request!"), HttpStatus.FORBIDDEN);
-        }
-        else return ResponseEntity.ok(new LogoutMessages("Logged out successfully!"));
+        } else
+            loggedin = false;
+            return ResponseEntity.ok(new LogoutMessages("Logged out successfully!"));
     }
 }

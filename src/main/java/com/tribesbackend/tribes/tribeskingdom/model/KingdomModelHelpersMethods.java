@@ -14,13 +14,12 @@ public class KingdomModelHelpersMethods {
     }
 
     public static boolean isValid(Kingdom kingdom) {
-        return kingdom.getName() != null;
+        if (kingdom.getName()==null||kingdom.getName().equals("")){
+            return false;}
+            else return true;
     }
-
 
     public static boolean isEmpty(Kingdom kingdom) {
         return kingdom.getName().isEmpty() || kingdom.getName().equals(" ");
     }
-
-
 }
