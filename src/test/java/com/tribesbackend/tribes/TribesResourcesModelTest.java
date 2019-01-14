@@ -24,7 +24,7 @@ public class TribesResourcesModelTest {
     }
 
     @Test
-    public void resouceIsValid() {
+    public void resourceIsValid() {
 
     }
 }

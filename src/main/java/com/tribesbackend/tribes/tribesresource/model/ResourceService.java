@@ -48,7 +48,7 @@ public class ResourceService {
 
     public ResourcesModel resourceDisplayandUpdate (long id, int amountGeneratedPerMinute){
         ResourcesModel resourcesModel = verifyResource(id);
-        long updatedResourceAmount = resourcesModel.getAmount() + getDifferenceInMinutes(id) * amountGeneratedPerMinute;
+        long updatedResourceAmount = resourcesModel.getAmount() + (getDifferenceInMinutes(id) * amountGeneratedPerMinute);
         resourcesModel.setAmount(updatedResourceAmount);
         resourcesModel.setTimeStampLastVisit(getCurrentTimestamp().getTime());
         resourceRepository.save(resourcesModel);
