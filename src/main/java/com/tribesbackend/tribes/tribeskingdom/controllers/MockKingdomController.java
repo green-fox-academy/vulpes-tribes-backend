@@ -22,7 +22,6 @@ public class MockKingdomController {
 
         @GetMapping(value = "/kingdom")
         public ResponseEntity getMockKingdom() {
-
                 return ResponseEntity.ok(mockKingdom);
         }
 }

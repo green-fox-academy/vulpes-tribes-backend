@@ -3,7 +3,7 @@ package com.tribesbackend.tribes.tribeskingdom.model;
 
 import com.tribesbackend.tribes.tribesbuilding.model.Building;
 
-import com.tribesbackend.tribes.tribesresource.model.Resource;
+import com.tribesbackend.tribes.tribesresource.model.ResourcesModel;
 
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.troop.model.Troop;
@@ -38,7 +38,7 @@ public class Kingdom {
     private List<Troop> troops;
 
     @OneToMany(mappedBy = "kingdom")
-    public Set<Resource> resources ;
+    public Set<ResourcesModel> resourcesModels;
 
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id", nullable = false)

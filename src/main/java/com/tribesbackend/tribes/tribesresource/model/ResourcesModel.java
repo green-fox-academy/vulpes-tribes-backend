@@ -11,8 +11,8 @@ import java.sql.Timestamp;
 
 @Validated
 @Entity
-@Table(name = "resources")
-public class Resource {
+@Table(name = "resourcesModels")
+public class ResourcesModel {
     @Id
     @GeneratedValue
     public long resourcesId;
@@ -29,10 +29,14 @@ public class Resource {
     @JoinColumn(name = "kingdom_id", nullable = false)
     Kingdom kingdom;
 
-    public Resource() {
+    public ResourcesModel() {
     }
 
-    /*public Resource(String type, Kingdom kingdom) {
+    public ResourcesModel(String type) {
+        this.type = type;
+    }
+
+    /*public ResourcesModel(String type, Kingdom kingdom) {
         if (!type.equals("gold")||!type.equals("food")){
             throw new IllegalArgumentException();
         }

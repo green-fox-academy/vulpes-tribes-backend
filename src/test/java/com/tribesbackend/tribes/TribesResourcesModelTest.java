@@ -1,8 +1,6 @@
 package com.tribesbackend.tribes;
 
 
-import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
-import com.tribesbackend.tribes.tribesresource.model.Resource;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +12,7 @@ import javax.validation.ValidatorFactory;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class TribesResourceTest {
+public class TribesResourcesModelTest {
 
     private static ValidatorFactory validatorFactory;
     private static Validator validator;
