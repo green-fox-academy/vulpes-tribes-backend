@@ -19,9 +19,9 @@ public class MockKingdomController {
         Kingdom mockKingdom = new Kingdom("mockdom", mockUser);
 
 
+
         @GetMapping(value = "/kingdom")
         public ResponseEntity getMockKingdom() {
-
                 return ResponseEntity.ok(mockKingdom);
         }
 }
