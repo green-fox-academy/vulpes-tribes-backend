@@ -14,8 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-
-
+//@SuppressWarnings("unchecked")
 @RestController
 public class UserRestController {
     UserTRepository userTRepository;
@@ -50,7 +49,7 @@ public class UserRestController {
 
         } else
             //if (userMethods.isValid(tribesUser)) {
-            //username is in database andpassword matches
+            //username is in database and password matches
             if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()) == null) {
                 //  throw new InvalidUserPasswordException("error", "Not such user: " + tribesUser.getUsername());
                 return new ResponseEntity(

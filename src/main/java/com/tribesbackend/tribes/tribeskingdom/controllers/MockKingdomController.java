@@ -18,8 +18,6 @@ public class MockKingdomController {
     TribesUser mockUser = new TribesUser("mockUser", "strongOne");
     Kingdom mockKingdom = new Kingdom("mockdom", mockUser);
 
-
-
     @GetMapping(value = "/kingdom")
     public ResponseEntity getMockKingdom() {
         return ResponseEntity.ok(mockKingdom);

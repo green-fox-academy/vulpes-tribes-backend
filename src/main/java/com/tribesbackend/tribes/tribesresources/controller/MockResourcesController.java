@@ -1,8 +1,7 @@
 package com.tribesbackend.tribes.tribesresources.controller;
 
 
-import com.tribesbackend.tribes.tribesresources.model.Resources;
-import com.tribesbackend.tribes.tribesresources.model.ResourcesFactory;
+import com.tribesbackend.tribes.tribesresources.model.ResourcesModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,5 +15,8 @@ public class MockResourcesController {
     public ResponseEntity getMockResources() {
         return ResponseEntity.ok(mockResources);
     }
-    Resources mockResources = ResourcesFactory.createValidSampleResources();
+    ResourcesModel mockResources = new ResourcesModel.ResourcesBuilder()
+            .setAmount( 20 )
+            .setType("gold")
+            .build();
 }
