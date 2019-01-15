@@ -1,6 +1,6 @@
-package com.tribesbackend.tribes.kingdom.mock.controller;
+package com.tribesbackend.tribes.mock.resources.controller;
 
-import com.tribesbackend.tribes.tribeskingdom.controllers.MockKingdomController;
+import com.tribesbackend.tribes.tribesresources.controller.MockResourcesController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,24 +13,23 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class MockKingdomControllerTest {
+public class MockResourcesControllerTest {
 
     private MockMvc mockMvc;
 
     @InjectMocks
-    private MockKingdomController mockKingdomController;
+    private MockResourcesController mockResourcesController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(mockKingdomController).build();
+        mockMvc = MockMvcBuilders.standaloneSetup(mockResourcesController).build();
     }
 
     @Test
     public void testMockJson() throws Exception {
-        String json = "{\"name\":\"mockdom\",\"tribesUser\":{\"username\":\"mockUser\",\"password\":\"strongOne\"}}";
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/mock/kingdom"))
+        String json = "{\"amount\":20,\"updated_at\":1234,\"type\":\"gold\"}";
+        mockMvc.perform(MockMvcRequestBuilders.get("/mock/resources"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(json));
     }

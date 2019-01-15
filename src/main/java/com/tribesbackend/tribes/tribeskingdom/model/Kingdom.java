@@ -36,7 +36,7 @@ public class Kingdom {
 
     @OneToMany(mappedBy = "kingdom")
 
-    public Set<ResourcesModel> resourcesModels;
+    public Set<ResourcesModel> resourcesModel;
 
 
     @OneToMany(fetch = FetchType.LAZY)

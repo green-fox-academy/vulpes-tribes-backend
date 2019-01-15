@@ -36,8 +36,10 @@ public class ResourceService {
     }
 
     public Timestamp verifyTimestampHasValue (ResourcesModel verifiedResourcesModel){
+
         if (verifiedResourcesModel.getTimeStampLastVisit() == 0){
-            return getCurrentTimestamp();
+            Timestamp ac = getCurrentTimestamp();
+            return ac;
         }
         else return getLastTimestampFromDB(verifiedResourcesModel);
     }
