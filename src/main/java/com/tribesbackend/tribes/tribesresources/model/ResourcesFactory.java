@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.tribesresources.model;
+/*package com.tribesbackend.tribes.tribesresources.model;
 
 package com.tribesbackend.tribes.tribesresources.model;
 
@@ -35,3 +35,4 @@ public class ResourcesFactory {
                 .build();
     }
 }
+*/

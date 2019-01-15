@@ -1,5 +1,6 @@
 package com.tribesbackend.tribes.tribesresources.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import org.springframework.validation.annotation.Validated;
 
@@ -19,6 +20,7 @@ public class ResourcesModel {
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
     long amount;
+    @JsonIgnore
     long timeStampLastVisit;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "kingdom_id", nullable = false)
@@ -81,7 +83,7 @@ public class ResourcesModel {
         @Min(value = 0L, message = "The value must be positive")
         @NotNull
         long amount;
-
+        @JsonIgnore
         long timeStampLastVisit;
 
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
