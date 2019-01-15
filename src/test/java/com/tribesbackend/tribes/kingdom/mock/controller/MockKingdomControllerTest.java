@@ -28,7 +28,8 @@ public class MockKingdomControllerTest {
 
     @Test
     public void testMockJson() throws Exception {
-        String json = "{\"name\":\"mockdom\",\"tribesUser\":{\"username\":\"mockUser\",\"password\":\"strongOne\"},\"resourcesModels\":null}";
+        String json = "{\"name\":\"mockdom\",\"tribesUser\":{\"username\":\"mockUser\",\"password\":\"strongOne\"}}";
+
         mockMvc.perform(MockMvcRequestBuilders.get("/mock/kingdom"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(json));
