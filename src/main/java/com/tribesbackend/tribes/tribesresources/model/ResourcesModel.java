@@ -27,13 +27,12 @@ public class ResourcesModel {
     public ResourcesModel() {
     }
 
-    public ResourcesModel(String type,  Kingdom kingdom) {
-        if (type.equals("gold")||type.equals("food")){
+    public ResourcesModel(String type, Kingdom kingdom) {
+        if (type.equals("gold") || type.equals("food")) {
             this.type = type;
-        }
-        else throw new IllegalArgumentException();;
+        } else throw new IllegalArgumentException();
 
-        switch(type){
+        switch (type) {
             case "gold":
                 this.amount = 100;// to be specified
                 break;
@@ -50,10 +49,9 @@ public class ResourcesModel {
     }
 
     public void setType(String type) {
-        if (type.equals("gold")||type.equals("food")){
+        if (type.equals("gold") || type.equals("food")) {
             this.type = type;
-        }
-        else throw new IllegalArgumentException();
+        } else throw new IllegalArgumentException();
     }
 
     public long getAmount() {
@@ -72,25 +70,21 @@ public class ResourcesModel {
         this.timeStampLastVisit = timeStampLastVisit;
     }
 
-    public static class ResourcesBuilder{
+    public static class ResourcesBuilder {
         @Id
         @GeneratedValue
         long resourcesId;
         String type;
-
         @Min(value = 0L, message = "The value must be positive")
         @NotNull
         long amount;
-
         long timeStampLastVisit;
-
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "kingdom_id", nullable = false)
         Kingdom kingdom;
 
         public ResourcesBuilder() {
         }
-
 
         public Kingdom getKingdom() {
             return kingdom;
@@ -126,4 +120,3 @@ public class ResourcesModel {
         }
     }
 }
-

@@ -41,8 +41,8 @@ public class ResourcesModelServiceTest {
         assertEquals(now, toTest);
     }
 
-    @Test
-    public void verifyResource(){
-        ResourcesModel resourcesModel = new ResourcesModel("gold" );
-    }
+//    @Test
+//    public void verifyResource(){
+//        ResourcesModel resourcesModel = new ResourcesModel("gold" );
+//    }
 }
