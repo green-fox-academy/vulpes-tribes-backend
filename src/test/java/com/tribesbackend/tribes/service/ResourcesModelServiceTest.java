@@ -49,7 +49,6 @@ public class ResourcesModelServiceTest {
     public void verifyResourceOptionalTest() {
         Kingdom testKingdom = new Kingdom();
         ResourcesModel model = new ResourcesModel("gold", testKingdom);
-        long id = 1;
         Optional<ResourcesModel> testOptional = Optional.of(model);
         Optional<ResourcesModel> emptyOptional = Optional.ofNullable(null);
         assertEquals(testOptional.get(), model);
@@ -72,6 +71,25 @@ public class ResourcesModelServiceTest {
         Optional<ResourcesModel> emptyOptional = Optional.ofNullable(null);
         Mockito.when(resourceRepository.findResourceByResourcesId(id)).thenReturn(emptyOptional);
         resourceService.verifyResource(id);
+    }
+
+    @Test
+    public void verifyResourceSecondTest(){
+        Kingdom testKingdom = new Kingdom();
+        ResourcesModel model = new ResourcesModel("gold", testKingdom);
+        long id = 1;
+        Optional<ResourcesModel> testOptional = Optional.of(model);
+        //Mockito.when(resourceRepository.findResourceByResourcesId(id)).thenReturn(testOptional);
+       // Mockito.when(resourceService.verifyResource(id)).thenReturn(model);
+    }
+
+    @Test
+    public void getLastTimestampFromDBTest(){
+        long id = 1;
+        Kingdom testKingdom = new Kingdom();
+        ResourcesModel model = new ResourcesModel("gold", testKingdom);
+        model.setTimeStampLastVisit(100);
+        assertEquals(resourceService.getLastTimestampFromDB(model), new Timestamp(100));
     }
 }
 
