@@ -28,7 +28,7 @@ public class MockResourcesControllerTest {
 
     @Test
     public void testMockJson() throws Exception {
-        String json = "{\"amount\":20,\"updated_at\":1234,\"type\":\"gold\"}";
+        String json = "{\"type\":\"gold\",\"amount\":100,\"timeStampLastVisit\":0}";
         mockMvc.perform(MockMvcRequestBuilders.get("/mock/resources"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(json));
