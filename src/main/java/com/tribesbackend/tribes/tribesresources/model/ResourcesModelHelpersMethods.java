@@ -9,9 +9,10 @@ public class ResourcesModelHelpersMethods {
     @Autowired
     public  ResourcesModelHelpersMethods (ResourceRepository resourceRepo) {this.resourceRepo = resourceRepo;}
 
-    public static boolean isValid(ResourcesModel resources) {
-        if (resources.getAmount()>=0 && resources.getTimeStampLastVisit()>=0&&resources.getType().equals("gold")){
-            return true;}
+    public static boolean isValid(ResourcesModel resourcesModel) {
+        if (resourcesModel.getAmount()>=0&&resourcesModel.getType().equals("gold")){
+            return true;
+        }
         else return false;
     }
 }

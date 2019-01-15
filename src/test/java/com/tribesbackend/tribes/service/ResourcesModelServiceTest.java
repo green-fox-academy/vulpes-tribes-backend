@@ -38,15 +38,16 @@ public class ResourcesModelServiceTest {
     }
 
     @Test
-    public void getCurrentTimestampTest(){
+    public void getCurrentTimestampTest() {
         Timestamp now = new Timestamp(System.currentTimeMillis());
         Timestamp toTest = resourceService.getCurrentTimestamp();
         assertEquals(now, toTest);
     }
 
+
     @Test
-    public void verifyResource(){
-        Kingdom testKingdom =new Kingdom();
+    public void verifyResource() {
+        Kingdom testKingdom = new Kingdom();
         ResourcesModel model = new ResourcesModel("gold", testKingdom);
         long id = 1;
         Optional<ResourcesModel> testOptional = Optional.of(model);
@@ -56,3 +57,4 @@ public class ResourcesModelServiceTest {
 
     }
 }
+
