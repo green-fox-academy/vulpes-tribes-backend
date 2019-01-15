@@ -52,6 +52,5 @@ public class TribesResourcesModelTest {
                 .setKingdom(new Kingdom())
                 .setType("silver")
                 .build();
-
     }
 }

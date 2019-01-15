@@ -1,19 +1,12 @@
 package com.tribesbackend.tribes.security;
 
-import com.tribesbackend.tribes.tribesuser.model.TribesUser;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-
 import javax.sql.DataSource;
-import java.security.Key;
-
 
 @Configuration
 @PropertySource("classpath:db.properties")
