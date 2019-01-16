@@ -33,7 +33,8 @@ public class MockBuildingRestController {
     }
 
     @PostMapping(value = "/kingdom/buildings")
-    public ResponseEntity<Object> sendBuildings(@Validated String xTribesToken, @RequestBody String type) {
+    public ResponseEntity<Object> sendBuildings(@RequestHeader (name = "X-Tribes-Token") String xTribesToken,
+                                                @RequestBody  String type) {
         if (type.equals("farm") || type.equals("mine") || type.equals("barrack") || type.equals("barrack")) {
             return new ResponseEntity(new Building(type), HttpStatus.OK);
         }

@@ -2,6 +2,7 @@ package com.tribesbackend.tribes.building;
 
 import com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.TokenIsValid;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,7 +17,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class BuildingRestControllerTest {
+public class MockBuildingRestControllerTest {
     @Mock
     private TokenIsValid validToken;
 
@@ -35,23 +36,33 @@ public class BuildingRestControllerTest {
     @Test
     public void testGettingBuildingsOfUser() throws Exception {
         String xTribesToken = "1";
-
- //       Mockito.when(validToken.isValid(refEq(xTribesToken))).thenReturn(true);
-//Mockito.doNothing().when
         mockMvc.perform(MockMvcRequestBuilders.get("/kingdom/buildings")
                 .accept(MediaType.APPLICATION_JSON)
                 .header("X-Tribes-Token", xTribesToken))
-   //             .andDo(print())
-  //      .andDo(Moc)
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(xTribesToken))
-//                .andDo(MockMvcResultMatchers.print())
                 .andExpect(MockMvcResultMatchers.status().isOk())
-     //   .andExpect(js);
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0]").exists());
-         //       .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON));
-        //     .;
+    }
 
+    @Test
+    public void testGettingTokenInvalid() throws Exception {
+        String xTribesToken = "1234";
+        mockMvc.perform(MockMvcRequestBuilders.get("/kingdom/buildings")
+                .accept(MediaType.APPLICATION_JSON)
+                .header("X-Tribes-Token", xTribesToken))
+                .andExpect(MockMvcResultMatchers.status().is(400))
+             .andExpect(MockMvcResultMatchers.jsonPath("$").isNotEmpty());
+    }
+
+    @Test
+    public void testPostingBuildingOfUser() throws Exception{
+        String xTribesToken = "1";
+        String type = "farm";
+        mockMvc.perform(MockMvcRequestBuilders.post("/kingdom/buildings")
+                .accept(MediaType.APPLICATION_JSON)
+                .header("X-Tribes-Token", xTribesToken)
+                .content(type))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.type", Matchers.is("farm")));
     }
 
 
