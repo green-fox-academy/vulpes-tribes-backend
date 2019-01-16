@@ -19,7 +19,6 @@ public class ErrorMessagesMethods {
         toReturn.setStatus("error");
         toReturn.setErrorMessage("Missing parameter(s): " + getErrorParameter(user));
         return toReturn;
-
     }
 
     public String getErrorParameter(TribesUser user) {
@@ -35,5 +34,4 @@ public class ErrorMessagesMethods {
         }
         return concatBuffer.toString();
     }
-
 }
