@@ -13,10 +13,13 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 //@SuppressWarnings("unchecked")
 @RestController
 public class UserRestController {
+    private  static final Logger LOGGER = LoggerFactory.getLogger(UserRestController.class);
     UserTRepository userTRepository;
     UserModelHelpersMethods userMethods;
     ErrorMessagesMethods errorMessages;

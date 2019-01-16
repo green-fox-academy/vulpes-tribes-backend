@@ -1,0 +1,111 @@
+2019-01-16 17:44:18.861  INFO 4088 --- [restartedMain] c.t.tribes.TribesApplication             : Starting TribesApplication on DESKTOP-1TLDB2P with PID 4088 (C:\Users\jiris\vulpes-tribes-backend\out\production\classes started by jiris in C:\Users\jiris\vulpes-tribes-backend)
+2019-01-16 17:44:18.861 DEBUG 4088 --- [restartedMain] c.t.tribes.TribesApplication             : Running with Spring Boot v2.1.1.RELEASE, Spring v5.1.3.RELEASE
+2019-01-16 17:44:18.861  INFO 4088 --- [restartedMain] c.t.tribes.TribesApplication             : No active profile set, falling back to default profiles: default
+2019-01-16 17:44:18.923  INFO 4088 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-01-16 17:44:18.923  INFO 4088 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-01-16 17:44:19.722  INFO 4088 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-16 17:44:19.817  INFO 4088 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 87ms. Found 5 repository interfaces.
+2019-01-16 17:44:20.152  INFO 4088 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$e60efd78] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-16 17:44:20.513  INFO 4088 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2019-01-16 17:44:20.534  INFO 4088 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-16 17:44:20.535  INFO 4088 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-16 17:44:20.542  INFO 4088 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Users\jiris\Anaconda3;C:\Users\jiris\Anaconda3\Library\mingw-w64\bin;C:\Users\jiris\Anaconda3\Library\usr\bin;C:\Users\jiris\Anaconda3\Library\bin;C:\Users\jiris\Anaconda3\Scripts;C:\Users\jiris\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;.]
+2019-01-16 17:44:20.649  INFO 4088 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-16 17:44:20.649  INFO 4088 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1726 ms
+2019-01-16 17:44:20.788  INFO 4088 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.3 by Boxfuse
+2019-01-16 17:44:21.263  INFO 4088 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/USERSERVICE (MySQL 8.0)
+2019-01-16 17:44:21.342  WARN 4088 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: Migration checksum mismatch for migration version 6
+-> Applied to database : 1568610633
+-> Resolved locally    : -1094152540
+2019-01-16 17:44:21.342  INFO 4088 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-01-16 17:44:21.358  INFO 4088 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-01-16 17:44:21.373 ERROR 4088 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: Migration checksum mismatch for migration version 6
+-> Applied to database : 1568610633
+-> Resolved locally    : -1094152540
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1083)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:853)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.tribesbackend.tribes.TribesApplication.main(TribesApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.flywaydb.core.api.FlywayException: Validate failed: Migration checksum mismatch for migration version 6
+-> Applied to database : 1568610633
+-> Resolved locally    : -1094152540
+	at org.flywaydb.core.Flyway.doValidate(Flyway.java:1479)
+	at org.flywaydb.core.Flyway.access$100(Flyway.java:82)
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1361)
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1353)
+	at org.flywaydb.core.Flyway.execute(Flyway.java:1708)
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:1353)
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:66)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741)
+	... 23 common frames omitted
+
+2019-01-16 17:45:25.981  INFO 8368 --- [restartedMain] c.t.tribes.TribesApplication             : Starting TribesApplication on DESKTOP-1TLDB2P with PID 8368 (C:\Users\jiris\vulpes-tribes-backend\out\production\classes started by jiris in C:\Users\jiris\vulpes-tribes-backend)
+2019-01-16 17:45:25.984 DEBUG 8368 --- [restartedMain] c.t.tribes.TribesApplication             : Running with Spring Boot v2.1.1.RELEASE, Spring v5.1.3.RELEASE
+2019-01-16 17:45:25.986  INFO 8368 --- [restartedMain] c.t.tribes.TribesApplication             : No active profile set, falling back to default profiles: default
+2019-01-16 17:45:26.020  INFO 8368 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-01-16 17:45:26.020  INFO 8368 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-01-16 17:45:26.816  INFO 8368 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-16 17:45:26.926  INFO 8368 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 100ms. Found 5 repository interfaces.
+2019-01-16 17:45:27.229  INFO 8368 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$58c3123b] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-16 17:45:27.579  INFO 8368 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2019-01-16 17:45:27.606  INFO 8368 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-16 17:45:27.606  INFO 8368 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-16 17:45:27.613  INFO 8368 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Users\jiris\Anaconda3;C:\Users\jiris\Anaconda3\Library\mingw-w64\bin;C:\Users\jiris\Anaconda3\Library\usr\bin;C:\Users\jiris\Anaconda3\Library\bin;C:\Users\jiris\Anaconda3\Scripts;C:\Users\jiris\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;.]
+2019-01-16 17:45:27.726  INFO 8368 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-16 17:45:27.726  INFO 8368 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1706 ms
+2019-01-16 17:45:27.846  INFO 8368 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.3 by Boxfuse
+2019-01-16 17:45:28.300  INFO 8368 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/USERSERVICE (MySQL 8.0)
+2019-01-16 17:45:28.374  INFO 8368 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 8 migrations (execution time 00:00.021s)
+2019-01-16 17:45:28.398  INFO 8368 --- [restartedMain] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table: `USERSERVICE`.`flyway_schema_history`
+2019-01-16 17:45:28.534  INFO 8368 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `USERSERVICE`: << Empty Schema >>
+2019-01-16 17:45:28.536  INFO 8368 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 1 - test init
+2019-01-16 17:45:28.612  INFO 8368 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 2 - test init
+2019-01-16 17:45:28.672  INFO 8368 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 3 - test init
+2019-01-16 17:45:28.843  INFO 8368 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 4 - troops
+2019-01-16 17:45:28.894  INFO 8368 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 5 - buildings
+2019-01-16 17:45:28.963  INFO 8368 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 6 - resources
+2019-01-16 17:45:29.005  INFO 8368 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 7 - resourcesForeignKey
+2019-01-16 17:45:29.084  INFO 8368 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 8 - another
+2019-01-16 17:45:29.097  INFO 8368 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Successfully applied 8 migrations to schema `USERSERVICE` (execution time 00:00.701s)
+2019-01-16 17:45:29.238  INFO 8368 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-01-16 17:45:29.317  INFO 8368 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2019-01-16 17:45:29.317  INFO 8368 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-01-16 17:45:29.466  INFO 8368 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-01-16 17:45:29.633  INFO 8368 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-01-16 17:45:30.336  INFO 8368 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-01-16 17:45:30.898  INFO 8368 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6f7722e, org.springframework.security.web.context.SecurityContextPersistenceFilter@c44351e, org.springframework.security.web.header.HeaderWriterFilter@1ab0bf90, org.springframework.security.web.authentication.logout.LogoutFilter@78ff47cd, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@5e585a46, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@5a43a6cb, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@713329a5, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@62c2dc57, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@eb6c3f2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@493dc192, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5093ba67, org.springframework.security.web.session.SessionManagementFilter@1dacb004, org.springframework.security.web.access.ExceptionTranslationFilter@4e9014f7, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@161bcc3]
+2019-01-16 17:45:30.920  WARN 8368 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-01-16 17:45:31.321  INFO 8368 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-01-16 17:45:31.532  INFO 8368 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8090 (http) with context path ''
+2019-01-16 17:45:31.538  INFO 8368 --- [restartedMain] c.t.tribes.TribesApplication             : Started TribesApplication in 5.904 seconds (JVM running for 6.946)
+2019-01-16 17:46:18.341  INFO 8368 --- [http-nio-8090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-01-16 17:46:18.341  INFO 8368 --- [http-nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-01-16 17:46:18.348  INFO 8368 --- [http-nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 7 ms
+2019-01-16 17:46:18.381  INFO 8368 --- [http-nio-8090-exec-1] c.t.t.t.c.MockKingdomController          : GET /mock/kingdom

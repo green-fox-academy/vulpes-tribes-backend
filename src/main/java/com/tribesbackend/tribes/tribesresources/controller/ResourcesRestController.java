@@ -7,6 +7,8 @@ package com.tribesbackend.tribes.tribesresources.controller;
         import com.tribesbackend.tribes.tribesresources.repository.ResourceRepository;
         import com.tribesbackend.tribes.tribesresources.service.ResourceCrudService;
         import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
+        import org.slf4j.Logger;
+        import org.slf4j.LoggerFactory;
         import org.springframework.beans.factory.annotation.Autowired;
         import org.springframework.http.HttpStatus;
         import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ package com.tribesbackend.tribes.tribesresources.controller;
 
 @RestController
 public class ResourcesRestController {
+    private  static final Logger LOGGER = LoggerFactory.getLogger(ResourcesRestController.class);
     ResourceRepository resourceRepository;
     KingdomRepository kingdomRepository;
     ResourcesModelHelpersMethods resourcesModelHelpersMethods;
@@ -34,6 +37,7 @@ public class ResourcesRestController {
     @GetMapping(value = "/kingdom/resources")
     public ResponseEntity getBuilding(@RequestHeader(name = "username")String username){
         Kingdom selectedKingdom =  kingdomRepository.findKingdomByTribesUserUsername(username);
+        LOGGER.info("GET /kingdom/resources/{}", username);
         return new ResponseEntity(resourceRepository.findAllByKingdom(selectedKingdom), HttpStatus.OK);
     }
 }

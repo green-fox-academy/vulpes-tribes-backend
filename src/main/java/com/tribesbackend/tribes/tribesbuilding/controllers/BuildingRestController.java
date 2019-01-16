@@ -7,6 +7,8 @@ import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.OKstatus;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class BuildingRestController {
+    private  static final Logger LOGGER = LoggerFactory.getLogger(BuildingRestController.class);
     KingdomRepository kingdomRepository;
     BuildingRepository buildingRepository;
     BuildingModelHelpersMethods buildingModelHelpersMethods;
@@ -34,6 +37,7 @@ public class BuildingRestController {
     @GetMapping(value = "/kingdom/buildings")
     public ResponseEntity getBuilding(@RequestHeader(name = "username")String username){
         Kingdom selectedKingdom =  kingdomRepository.findKingdomByTribesUserUsername(username);
+        LOGGER.info("GET kingdom/buildings/{}", username);
         return new ResponseEntity(buildingRepository.findAllByKingdom(selectedKingdom), HttpStatus.OK);
     }
 }
