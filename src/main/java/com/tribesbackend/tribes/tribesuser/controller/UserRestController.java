@@ -38,7 +38,6 @@ public class UserRestController {
             return new ResponseEntity(errorMessages.usernameAlreadyTaken(), HttpStatus.CONFLICT);
         } else userTRepository.save(newUser);
         return ResponseEntity.ok(newUser);
-        // return new ResponseEntity(newUser, HttpStatus.OK);
     }
 
     @PostMapping(value = "/login")
@@ -47,10 +46,7 @@ public class UserRestController {
                 tribesUser.getPassword() == null || tribesUser.getPassword().isEmpty()) {
             return new ResponseEntity(errorMessages.jsonFieldIsEmpty(tribesUser), HttpStatus.BAD_REQUEST);
 
-        } else
-            //if (userMethods.isValid(tribesUser)) {
-            //username is in database and password matches
-            if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()) == null) {
+        } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()) == null) {
                 //  throw new InvalidUserPasswordException("error", "Not such user: " + tribesUser.getUsername());
                 return new ResponseEntity(
                         new InvalidUserPasswordException("error", "Not such user: " + tribesUser.getUsername())
@@ -60,13 +56,10 @@ public class UserRestController {
                 return new ResponseEntity(
                         new OKstatus("ok", "token")
                         , HttpStatus.OK);
-                //username is not empty, but is not in database
             } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
-                //     throw new InvalidUserPasswordException("error", "Wrong password!");
                 return new ResponseEntity(
                         new InvalidUserPasswordException("error", "Wrong password!")
                         , HttpStatus.UNAUTHORIZED);
-                //just to have a return statement, will never happen
             }
         return new ResponseEntity(HttpStatus.CONFLICT);
     }
