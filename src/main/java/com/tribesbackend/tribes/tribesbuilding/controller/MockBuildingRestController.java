@@ -15,16 +15,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-public class BuildingRestController {
+public class MockBuildingRestController {
     BuildingRepository buldingRepo;
 
     @Autowired
-    BuildingRestController(BuildingRepository buildingRepo) {
+    MockBuildingRestController(BuildingRepository buildingRepo) {
         this.buldingRepo = buildingRepo;
     }
 
     @GetMapping(value = "/kingdom/buildings")
-    public ResponseEntity<Object> buildingsOfUser(@Validated @RequestBody String xTribesToken) {
+    public ResponseEntity<Object> buildingsOfUser( @RequestHeader (name = "X-Tribes-Token") String xTribesToken) {
         List<Building> usersBuildings = new ArrayList<Building>();
         usersBuildings.add(BuildingFactory.createSampleBuilding());
         if (TokenIsValid.isValid(xTribesToken)) {
