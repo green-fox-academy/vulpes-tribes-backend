@@ -79,8 +79,9 @@ public class ResourcesModelServiceTest {
         ResourcesModel model = new ResourcesModel("gold", testKingdom);
         long id = 1;
         Optional<ResourcesModel> testOptional = Optional.of(model);
-        //Mockito.when(resourceRepository.findResourceByResourcesId(id)).thenReturn(testOptional);
-       // Mockito.when(resourceService.verifyResource(id)).thenReturn(model);
+        Mockito.when(resourceRepository.findResourceByResourcesId(id)).thenReturn(testOptional);
+        ResourcesModel verified = resourceService.verifyResource(id);
+        assertEquals("gold", verified.getType());
     }
 
     @Test
