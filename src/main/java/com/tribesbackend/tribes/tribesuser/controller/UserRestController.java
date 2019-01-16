@@ -21,7 +21,7 @@ public class UserRestController {
     UserModelHelpersMethods userMethods;
     ErrorMessagesMethods errorMessages;
     UserCrudService userCrudService;
-    boolean loggedin;
+    boolean loggedIn; 
 
     @Autowired
     public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods, ErrorMessagesMethods errorMessages, UserCrudService userCrudService) {
@@ -56,7 +56,7 @@ public class UserRestController {
                         new InvalidUserPasswordException("error", "Not such user: " + tribesUser.getUsername())
                         , HttpStatus.UNAUTHORIZED);
             } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
-                loggedin = true;
+                loggedIn = true;
                 return new ResponseEntity(
                         new OKstatus("ok", "token")
                         , HttpStatus.OK);
@@ -76,7 +76,7 @@ public class UserRestController {
         if (token == null || token.isEmpty()) {
             return new ResponseEntity(new LogoutMessages("Unauthorized request!"), HttpStatus.FORBIDDEN);
         } else
-            loggedin = false;
+            loggedIn = false;
             return ResponseEntity.ok(new LogoutMessages("Logged out successfully!"));
     }
 }
