@@ -27,7 +27,6 @@ public class KingdomRestController {
         this.kingdomCrudService = kingdomCrudService;
     }
 
-
     @GetMapping(value = "/kingdom")
     public ResponseEntity getKingdom(@RequestHeader(name = "username") String username) {
         return new ResponseEntity(new OKstatus("ok", kingdomRepository.findKingdomByTribesUserUsername(username)), HttpStatus.OK);

@@ -1,7 +1,9 @@
 package com.tribesbackend.tribes.tribesresources.model;
 import com.tribesbackend.tribes.tribesresources.repository.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class ResourcesModelHelpersMethods {
 
     ResourceRepository resourceRepo;
