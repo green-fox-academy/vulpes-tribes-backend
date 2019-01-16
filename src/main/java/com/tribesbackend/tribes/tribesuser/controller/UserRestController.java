@@ -1,5 +1,7 @@
 package com.tribesbackend.tribes.tribesuser.controller;
 
+import com.auth0.jwt.JWT;
+import com.tribesbackend.tribes.security.SecurityConstants;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.exception.InvalidUserPasswordException;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
@@ -13,6 +15,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Date;
+
+import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
+import static com.tribesbackend.tribes.security.SecurityConstants.EXPIRATION_TIME;
 
 
 @RestController
@@ -30,13 +37,22 @@ public class UserRestController {
         this.userCrudService = userCrudService;
     }
 
+    @GetMapping (value="/mockuser")
+    public ResponseEntity sampleUserJson(){
+        TribesUser tuser  = new TribesUser("jirina","1234");
+        userTRepository.save(tuser);
+        return new ResponseEntity(tuser, HttpStatus.OK);
+    }
+
+
+
     @PostMapping(value = "/register")
-    public ResponseEntity<Object> registerUser(@Validated @RequestBody TribesUser newUser) {
+    public ResponseEntity registerUser(@Validated @RequestBody TribesUser newUser) {
 
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(errorMessages.usernameAlreadyTaken(), HttpStatus.CONFLICT);
         } else userTRepository.save(newUser);
-        return ResponseEntity.ok(newUser);
+        return new ResponseEntity("ok", HttpStatus.OK);
         // return new ResponseEntity(newUser, HttpStatus.OK);
     }
 
@@ -56,7 +72,11 @@ public class UserRestController {
                         , HttpStatus.UNAUTHORIZED);
             } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
                 return new ResponseEntity(
-                        new OKstatus("ok", "token")
+                        new OKstatus("ok",
+                                 JWT.create()
+                                .withSubject(tribesUser.getUsername())
+                                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                                .sign(HMAC512(SecurityConstants.SECRET.getBytes())))
                         , HttpStatus.OK);
                 //username is not empty, but is not in database
             } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
@@ -75,5 +95,10 @@ public class UserRestController {
             return new ResponseEntity(new LogoutMessages("Unauthorized request!"), HttpStatus.FORBIDDEN);
         }
         else return ResponseEntity.ok(new LogoutMessages("Logged out successfully!"));
+    }
+
+    @GetMapping (value = "/testjwt")
+    public String testingEndpoint(@RequestHeader String token){
+      return JWT.decode(token).getSubject();
     }
 }
