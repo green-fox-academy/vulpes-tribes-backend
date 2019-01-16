@@ -20,3 +20,4 @@ public class MockResourcesController {
             .setType("gold")
             .build();
 }
+
