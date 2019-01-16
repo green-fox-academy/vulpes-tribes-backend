@@ -34,4 +34,3 @@ public class TribesUserTest {
         Assert.assertEquals(true, UserModelHelpersMethods.isValid(tribesUser));
     }
 }
-

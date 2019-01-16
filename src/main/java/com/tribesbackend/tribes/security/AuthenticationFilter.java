@@ -1,11 +1,9 @@
 package com.tribesbackend.tribes.security;
 
 
-import com.tribesbackend.tribes.tribesuser.okstatusservice.RandomToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.token.TokenService;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +12,7 @@ import java.util.Optional;
 
 public class AuthenticationFilter implements Filter {
 
-    RandomToken randomToken;
-
-    public AuthenticationFilter (RandomToken randomToken) {this.randomToken = randomToken;}
+    public AuthenticationFilter () {}
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {

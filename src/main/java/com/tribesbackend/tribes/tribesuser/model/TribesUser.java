@@ -3,14 +3,17 @@ package com.tribesbackend.tribes.tribesuser.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Entity
 @Table(name = "users")
-public class TribesUser {
+public class TribesUser implements UserDetails {
     @Id
     @GeneratedValue
     @JsonIgnore
@@ -42,6 +45,7 @@ public class TribesUser {
         this.id = id;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -50,11 +54,37 @@ public class TribesUser {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 }

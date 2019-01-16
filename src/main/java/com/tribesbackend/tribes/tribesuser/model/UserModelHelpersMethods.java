@@ -25,9 +25,7 @@ public class UserModelHelpersMethods {
 
 
     public boolean usernameAlreadyTaken(TribesUser userFromJSON) {
-        Optional<TribesUser> optionalUserFromRepo = Optional.ofNullable( userRepo.findByUsername( userFromJSON.getUsername() ) );
+        Optional<TribesUser> optionalUserFromRepo = userRepo.findTribesUserByUsername(userFromJSON.getUsername());
         return (optionalUserFromRepo.isPresent());
     }
 }
-
-
