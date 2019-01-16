@@ -16,7 +16,7 @@ public class MockResourcesController {
         return ResponseEntity.ok(mockResources);
     }
     ResourcesModel mockResources = new ResourcesModel.ResourcesBuilder()
-            .setAmount( 20 )
+            .setAmount(20)
             .setType("gold")
             .build();
 }
