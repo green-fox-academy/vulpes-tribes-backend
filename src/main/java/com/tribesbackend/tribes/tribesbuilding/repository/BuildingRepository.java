@@ -10,9 +10,11 @@ import java.util.Optional;
 
 
 @Repository
-public interface BuildingRepository extends JpaRepository <Building, Long> {
+public interface BuildingRepository extends JpaRepository<Building, Long> {
     @Override
     List<Building> findAll();
 
     Optional<Building> findAllByKingdom(Kingdom kingdom);
-    }
+    Optional<Building> findByType(String type);
+    Optional<Building> findById(int id);
+}

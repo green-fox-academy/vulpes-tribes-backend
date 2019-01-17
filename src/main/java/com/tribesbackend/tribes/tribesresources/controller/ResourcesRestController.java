@@ -3,7 +3,7 @@ package com.tribesbackend.tribes.tribesresources.controller;
 
         import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
         import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
-        import com.tribesbackend.tribes.tribesresources.model.ResourcesModelHelpersMethods;
+        import com.tribesbackend.tribes.tribesresources.service.ResourcesModelHelpersMethods;
         import com.tribesbackend.tribes.tribesresources.repository.ResourceRepository;
         import com.tribesbackend.tribes.tribesresources.service.ResourceCrudService;
         import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
