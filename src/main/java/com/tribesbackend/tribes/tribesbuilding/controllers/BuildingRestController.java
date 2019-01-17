@@ -6,7 +6,6 @@ import com.tribesbackend.tribes.tribesbuilding.repository.BuildingRepository;
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
-import com.tribesbackend.tribes.tribesuser.okstatusservice.OKstatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
