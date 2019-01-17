@@ -13,8 +13,6 @@ import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -99,13 +97,14 @@ public class UserRestController {
         else return ResponseEntity.ok(new LogoutMessages("Logged out successfully!"));
     }
 
-    @GetMapping (value = "/testjwt")
-    public String testingEndpoint(@RequestHeader UsernamePasswordAuthenticationToken authentication){
-
-
-     //   UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
-      return SecurityContextHolder.getContext().getAuthentication(authentication);
-
-         //     JWT.decode(token).getSubject();
-    }
+//    @GetMapping (value = "/testjwt")
+//    public String testingEndpoint(@RequestHeader (name = "token", required = false)
+//                                              UsernamePasswordAuthenticationToken authentication){
+//
+//
+//     //   UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
+//      return SecurityContextHolder.getContext().getAuthentication(authentication);
+//
+//         //     JWT.decode(token).getSubject();
+//    }
 }
