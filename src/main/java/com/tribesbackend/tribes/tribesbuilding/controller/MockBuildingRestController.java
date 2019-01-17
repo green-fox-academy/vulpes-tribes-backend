@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequestMapping(value = "/mock")
 @RestController
 public class MockBuildingRestController {
     BuildingRepository buldingRepo;
