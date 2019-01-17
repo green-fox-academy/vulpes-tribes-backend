@@ -1,5 +1,7 @@
 package com.tribesbackend.tribes.tribesuser.controller;
 
+import com.auth0.jwt.JWT;
+import com.tribesbackend.tribes.security.SecurityConstants;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.exception.InvalidUserPasswordException;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
@@ -14,7 +16,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-//@SuppressWarnings("unchecked")
+
+import java.util.Date;
+
+import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
+import static com.tribesbackend.tribes.security.SecurityConstants.EXPIRATION_TIME;
+
+
+
 @RestController
 public class UserRestController {
     UserTRepository userTRepository;
@@ -31,13 +40,25 @@ public class UserRestController {
         this.userCrudService = userCrudService;
     }
 
+    @GetMapping (value="/mockuser")
+    public ResponseEntity sampleUserJson(){
+        TribesUser tuser  = new TribesUser("jirina","1234");
+        userTRepository.save(tuser);
+        return new ResponseEntity(tuser, HttpStatus.OK);
+    }
+
+
+
     @PostMapping(value = "/register")
-    public ResponseEntity<Object> registerUser(@Validated @RequestBody TribesUser newUser) {
+    public ResponseEntity registerUser(@Validated @RequestBody TribesUser newUser) {
 
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(errorMessages.usernameAlreadyTaken(), HttpStatus.CONFLICT);
         } else userTRepository.save(newUser);
-        return ResponseEntity.ok(newUser);
+
+        return new ResponseEntity("ok", HttpStatus.OK);
+        // return new ResponseEntity(newUser, HttpStatus.OK);
+
     }
 
     @PostMapping(value = "/login")
@@ -54,7 +75,11 @@ public class UserRestController {
             } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
                 loggedIn = true;
                 return new ResponseEntity(
-                        new OKstatus("ok", "token")
+                        new OKstatus("ok",
+                                 JWT.create()
+                                .withSubject(tribesUser.getUsername())
+                                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                                .sign(HMAC512(SecurityConstants.SECRET.getBytes())))
                         , HttpStatus.OK);
             } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
                 return new ResponseEntity(
@@ -72,4 +97,15 @@ public class UserRestController {
             loggedIn = false;
             return ResponseEntity.ok(new LogoutMessages("Logged out successfully!"));
     }
+
+//    @GetMapping (value = "/testjwt")
+//    public String testingEndpoint(@RequestHeader (name = "token", required = false)
+//                                              UsernamePasswordAuthenticationToken authentication){
+//
+//
+//     //   UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
+//      return SecurityContextHolder.getContext().getAuthentication(authentication);
+//
+//         //     JWT.decode(token).getSubject();
+//    }
 }
