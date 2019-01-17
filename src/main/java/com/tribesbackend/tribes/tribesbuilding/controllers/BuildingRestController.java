@@ -37,7 +37,7 @@ public class BuildingRestController {
     @GetMapping(value = "/kingdom/buildings")
     public ResponseEntity getBuilding(@RequestHeader(name = "username")String username){
         Kingdom selectedKingdom =  kingdomRepository.findKingdomByTribesUserUsername(username);
-        LOGGER.info("GET kingdom/buildings/{}", username);
+        LOGGER.info("GET kingdom/buildings for username:{}", username);
         return new ResponseEntity(buildingRepository.findAllByKingdom(selectedKingdom), HttpStatus.OK);
     }
 }
