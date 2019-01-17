@@ -1,5 +1,6 @@
 package com.tribesbackend.tribes.tribesuser.controller;
 
+import com.tribesbackend.tribes.logging.Logging;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.exception.InvalidUserPasswordException;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
@@ -13,13 +14,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-//@SuppressWarnings("unchecked")
+@SuppressWarnings("unchecked")
 @RestController
-public class UserRestController {
-    private  static final Logger LOGGER = LoggerFactory.getLogger(UserRestController.class);
+public class UserRestController extends Logging {
     UserTRepository userTRepository;
     UserModelHelpersMethods userMethods;
     ErrorMessagesMethods errorMessages;

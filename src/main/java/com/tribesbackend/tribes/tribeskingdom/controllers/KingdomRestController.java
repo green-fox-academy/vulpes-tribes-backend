@@ -1,5 +1,6 @@
 package com.tribesbackend.tribes.tribeskingdom.controllers;
 
+import com.tribesbackend.tribes.logging.Logging;
 import com.tribesbackend.tribes.tribeskingdom.model.KingdomModelHelpersMethods;
 import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
 import com.tribesbackend.tribes.tribeskingdom.service.KingdomCrudService;
@@ -13,7 +14,8 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class KingdomRestController {
+public class KingdomRestController extends Logging {
+
     KingdomRepository kingdomRepository;
     KingdomModelHelpersMethods kingdomModelHelpersMethods;
     ErrorMessagesMethods errorMessages;
@@ -29,6 +31,7 @@ public class KingdomRestController {
 
     @GetMapping(value = "/kingdom")
     public ResponseEntity getKingdom(@RequestHeader(name = "username") String username) {
+        LOGGER.info("GET /kingdom for username: " + username);
         return new ResponseEntity(new OKstatus("ok", kingdomRepository.findKingdomByTribesUserUsername(username)), HttpStatus.OK);
     }
 }

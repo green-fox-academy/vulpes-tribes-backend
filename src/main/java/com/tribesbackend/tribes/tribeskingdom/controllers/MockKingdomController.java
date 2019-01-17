@@ -1,5 +1,6 @@
 package com.tribesbackend.tribes.tribeskingdom.controllers;
 
+import com.tribesbackend.tribes.logging.Logging;
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import com.tribesbackend.tribes.tribeskingdom.model.KingdomModelHelpersMethods;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
@@ -13,8 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/mock")
-public class MockKingdomController {
-    private  static final Logger LOGGER = LoggerFactory.getLogger(MockKingdomController.class);
+public class MockKingdomController extends Logging {
         @Autowired
         KingdomModelHelpersMethods m;
 
