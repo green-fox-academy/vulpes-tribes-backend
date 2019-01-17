@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "users")
+@Table(name = "`USERS`")
 public class TribesUser {
     @Id
     @GeneratedValue

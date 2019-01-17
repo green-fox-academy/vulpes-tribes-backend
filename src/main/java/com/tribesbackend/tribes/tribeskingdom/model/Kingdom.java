@@ -1,6 +1,9 @@
 package com.tribesbackend.tribes.tribeskingdom.model;
 import com.tribesbackend.tribes.tribesbuilding.model.Building;
+
 import com.tribesbackend.tribes.tribesresources.model.ResourcesModel;
+
+
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.troop.model.Troop;
 import javax.persistence.*;

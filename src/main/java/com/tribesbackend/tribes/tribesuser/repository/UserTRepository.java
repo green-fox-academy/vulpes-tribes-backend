@@ -16,4 +16,6 @@ public interface UserTRepository extends JpaRepository<TribesUser, Long> {
     //Added by Jirina coz of login endpoint functionality - .getPassword by a TribesUser from database
     TribesUser findTribesUserByUsername(String username);
 
+
+
 }
