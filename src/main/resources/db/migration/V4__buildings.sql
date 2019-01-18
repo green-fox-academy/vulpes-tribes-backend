@@ -5,4 +5,4 @@ CREATE TABLE BUILDINGS (ID INT AUTO_INCREMENT PRIMARY KEY,
                        HP SMALLINT (4),
                        STARTED_AT SMALLINT (10),
                        FINISHED_AT SMALLINT (10),
-                       FOREIGN KEY(KINGDOM_ID) REFERENCES KINGDOMS(ID));
+                       FOREIGN KEY(KINGDOM_ID) REFERENCES KINGDOM(ID));

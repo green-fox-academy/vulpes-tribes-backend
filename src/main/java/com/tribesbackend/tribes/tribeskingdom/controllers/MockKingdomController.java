@@ -1,11 +1,8 @@
 package com.tribesbackend.tribes.tribeskingdom.controllers;
 
-import com.tribesbackend.tribes.logging.Logging;
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import com.tribesbackend.tribes.tribeskingdom.model.KingdomModelHelpersMethods;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/mock")
-public class MockKingdomController extends Logging {
+public class MockKingdomController  {
         @Autowired
         KingdomModelHelpersMethods m;
 
@@ -23,7 +20,7 @@ public class MockKingdomController extends Logging {
 
     @GetMapping(value = "/kingdom")
     public ResponseEntity getMockKingdom() {
-        LOGGER.info("GET /mock/kingdom");
+       // logger.info("GET /mock/kingdom");
         return ResponseEntity.ok(mockKingdom);
     }
 
