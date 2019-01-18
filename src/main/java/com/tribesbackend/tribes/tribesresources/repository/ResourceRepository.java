@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface ResourceRepository extends JpaRepository <ResourcesModel, Long> {
+public interface ResourceRepository extends JpaRepository<ResourcesModel, Long> {
     @Override
     List<ResourcesModel> findAll();
 
