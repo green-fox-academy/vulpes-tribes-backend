@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class KingdomRestController {
+
     KingdomRepository kingdomRepository;
     KingdomModelHelpersMethods kingdomModelHelpersMethods;
     ErrorMessagesMethods errorMessages;

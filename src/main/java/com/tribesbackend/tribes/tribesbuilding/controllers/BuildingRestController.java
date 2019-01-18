@@ -1,4 +1,31 @@
 
+
+/*@RestController
+public class BuildingRestController extends Logging {
+    KingdomRepository kingdomRepository;
+    BuildingRepository buildingRepository;
+    BuildingModelHelpersMethods buildingModelHelpersMethods;
+    ErrorMessagesMethods errorMessages;
+    BuildingCrudService buildingCrudService;
+
+    @Autowired
+    public BuildingRestController (KingdomRepository kingdomRepository, BuildingRepository buildingRepository, BuildingModelHelpersMethods buildingModelHelpersMethods, ErrorMessagesMethods errorMessages, BuildingCrudService buildingCrudService ){
+        this.kingdomRepository = kingdomRepository;
+        this.buildingRepository = buildingRepository;
+        this.buildingModelHelpersMethods = buildingModelHelpersMethods;
+        this.errorMessages = errorMessages;
+        this.buildingCrudService = buildingCrudService;
+    }
+
+    @GetMapping(value = "/kingdom/buildings")
+    public ResponseEntity getBuilding(@RequestHeader(name = "username")String username){
+        Kingdom selectedKingdom =  kingdomRepository.findKingdomByTribesUserUsername(username);
+        logger.info("GET kingdom/buildings for username:{}", username);
+        return new ResponseEntity(buildingRepository.findAllByKingdom(selectedKingdom), HttpStatus.OK);
+    }
+}
+*/
+
 //package com.tribesbackend.tribes.tribesbuilding.controllers;
 //
 //import com.tribesbackend.tribes.tribesbuilding.model.BuildingModelHelpersMethods;
@@ -36,3 +63,4 @@
 //        return new ResponseEntity(buildingRepository.findAllByKingdom(selectedKingdom), HttpStatus.OK);
 //    }
 //}
+

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/mock")
-public class MockKingdomController {
+public class MockKingdomController  {
         @Autowired
         KingdomModelHelpersMethods m;
 
@@ -20,6 +20,7 @@ public class MockKingdomController {
 
     @GetMapping(value = "/kingdom")
     public ResponseEntity getMockKingdom() {
+       // logger.info("GET /mock/kingdom");
         return ResponseEntity.ok(mockKingdom);
     }
 

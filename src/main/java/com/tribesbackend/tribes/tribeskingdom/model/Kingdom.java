@@ -1,6 +1,4 @@
 package com.tribesbackend.tribes.tribeskingdom.model;
-
-
 import com.tribesbackend.tribes.tribesbuilding.model.Building;
 
 import com.tribesbackend.tribes.tribesresources.model.ResourcesModel;
@@ -8,15 +6,11 @@ import com.tribesbackend.tribes.tribesresources.model.ResourcesModel;
 
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.troop.model.Troop;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
-
-
 import java.util.Set;
-
 
 @Entity
 @Table
@@ -29,6 +23,50 @@ public class Kingdom {
     @Size(min = 2, message = "Name of Kingdom should have at least 2 characters")
     @Column(name = "kingdomname",nullable = false, unique = true)
     public String name;
+    public Kingdom(@NotNull @Size(min = 2, message = "Name of Kingdom should have at least 2 characters") String name) {
+        this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public TribesUser getTribesUser() {
+        return tribesUser;
+    }
+
+    public void setTribesUser(TribesUser tribesUser) {
+        this.tribesUser = tribesUser;
+    }
+
+    public List<Troop> getTroops() {
+        return troops;
+    }
+
+    public void setTroops(List<Troop> troops) {
+        this.troops = troops;
+    }
+
+    public Set<ResourcesModel> getResourcesModel() {
+        return resourcesModel;
+    }
+
+    public void setResourcesModel(Set<ResourcesModel> resourcesModel) {
+        this.resourcesModel = resourcesModel;
+    }
+
+    public List<Building> getBuildings() {
+        return buildings;
+    }
+
+    public void setBuildings(List<Building> buildings) {
+        this.buildings = buildings;
+    }
+
     @OneToOne(fetch = FetchType.LAZY, optional = false)
 
     @JoinColumn(name = "tribe_User_id", nullable = false)

@@ -17,11 +17,11 @@ import java.util.List;
 @RequestMapping(value = "/mock")
 @RestController
 public class MockBuildingRestController {
-    BuildingRepository buldingRepo;
+    BuildingRepository buildingRepo;
 
     @Autowired
     MockBuildingRestController(BuildingRepository buildingRepo) {
-        this.buldingRepo = buildingRepo;
+        this.buildingRepo = buildingRepo;
     }
 
     @GetMapping(value = "/kingdom/buildings")
@@ -56,7 +56,7 @@ public class MockBuildingRestController {
     public @ResponseBody
     ResponseEntity<Object> listTheBuilding(@Validated @PathVariable int id, String xTribesToken) {
         if (TokenIsValid.isValid(xTribesToken)) {
-            return new ResponseEntity(buldingRepo.findById(id), HttpStatus.OK);
+            return new ResponseEntity(buildingRepo.findById(id), HttpStatus.OK);
         } else return new ResponseEntity(new ErrorMessage("error", "Id not found"),
                 HttpStatus.NOT_FOUND);
     }
@@ -66,12 +66,12 @@ public class MockBuildingRestController {
                                                              @RequestBody String xTribesToken, Integer typeLevel) {
         // and enough resources
         if (TokenIsValid.isValid(xTribesToken) && (true)) {
-            buldingRepo.findById(id).get().setHP(typeLevel);
-            buldingRepo.save(buldingRepo.findById(id).get());
-            return new ResponseEntity(buldingRepo.findById(id).get(), HttpStatus.OK);
+            buildingRepo.findById(id).get().setHP(typeLevel);
+            buildingRepo.save(buildingRepo.findById(id).get());
+            return new ResponseEntity(buildingRepo.findById(id).get(), HttpStatus.OK);
         } else if (typeLevel < 0 || typeLevel == null || typeLevel.toString().isEmpty()) {
             return new ResponseEntity(new ErrorMessage("error", "Missing parameter(s): !"), HttpStatus.BAD_REQUEST);
-        } else if (!(buldingRepo.findById(id).isPresent())) {
+        } else if (!(buildingRepo.findById(id).isPresent())) {
             return new ResponseEntity(new ErrorMessage("error", "Id not found"), HttpStatus.NOT_FOUND);
         }
         //not valid level of the building

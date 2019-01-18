@@ -1,6 +1,8 @@
 package com.tribesbackend.tribes.tribesuser.controller;
 
 import com.auth0.jwt.JWT;
+import com.tribesbackend.tribes.jsonmodels.RegistrationInputJson;
+import com.tribesbackend.tribes.jsonmodels.RegistrationResponceJson;
 import com.tribesbackend.tribes.security.SecurityConstants;
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
@@ -18,13 +20,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.Date;
-
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.tribesbackend.tribes.security.SecurityConstants.EXPIRATION_TIME;
 
 
+
+@SuppressWarnings("unchecked")
 
 @RestController
 public class UserRestController {
@@ -33,38 +35,43 @@ public class UserRestController {
     ErrorMessagesMethods errorMessages;
     UserCrudService userCrudService;
     KingdomRepository kingdomRepo;
-    boolean loggedIn; 
+    boolean loggedIn;
 
     @Autowired
-    public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods, ErrorMessagesMethods errorMessages, UserCrudService userCrudService) {
+    public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods,
+                              ErrorMessagesMethods errorMessages, UserCrudService userCrudService,
+                              KingdomRepository kingdomRepo) {
         this.userTRepository = userTRepository;
         this.userMethods = userMethods;
         this.errorMessages = errorMessages;
         this.userCrudService = userCrudService;
+        this.kingdomRepo = kingdomRepo;
     }
 
-    @GetMapping (value="/mockuser")
-    public ResponseEntity sampleUserJson(){
-        TribesUser tuser  = new TribesUser("jirina","1234");
+    @GetMapping(value = "/mockuser")
+    public ResponseEntity sampleUserJson() {
+        TribesUser tuser = new TribesUser("jirina", "1234");
         userTRepository.save(tuser);
         return new ResponseEntity(tuser, HttpStatus.OK);
     }
 
 
-
     @PostMapping(value = "/register")
-    public ResponseEntity registerUser(@Validated @RequestBody TribesUser newUser, Kingdom newKingdom) {
-
+    public ResponseEntity registerUser(@Validated @RequestBody RegistrationInputJson regjson) {
+        TribesUser newUser = new TribesUser(regjson.getUsername(), regjson.getPassword());
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(errorMessages.usernameAlreadyTaken(), HttpStatus.CONFLICT);
         } else
-
             userTRepository.save(newUser);
-
-
-        return new ResponseEntity(newUser, HttpStatus.OK);
-        // return new ResponseEntity(newUser, HttpStatus.OK);
-
+            Kingdom newKingdom = new Kingdom(regjson.getKingdom());
+        System.out.println(newKingdom.getName());
+        System.out.println(newKingdom.getId());
+            kingdomRepo.save(newKingdom);
+        System.out.println(newUser.getId());
+        System.out.println(newUser.getUsername());
+        System.out.println(newKingdom.getId());
+        return new ResponseEntity(new RegistrationResponceJson(newUser.getId(), newUser.getUsername(),
+                newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
     }
 
     @PostMapping(value = "/login")
@@ -74,7 +81,8 @@ public class UserRestController {
             return new ResponseEntity(errorMessages.jsonFieldIsEmpty(tribesUser), HttpStatus.BAD_REQUEST);
 
         } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()) == null) {
-                //  throw new InvalidUserPasswordException("error", "Not such user: " + tribesUser.getUsername());
+
+                  //throw new InvalidUserPasswordException("error", "Not such user: " + tribesUser.getUsername());
                 return new ResponseEntity(
                         new InvalidUserPasswordException("error", "Not such user: " + tribesUser.getUsername())
                         , HttpStatus.UNAUTHORIZED);
@@ -88,10 +96,11 @@ public class UserRestController {
                                 .sign(HMAC512(SecurityConstants.SECRET.getBytes())))
                         , HttpStatus.OK);
             } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
-                return new ResponseEntity(
+            return new ResponseEntity(
                         new InvalidUserPasswordException("error", "Wrong password!")
                         , HttpStatus.UNAUTHORIZED);
             }
+
         return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
@@ -101,16 +110,11 @@ public class UserRestController {
             return new ResponseEntity(new LogoutMessages("Unauthorized request!"), HttpStatus.FORBIDDEN);
         } else
             loggedIn = false;
-            return ResponseEntity.ok(new LogoutMessages("Logged out successfully!"));
+        return ResponseEntity.ok(new LogoutMessages("Logged out successfully!"));
     }
 
-    @GetMapping (value = "/user/testjwt")
-    public String testingEndpoint(){
-
-
-     //   UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
-      return SecurityContextHolder.getContext().getAuthentication().getName();
-
-         //     JWT.decode(token).getSubject();
+    @GetMapping(value = "/user/testjwt")
+    public String testingEndpoint() {
+        return SecurityContextHolder.getContext().getAuthentication().getName();
     }
 }

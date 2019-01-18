@@ -1,3 +1,4 @@
+
 CREATE TABLE building (id INT AUTO_INCREMENT PRIMARY KEY,
                         kingdom_id INT,
                         type VARCHAR(45),
