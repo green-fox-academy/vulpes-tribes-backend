@@ -1,4 +1,3 @@
-
 /*package com.tribesbackend.tribes.tribesbuilding.model;
 
 import javafx.beans.binding.ObjectExpression;
@@ -65,4 +64,3 @@ public class BuildingValidator implements Validator {
     }
 }
 */
-

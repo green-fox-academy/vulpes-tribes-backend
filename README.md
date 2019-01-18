@@ -11,5 +11,3 @@ TRIBES_DB_USERNAME      = favorite
 FLYWAY_SCHEMAS_DB_NAME  = USERSERVICE
 
 DATASOURCE_URL          = jdbc:mysql://localhost:3306/USERSERVICE?autoreconnect=true
-
-LOGGING_FILTER          = DEBUG
