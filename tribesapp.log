@@ -330,3 +330,8 @@ Unconditional classes:
 2019-01-18 12:04:36.008  INFO 20636 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
 2019-01-18 12:04:36.058  INFO 20636 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8090 (http) with context path ''
 2019-01-18 12:04:36.061  INFO 20636 --- [restartedMain] c.t.tribes.TribesApplication             : Started TribesApplication in 6.077 seconds (JVM running for 7.455)
+2019-01-18 12:12:07.869  INFO 20636 --- [http-nio-8090-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2019-01-18 12:12:07.870  INFO 20636 --- [http-nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2019-01-18 12:12:07.877  INFO 20636 --- [http-nio-8090-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 6 ms
+2019-01-18 12:12:07.901 DEBUG 20636 --- [http-nio-8090-exec-1] o.s.w.f.CommonsRequestLoggingFilter      : Before request [uri=/mock/kingdom;client=0:0:0:0:0:0:0:1]
+2019-01-18 12:12:07.987 DEBUG 20636 --- [http-nio-8090-exec-1] o.s.w.f.CommonsRequestLoggingFilter      : Request Data: uri=/mock/kingdom;client=0:0:0:0:0:0:0:1]

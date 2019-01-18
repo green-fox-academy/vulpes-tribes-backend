@@ -12,8 +12,4 @@ FLYWAY_SCHEMAS_DB_NAME  = USERSERVICE
 
 DATASOURCE_URL          = jdbc:mysql://localhost:3306/USERSERVICE?autoreconnect=true
 
-WEB_LOGLEVEL            = INFO
-
-TRIBES_LOGLEVEL         = DEBUG
-
-HIBERNATE_LOGLEVEL      = ERROR
+LOGGING_FILTER          = DEBUG
