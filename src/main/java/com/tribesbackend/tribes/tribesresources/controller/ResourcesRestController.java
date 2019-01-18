@@ -35,7 +35,7 @@ public class ResourcesRestController extends Logging {
     @GetMapping(value = "/kingdom/resources")
     public ResponseEntity getBuilding(@RequestHeader(name = "username")String username){
         Kingdom selectedKingdom =  kingdomRepository.findKingdomByTribesUserUsername(username);
-        LOGGER.info("GET /kingdom/resources/{}", username);
+        logger.info("GET /kingdom/resources/{}", username);
         return new ResponseEntity(resourceRepository.findAllByKingdom(selectedKingdom), HttpStatus.OK);
     }
 }

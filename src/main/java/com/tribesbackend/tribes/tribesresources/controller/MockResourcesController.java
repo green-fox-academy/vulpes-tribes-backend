@@ -19,7 +19,7 @@ public class MockResourcesController extends Logging {
 
     @GetMapping(value = "/resources")
     public ResponseEntity getMockResources() {
-        LOGGER.info("hello");
+        logger.info("hello");
         return ResponseEntity.ok(mockResources);
     }
 

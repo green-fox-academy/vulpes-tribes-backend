@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+/*@RestController
 public class BuildingRestController extends Logging {
     KingdomRepository kingdomRepository;
     BuildingRepository buildingRepository;
@@ -34,7 +34,8 @@ public class BuildingRestController extends Logging {
     @GetMapping(value = "/kingdom/buildings")
     public ResponseEntity getBuilding(@RequestHeader(name = "username")String username){
         Kingdom selectedKingdom =  kingdomRepository.findKingdomByTribesUserUsername(username);
-        LOGGER.info("GET kingdom/buildings for username:{}", username);
+        logger.info("GET kingdom/buildings for username:{}", username);
         return new ResponseEntity(buildingRepository.findAllByKingdom(selectedKingdom), HttpStatus.OK);
     }
 }
+*/

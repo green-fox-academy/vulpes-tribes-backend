@@ -31,7 +31,7 @@ public class KingdomRestController extends Logging {
 
     @GetMapping(value = "/kingdom")
     public ResponseEntity getKingdom(@RequestHeader(name = "username") String username) {
-        LOGGER.info("GET /kingdom for username: " + username);
+        logger.info("GET /kingdom for username: " + username);
         return new ResponseEntity(new OKstatus("ok", kingdomRepository.findKingdomByTribesUserUsername(username)), HttpStatus.OK);
     }
 }

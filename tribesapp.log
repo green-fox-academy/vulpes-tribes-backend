@@ -201,3 +201,897 @@ public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbacke
 	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741)
 	... 21 common frames omitted
 
+2019-01-17 16:27:14.235 ERROR 14920 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'INFO${WEB_LOGLEVEL}' for 'org.springframework.web'
+2019-01-17 16:27:14.239 ERROR 14920 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'DEBUG${TRIBES_LOGLEVEL}' for 'com.tribesbackend.tribes'
+2019-01-17 16:27:14.240 ERROR 14920 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'ERROR${HIBERNATE_LOGLEVEL}' for 'org.hibernate'
+2019-01-17 16:27:14.342  INFO 14920 --- [restartedMain] c.t.tribes.TribesApplication             : Starting TribesApplication on DESKTOP-1TLDB2P with PID 14920 (C:\Users\jiris\vulpes-tribes-backend\out\production\classes started by jiris in C:\Users\jiris\vulpes-tribes-backend)
+2019-01-17 16:27:14.343  INFO 14920 --- [restartedMain] c.t.tribes.TribesApplication             : No active profile set, falling back to default profiles: default
+2019-01-17 16:27:14.754  INFO 14920 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-01-17 16:27:14.754  INFO 14920 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-01-17 16:27:15.570  INFO 14920 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-17 16:27:15.688  INFO 14920 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 110ms. Found 5 repository interfaces.
+2019-01-17 16:27:16.059  INFO 14920 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$222cd9f5] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-17 16:27:16.522  INFO 14920 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2019-01-17 16:27:16.551  INFO 14920 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-17 16:27:16.551  INFO 14920 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-17 16:27:16.558  INFO 14920 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Users\jiris\Anaconda3;C:\Users\jiris\Anaconda3\Library\mingw-w64\bin;C:\Users\jiris\Anaconda3\Library\usr\bin;C:\Users\jiris\Anaconda3\Library\bin;C:\Users\jiris\Anaconda3\Scripts;C:\Users\jiris\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;.]
+2019-01-17 16:27:16.718  INFO 14920 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-17 16:27:16.718  INFO 14920 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1964 ms
+2019-01-17 16:27:16.892  INFO 14920 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.3 by Boxfuse
+2019-01-17 16:27:17.337  INFO 14920 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/USERSERVICE (MySQL 8.0)
+2019-01-17 16:27:17.414  INFO 14920 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 7 migrations (execution time 00:00.024s)
+2019-01-17 16:27:17.434  INFO 14920 --- [restartedMain] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table: `USERSERVICE`.`flyway_schema_history`
+2019-01-17 16:27:17.541  INFO 14920 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `USERSERVICE`: << Empty Schema >>
+2019-01-17 16:27:17.544  INFO 14920 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 1 - test init
+2019-01-17 16:27:17.620  INFO 14920 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 2 - test init
+2019-01-17 16:27:17.787  INFO 14920 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 3 - troops
+2019-01-17 16:27:17.844  INFO 14920 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 4 - buildings
+2019-01-17 16:27:17.863  WARN 14920 --- [restartedMain] o.f.c.i.s.DefaultSqlScriptExecutor       : DB: Failed to open the referenced table 'kingdoms' (SQL State: HY000 - Error Code: 1824)
+2019-01-17 16:27:17.866 ERROR 14920 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migration of schema `USERSERVICE` to version 4 - buildings failed! Please restore backups and roll back database and code!
+2019-01-17 16:27:17.880  WARN 14920 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V4__buildings.sql failed
+----------------------------------
+SQL State  : HY000
+Error Code : 1824
+Message    : Failed to open the referenced table 'kingdoms'
+Location   : db/migration/V4__buildings.sql (C:\Users\jiris\vulpes-tribes-backend\out\production\resources\db\migration\V4__buildings.sql)
+Line       : 1
+Statement  : CREATE TABLE BUILDINGS (ID INT AUTO_INCREMENT PRIMARY KEY,
+                       KINGDOM_ID INT,
+                       TYPE VARCHAR(45),
+                       LEVEL SMALLINT (4),
+                       HP SMALLINT (4),
+                       STARTED_AT SMALLINT (10),
+                       FINISHED_AT SMALLINT (10),
+                       FOREIGN KEY(KINGDOM_ID) REFERENCES KINGDOMS(ID))
+
+2019-01-17 16:27:17.883  INFO 14920 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-01-17 16:27:17.894  INFO 14920 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-01-17 16:27:17.905 ERROR 14920 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V4__buildings.sql failed
+----------------------------------
+SQL State  : HY000
+Error Code : 1824
+Message    : Failed to open the referenced table 'kingdoms'
+Location   : db/migration/V4__buildings.sql (C:\Users\jiris\vulpes-tribes-backend\out\production\resources\db\migration\V4__buildings.sql)
+Line       : 1
+Statement  : CREATE TABLE BUILDINGS (ID INT AUTO_INCREMENT PRIMARY KEY,
+                       KINGDOM_ID INT,
+                       TYPE VARCHAR(45),
+                       LEVEL SMALLINT (4),
+                       HP SMALLINT (4),
+                       STARTED_AT SMALLINT (10),
+                       FINISHED_AT SMALLINT (10),
+                       FOREIGN KEY(KINGDOM_ID) REFERENCES KINGDOMS(ID))
+
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1083)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:853)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.tribesbackend.tribes.TribesApplication.main(TribesApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.flywaydb.core.internal.command.DbMigrate$FlywayMigrateException: 
+Migration V4__buildings.sql failed
+----------------------------------
+SQL State  : HY000
+Error Code : 1824
+Message    : Failed to open the referenced table 'kingdoms'
+Location   : db/migration/V4__buildings.sql (C:\Users\jiris\vulpes-tribes-backend\out\production\resources\db\migration\V4__buildings.sql)
+Line       : 1
+Statement  : CREATE TABLE BUILDINGS (ID INT AUTO_INCREMENT PRIMARY KEY,
+                       KINGDOM_ID INT,
+                       TYPE VARCHAR(45),
+                       LEVEL SMALLINT (4),
+                       HP SMALLINT (4),
+                       STARTED_AT SMALLINT (10),
+                       FINISHED_AT SMALLINT (10),
+                       FOREIGN KEY(KINGDOM_ID) REFERENCES KINGDOMS(ID))
+
+	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:370)
+	at org.flywaydb.core.internal.command.DbMigrate.access$200(DbMigrate.java:54)
+	at org.flywaydb.core.internal.command.DbMigrate$3.call(DbMigrate.java:284)
+	at org.flywaydb.core.internal.jdbc.TransactionTemplate.execute(TransactionTemplate.java:74)
+	at org.flywaydb.core.internal.command.DbMigrate.applyMigrations(DbMigrate.java:281)
+	at org.flywaydb.core.internal.command.DbMigrate.migrateGroup(DbMigrate.java:246)
+	at org.flywaydb.core.internal.command.DbMigrate.access$100(DbMigrate.java:54)
+	at org.flywaydb.core.internal.command.DbMigrate$2.call(DbMigrate.java:164)
+	at org.flywaydb.core.internal.command.DbMigrate$2.call(DbMigrate.java:161)
+	at org.flywaydb.core.internal.database.mysql.MySQLNamedLockTemplate.execute(MySQLNamedLockTemplate.java:60)
+	at org.flywaydb.core.internal.database.mysql.MySQLConnection.lock(MySQLConnection.java:116)
+	at org.flywaydb.core.internal.schemahistory.JdbcTableSchemaHistory.lock(JdbcTableSchemaHistory.java:155)
+	at org.flywaydb.core.internal.command.DbMigrate.migrateAll(DbMigrate.java:161)
+	at org.flywaydb.core.internal.command.DbMigrate.migrate(DbMigrate.java:139)
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1392)
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1353)
+	at org.flywaydb.core.Flyway.execute(Flyway.java:1708)
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:1353)
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:66)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741)
+	... 23 common frames omitted
+Caused by: org.flywaydb.core.internal.sqlscript.FlywaySqlScriptException: 
+Migration V4__buildings.sql failed
+----------------------------------
+SQL State  : HY000
+Error Code : 1824
+Message    : Failed to open the referenced table 'kingdoms'
+Location   : db/migration/V4__buildings.sql (C:\Users\jiris\vulpes-tribes-backend\out\production\resources\db\migration\V4__buildings.sql)
+Line       : 1
+Statement  : CREATE TABLE BUILDINGS (ID INT AUTO_INCREMENT PRIMARY KEY,
+                       KINGDOM_ID INT,
+                       TYPE VARCHAR(45),
+                       LEVEL SMALLINT (4),
+                       HP SMALLINT (4),
+                       STARTED_AT SMALLINT (10),
+                       FINISHED_AT SMALLINT (10),
+                       FOREIGN KEY(KINGDOM_ID) REFERENCES KINGDOMS(ID))
+
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.handleException(DefaultSqlScriptExecutor.java:253)
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:202)
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.execute(DefaultSqlScriptExecutor.java:125)
+	at org.flywaydb.core.internal.resolver.sql.SqlMigrationExecutor.execute(SqlMigrationExecutor.java:77)
+	at org.flywaydb.core.internal.command.DbMigrate.doMigrateGroup(DbMigrate.java:367)
+	... 43 common frames omitted
+Caused by: java.sql.SQLException: Failed to open the referenced table 'kingdoms'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.StatementImpl.executeInternal(StatementImpl.java:782)
+	at com.mysql.cj.jdbc.StatementImpl.execute(StatementImpl.java:666)
+	at org.flywaydb.core.internal.jdbc.JdbcTemplate.executeStatement(JdbcTemplate.java:235)
+	at org.flywaydb.core.internal.sqlscript.StandardSqlStatement.execute(StandardSqlStatement.java:42)
+	at org.flywaydb.core.internal.sqlscript.DefaultSqlScriptExecutor.executeStatement(DefaultSqlScriptExecutor.java:189)
+	... 46 common frames omitted
+
+2019-01-17 16:32:24.382 ERROR 17556 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'INFO${WEB_LOGLEVEL}' for 'org.springframework.web'
+2019-01-17 16:32:24.389 ERROR 17556 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'DEBUG${TRIBES_LOGLEVEL}' for 'com.tribesbackend.tribes'
+2019-01-17 16:32:24.389 ERROR 17556 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'ERROR${HIBERNATE_LOGLEVEL}' for 'org.hibernate'
+2019-01-17 16:32:24.520  INFO 17556 --- [restartedMain] c.t.tribes.TribesApplication             : Starting TribesApplication on DESKTOP-1TLDB2P with PID 17556 (C:\Users\jiris\vulpes-tribes-backend\out\production\classes started by jiris in C:\Users\jiris\vulpes-tribes-backend)
+2019-01-17 16:32:24.521  INFO 17556 --- [restartedMain] c.t.tribes.TribesApplication             : No active profile set, falling back to default profiles: default
+2019-01-17 16:32:24.900  INFO 17556 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-01-17 16:32:24.900  INFO 17556 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-01-17 16:32:25.724  INFO 17556 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-17 16:32:25.845  INFO 17556 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 114ms. Found 5 repository interfaces.
+2019-01-17 16:32:26.231  INFO 17556 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$c5702e9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-17 16:32:26.757  INFO 17556 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2019-01-17 16:32:26.786  INFO 17556 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-17 16:32:26.787  INFO 17556 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-17 16:32:26.794  INFO 17556 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Users\jiris\Anaconda3;C:\Users\jiris\Anaconda3\Library\mingw-w64\bin;C:\Users\jiris\Anaconda3\Library\usr\bin;C:\Users\jiris\Anaconda3\Library\bin;C:\Users\jiris\Anaconda3\Scripts;C:\Users\jiris\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;.]
+2019-01-17 16:32:26.968  INFO 17556 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-17 16:32:26.968  INFO 17556 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2068 ms
+2019-01-17 16:32:27.140  INFO 17556 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.3 by Boxfuse
+2019-01-17 16:32:27.619  INFO 17556 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/USERSERVICE (MySQL 8.0)
+2019-01-17 16:32:27.700  WARN 17556 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: Detected failed migration to version 4 (buildings)
+2019-01-17 16:32:27.703  INFO 17556 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-01-17 16:32:27.715  INFO 17556 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-01-17 16:32:27.725 ERROR 17556 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'flywayInitializer' defined in class path resource [org/springframework/boot/autoconfigure/flyway/FlywayAutoConfiguration$FlywayConfiguration.class]: Invocation of init method failed; nested exception is org.flywaydb.core.api.FlywayException: Validate failed: Detected failed migration to version 4 (buildings)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:307)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1083)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:853)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.tribesbackend.tribes.TribesApplication.main(TribesApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: org.flywaydb.core.api.FlywayException: Validate failed: Detected failed migration to version 4 (buildings)
+	at org.flywaydb.core.Flyway.doValidate(Flyway.java:1479)
+	at org.flywaydb.core.Flyway.access$100(Flyway.java:82)
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1361)
+	at org.flywaydb.core.Flyway$1.execute(Flyway.java:1353)
+	at org.flywaydb.core.Flyway.execute(Flyway.java:1708)
+	at org.flywaydb.core.Flyway.migrate(Flyway.java:1353)
+	at org.springframework.boot.autoconfigure.flyway.FlywayMigrationInitializer.afterPropertiesSet(FlywayMigrationInitializer.java:66)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741)
+	... 23 common frames omitted
+
+2019-01-17 16:32:55.181 ERROR 1172 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'INFO${WEB_LOGLEVEL}' for 'org.springframework.web'
+2019-01-17 16:32:55.185 ERROR 1172 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'DEBUG${TRIBES_LOGLEVEL}' for 'com.tribesbackend.tribes'
+2019-01-17 16:32:55.186 ERROR 1172 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'ERROR${HIBERNATE_LOGLEVEL}' for 'org.hibernate'
+2019-01-17 16:32:55.315  INFO 1172 --- [restartedMain] c.t.tribes.TribesApplication             : Starting TribesApplication on DESKTOP-1TLDB2P with PID 1172 (C:\Users\jiris\vulpes-tribes-backend\out\production\classes started by jiris in C:\Users\jiris\vulpes-tribes-backend)
+2019-01-17 16:32:55.316  INFO 1172 --- [restartedMain] c.t.tribes.TribesApplication             : No active profile set, falling back to default profiles: default
+2019-01-17 16:32:55.775  INFO 1172 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-01-17 16:32:55.775  INFO 1172 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-01-17 16:32:56.673  INFO 1172 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-17 16:32:56.794  INFO 1172 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 113ms. Found 5 repository interfaces.
+2019-01-17 16:32:57.200  INFO 1172 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$68541a1] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-17 16:32:57.715  INFO 1172 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2019-01-17 16:32:57.749  INFO 1172 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-17 16:32:57.750  INFO 1172 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-17 16:32:57.759  INFO 1172 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Users\jiris\Anaconda3;C:\Users\jiris\Anaconda3\Library\mingw-w64\bin;C:\Users\jiris\Anaconda3\Library\usr\bin;C:\Users\jiris\Anaconda3\Library\bin;C:\Users\jiris\Anaconda3\Scripts;C:\Users\jiris\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;.]
+2019-01-17 16:32:57.929  INFO 1172 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-17 16:32:57.929  INFO 1172 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2154 ms
+2019-01-17 16:32:58.118  INFO 1172 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.3 by Boxfuse
+2019-01-17 16:32:58.609  INFO 1172 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/USERSERVICE (MySQL 8.0)
+2019-01-17 16:32:58.684  INFO 1172 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 7 migrations (execution time 00:00.025s)
+2019-01-17 16:32:58.705  INFO 1172 --- [restartedMain] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table: `USERSERVICE`.`flyway_schema_history`
+2019-01-17 16:32:58.792  INFO 1172 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `USERSERVICE`: << Empty Schema >>
+2019-01-17 16:32:58.794  INFO 1172 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 1 - test init
+2019-01-17 16:32:58.879  INFO 1172 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 2 - test init
+2019-01-17 16:32:59.073  INFO 1172 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 3 - troops
+2019-01-17 16:32:59.127  INFO 1172 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 4 - buildings
+2019-01-17 16:32:59.215  INFO 1172 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 5 - resources
+2019-01-17 16:32:59.265  INFO 1172 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 6 - resourcesForeignKey
+2019-01-17 16:32:59.380  INFO 1172 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 7 - another
+2019-01-17 16:32:59.522  INFO 1172 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Successfully applied 7 migrations to schema `USERSERVICE` (execution time 00:00.819s)
+2019-01-17 16:32:59.699  INFO 1172 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-01-17 16:32:59.781  INFO 1172 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2019-01-17 16:32:59.783  INFO 1172 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-01-17 16:32:59.972  INFO 1172 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-01-17 16:33:00.167  INFO 1172 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-01-17 16:33:00.967  INFO 1172 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 16:33:01.866  INFO 1172 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@640fdff3, org.springframework.security.web.context.SecurityContextPersistenceFilter@6cced6ae, org.springframework.security.web.header.HeaderWriterFilter@5d23e6e4, org.springframework.security.web.authentication.logout.LogoutFilter@77f6c8cd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@20152208, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5307aac2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@79712811, org.springframework.security.web.session.SessionManagementFilter@a312171, org.springframework.security.web.access.ExceptionTranslationFilter@55154746, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@898282f]
+2019-01-17 16:33:02.025  INFO 1172 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-01-17 16:33:02.066  WARN 1172 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-01-17 16:33:02.093  WARN 1172 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+2019-01-17 16:33:02.093  INFO 1172 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-01-17 16:33:02.095  INFO 1172 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 16:33:02.099  INFO 1172 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-01-17 16:33:02.111  INFO 1172 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-01-17 16:33:02.120 ERROR 1172 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.tribesbackend.tribes.TribesApplication.main(TribesApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:621)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:589)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:315)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lambda$detectHandlerMethods$1(AbstractHandlerMethodMapping.java:282)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:280)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.processCandidateBean(AbstractHandlerMethodMapping.java:252)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:211)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:199)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:164)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741)
+	... 21 common frames omitted
+
+2019-01-17 16:40:31.704 ERROR 17216 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'INFO${WEB_LOGLEVEL}' for 'org.springframework.web'
+2019-01-17 16:40:31.709 ERROR 17216 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'DEBUG${TRIBES_LOGLEVEL}' for 'com.tribesbackend.tribes'
+2019-01-17 16:40:31.710 ERROR 17216 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'ERROR${HIBERNATE_LOGLEVEL}' for 'org.hibernate'
+2019-01-17 16:40:31.830  INFO 17216 --- [restartedMain] c.t.tribes.TribesApplication             : Starting TribesApplication on DESKTOP-1TLDB2P with PID 17216 (C:\Users\jiris\vulpes-tribes-backend\out\production\classes started by jiris in C:\Users\jiris\vulpes-tribes-backend)
+2019-01-17 16:40:31.831  INFO 17216 --- [restartedMain] c.t.tribes.TribesApplication             : No active profile set, falling back to default profiles: default
+2019-01-17 16:40:32.310  INFO 17216 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-01-17 16:40:32.311  INFO 17216 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-01-17 16:40:33.294  INFO 17216 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-17 16:40:33.448  INFO 17216 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 142ms. Found 5 repository interfaces.
+2019-01-17 16:40:33.848  INFO 17216 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$d3f73c71] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-17 16:40:34.352  INFO 17216 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2019-01-17 16:40:34.384  INFO 17216 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-17 16:40:34.384  INFO 17216 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-17 16:40:34.391  INFO 17216 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Users\jiris\Anaconda3;C:\Users\jiris\Anaconda3\Library\mingw-w64\bin;C:\Users\jiris\Anaconda3\Library\usr\bin;C:\Users\jiris\Anaconda3\Library\bin;C:\Users\jiris\Anaconda3\Scripts;C:\Users\jiris\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;.]
+2019-01-17 16:40:34.558  INFO 17216 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-17 16:40:34.558  INFO 17216 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2247 ms
+2019-01-17 16:40:34.737  INFO 17216 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.3 by Boxfuse
+2019-01-17 16:40:35.259  INFO 17216 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/USERSERVICE (MySQL 8.0)
+2019-01-17 16:40:35.353  INFO 17216 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 7 migrations (execution time 00:00.036s)
+2019-01-17 16:40:35.373  INFO 17216 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `USERSERVICE`: 7
+2019-01-17 16:40:35.374  INFO 17216 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema `USERSERVICE` is up to date. No migration necessary.
+2019-01-17 16:40:35.573  INFO 17216 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-01-17 16:40:35.661  INFO 17216 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2019-01-17 16:40:35.664  INFO 17216 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-01-17 16:40:35.865  INFO 17216 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-01-17 16:40:36.059  INFO 17216 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-01-17 16:40:36.905  INFO 17216 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 16:40:37.779  INFO 17216 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@79c257e6, org.springframework.security.web.context.SecurityContextPersistenceFilter@4b23bbe9, org.springframework.security.web.header.HeaderWriterFilter@262a8c0e, org.springframework.security.web.authentication.logout.LogoutFilter@67bda2f3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@602acd62, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4c5e26e0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@53e95582, org.springframework.security.web.session.SessionManagementFilter@879ed0b, org.springframework.security.web.access.ExceptionTranslationFilter@2d4b5cf3, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@5df3a6d4]
+2019-01-17 16:40:37.943  INFO 17216 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-01-17 16:40:37.987  WARN 17216 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-01-17 16:40:38.015  WARN 17216 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+2019-01-17 16:40:38.015  INFO 17216 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-01-17 16:40:38.017  INFO 17216 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 16:40:38.021  INFO 17216 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-01-17 16:40:38.035  INFO 17216 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-01-17 16:40:38.046 ERROR 17216 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.tribesbackend.tribes.TribesApplication.main(TribesApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:621)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:589)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:315)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lambda$detectHandlerMethods$1(AbstractHandlerMethodMapping.java:282)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:280)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.processCandidateBean(AbstractHandlerMethodMapping.java:252)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:211)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:199)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:164)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741)
+	... 21 common frames omitted
+
+2019-01-17 16:46:16.911 ERROR 10592 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'INFO${WEB_LOGLEVEL}' for 'org.springframework.web'
+2019-01-17 16:46:16.916 ERROR 10592 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'DEBUG${TRIBES_LOGLEVEL}' for 'com.tribesbackend.tribes'
+2019-01-17 16:46:16.916 ERROR 10592 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'ERROR${HIBERNATE_LOGLEVEL}' for 'org.hibernate'
+2019-01-17 16:46:17.032  INFO 10592 --- [restartedMain] c.t.tribes.TribesApplication             : Starting TribesApplication on DESKTOP-1TLDB2P with PID 10592 (C:\Users\jiris\vulpes-tribes-backend\out\production\classes started by jiris in C:\Users\jiris\vulpes-tribes-backend)
+2019-01-17 16:46:17.033  INFO 10592 --- [restartedMain] c.t.tribes.TribesApplication             : No active profile set, falling back to default profiles: default
+2019-01-17 16:46:17.562  INFO 10592 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-01-17 16:46:17.562  INFO 10592 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-01-17 16:46:18.519  INFO 10592 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-17 16:46:18.637  INFO 10592 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 110ms. Found 5 repository interfaces.
+2019-01-17 16:46:19.011  INFO 10592 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$bee5f6ff] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-17 16:46:19.492  INFO 10592 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2019-01-17 16:46:19.520  INFO 10592 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-17 16:46:19.520  INFO 10592 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-17 16:46:19.527  INFO 10592 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Users\jiris\Anaconda3;C:\Users\jiris\Anaconda3\Library\mingw-w64\bin;C:\Users\jiris\Anaconda3\Library\usr\bin;C:\Users\jiris\Anaconda3\Library\bin;C:\Users\jiris\Anaconda3\Scripts;C:\Users\jiris\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;.]
+2019-01-17 16:46:19.687  INFO 10592 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-17 16:46:19.688  INFO 10592 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2126 ms
+2019-01-17 16:46:19.845  INFO 10592 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.3 by Boxfuse
+2019-01-17 16:46:20.297  INFO 10592 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/USERSERVICE (MySQL 8.0)
+2019-01-17 16:46:20.382  INFO 10592 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 7 migrations (execution time 00:00.035s)
+2019-01-17 16:46:20.398  INFO 10592 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `USERSERVICE`: 7
+2019-01-17 16:46:20.399  INFO 10592 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema `USERSERVICE` is up to date. No migration necessary.
+2019-01-17 16:46:20.573  INFO 10592 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-01-17 16:46:20.652  INFO 10592 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2019-01-17 16:46:20.654  INFO 10592 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-01-17 16:46:20.830  INFO 10592 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-01-17 16:46:21.000  INFO 10592 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-01-17 16:46:21.745  INFO 10592 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 16:46:22.584  INFO 10592 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1d47866f, org.springframework.security.web.context.SecurityContextPersistenceFilter@27a0ee03, org.springframework.security.web.header.HeaderWriterFilter@100f8c5c, org.springframework.security.web.authentication.logout.LogoutFilter@51e9d57b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5b576330, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3ca4ac45, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@633d8768, org.springframework.security.web.session.SessionManagementFilter@6267905e, org.springframework.security.web.access.ExceptionTranslationFilter@1db2d953, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3b018752]
+2019-01-17 16:46:22.742  INFO 10592 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-01-17 16:46:22.783  WARN 10592 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-01-17 16:46:22.810  WARN 10592 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+2019-01-17 16:46:22.811  INFO 10592 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-01-17 16:46:22.812  INFO 10592 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 16:46:22.817  INFO 10592 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-01-17 16:46:22.829  INFO 10592 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-01-17 16:46:22.838 ERROR 10592 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.tribesbackend.tribes.TribesApplication.main(TribesApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:621)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:589)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:315)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lambda$detectHandlerMethods$1(AbstractHandlerMethodMapping.java:282)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:280)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.processCandidateBean(AbstractHandlerMethodMapping.java:252)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:211)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:199)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:164)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741)
+	... 21 common frames omitted
+
+2019-01-17 16:46:50.026 ERROR 7420 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'INFO${WEB_LOGLEVEL}' for 'org.springframework.web'
+2019-01-17 16:46:50.031 ERROR 7420 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'DEBUG${TRIBES_LOGLEVEL}' for 'com.tribesbackend.tribes'
+2019-01-17 16:46:50.031 ERROR 7420 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'ERROR${HIBERNATE_LOGLEVEL}' for 'org.hibernate'
+2019-01-17 16:46:50.140  INFO 7420 --- [restartedMain] c.t.tribes.TribesApplication             : Starting TribesApplication on DESKTOP-1TLDB2P with PID 7420 (C:\Users\jiris\vulpes-tribes-backend\out\production\classes started by jiris in C:\Users\jiris\vulpes-tribes-backend)
+2019-01-17 16:46:50.141  INFO 7420 --- [restartedMain] c.t.tribes.TribesApplication             : No active profile set, falling back to default profiles: default
+2019-01-17 16:46:50.587  INFO 7420 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-01-17 16:46:50.587  INFO 7420 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-01-17 16:46:51.450  INFO 7420 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-17 16:46:51.567  INFO 7420 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 108ms. Found 5 repository interfaces.
+2019-01-17 16:46:51.956  INFO 7420 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$2358c55] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-17 16:46:52.470  INFO 7420 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2019-01-17 16:46:52.501  INFO 7420 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-17 16:46:52.502  INFO 7420 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-17 16:46:52.509  INFO 7420 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Users\jiris\Anaconda3;C:\Users\jiris\Anaconda3\Library\mingw-w64\bin;C:\Users\jiris\Anaconda3\Library\usr\bin;C:\Users\jiris\Anaconda3\Library\bin;C:\Users\jiris\Anaconda3\Scripts;C:\Users\jiris\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;.]
+2019-01-17 16:46:52.678  INFO 7420 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-17 16:46:52.679  INFO 7420 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2092 ms
+2019-01-17 16:46:52.841  INFO 7420 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.3 by Boxfuse
+2019-01-17 16:46:53.311  INFO 7420 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/USERSERVICE (MySQL 8.0)
+2019-01-17 16:46:53.393  INFO 7420 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 7 migrations (execution time 00:00.034s)
+2019-01-17 16:46:53.409  INFO 7420 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `USERSERVICE`: 7
+2019-01-17 16:46:53.411  INFO 7420 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema `USERSERVICE` is up to date. No migration necessary.
+2019-01-17 16:46:53.580  INFO 7420 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-01-17 16:46:53.655  INFO 7420 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2019-01-17 16:46:53.657  INFO 7420 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-01-17 16:46:53.819  INFO 7420 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-01-17 16:46:53.989  INFO 7420 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-01-17 16:46:54.728  INFO 7420 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 16:46:55.588  INFO 7420 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@1504327a, org.springframework.security.web.context.SecurityContextPersistenceFilter@56b66c0c, org.springframework.security.web.header.HeaderWriterFilter@14ec82de, org.springframework.security.web.authentication.logout.LogoutFilter@2878ad0d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@16fdd53a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@56d8019a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@d5d44af, org.springframework.security.web.session.SessionManagementFilter@68e82deb, org.springframework.security.web.access.ExceptionTranslationFilter@a00d4bc, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2f93b22c]
+2019-01-17 16:46:55.748  INFO 7420 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-01-17 16:46:55.791  WARN 7420 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-01-17 16:46:55.818  WARN 7420 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+2019-01-17 16:46:55.818  INFO 7420 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-01-17 16:46:55.820  INFO 7420 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 16:46:55.824  INFO 7420 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-01-17 16:46:55.837  INFO 7420 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-01-17 16:46:55.846 ERROR 7420 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.tribesbackend.tribes.TribesApplication.main(TribesApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:621)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:589)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:315)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lambda$detectHandlerMethods$1(AbstractHandlerMethodMapping.java:282)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:280)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.processCandidateBean(AbstractHandlerMethodMapping.java:252)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:211)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:199)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:164)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741)
+	... 21 common frames omitted
+
+2019-01-17 17:02:36.775 ERROR 11296 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'INFO${WEB_LOGLEVEL}' for 'org.springframework.web'
+2019-01-17 17:02:36.779 ERROR 11296 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'DEBUG${TRIBES_LOGLEVEL}' for 'com.tribesbackend.tribes'
+2019-01-17 17:02:36.779 ERROR 11296 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level 'ERROR${HIBERNATE_LOGLEVEL}' for 'org.hibernate'
+2019-01-17 17:02:36.881  INFO 11296 --- [restartedMain] c.t.tribes.TribesApplication             : Starting TribesApplication on DESKTOP-1TLDB2P with PID 11296 (C:\Users\jiris\vulpes-tribes-backend\out\production\classes started by jiris in C:\Users\jiris\vulpes-tribes-backend)
+2019-01-17 17:02:36.882  INFO 11296 --- [restartedMain] c.t.tribes.TribesApplication             : No active profile set, falling back to default profiles: default
+2019-01-17 17:02:37.273  INFO 11296 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-01-17 17:02:37.273  INFO 11296 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-01-17 17:02:38.129  INFO 11296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-17 17:02:38.256  INFO 11296 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 116ms. Found 5 repository interfaces.
+2019-01-17 17:02:38.632  INFO 11296 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$d4d31ac4] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-17 17:02:39.136  INFO 11296 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2019-01-17 17:02:39.165  INFO 11296 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-17 17:02:39.165  INFO 11296 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-17 17:02:39.171  INFO 11296 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Users\jiris\Anaconda3;C:\Users\jiris\Anaconda3\Library\mingw-w64\bin;C:\Users\jiris\Anaconda3\Library\usr\bin;C:\Users\jiris\Anaconda3\Library\bin;C:\Users\jiris\Anaconda3\Scripts;C:\Users\jiris\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;.]
+2019-01-17 17:02:39.330  INFO 11296 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-17 17:02:39.330  INFO 11296 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2057 ms
+2019-01-17 17:02:39.485  INFO 11296 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.3 by Boxfuse
+2019-01-17 17:02:39.948  INFO 11296 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/USERSERVICE (MySQL 8.0)
+2019-01-17 17:02:40.030  INFO 11296 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 7 migrations (execution time 00:00.034s)
+2019-01-17 17:02:40.052  INFO 11296 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `USERSERVICE`: 7
+2019-01-17 17:02:40.054  INFO 11296 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema `USERSERVICE` is up to date. No migration necessary.
+2019-01-17 17:02:40.235  INFO 11296 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-01-17 17:02:40.312  INFO 11296 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2019-01-17 17:02:40.315  INFO 11296 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-01-17 17:02:40.487  INFO 11296 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-01-17 17:02:40.659  INFO 11296 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-01-17 17:02:41.419  INFO 11296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 17:02:42.293  INFO 11296 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@645c02ba, org.springframework.security.web.context.SecurityContextPersistenceFilter@67e18ac5, org.springframework.security.web.header.HeaderWriterFilter@402a3229, org.springframework.security.web.authentication.logout.LogoutFilter@1d3d07d4, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4255dbb2, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6982eda2, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@553054bf, org.springframework.security.web.session.SessionManagementFilter@5971c9d7, org.springframework.security.web.access.ExceptionTranslationFilter@fb6fc25, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1c3ebfb6]
+2019-01-17 17:02:42.459  INFO 11296 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-01-17 17:02:42.501  WARN 11296 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-01-17 17:02:42.527  WARN 11296 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+2019-01-17 17:02:42.527  INFO 11296 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-01-17 17:02:42.528  INFO 11296 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 17:02:42.533  INFO 11296 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-01-17 17:02:42.544  INFO 11296 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-01-17 17:02:42.554 ERROR 11296 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.tribesbackend.tribes.TribesApplication.main(TribesApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:621)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:589)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:315)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lambda$detectHandlerMethods$1(AbstractHandlerMethodMapping.java:282)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:280)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.processCandidateBean(AbstractHandlerMethodMapping.java:252)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:211)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:199)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:164)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741)
+	... 21 common frames omitted
+
+2019-01-17 17:02:59.420 ERROR 7072 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level '${WEB_LOGLEVEL}' for 'org.springframework.web'
+2019-01-17 17:02:59.425 ERROR 7072 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level '${TRIBES_LOGLEVEL}' for 'com.tribesbackend.tribes'
+2019-01-17 17:02:59.425 ERROR 7072 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level '${HIBERNATE_LOGLEVEL}' for 'org.hibernate'
+2019-01-17 17:02:59.548  INFO 7072 --- [restartedMain] c.t.tribes.TribesApplication             : Starting TribesApplication on DESKTOP-1TLDB2P with PID 7072 (C:\Users\jiris\vulpes-tribes-backend\out\production\classes started by jiris in C:\Users\jiris\vulpes-tribes-backend)
+2019-01-17 17:02:59.549  INFO 7072 --- [restartedMain] c.t.tribes.TribesApplication             : No active profile set, falling back to default profiles: default
+2019-01-17 17:02:59.927  INFO 7072 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-01-17 17:02:59.927  INFO 7072 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-01-17 17:03:00.765  INFO 7072 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-17 17:03:00.884  INFO 7072 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 111ms. Found 5 repository interfaces.
+2019-01-17 17:03:01.269  INFO 7072 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$7332aae8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-17 17:03:01.737  INFO 7072 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2019-01-17 17:03:01.765  INFO 7072 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-17 17:03:01.766  INFO 7072 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-17 17:03:01.773  INFO 7072 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Users\jiris\Anaconda3;C:\Users\jiris\Anaconda3\Library\mingw-w64\bin;C:\Users\jiris\Anaconda3\Library\usr\bin;C:\Users\jiris\Anaconda3\Library\bin;C:\Users\jiris\Anaconda3\Scripts;C:\Users\jiris\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;.]
+2019-01-17 17:03:01.948  INFO 7072 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-17 17:03:01.948  INFO 7072 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2021 ms
+2019-01-17 17:03:02.104  INFO 7072 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.3 by Boxfuse
+2019-01-17 17:03:02.567  INFO 7072 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/USERSERVICE (MySQL 8.0)
+2019-01-17 17:03:02.642  INFO 7072 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 7 migrations (execution time 00:00.030s)
+2019-01-17 17:03:02.657  INFO 7072 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `USERSERVICE`: 7
+2019-01-17 17:03:02.658  INFO 7072 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema `USERSERVICE` is up to date. No migration necessary.
+2019-01-17 17:03:02.826  INFO 7072 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-01-17 17:03:02.903  INFO 7072 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2019-01-17 17:03:02.905  INFO 7072 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-01-17 17:03:03.070  INFO 7072 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-01-17 17:03:03.238  INFO 7072 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-01-17 17:03:03.992  INFO 7072 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 17:03:04.832  INFO 7072 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@57aad578, org.springframework.security.web.context.SecurityContextPersistenceFilter@3b340299, org.springframework.security.web.header.HeaderWriterFilter@5bad7a87, org.springframework.security.web.authentication.logout.LogoutFilter@7b2a1c72, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@63cb1a28, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5006b792, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3530a5ec, org.springframework.security.web.session.SessionManagementFilter@69ae0b41, org.springframework.security.web.access.ExceptionTranslationFilter@4d995c6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4b38a4e1]
+2019-01-17 17:03:04.990  INFO 7072 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-01-17 17:03:05.031  WARN 7072 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-01-17 17:03:05.059  WARN 7072 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+2019-01-17 17:03:05.060  INFO 7072 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-01-17 17:03:05.061  INFO 7072 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 17:03:05.066  INFO 7072 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-01-17 17:03:05.078  INFO 7072 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-01-17 17:03:05.086 ERROR 7072 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.tribesbackend.tribes.TribesApplication.main(TribesApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:621)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:589)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:315)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lambda$detectHandlerMethods$1(AbstractHandlerMethodMapping.java:282)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:280)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.processCandidateBean(AbstractHandlerMethodMapping.java:252)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:211)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:199)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:164)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741)
+	... 21 common frames omitted
+
+2019-01-17 17:08:01.593 ERROR 21096 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level '${WEB_LOGLEVEL}' for 'org.springframework.web'
+2019-01-17 17:08:01.598 ERROR 21096 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level '${TRIBES_LOGLEVEL}' for 'com.tribesbackend.tribes'
+2019-01-17 17:08:01.598 ERROR 21096 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level '${HIBERNATE_LOGLEVEL}' for 'org.hibernate'
+2019-01-17 17:08:01.703  INFO 21096 --- [restartedMain] c.t.tribes.TribesApplication             : Starting TribesApplication on DESKTOP-1TLDB2P with PID 21096 (C:\Users\jiris\vulpes-tribes-backend\out\production\classes started by jiris in C:\Users\jiris\vulpes-tribes-backend)
+2019-01-17 17:08:01.704  INFO 21096 --- [restartedMain] c.t.tribes.TribesApplication             : No active profile set, falling back to default profiles: default
+2019-01-17 17:08:02.270  INFO 21096 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-01-17 17:08:02.270  INFO 21096 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-01-17 17:08:03.250  INFO 21096 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-17 17:08:03.422  INFO 21096 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 159ms. Found 5 repository interfaces.
+2019-01-17 17:08:03.822  INFO 21096 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$923e3ba7] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-17 17:08:04.289  INFO 21096 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2019-01-17 17:08:04.318  INFO 21096 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-17 17:08:04.318  INFO 21096 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-17 17:08:04.325  INFO 21096 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Users\jiris\Anaconda3;C:\Users\jiris\Anaconda3\Library\mingw-w64\bin;C:\Users\jiris\Anaconda3\Library\usr\bin;C:\Users\jiris\Anaconda3\Library\bin;C:\Users\jiris\Anaconda3\Scripts;C:\Users\jiris\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;.]
+2019-01-17 17:08:04.488  INFO 21096 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-17 17:08:04.488  INFO 21096 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2218 ms
+2019-01-17 17:08:04.682  INFO 21096 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.3 by Boxfuse
+2019-01-17 17:08:05.147  INFO 21096 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/USERSERVICE (MySQL 8.0)
+2019-01-17 17:08:05.224  INFO 21096 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 7 migrations (execution time 00:00.028s)
+2019-01-17 17:08:05.238  INFO 21096 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `USERSERVICE`: 7
+2019-01-17 17:08:05.240  INFO 21096 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Schema `USERSERVICE` is up to date. No migration necessary.
+2019-01-17 17:08:05.422  INFO 21096 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-01-17 17:08:05.521  INFO 21096 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2019-01-17 17:08:05.523  INFO 21096 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-01-17 17:08:05.722  INFO 21096 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-01-17 17:08:05.894  INFO 21096 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-01-17 17:08:06.637  INFO 21096 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 17:08:07.462  INFO 21096 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@78d68967, org.springframework.security.web.context.SecurityContextPersistenceFilter@2442918e, org.springframework.security.web.header.HeaderWriterFilter@289cf67f, org.springframework.security.web.authentication.logout.LogoutFilter@5a24f471, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@74cfd0c3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@43ba6187, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@730da6df, org.springframework.security.web.session.SessionManagementFilter@47c05bd9, org.springframework.security.web.access.ExceptionTranslationFilter@14e724b2, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@10ea215d]
+2019-01-17 17:08:07.625  INFO 21096 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-01-17 17:08:07.671  WARN 21096 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-01-17 17:08:07.704  WARN 21096 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+2019-01-17 17:08:07.705  INFO 21096 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2019-01-17 17:08:07.707  INFO 21096 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 17:08:07.712  INFO 21096 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2019-01-17 17:08:07.725  INFO 21096 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2019-01-17 17:08:07.735 ERROR 21096 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in class path resource [org/springframework/boot/autoconfigure/web/servlet/WebMvcAutoConfiguration$EnableWebMvcConfiguration.class]: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1745)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:576)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:498)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:320)
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:222)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:318)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:199)
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:846)
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:863)
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:546)
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:142)
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:775)
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:397)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:316)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1260)
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1248)
+	at com.tribesbackend.tribes.TribesApplication.main(TribesApplication.java:10)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49)
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'buildingRestController' method 
+public org.springframework.http.ResponseEntity com.tribesbackend.tribes.tribesbuilding.controllers.BuildingRestController.getBuilding(java.lang.String)
+to {GET /kingdom/buildings}: There is already 'mockBuildingRestController' bean method
+public org.springframework.http.ResponseEntity<java.lang.Object> com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController.buildingsOfUser(java.lang.String) mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.assertUniqueMethodMapping(AbstractHandlerMethodMapping.java:621)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:589)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:315)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lambda$detectHandlerMethods$1(AbstractHandlerMethodMapping.java:282)
+	at java.util.LinkedHashMap.forEach(LinkedHashMap.java:684)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:280)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.processCandidateBean(AbstractHandlerMethodMapping.java:252)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:211)
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:199)
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:164)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1804)
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1741)
+	... 21 common frames omitted
+
+2019-01-17 17:13:07.226 ERROR 20128 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level '${WEB_LOGLEVEL}' for 'org.springframework.web'
+2019-01-17 17:13:07.226 ERROR 20128 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level '${TRIBES_LOGLEVEL}' for 'com.tribesbackend.tribes'
+2019-01-17 17:13:07.226 ERROR 20128 --- [restartedMain] o.s.b.c.l.LoggingApplicationListener     : Cannot set level '${HIBERNATE_LOGLEVEL}' for 'org.hibernate'
+2019-01-17 17:13:07.343  INFO 20128 --- [restartedMain] c.t.tribes.TribesApplication             : Starting TribesApplication on DESKTOP-1TLDB2P with PID 20128 (C:\Users\jiris\vulpes-tribes-backend\out\production\classes started by jiris in C:\Users\jiris\vulpes-tribes-backend)
+2019-01-17 17:13:07.343  INFO 20128 --- [restartedMain] c.t.tribes.TribesApplication             : No active profile set, falling back to default profiles: default
+2019-01-17 17:13:08.185  INFO 20128 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2019-01-17 17:13:08.186  INFO 20128 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2019-01-17 17:13:09.227  INFO 20128 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data repositories in DEFAULT mode.
+2019-01-17 17:13:09.342  INFO 20128 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 115ms. Found 5 repository interfaces.
+2019-01-17 17:13:09.772  INFO 20128 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$17debcd9] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2019-01-17 17:13:10.290  INFO 20128 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8090 (http)
+2019-01-17 17:13:10.319  INFO 20128 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2019-01-17 17:13:10.320  INFO 20128 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet Engine: Apache Tomcat/9.0.13
+2019-01-17 17:13:10.327  INFO 20128 --- [restartedMain] o.a.catalina.core.AprLifecycleListener   : The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [C:\Program Files\Java\jdk1.8.0_181\bin;C:\WINDOWS\Sun\Java\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Intel\Intel(R) Management Engine Components\iCLS\;C:\Program Files\Microsoft MPI\Bin\;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\Program Files\Microsoft VS Code\bin;C:\Program Files\dotnet\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Git\cmd;C:\WINDOWS\System32\OpenSSH\;C:\Users\jiris\Anaconda3;C:\Users\jiris\Anaconda3\Library\mingw-w64\bin;C:\Users\jiris\Anaconda3\Library\usr\bin;C:\Users\jiris\Anaconda3\Library\bin;C:\Users\jiris\Anaconda3\Scripts;C:\Users\jiris\AppData\Local\Microsoft\WindowsApps;C:\Program Files\heroku\bin;.]
+2019-01-17 17:13:10.492  INFO 20128 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2019-01-17 17:13:10.493  INFO 20128 --- [restartedMain] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 2307 ms
+2019-01-17 17:13:10.651  INFO 20128 --- [restartedMain] o.f.c.internal.license.VersionPrinter    : Flyway Community Edition 5.2.3 by Boxfuse
+2019-01-17 17:13:11.101  INFO 20128 --- [restartedMain] o.f.c.internal.database.DatabaseFactory  : Database: jdbc:mysql://localhost:3306/USERSERVICE (MySQL 8.0)
+2019-01-17 17:13:11.186  INFO 20128 --- [restartedMain] o.f.core.internal.command.DbValidate     : Successfully validated 7 migrations (execution time 00:00.023s)
+2019-01-17 17:13:11.218  INFO 20128 --- [restartedMain] o.f.c.i.s.JdbcTableSchemaHistory         : Creating Schema History table: `USERSERVICE`.`flyway_schema_history`
+2019-01-17 17:13:11.382  INFO 20128 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Current version of schema `USERSERVICE`: << Empty Schema >>
+2019-01-17 17:13:11.383  INFO 20128 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 1 - test init
+2019-01-17 17:13:11.442  INFO 20128 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 2 - test init
+2019-01-17 17:13:11.632  INFO 20128 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 3 - troops
+2019-01-17 17:13:11.679  INFO 20128 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 4 - buildings
+2019-01-17 17:13:11.730  INFO 20128 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 5 - resources
+2019-01-17 17:13:11.773  INFO 20128 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 6 - resourcesForeignKey
+2019-01-17 17:13:11.852  INFO 20128 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Migrating schema `USERSERVICE` to version 7 - another
+2019-01-17 17:13:11.967  INFO 20128 --- [restartedMain] o.f.core.internal.command.DbMigrate      : Successfully applied 7 migrations to schema `USERSERVICE` (execution time 00:00.754s)
+2019-01-17 17:13:12.132  INFO 20128 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [
+	name: default
+	...]
+2019-01-17 17:13:12.207  INFO 20128 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate Core {5.3.7.Final}
+2019-01-17 17:13:12.209  INFO 20128 --- [restartedMain] org.hibernate.cfg.Environment            : HHH000206: hibernate.properties not found
+2019-01-17 17:13:12.380  INFO 20128 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.0.4.Final}
+2019-01-17 17:13:12.559  INFO 20128 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5Dialect
+2019-01-17 17:13:13.329  INFO 20128 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2019-01-17 17:13:14.241  INFO 20128 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@10a7deda, org.springframework.security.web.context.SecurityContextPersistenceFilter@5bc2a2e3, org.springframework.security.web.header.HeaderWriterFilter@22fbb541, org.springframework.security.web.authentication.logout.LogoutFilter@17ddb24f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@168cd00b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1418bd8a, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4d5fe44, org.springframework.security.web.session.SessionManagementFilter@22b91e93, org.springframework.security.web.access.ExceptionTranslationFilter@38d36075, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@194254b1]
+2019-01-17 17:13:14.404  INFO 20128 --- [restartedMain] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2019-01-17 17:13:14.436  WARN 20128 --- [restartedMain] aWebConfiguration$JpaWebMvcConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2019-01-17 17:13:14.591  WARN 20128 --- [restartedMain] .b.a.g.t.GroovyTemplateAutoConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Groovy configuration, or set spring.groovy.template.check-template-location=false)
+2019-01-17 17:13:14.968  INFO 20128 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2019-01-17 17:13:15.068  INFO 20128 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8090 (http) with context path ''
+2019-01-17 17:13:15.068  INFO 20128 --- [restartedMain] c.t.tribes.TribesApplication             : Started TribesApplication in 8.196 seconds (JVM running for 9.859)
