@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class KingdomRestController {
+
     KingdomRepository kingdomRepository;
     KingdomModelHelpersMethods kingdomModelHelpersMethods;
     ErrorMessagesMethods errorMessages;
@@ -26,7 +27,6 @@ public class KingdomRestController {
         this.errorMessages = errorMessages;
         this.kingdomCrudService = kingdomCrudService;
     }
-
 
     @GetMapping(value = "/kingdom")
     public ResponseEntity getKingdom(@RequestHeader(name = "username") String username) {

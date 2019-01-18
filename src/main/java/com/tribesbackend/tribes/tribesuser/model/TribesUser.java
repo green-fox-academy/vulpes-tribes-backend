@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "users")
+@Table(name = "`USERS`")
 public class TribesUser {
     @Id
     @GeneratedValue
@@ -28,8 +28,6 @@ public class TribesUser {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "resources_id", nullable = false)
     Kingdom resources;
-
-
 
 
 
