@@ -11,13 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/mock")
 public class MockResourcesController {
 
-    @GetMapping(value = "/resources")
+    @GetMapping(value = "/kingdom/resources")
     public ResponseEntity getMockResources() {
+        ResourcesModel mockResources = new ResourcesModel.ResourcesBuilder()
+                .setAmount(20)
+                .setType("gold")
+                .build();
         return ResponseEntity.ok(mockResources);
     }
-    ResourcesModel mockResources = new ResourcesModel.ResourcesBuilder()
-            .setAmount(20)
-            .setType("gold")
-            .build();
 }
-

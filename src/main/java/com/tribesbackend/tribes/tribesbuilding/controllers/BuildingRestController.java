@@ -1,5 +1,7 @@
 package com.tribesbackend.tribes.tribesbuilding.controllers;
 
+import com.tribesbackend.tribes.tribesbuilding.model.Building;
+import com.tribesbackend.tribes.tribesbuilding.model.Buildings;
 import com.tribesbackend.tribes.tribesbuilding.service.BuildingCrudService;
 import com.tribesbackend.tribes.tribesbuilding.model.BuildingModelHelpersMethods;
 import com.tribesbackend.tribes.tribesbuilding.repository.BuildingRepository;
@@ -13,6 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 @RestController
 public class BuildingRestController {
     KingdomRepository kingdomRepository;
@@ -20,6 +26,7 @@ public class BuildingRestController {
     BuildingModelHelpersMethods buildingModelHelpersMethods;
     ErrorMessagesMethods errorMessages;
     BuildingCrudService buildingCrudService;
+    Buildings buildings;
 
     @Autowired
     public BuildingRestController (KingdomRepository kingdomRepository, BuildingRepository buildingRepository, BuildingModelHelpersMethods buildingModelHelpersMethods, ErrorMessagesMethods errorMessages, BuildingCrudService buildingCrudService ){
@@ -33,6 +40,13 @@ public class BuildingRestController {
     @GetMapping(value = "/kingdom/buildings")
     public ResponseEntity getBuilding(@RequestHeader(name = "username")String username){
         Kingdom selectedKingdom =  kingdomRepository.findKingdomByTribesUserUsername(username);
-        return new ResponseEntity(buildingRepository.findAllByKingdom(selectedKingdom), HttpStatus.OK);
+        buildings.setBuildingList(buildingRepository.findAllByKingdom(selectedKingdom).get());
+
+//            List<Building> Buildings = new ArrayList<Building>();
+//        Buildings.add(new Building("mine", 1, 12));
+//        Buildings.add(new Building("farm", 1, 12));
+//        Buildings.add(new Building("farm", 1, 12));
+//        Buildings.add(new Building("mine", 1, 12));
+            return new ResponseEntity(buildings.getBuildingList(), HttpStatus.OK);
     }
 }

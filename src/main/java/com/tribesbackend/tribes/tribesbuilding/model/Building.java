@@ -1,6 +1,5 @@
 package com.tribesbackend.tribes.tribesbuilding.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 
 import javax.persistence.*;
@@ -13,7 +12,6 @@ import java.sql.Timestamp;
 public class Building {
     @Id
     @GeneratedValue
-    @JsonIgnore
     Long id;
     @NotNull
     @Size(min = 2, message = "At least 2 charracters.")
