@@ -1,19 +1,27 @@
 package com.tribesbackend.tribes.tribesuser.model;
 
-import com.tribesbackend.tribes.tribesuser.model.TribesUser;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Optional;
 
 public class MyUserTrPrincipal implements UserDetails {
 
     private TribesUser tribesuser;
 
+    Kingdom kingdom;
+
     public MyUserTrPrincipal(TribesUser tribesuser) {
         this.tribesuser = tribesuser;
+    }
+
+    public Kingdom getKingdom() {
+        return kingdom;
+    }
+
+    public void setKingdom(Kingdom kingdom) {
+        this.kingdom = kingdom;
     }
 
     @Override

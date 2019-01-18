@@ -59,11 +59,14 @@ public class UserRestController {
     @PostMapping(value = "/register")
     public ResponseEntity registerUser(@Validated @RequestBody RegistrationInputJson regjson) {
         TribesUser newUser = new TribesUser(regjson.getUsername(), regjson.getPassword());
+
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(errorMessages.usernameAlreadyTaken(), HttpStatus.CONFLICT);
         } else
             userTRepository.save(newUser);
-            Kingdom newKingdom = new Kingdom(regjson.getKingdom());
+        Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
+        newUser.setKingdom( newKingdom);
+
         System.out.println(newKingdom.getName());
         System.out.println(newKingdom.getId());
             kingdomRepo.save(newKingdom);
