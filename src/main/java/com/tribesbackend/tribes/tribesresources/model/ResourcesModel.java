@@ -8,10 +8,8 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-
-@Validated
 @Entity
-@Table(name = "resourcesModels")
+@Table(name = "RESOURCES")
 public class ResourcesModel {
     @Id
     @GeneratedValue
@@ -22,9 +20,9 @@ public class ResourcesModel {
     long amount;
     @JsonIgnore
     long timeStampLastVisit;
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "kingdom_id", nullable = false)
-    Kingdom kingdom;
+    @ManyToOne
+    @JoinColumn(name = "KINGDOM_ID")
+    private Kingdom kingdom;
 
     public ResourcesModel() {
     }

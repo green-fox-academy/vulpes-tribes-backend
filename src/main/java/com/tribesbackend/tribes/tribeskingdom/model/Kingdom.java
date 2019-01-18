@@ -36,7 +36,7 @@ public class Kingdom {
 
     @OneToMany(mappedBy = "kingdom")
 
-    public Set<ResourcesModel> resourcesModel;
+    public List<ResourcesModel> resourcesModel;
 
 
     @OneToMany(fetch = FetchType.LAZY)
@@ -58,5 +58,14 @@ public class Kingdom {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Kingdom setId(Long id) {
+        this.id = id;
+        return this;
     }
 }
