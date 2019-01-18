@@ -92,4 +92,3 @@ public class ResourcesModelServiceTest {
         assertEquals(resourceService.getLastTimestampFromDB(model), new Timestamp(100));
     }
 }
-
