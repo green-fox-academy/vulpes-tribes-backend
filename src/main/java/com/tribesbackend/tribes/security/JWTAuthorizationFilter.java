@@ -24,6 +24,8 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                                     HttpServletResponse res,
                                     FilterChain chain) throws IOException, ServletException {
         String header = req.getHeader(HEADER_STRING);
+        System.out.println("Header is running");
+        System.out.println(header);
 
         if (header == null) {
             chain.doFilter(req, res);
@@ -44,7 +46,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                     .build()
                     .verify(token)
                     .getSubject();
-
+            System.out.println("USER IS:::::::::::::::::::::" + user);
             if (user != null) {
                 return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
             }
