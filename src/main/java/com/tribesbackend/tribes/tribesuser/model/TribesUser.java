@@ -31,8 +31,6 @@ public class TribesUser {
 
 
 
-
-
     public TribesUser(String username, String password) {
         this.username = username;
         this.password = password;

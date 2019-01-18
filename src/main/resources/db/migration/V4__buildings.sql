@@ -1,8 +1,9 @@
-CREATE TABLE BUILDINGS (ID INT AUTO_INCREMENT PRIMARY KEY,
-                       KINGDOM_ID INT,
-                       TYPE VARCHAR(45),
-                       LEVEL SMALLINT (4),
-                       HP SMALLINT (4),
-                       STARTED_AT SMALLINT (10),
-                       FINISHED_AT SMALLINT (10),
-                       FOREIGN KEY(KINGDOM_ID) REFERENCES KINGDOM(ID));
+
+CREATE TABLE building (id INT AUTO_INCREMENT PRIMARY KEY,
+                        kingdom_id INT,
+                        type VARCHAR(45),
+                        level SMALLINT (4),
+                        hp SMALLINT (4),
+                        started_at SMALLINT (10),
+                        finished_at SMALLINT (10),
+                        FOREIGN KEY(kingdom_id) REFERENCES kingdom(id));
