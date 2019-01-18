@@ -1,5 +1,9 @@
 package com.tribesbackend.tribes.tribesuser.controller;
 
+import com.auth0.jwt.JWT;
+import com.tribesbackend.tribes.security.SecurityConstants;
+import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
+import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.exception.InvalidUserPasswordException;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
@@ -11,16 +15,24 @@ import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-//@SuppressWarnings("unchecked")
+import java.util.Date;
+
+import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
+import static com.tribesbackend.tribes.security.SecurityConstants.EXPIRATION_TIME;
+
+
+
 @RestController
 public class UserRestController {
     UserTRepository userTRepository;
     UserModelHelpersMethods userMethods;
     ErrorMessagesMethods errorMessages;
     UserCrudService userCrudService;
+    KingdomRepository kingdomRepo;
     boolean loggedIn; 
 
     @Autowired
@@ -31,13 +43,28 @@ public class UserRestController {
         this.userCrudService = userCrudService;
     }
 
+    @GetMapping (value="/mockuser")
+    public ResponseEntity sampleUserJson(){
+        TribesUser tuser  = new TribesUser("jirina","1234");
+        userTRepository.save(tuser);
+        return new ResponseEntity(tuser, HttpStatus.OK);
+    }
+
+
+
     @PostMapping(value = "/register")
-    public ResponseEntity<Object> registerUser(@Validated @RequestBody TribesUser newUser) {
+    public ResponseEntity registerUser(@Validated @RequestBody TribesUser newUser, Kingdom newKingdom) {
 
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(errorMessages.usernameAlreadyTaken(), HttpStatus.CONFLICT);
-        } else userTRepository.save(newUser);
-        return ResponseEntity.ok(newUser);
+        } else
+
+            userTRepository.save(newUser);
+
+
+        return new ResponseEntity(newUser, HttpStatus.OK);
+        // return new ResponseEntity(newUser, HttpStatus.OK);
+
     }
 
     @PostMapping(value = "/login")
@@ -54,7 +81,11 @@ public class UserRestController {
             } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
                 loggedIn = true;
                 return new ResponseEntity(
-                        new OKstatus("ok", "token")
+                        new OKstatus("ok",
+                                 JWT.create()
+                                .withSubject(tribesUser.getUsername())
+                                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                                .sign(HMAC512(SecurityConstants.SECRET.getBytes())))
                         , HttpStatus.OK);
             } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
                 return new ResponseEntity(
@@ -71,5 +102,15 @@ public class UserRestController {
         } else
             loggedIn = false;
             return ResponseEntity.ok(new LogoutMessages("Logged out successfully!"));
+    }
+
+    @GetMapping (value = "/user/testjwt")
+    public String testingEndpoint(){
+
+
+     //   UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
+      return SecurityContextHolder.getContext().getAuthentication().getName();
+
+         //     JWT.decode(token).getSubject();
     }
 }
