@@ -1,7 +1,5 @@
 package com.tribesbackend.tribes.tribesresources.repository;
 
-import com.tribesbackend.tribes.tribesbuilding.model.Building;
-import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import com.tribesbackend.tribes.tribesresources.model.ResourcesModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -16,5 +14,5 @@ public interface ResourceRepository extends JpaRepository <ResourcesModel, Long>
 
     Optional<ResourcesModel> findResourceByResourcesId(long id);
 
-    Optional<ResourcesModel> findAllByKingdom (Kingdom kingdom);
+
 }
