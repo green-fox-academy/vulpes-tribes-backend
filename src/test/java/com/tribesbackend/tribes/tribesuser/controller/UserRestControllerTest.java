@@ -1,13 +1,18 @@
 package com.tribesbackend.tribes.tribesuser.controller;
 
+import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
+import static com.tribesbackend.tribes.security.SecurityConstants.EXPIRATION_TIME;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.refEq;
 
+import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tribesbackend.tribes.security.SecurityConstants;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorResponseModel;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
+import com.tribesbackend.tribes.tribesuser.okstatusservice.JWTToken;
 import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
 import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
 import org.hamcrest.Matchers;
@@ -25,6 +30,8 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
+import java.util.Date;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserRestControllerTest {
@@ -127,15 +134,21 @@ public class UserRestControllerTest {
     @Test
     public void testLoginSuccessful() throws Exception {
         TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
+        String token = JWT.create()
+                .withSubject(newUser.getUsername())
+                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                .sign(HMAC512(SecurityConstants.SECRET.getBytes()));
+
         Mockito.when(userTRepository.findTribesUserByUsername(newUser.getUsername())).thenReturn(newUser);
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(asJsonString(newUser)))
                     .andExpect(MockMvcResultMatchers.status().isOk())
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("ok")))
-                    .andExpect(MockMvcResultMatchers.jsonPath("$.token", Matchers.is("token")));
+                    .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("ok")));
+                    //.andExpect(MockMvcResultMatchers.jsonPath("$.token", Matchers.is(token)));
         Mockito.verify(userTRepository, Mockito.atLeast(2)).findTribesUserByUsername(newUser.getUsername());
     }
+    
 
     @Test
     public void testLoginWrongPassword() throws Exception{
