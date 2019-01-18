@@ -14,5 +14,5 @@ public interface TroopRepository extends JpaRepository<Troop, Long> {
     @Override
     List<Troop> findAll();
 
-    Optional<Troop>findAllByKingdom(Kingdom kingdom);
+    Optional<List<Troop>>findAllByKingdom(Kingdom kingdom);
 }

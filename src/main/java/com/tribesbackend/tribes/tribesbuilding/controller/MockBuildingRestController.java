@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@RequestMapping(value = "/mock")
 @RestController
 public class MockBuildingRestController {
     BuildingRepository buldingRepo;
@@ -27,9 +28,9 @@ public class MockBuildingRestController {
     public ResponseEntity<Object> buildingsOfUser( @RequestHeader (name = "X-Tribes-Token") String xTribesToken) {
         List<Building> usersBuildings = new ArrayList<Building>();
         usersBuildings.add(BuildingFactory.createSampleBuilding());
-        if (TokenIsValid.isValid(xTribesToken)) {
+//        if (TokenIsValid.isValid(xTribesToken)) {
             return new ResponseEntity(usersBuildings, HttpStatus.OK);
-        } else return new ResponseEntity("Invalid token", HttpStatus.BAD_REQUEST);
+//        } else return new ResponseEntity("Invalid token", HttpStatus.BAD_REQUEST);
     }
 
     @PostMapping(value = "/kingdom/buildings")
