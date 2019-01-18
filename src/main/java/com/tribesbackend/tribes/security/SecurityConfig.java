@@ -1,6 +1,7 @@
 package com.tribesbackend.tribes.security;
 
 
+import org.aspectj.lang.annotation.Before;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -8,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.filter.CommonsRequestLoggingFilter;
 
 @Configuration
 @EnableWebSecurity
@@ -52,4 +54,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     public PasswordEncoder encoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 }

@@ -1,19 +1,5 @@
 package com.tribesbackend.tribes.tribesbuilding.controllers;
 
-import com.tribesbackend.tribes.logging.Logging;
-import com.tribesbackend.tribes.tribesbuilding.service.BuildingCrudService;
-import com.tribesbackend.tribes.tribesbuilding.model.BuildingModelHelpersMethods;
-import com.tribesbackend.tribes.tribesbuilding.repository.BuildingRepository;
-import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
-import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
-import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RestController;
-
 /*@RestController
 public class BuildingRestController extends Logging {
     KingdomRepository kingdomRepository;
