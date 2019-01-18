@@ -2,6 +2,8 @@ package com.tribesbackend.tribes.tribesuser.controller;
 
 import com.auth0.jwt.JWT;
 import com.tribesbackend.tribes.security.SecurityConstants;
+import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
+import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.exception.InvalidUserPasswordException;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
@@ -30,6 +32,7 @@ public class UserRestController {
     UserModelHelpersMethods userMethods;
     ErrorMessagesMethods errorMessages;
     UserCrudService userCrudService;
+    KingdomRepository kingdomRepo;
     boolean loggedIn; 
 
     @Autowired
@@ -50,13 +53,17 @@ public class UserRestController {
 
 
     @PostMapping(value = "/register")
-    public ResponseEntity registerUser(@Validated @RequestBody TribesUser newUser) {
+    public ResponseEntity registerUser(@Validated @RequestBody TribesUser newUser, Kingdom newKingdom) {
 
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(errorMessages.usernameAlreadyTaken(), HttpStatus.CONFLICT);
-        } else userTRepository.save(newUser);
+        } else
 
-        return new ResponseEntity("ok", HttpStatus.OK);
+            userTRepository.save(newUser);
+            kingdomRepo.save(newUser.ge)
+
+
+        return new ResponseEntity(newUser, HttpStatus.OK);
         // return new ResponseEntity(newUser, HttpStatus.OK);
 
     }
