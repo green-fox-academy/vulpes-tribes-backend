@@ -148,6 +148,7 @@ public class UserRestControllerTest {
                     //.andExpect(MockMvcResultMatchers.jsonPath("$.token", Matchers.is(token)));
         Mockito.verify(userTRepository, Mockito.atLeast(2)).findTribesUserByUsername(newUser.getUsername());
     }
+    
 
     @Test
     public void testLoginWrongPassword() throws Exception{
