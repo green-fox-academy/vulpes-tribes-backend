@@ -1,6 +1,6 @@
 package com.tribesbackend.tribes.kingdom.mock.controller;
 
-import com.tribesbackend.tribes.controllers.kingdomcontrollers.MockKingdomController;
+import com.tribesbackend.tribes.controllers.kingdomcontrollers.KingdomRestController;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,12 +13,12 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-public class MockKingdomControllerTest {
+public class KingdomControllerTest {
 
     private MockMvc mockMvc;
 
     @InjectMocks
-    private MockKingdomController mockKingdomController;
+    private KingdomRestController mockKingdomController;
 
     @Before
     public void setUp() {
