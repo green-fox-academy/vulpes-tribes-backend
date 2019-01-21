@@ -1,6 +1,5 @@
 package com.tribesbackend.tribes.tribeskingdom.controllers;
 
-import com.tribesbackend.tribes.tribeskingdom.model.KingdomModelHelpersMethods;
 import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
 import com.tribesbackend.tribes.tribeskingdom.service.KingdomCrudService;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
@@ -16,14 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class KingdomRestController {
 
     KingdomRepository kingdomRepository;
-    KingdomModelHelpersMethods kingdomModelHelpersMethods;
     ErrorMessagesMethods errorMessages;
     KingdomCrudService kingdomCrudService;
 
     @Autowired
-    public KingdomRestController (KingdomRepository kingdomRepository, KingdomModelHelpersMethods kingdomModelHelpersMethods, ErrorMessagesMethods errorMessages, KingdomCrudService kingdomCrudService ){
+    public KingdomRestController (KingdomRepository kingdomRepository,  ErrorMessagesMethods errorMessages, KingdomCrudService kingdomCrudService ){
         this.kingdomRepository = kingdomRepository;
-        this.kingdomModelHelpersMethods = kingdomModelHelpersMethods;
         this.errorMessages = errorMessages;
         this.kingdomCrudService = kingdomCrudService;
     }

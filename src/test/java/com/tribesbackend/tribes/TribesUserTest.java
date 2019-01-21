@@ -35,6 +35,7 @@ public class TribesUserTest {
     }
 
 
+
     @Test
     public void usernameMissing() {
         TribesUser tribesUser = new TribesUser(null, "1235");
