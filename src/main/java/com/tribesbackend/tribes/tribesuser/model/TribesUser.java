@@ -30,7 +30,18 @@ public class TribesUser {
     @JoinColumn(name = "resources_id", nullable = false)
     ResourcesModel resources;
 
+    @Transient
+    Boolean loggedIn = false;
 
+    @Transient
+    public Boolean getLoggedIn() {
+        return loggedIn;
+    }
+
+    @Transient
+    public void setLoggedIn(Boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
 
     public TribesUser(String username, String password) {
         this.username = username;
@@ -104,20 +115,20 @@ public class TribesUser {
         }
 
 
-    public TribesUserBuilder setUsername(String username) {
-        this.username = username;
-        return this;
-    }
+        public TribesUserBuilder setUsername(String username) {
+            this.username = username;
+            return this;
+        }
 
-    public TribesUserBuilder setPassword(String password) {
-        this.password = password;
-        return this;
-    }
+        public TribesUserBuilder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
 
 
-    public TribesUser build() {
-        return new TribesUser(username,password);
-    }
+        public TribesUser build() {
+            return new TribesUser(username, password);
+        }
 
         public Long getId() {
             return id;
