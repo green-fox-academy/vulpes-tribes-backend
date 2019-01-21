@@ -1,9 +1,9 @@
 package com.tribesbackend.tribes.service;
-
-import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
-import com.tribesbackend.tribes.tribesresources.model.ResourcesModel;
-import com.tribesbackend.tribes.tribesresources.service.ResourceService;
-import com.tribesbackend.tribes.tribesresources.repository.ResourceRepository;
+import com.tribesbackend.tribes.models.Kingdom;
+import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
+import com.tribesbackend.tribes.repositories.UserTRepository;
+import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
+import com.tribesbackend.tribes.repositories.ResourceRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +14,12 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import java.sql.Timestamp;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ResourcesModelServiceTest {
@@ -79,6 +80,7 @@ public class ResourcesModelServiceTest {
         long id = 1;
         Optional<ResourcesModel> testOptional = Optional.of(model);
         Mockito.when(resourceRepository.findResourceByResourcesId(id)).thenReturn(testOptional);
+        Mockito.verify(resourceRepository.findResourceByResourcesId(id), times(1));
         ResourcesModel verified = resourceService.verifyResource(id);
         assertEquals("gold", verified.getType());
     }
@@ -90,5 +92,11 @@ public class ResourcesModelServiceTest {
         ResourcesModel model = new ResourcesModel("gold", testKingdom);
         model.setTimeStampLastVisit(100);
         assertEquals(resourceService.getLastTimestampFromDB(model), new Timestamp(100));
+    }
+
+    @Test
+    public void mockTest(){
+        UserTRepository r = mock(UserTRepository.class);
+
     }
 }
