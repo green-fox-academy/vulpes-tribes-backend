@@ -1,13 +1,14 @@
 package com.tribesbackend.tribes.controllers.buildingcontrollers;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
-import com.tribesbackend.tribes.tribesbuilding.service.ErrorMessage;
+import com.tribesbackend.tribes.services.errorservice.ErrorResponseModel;
 import com.tribesbackend.tribes.services.okstatusservice.TokenIsValid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,16 +38,16 @@ public class MockBuildingRestController {
             return new ResponseEntity(new Building(type), HttpStatus.OK);
         }
         else if (type == null || type.equals("")) {
-            return new ResponseEntity(new ErrorMessage("error", "Missing parameter(s): type!"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new ErrorResponseModel( "Missing parameter(s): type!"), HttpStatus.BAD_REQUEST);
         }
         else if ((type.equals("farm") || type.equals("mine") || type.equals("barrack") || type.equals("barrack"))) {
-            return new ResponseEntity(new ErrorMessage("error", "Invalid building type"), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity(new ErrorResponseModel("Invalid building type"), HttpStatus.NOT_ACCEPTABLE);
         }
         //not enough resources
         else if (false) {
-            return new ResponseEntity(new ErrorMessage("error", "Not enough resources"), HttpStatus.CONFLICT);
+            return new ResponseEntity(new ErrorResponseModel( "Not enough resources"), HttpStatus.CONFLICT);
         }
-        else return new ResponseEntity(new ErrorMessage("error", "Unexpected error"), HttpStatus.IM_USED);
+        else return new ResponseEntity(new ErrorResponseModel("Unexpected error"), HttpStatus.IM_USED);
     }
 
     @GetMapping(value = "/kingdom/buildings/{id}")
@@ -54,7 +55,7 @@ public class MockBuildingRestController {
     ResponseEntity<Object> listTheBuilding(@Validated @PathVariable int id, String xTribesToken) {
         if (TokenIsValid.isValid(xTribesToken)) {
             return new ResponseEntity(buildingRepo.findById(id), HttpStatus.OK);
-        } else return new ResponseEntity(new ErrorMessage("error", "Id not found"),
+        } else return new ResponseEntity(new ErrorResponseModel( "Id not found"),
                 HttpStatus.NOT_FOUND);
     }
 
@@ -67,17 +68,17 @@ public class MockBuildingRestController {
             buildingRepo.save(buildingRepo.findById(id).get());
             return new ResponseEntity(buildingRepo.findById(id).get(), HttpStatus.OK);
         } else if (typeLevel < 0 || typeLevel == null || typeLevel.toString().isEmpty()) {
-            return new ResponseEntity(new ErrorMessage("error", "Missing parameter(s): !"), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity(new ErrorResponseModel( "Missing parameter(s): !"), HttpStatus.BAD_REQUEST);
         } else if (!(buildingRepo.findById(id).isPresent())) {
-            return new ResponseEntity(new ErrorMessage("error", "Id not found"), HttpStatus.NOT_FOUND);
+            return new ResponseEntity(new ErrorResponseModel( "Id not found"), HttpStatus.NOT_FOUND);
         }
         //not valid level of the building
         else if (false) {
-            return new ResponseEntity(new ErrorMessage("error", "Invalid building level"), HttpStatus.NOT_ACCEPTABLE);
+            return new ResponseEntity(new ErrorResponseModel( "Invalid building level"), HttpStatus.NOT_ACCEPTABLE);
         }
         //not enough resource
         else if (false) {
-            return new ResponseEntity(new ErrorMessage("error", "Not enough resource"), HttpStatus.CONFLICT);
-        } else return new ResponseEntity(new ErrorMessage("error", "Unexpected error"), HttpStatus.IM_USED);
+            return new ResponseEntity(new ErrorResponseModel( "Not enough resource"), HttpStatus.CONFLICT);
+        } else return new ResponseEntity(new ErrorResponseModel("Unexpected error"), HttpStatus.IM_USED);
     }
 }

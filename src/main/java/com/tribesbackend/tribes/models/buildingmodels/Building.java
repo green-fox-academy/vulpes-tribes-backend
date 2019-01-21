@@ -22,25 +22,27 @@ public class Building {
     @NotNull
     @Min(value = 0L, message = "The value must be positive" )
     int HP;
-    int started_at;
-    int finished_at;
+    long startedAt;
+    long finishedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "kingdom_id", nullable = false)
     private Kingdom kingdom;
 
-    public Building(@NotNull @Size(min = 2, message = "At least 2 charracters.") String type) {
+    public Building(String type) {
         this.type = type;
         level = 1;
         HP = 100;
-        started_at= new Timestamp(System.currentTimeMillis()).getNanos();
-        finished_at = started_at + started_at;
-
-
+        startedAt= new Timestamp(System.currentTimeMillis()).getNanos();
+    }
+    public Building(String type, int level, int HP) {
+        this.type = type;
+        this.level = level;
+        this.HP = HP;
+        this.kingdom = kingdom;
     }
 
-    public Building() {
-    }
+    public Building() {}
 
     public Long getId() {
         return id;
@@ -74,20 +76,20 @@ public class Building {
         this.HP = HP;
     }
 
-    public int getStarted_at() {
-        return started_at;
+    public long getStartedAt() {
+        return startedAt;
     }
 
-    public void setStarted_at(int started_at) {
-        this.started_at = started_at;
+    public void setStartedAt(long startedAt) {
+        this.startedAt = startedAt;
     }
 
-    public int getFinished_at() {
-        return finished_at;
+    public long getFinishedAt() {
+        return finishedAt;
     }
 
-    public void setFinished_at(int finished_at) {
-        this.finished_at = finished_at;
+    public void setFinishedAt(int finishedAt) {
+        this.finishedAt = finishedAt;
     }
 
     public Kingdom getKingdom() {
@@ -98,12 +100,5 @@ public class Building {
         this.kingdom = kingdom;
     }
 
-    public Building(@NotNull @Size(min = 2, message = "At least 2 charracters.") String type,
-                    @NotNull @Min(value = 0L, message = "The value must be positive" ) int level,
-                    @NotNull @Min(value = 0L, message = "The value must be positive" ) int HP) {
-        this.type = type;
-        this.level = level;
-        this.HP = HP;
-        this.kingdom = kingdom;
-    }
+
 }
