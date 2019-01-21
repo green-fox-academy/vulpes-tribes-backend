@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+
 import static com.tribesbackend.tribes.security.SecurityConstants.HEADER_STRING;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
@@ -29,7 +30,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
         if (header == null) {
             chain.doFilter(req, res);
-            return;
+            return ;
         }
 
         UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
@@ -52,6 +53,5 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             }
         }
         return null;
-
     }
 }

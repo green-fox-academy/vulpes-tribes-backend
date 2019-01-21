@@ -2,7 +2,6 @@ package com.tribesbackend.tribes.troop.controller;
 
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
-import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.troop.model.TroopModelHelpersMethods;
 import com.tribesbackend.tribes.troop.repository.TroopRepository;
 import com.tribesbackend.tribes.troop.service.TroopCrudService;
@@ -18,15 +17,13 @@ public class TroopRestController {
     TroopRepository troopRepository;
     KingdomRepository kingdomRepository;
     TroopModelHelpersMethods troopModelHelpersMethods;
-    ErrorMessagesMethods errorMessages;
     TroopCrudService troopCrudService;
 
     @Autowired
-    public TroopRestController (TroopRepository troopRepository, KingdomRepository kingdomRepository, TroopModelHelpersMethods troopModelHelpersMethods, ErrorMessagesMethods errorMessages, TroopCrudService troopCrudService ){
+    public TroopRestController (TroopRepository troopRepository, KingdomRepository kingdomRepository, TroopModelHelpersMethods troopModelHelpersMethods,  TroopCrudService troopCrudService ){
         this.troopRepository = troopRepository;
         this.kingdomRepository = kingdomRepository;
         this.troopModelHelpersMethods = troopModelHelpersMethods;
-        this.errorMessages = errorMessages;
         this.troopCrudService = troopCrudService;
     }
 

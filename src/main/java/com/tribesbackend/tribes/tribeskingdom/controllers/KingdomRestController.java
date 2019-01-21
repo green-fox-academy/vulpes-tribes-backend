@@ -2,7 +2,6 @@ package com.tribesbackend.tribes.tribeskingdom.controllers;
 
 import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
 import com.tribesbackend.tribes.tribeskingdom.service.KingdomCrudService;
-import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.OKstatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,13 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class KingdomRestController {
 
     KingdomRepository kingdomRepository;
-    ErrorMessagesMethods errorMessages;
     KingdomCrudService kingdomCrudService;
 
     @Autowired
-    public KingdomRestController (KingdomRepository kingdomRepository,  ErrorMessagesMethods errorMessages, KingdomCrudService kingdomCrudService ){
+    public KingdomRestController (KingdomRepository kingdomRepository,   KingdomCrudService kingdomCrudService ){
         this.kingdomRepository = kingdomRepository;
-        this.errorMessages = errorMessages;
         this.kingdomCrudService = kingdomCrudService;
     }
 
