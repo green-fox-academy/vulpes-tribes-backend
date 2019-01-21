@@ -1,3 +1,4 @@
+
 package com.tribesbackend.tribes.repositories;
 
 import com.tribesbackend.tribes.models.Kingdom;

@@ -1,7 +1,6 @@
 package com.tribesbackend.tribes.models.buildingmodels;
-
 import com.tribesbackend.tribes.models.Kingdom;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -12,6 +11,7 @@ import java.sql.Timestamp;
 public class Building {
     @Id
     @GeneratedValue
+    @JsonIgnore
     Long id;
     @NotNull
     @Size(min = 2, message = "At least 2 charracters.")
@@ -22,22 +22,12 @@ public class Building {
     @NotNull
     @Min(value = 0L, message = "The value must be positive" )
     int HP;
-    int started_at;
-    int finished_at;
+    Timestamp started_at;
+    Timestamp finished_at;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "kingdom_id", nullable = false)
     private Kingdom kingdom;
-
-    public Building(@NotNull @Size(min = 2, message = "At least 2 charracters.") String type) {
-        this.type = type;
-        level = 1;
-        HP = 100;
-        started_at= new Timestamp(System.currentTimeMillis()).getNanos();
-        finished_at = started_at + started_at;
-
-
-    }
 
     public Building() {
     }
@@ -74,19 +64,19 @@ public class Building {
         this.HP = HP;
     }
 
-    public int getStarted_at() {
+    public Timestamp getStarted_at() {
         return started_at;
     }
 
-    public void setStarted_at(int started_at) {
+    public void setStarted_at(Timestamp started_at) {
         this.started_at = started_at;
     }
 
-    public int getFinished_at() {
+    public Timestamp getFinished_at() {
         return finished_at;
     }
 
-    public void setFinished_at(int finished_at) {
+    public void setFinished_at(Timestamp finished_at) {
         this.finished_at = finished_at;
     }
 

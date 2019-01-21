@@ -1,5 +1,4 @@
 package com.tribesbackend.tribes.services.userservice;
-
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.UserTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
