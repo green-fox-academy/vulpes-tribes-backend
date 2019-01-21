@@ -8,12 +8,12 @@ import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponceJson;
 import com.tribesbackend.tribes.models.TribesUser;
+import com.tribesbackend.tribes.services.responseservice.OKstatus;
 import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
-import com.tribesbackend.tribes.services.okstatusservice.OKstatus;
 import com.tribesbackend.tribes.repositories.UserTRepository;
 import com.tribesbackend.tribes.services.userservice.LogoutMessages;
 import com.tribesbackend.tribes.services.userservice.UserCrudService;
-import com.tribesbackend.tribes.services.errorservice.ErrorMessagesMethods;
+import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +25,6 @@ import java.util.Date;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.tribesbackend.tribes.configurations.security.SecurityConstants.EXPIRATION_TIME;
-
 
 
 @SuppressWarnings("unchecked")
@@ -56,10 +55,10 @@ public class UserRestController {
         } else
             userTRepository.save(newUser);
         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
-        newUser.setKingdom( newKingdom);
+        newUser.setKingdom(newKingdom);
         System.out.println(newKingdom.getName());
         System.out.println(newKingdom.getId());
-            kingdomRepo.save(newKingdom);
+        kingdomRepo.save(newKingdom);
         System.out.println(newUser.getId());
         System.out.println(newUser.getUsername());
         System.out.println(newKingdom.getId());
@@ -76,22 +75,21 @@ public class UserRestController {
 
         } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).isPresent()) {
             return new ResponseEntity(ErrorMessagesMethods.notSuchUser(tribesUser.getUsername()), HttpStatus.UNAUTHORIZED);
-            }
-        else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword().equals(tribesUser.getPassword())) {
+        } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword().equals(tribesUser.getPassword())) {
             userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().setLoggedIn(true);
             userTRepository.save(userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get());
             return new ResponseEntity(
-                        new OKstatus("ok",
-                                 JWT.create()
-                                .withSubject(tribesUser.getUsername())
-                                .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                                .sign(HMAC512(SecurityConstants.SECRET.getBytes())))
-                        , HttpStatus.OK);
-            } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword()
+                    new OKstatus(
+                            JWT.create()
+                                    .withSubject(tribesUser.getUsername())
+                                    .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
+                                    .sign(HMAC512(SecurityConstants.SECRET.getBytes())))
+                    , HttpStatus.OK);
+        } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword()
                 .equals(tribesUser.getPassword())) {
             return new ResponseEntity(ErrorMessagesMethods.wrongPassword()
                     , HttpStatus.UNAUTHORIZED);
-            }
+        }
 
         return new ResponseEntity(HttpStatus.CONFLICT);
     }
@@ -103,7 +101,7 @@ public class UserRestController {
                     .get().setLoggedIn(false);
             return new ResponseEntity(new LogoutMessages("Logged out successfully!"), HttpStatus.OK);
         } else
-        return new ResponseEntity(new LogoutMessages("Unauthorized request!"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity(new LogoutMessages("Unauthorized request!"), HttpStatus.FORBIDDEN);
     }
 
     @GetMapping(value = "/user/testjwt")

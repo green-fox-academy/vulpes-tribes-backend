@@ -33,7 +33,6 @@ public class BuildingRestController extends Logging {
 //import com.tribesbackend.tribes.tribesbuilding.userservice.BuildingCrudService;
 //import com.tribesbackend.tribes.models.Kingdom;
 //import com.tribesbackend.tribes.repositories.KingdomRepository;
-//import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 //import org.springframework.http.HttpStatus;
 //import org.springframework.http.ResponseEntity;
 //import org.springframework.web.bind.annotation.GetMapping;

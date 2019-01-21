@@ -23,8 +23,8 @@ public class Troop {
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
     private int defence;
-    private int started_at;
-    private long finished_at;
+    private int startedAt;
+    private long finishedAt;
     @ManyToOne
     @JoinColumn(name = "KINGDOM_ID")
     private Kingdom kingdom;
@@ -38,8 +38,8 @@ public class Troop {
         this.hp = hp;
         this.attack = attack;
         this.defence = defence;
-        this.started_at = started_at;
-        this.finished_at = finished_at;
+        this.startedAt = started_at;
+        this.finishedAt = finished_at;
     }
 
 
