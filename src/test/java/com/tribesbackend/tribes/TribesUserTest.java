@@ -1,7 +1,7 @@
 package com.tribesbackend.tribes;
 
-import com.tribesbackend.tribes.tribesuser.model.TribesUser;
-import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
+import com.tribesbackend.tribes.models.TribesUser;
+import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
 import org.junit.Assert;
 import org.junit.Test;
 

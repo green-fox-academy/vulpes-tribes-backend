@@ -1,28 +1,16 @@
 package com.tribesbackend.tribes.tribesuser.controller;
 
-<<<<<<< HEAD
-import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
-import static com.tribesbackend.tribes.configurations.security.SecurityConstants.EXPIRATION_TIME;
-=======
->>>>>>> 5b3ce4768ebc230a56566c3192b01711b2000a11
 import static org.mockito.ArgumentMatchers.refEq;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-<<<<<<< HEAD
-import com.tribesbackend.tribes.configurations.security.SecurityConstants;
-import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
-import com.tribesbackend.tribes.tribesuser.errorservice.ErrorResponseModel;
-import com.tribesbackend.tribes.tribesuser.model.TribesUser;
-import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
+
+import com.tribesbackend.tribes.controllers.usercontrollers.UserRestController;
+import com.tribesbackend.tribes.models.TribesUser;
+import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
 import com.tribesbackend.tribes.repositories.UserTRepository;
-=======
-import com.tribesbackend.tribes.tribesuser.service.errorservice.ErrorMessagesMethods;
-import com.tribesbackend.tribes.tribesuser.service.errorservice.ErrorResponseModel;
-import com.tribesbackend.tribes.tribesuser.model.TribesUser;
-import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
-import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
->>>>>>> 5b3ce4768ebc230a56566c3192b01711b2000a11
-import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
+
+import com.tribesbackend.tribes.services.userservice.UserCrudService;
+import com.tribesbackend.tribes.services.errorservice.ErrorMessagesMethods;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;

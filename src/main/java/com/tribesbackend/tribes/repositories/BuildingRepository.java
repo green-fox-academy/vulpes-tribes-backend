@@ -1,7 +1,7 @@
 package com.tribesbackend.tribes.repositories;
 
-import com.tribesbackend.tribes.tribesbuilding.model.Building;
-import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
+import com.tribesbackend.tribes.models.buildingmodels.Building;
+import com.tribesbackend.tribes.models.Kingdom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

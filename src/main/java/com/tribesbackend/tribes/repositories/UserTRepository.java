@@ -1,5 +1,5 @@
 package com.tribesbackend.tribes.repositories;
-import com.tribesbackend.tribes.tribesuser.model.TribesUser;
+import com.tribesbackend.tribes.models.TribesUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import org.springframework.stereotype.Repository;

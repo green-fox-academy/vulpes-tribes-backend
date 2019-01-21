@@ -1,7 +1,7 @@
 package com.tribesbackend.tribes.building;
 
-import com.tribesbackend.tribes.tribesbuilding.controller.MockBuildingRestController;
-import com.tribesbackend.tribes.tribesuser.okstatusservice.TokenIsValid;
+import com.tribesbackend.tribes.controllers.buildingcontrollers.MockBuildingRestController;
+import com.tribesbackend.tribes.services.okstatusservice.TokenIsValid;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
