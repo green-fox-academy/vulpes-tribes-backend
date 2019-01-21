@@ -23,7 +23,7 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.tribesbackend.tribes.security.SecurityConstants.EXPIRATION_TIME;
 
 
-@SuppressWarnings("unchecked")
+//@SuppressWarnings("unchecked")
 @RestController
 public class UserRestController {
     UserTRepository userTRepository;
@@ -43,9 +43,9 @@ public class UserRestController {
 
     @GetMapping (value="/mockuser")
     public ResponseEntity sampleUserJson(){
-        TribesUser tuser  = new TribesUser("jirina","1234");
-        userTRepository.save(tuser);
-        return new ResponseEntity(tuser, HttpStatus.OK);
+        TribesUser tUser  = new TribesUser("jirina","1234");
+        userTRepository.save(tUser);
+        return ResponseEntity.ok(tUser);
     }
 
 
@@ -56,13 +56,8 @@ public class UserRestController {
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(errorMessages.usernameAlreadyTaken(), HttpStatus.CONFLICT);
         } else
-
             userTRepository.save(newUser);
-
-
-        return new ResponseEntity(newUser, HttpStatus.OK);
-        // return new ResponseEntity(newUser, HttpStatus.OK);
-
+        return ResponseEntity.ok(newUser);
     }
 
     @PostMapping(value = "/login")
@@ -78,13 +73,11 @@ public class UserRestController {
                         , HttpStatus.UNAUTHORIZED);
             } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
                 loggedIn = true;
-                return new ResponseEntity(
-                        new OKstatus("ok",
-                                 JWT.create()
+                return ResponseEntity.ok(new OKstatus("ok",
+                        JWT.create()
                                 .withSubject(tribesUser.getUsername())
                                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                                .sign(HMAC512(SecurityConstants.SECRET.getBytes())))
-                        , HttpStatus.OK);
+                                .sign(HMAC512(SecurityConstants.SECRET.getBytes()))));
             } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).getPassword().equals(tribesUser.getPassword())) {
             return new ResponseEntity(
                         new InvalidUserPasswordException("error", "Wrong password!")
