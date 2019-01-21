@@ -3,7 +3,7 @@ package com.tribesbackend.tribes.models.jsonmodels;
 public class RegistrationInputJson {
     String username;
     String password;
-    String kingdom;
+    String kingdomname;
 
     public RegistrationInputJson() {
     }
@@ -11,7 +11,7 @@ public class RegistrationInputJson {
     public RegistrationInputJson(String username, String password, String kingdom) {
         this.username = username;
         this.password = password;
-        this.kingdom = kingdom;
+        this.kingdomname = kingdom;
     }
 
     public String getUsername() {
@@ -31,10 +31,10 @@ public class RegistrationInputJson {
     }
 
     public String getKingdom() {
-        return kingdom;
+        return kingdomname;
     }
 
     public void setKingdom(String kingdom) {
-        this.kingdom = kingdom;
+        this.kingdomname = kingdom;
     }
 }

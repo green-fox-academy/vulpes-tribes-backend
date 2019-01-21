@@ -85,6 +85,7 @@ public class UserRestControllerTest {
         String json = "{\n" +
                 "  \"username\": \"\",\n" +
                 "  \"password\": \"12345678ab\"\n" +
+                "   \"kingdomname\": \"mightykingdom\";\n"
                 "}";
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)

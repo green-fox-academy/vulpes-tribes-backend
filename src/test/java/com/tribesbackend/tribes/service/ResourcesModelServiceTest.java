@@ -80,9 +80,9 @@ public class ResourcesModelServiceTest {
         long id = 1;
         Optional<ResourcesModel> testOptional = Optional.of(model);
         Mockito.when(resourceRepository.findResourceByResourcesId(id)).thenReturn(testOptional);
-        Mockito.verify(resourceRepository.findResourceByResourcesId(id), times(1));
         ResourcesModel verified = resourceService.verifyResource(id);
         assertEquals("gold", verified.getType());
+        Mockito.verify(resourceRepository, times(1)).findResourceByResourcesId(id);
     }
 
     @Test
