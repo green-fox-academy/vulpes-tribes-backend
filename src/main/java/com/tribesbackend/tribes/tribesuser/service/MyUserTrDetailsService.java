@@ -1,6 +1,5 @@
 package com.tribesbackend.tribes.tribesuser.service;
 
-import com.tribesbackend.tribes.tribesuser.model.MyUserTrPrincipal;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.repositories.UserTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,11 +27,10 @@ public class MyUserTrDetailsService implements UserDetailsService {
      *                                   GrantedAuthority
      */
     @Override
-    public UserDetails loadUserByUsername(String username){
-        TribesUser tribesUser = userTRepository.findByUsername( username );
-        if (tribesUser == null) {
-            throw new  UsernameNotFoundException( username );
-    }
-        return new MyUserTrPrincipal(tribesUser);
+    public UserDetails loadUserByUsername(String username) {
+        Optional<TribesUser> tribesUser = userTRepository.findTribesUserByUsername(username);
+        if (tribesUser.isPresent()) {
+            return tribesUser.get();
+        } else throw new UsernameNotFoundException(username);
     }
 }

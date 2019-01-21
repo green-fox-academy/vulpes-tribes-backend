@@ -3,14 +3,17 @@ package com.tribesbackend.tribes.tribesuser.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
-
+import com.tribesbackend.tribes.tribesresources.model.ResourcesModel;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Collection;
 
 @Entity
-@Table(name = "`USERS`")
-public class TribesUser {
+@Table(name = "USERS")
+public class TribesUser implements UserDetails {
     @Id
     @GeneratedValue
     @JsonIgnore
@@ -19,7 +22,7 @@ public class TribesUser {
     @Size(min = 2, max = 45, message = "Username should have at least 2, maximum 45 characters")
     String username;
     @NotNull
-    @Size(min = 8, message = "Password should have at least 2 characters")
+    @Size(min = 2, message = "Password should have at least 2 characters")
     String password;
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "kingdom_id", nullable = false)
@@ -27,13 +30,28 @@ public class TribesUser {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "resources_id", nullable = false)
-    Kingdom resources;
+    ResourcesModel resources;
+    Boolean loggedIn = false;
 
 
+    public Boolean getLoggedIn() {
+        return loggedIn;
+    }
+
+
+    public void setLoggedIn(Boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
 
     public TribesUser(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public TribesUser(@NotNull @Size(min = 2, max = 45, message = "Username should have at least 2, maximum 45 characters") String username, @NotNull @Size(min = 8, message = "Password should have at least 2 characters") String password, Kingdom kingdom) {
+        this.username = username;
+        this.password = password;
+        this.kingdom = kingdom;
     }
 
     public TribesUser() {
@@ -47,6 +65,7 @@ public class TribesUser {
         this.id = id;
     }
 
+    @Override
     public String getUsername() {
         return username;
     }
@@ -55,6 +74,7 @@ public class TribesUser {
         this.username = username;
     }
 
+    @Override
     public String getPassword() {
         return password;
     }
@@ -63,43 +83,110 @@ public class TribesUser {
         this.password = password;
     }
 
-    public static class TribesUserBuilder {
-        @Id
-        @GeneratedValue
-        @JsonIgnore
-        Long id;
-        @NotNull
-        @Size(min = 2, max = 45, message = "Username should have at least 2, maximum 45 characters")
-        String username;
-        @NotNull
-        @Size(min = 8, message = "Password should have at least 2 characters")
-        String password;
-        @OneToOne(fetch = FetchType.LAZY, optional = false)
-        @JoinColumn(name = "kingdom_id", nullable = false)
-        Kingdom kingdom;
 
-        @OneToOne(fetch = FetchType.LAZY, optional = false)
-        @JoinColumn(name = "resources_id", nullable = false)
-        Kingdom resources;
-
-    public TribesUserBuilder setTribesUser_id(long id) {
-        this.id = id;
-        return this;
+    public Kingdom getKingdom() {
+        return kingdom;
     }
 
-    public TribesUserBuilder setUsername(String username) {
-        this.username = username;
-        return this;
+    public void setKingdom(Kingdom kingdom) {
+        this.kingdom = kingdom;
     }
 
-    public TribesUserBuilder setPassword(String password) {
-        this.password = password;
-        return this;
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return null;
     }
 
 
-    public TribesUser build() {
-        return new TribesUser(username,password);
+        public static class TribesUserBuilder {
+            @Id
+            @GeneratedValue
+            @JsonIgnore
+            Long id;
+            @NotNull
+            @Size(min = 2, max = 45, message = "Username should have at least 2, maximum 45 characters")
+            String username;
+            @NotNull
+            @Size(min = 8, message = "Password should have at least 2 characters")
+            String password;
+
+            @JoinColumn(name = "kingdom_id", nullable = false)
+            @OneToOne(fetch = FetchType.LAZY, optional = false)
+            Kingdom kingdom;
+
+            @OneToOne(fetch = FetchType.LAZY, optional = false)
+            @JoinColumn(name = "resources_id", nullable = false)
+            ResourcesModel resources;
+
+            public TribesUserBuilder setTribesUser_id(long id) {
+                this.id = id;
+                return this;
+            }
+
+            public TribesUserBuilder setUsername(String username) {
+                this.username = username;
+                return this;
+            }
+
+            public TribesUserBuilder setPassword(String password) {
+                this.password = password;
+                return this;
+            }
+
+            public TribesUser build() {
+                return new TribesUser(username, password);
+            }
+
+            public Long getId() {
+                return id;
+            }
+
+            public void setId(Long id) {
+                this.id = id;
+            }
+
+            public String getUsername() {
+                return username;
+            }
+
+            public String getPassword() {
+                return password;
+            }
+
+            public Kingdom getKingdom() {
+                return kingdom;
+            }
+
+            public void setKingdom(Kingdom kingdom) {
+                this.kingdom = kingdom;
+            }
+
+            public ResourcesModel getResources() {
+                return resources;
+            }
+
+            public void setResources(ResourcesModel resources) {
+                this.resources = resources;
+            }
+        }
     }
-}
-}
