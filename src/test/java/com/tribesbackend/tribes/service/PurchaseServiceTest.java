@@ -43,24 +43,24 @@ public class PurchaseServiceTest {
     public void priceOfTownhallLevelOneTest() {
         Optional<ItemPrice> itemPrice = Optional.of(new ItemPrice("townhall", 300));
         Mockito.when(itemPriceRepository.findByType("townhall")).thenReturn(itemPrice);
-        assertEquals(300, purchaseService.priceOfItem(1, "townhall"));
+        assertEquals(300, purchaseService.priceOfItem("townhall", 1));
     }
 
     @Test
     public void priceOfFarmLevelFiveTest() {
         Optional<ItemPrice> itemPrice = Optional.of(new ItemPrice("farm", 80));
         Mockito.when(itemPriceRepository.findByType("farm")).thenReturn(itemPrice);
-        assertEquals(400, purchaseService.priceOfItem(5, "farm"));
+        assertEquals(400, purchaseService.priceOfItem("farm", 5));
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void wrongLevelOfFarmTest() {
-        int gold = purchaseService.priceOfItem(9, "farm");
+        int gold = purchaseService.priceOfItem("farm", 9);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void wrongTypeOfItemTest() {
-        int gold = purchaseService.priceOfItem(2, "aze");
+        int gold = purchaseService.priceOfItem("aze", 2);
     }
 
     @Test

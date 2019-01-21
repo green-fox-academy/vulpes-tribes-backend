@@ -6,24 +6,24 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "itemprice")
-public class ItemPrice {
+@Table(name = "buildingtime")
+public class BuildingTime {
     @Id
     @GeneratedValue
     Long id;
-    String type;
-    int gold;
+    private String type;
+    private int buildTimeInMin;
 
-    public ItemPrice(String type, int gold) {
+    public BuildingTime(String type, int buildTimeInMin) {
         this.type = type;
-        this.gold = gold;
+        this.buildTimeInMin = buildTimeInMin;
     }
 
     public Long getId() {
         return id;
     }
 
-    public ItemPrice setId(Long id) {
+    public BuildingTime setId(Long id) {
         this.id = id;
         return this;
     }
@@ -32,17 +32,17 @@ public class ItemPrice {
         return type;
     }
 
-    public ItemPrice setType(String type) {
+    public BuildingTime setType(String type) {
         this.type = type;
         return this;
     }
 
-    public int getGold() {
-        return gold;
+    public int getBuildTimeInMin() {
+        return buildTimeInMin;
     }
 
-    public ItemPrice setGold(int gold) {
-        this.gold = gold;
+    public BuildingTime setBuildTimeInMin(int buildTimeInMin) {
+        this.buildTimeInMin = buildTimeInMin;
         return this;
     }
 }

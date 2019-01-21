@@ -1,9 +1,18 @@
 package com.tribesbackend.tribes.service;
 
+import com.tribesbackend.tribes.BuildingTimeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Timestamp;
+import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
 
 public class TimeService {
+
+    @Autowired
+    BuildingTimeRepository buildingTimeRepository;
 
     public static long timeDifferenceInMin(Timestamp timestamp1, Timestamp timestamp2) {
         long milliseconds = timestamp2.getTime() - timestamp1.getTime();
@@ -12,20 +21,20 @@ public class TimeService {
 
     }
 
-    public Integer buildingTimeInMin (String type, int level) {
+    public int buildingTimeInMin(String type, int level) {
         if (level >= 1 && level <= 5) {
-            switch (type) {
-                case "townhall":
-                    return 3 * (1 + (level - 1) * 2);
-                case "mine":
-                    return 3 * (1 + (level - 1) * 2);
-                case "farm":
-                    return 3 * (1 + (level - 1) * 2);
-                case "barracks":
-                    return 3 * (1 + (level - 1) * 2);
-            }
-            throw new IllegalArgumentException("Wrong type of the building");
-        } else throw new IllegalArgumentException("Wrong level of the building");
+            if (buildingTimeRepository.findByType(type).isPresent()) {
+                return buildingTimeRepository.findByType(type).get().getBuildTimeInMin() * level;
+            } else throw new IllegalArgumentException();
+        } else throw new IllegalArgumentException();
     }
 
+    public Double troopTimeinMin(int troopLevel, int barracksLevel) {
+        if ((troopLevel >= 1 && troopLevel <= 5) && (barracksLevel >= 1 && barracksLevel <= 5)) {
+            double value = troopLevel / (2.0 * barracksLevel);
+            BigDecimal bd = new BigDecimal(value).setScale(2, RoundingMode.HALF_UP);
+            value = bd.doubleValue();
+            return value;
+        } else throw new IllegalArgumentException();
+    }
 }
