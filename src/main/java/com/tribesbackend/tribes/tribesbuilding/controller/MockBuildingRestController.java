@@ -2,7 +2,7 @@ package com.tribesbackend.tribes.tribesbuilding.controller;
 
 import com.tribesbackend.tribes.tribesbuilding.model.Building;
 import com.tribesbackend.tribes.tribesbuilding.model.BuildingFactory;
-import com.tribesbackend.tribes.tribesbuilding.repository.BuildingRepository;
+import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.tribesbuilding.service.ErrorMessage;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.TokenIsValid;
 import org.springframework.beans.factory.annotation.Autowired;

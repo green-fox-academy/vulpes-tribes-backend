@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.logging;
+package com.tribesbackend.tribes.configurations.logging;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

@@ -1,7 +1,7 @@
 package com.tribesbackend.tribes.tribeskingdom.service;
 
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
-import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
+import com.tribesbackend.tribes.repositories.KingdomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

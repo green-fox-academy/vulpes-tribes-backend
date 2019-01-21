@@ -1,13 +1,11 @@
 package com.tribesbackend.tribes.service;
 
-import org.junit.Before;
+import com.tribesbackend.tribes.services.timeservice.TimeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.sql.Timestamp;
 
-import java.sql.Date;
-import java.time.Instant;
 import java.util.Calendar;
 
 import static org.junit.Assert.*;

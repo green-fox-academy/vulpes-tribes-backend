@@ -1,6 +1,6 @@
 package com.tribesbackend.tribes.tribeskingdom.model;
 
-import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
+import com.tribesbackend.tribes.repositories.KingdomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

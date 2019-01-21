@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.security;
+package com.tribesbackend.tribes.configurations.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

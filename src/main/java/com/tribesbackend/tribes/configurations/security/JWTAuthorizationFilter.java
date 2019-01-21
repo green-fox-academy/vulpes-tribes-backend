@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.security;
+package com.tribesbackend.tribes.configurations.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
-import static com.tribesbackend.tribes.security.SecurityConstants.HEADER_STRING;
+import static com.tribesbackend.tribes.configurations.security.SecurityConstants.HEADER_STRING;
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     public JWTAuthorizationFilter(AuthenticationManager authManager) {

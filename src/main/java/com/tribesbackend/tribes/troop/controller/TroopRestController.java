@@ -1,7 +1,7 @@
 package com.tribesbackend.tribes.troop.controller;
 
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
-import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
+import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.troop.model.TroopModelHelpersMethods;
 import com.tribesbackend.tribes.troop.repository.TroopRepository;

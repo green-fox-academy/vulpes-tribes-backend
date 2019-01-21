@@ -28,11 +28,11 @@ public class BuildingRestController extends Logging {
 
 //package com.tribesbackend.tribes.tribesbuilding.controllers;
 //
-//import com.tribesbackend.tribes.tribesbuilding.model.BuildingModelHelpersMethods;
-//import com.tribesbackend.tribes.tribesbuilding.repository.BuildingRepository;
+//import BuildingModelHelpersMethods;
+//import com.tribesbackend.tribes.repositories.BuildingRepository;
 //import com.tribesbackend.tribes.tribesbuilding.service.BuildingCrudService;
 //import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
-//import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
+//import com.tribesbackend.tribes.repositories.KingdomRepository;
 //import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 //import org.springframework.http.HttpStatus;
 //import org.springframework.http.ResponseEntity;

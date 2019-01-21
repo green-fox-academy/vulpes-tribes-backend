@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.tribeskingdom.repository;
+package com.tribesbackend.tribes.repositories;
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

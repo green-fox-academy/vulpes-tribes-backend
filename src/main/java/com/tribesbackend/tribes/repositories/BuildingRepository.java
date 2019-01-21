@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.tribesbuilding.repository;
+package com.tribesbackend.tribes.repositories;
 
 import com.tribesbackend.tribes.tribesbuilding.model.Building;
 import com.tribesbackend.tribes.tribeskingdom.model.Kingdom;

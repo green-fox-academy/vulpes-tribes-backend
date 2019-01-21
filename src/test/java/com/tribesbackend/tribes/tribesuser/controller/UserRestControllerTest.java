@@ -1,19 +1,17 @@
 package com.tribesbackend.tribes.tribesuser.controller;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
-import static com.tribesbackend.tribes.security.SecurityConstants.EXPIRATION_TIME;
-import static org.junit.Assert.*;
+import static com.tribesbackend.tribes.configurations.security.SecurityConstants.EXPIRATION_TIME;
 import static org.mockito.ArgumentMatchers.refEq;
 
 import com.auth0.jwt.JWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tribesbackend.tribes.security.SecurityConstants;
+import com.tribesbackend.tribes.configurations.security.SecurityConstants;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorResponseModel;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
-import com.tribesbackend.tribes.tribesuser.okstatusservice.JWTToken;
-import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
+import com.tribesbackend.tribes.repositories.UserTRepository;
 import com.tribesbackend.tribes.tribesuser.service.UserCrudService;
 import org.hamcrest.Matchers;
 import org.junit.Before;
@@ -22,7 +20,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;

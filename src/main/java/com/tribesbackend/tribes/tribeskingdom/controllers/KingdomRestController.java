@@ -1,7 +1,7 @@
 package com.tribesbackend.tribes.tribeskingdom.controllers;
 
 import com.tribesbackend.tribes.tribeskingdom.model.KingdomModelHelpersMethods;
-import com.tribesbackend.tribes.tribeskingdom.repository.KingdomRepository;
+import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.tribeskingdom.service.KingdomCrudService;
 import com.tribesbackend.tribes.tribesuser.errorservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.tribesuser.okstatusservice.OKstatus;

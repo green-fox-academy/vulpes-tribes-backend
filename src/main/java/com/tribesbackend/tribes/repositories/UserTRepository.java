@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.tribesuser.repository;
+package com.tribesbackend.tribes.repositories;
 import com.tribesbackend.tribes.tribesuser.model.TribesUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 

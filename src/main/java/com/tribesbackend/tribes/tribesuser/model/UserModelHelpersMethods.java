@@ -1,6 +1,6 @@
 package com.tribesbackend.tribes.tribesuser.model;
 
-import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
+import com.tribesbackend.tribes.repositories.UserTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
