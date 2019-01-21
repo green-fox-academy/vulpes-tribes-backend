@@ -1,6 +1,6 @@
 //package com.tribesbackend.tribes.mock.resources.controller;
 //
-//import com.tribesbackend.tribes.controllers.resourcecontrollers.MockResourcesController;
+//import com.tribesbackend.tribes.tribesresources.controller.MockResourcesController;
 //import org.junit.Before;
 //import org.junit.Test;
 //import org.junit.runner.RunWith;

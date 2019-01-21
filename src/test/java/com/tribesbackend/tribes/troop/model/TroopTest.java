@@ -1,12 +1,13 @@
 package com.tribesbackend.tribes.troop.model;
 
-import com.tribesbackend.tribes.factories.TroopFactory;
-import com.tribesbackend.tribes.models.Troop;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

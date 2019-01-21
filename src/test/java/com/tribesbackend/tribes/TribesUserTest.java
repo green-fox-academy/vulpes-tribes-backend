@@ -1,7 +1,7 @@
 package com.tribesbackend.tribes;
 
-import com.tribesbackend.tribes.models.TribesUser;
-import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
+import com.tribesbackend.tribes.tribesuser.model.TribesUser;
+import com.tribesbackend.tribes.tribesuser.model.UserModelHelpersMethods;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -33,7 +33,6 @@ public class TribesUserTest {
         TribesUser tribesUser = new TribesUser("ddd", "1235");
         Assert.assertEquals(true, UserModelHelpersMethods.isValid(tribesUser));
     }
-
 
 
     @Test
