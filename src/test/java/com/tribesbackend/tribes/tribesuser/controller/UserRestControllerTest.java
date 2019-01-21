@@ -10,7 +10,7 @@ import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
 import com.tribesbackend.tribes.repositories.UserTRepository;
 
 import com.tribesbackend.tribes.services.userservice.UserCrudService;
-import com.tribesbackend.tribes.services.errorservice.ErrorMessagesMethods;
+import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
 import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;

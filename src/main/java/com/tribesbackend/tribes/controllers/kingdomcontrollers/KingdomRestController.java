@@ -1,8 +1,9 @@
 package com.tribesbackend.tribes.controllers.kingdomcontrollers;
 
 
+import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
-import com.tribesbackend.tribes.services.okstatusservice.OKstatus;
+import com.tribesbackend.tribes.services.responseservice.OKstatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,6 @@ public class KingdomRestController {
 
     @GetMapping(value = "/kingdom")
     public ResponseEntity getKingdom(@RequestHeader(name = "username") String username) {
-        return new ResponseEntity(new OKstatus("ok", kingdomRepository.findKingdomByTribesUserUsername(username)), HttpStatus.OK);
+        return new ResponseEntity(kingdomRepository.findKingdomByTribesUserUsername(username), HttpStatus.OK);
     }
 }

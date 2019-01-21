@@ -1,8 +1,8 @@
+
 package com.tribesbackend.tribes.controllers.buildingcontrollers;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
-import com.tribesbackend.tribes.services.errorservice.ErrorResponseModel;
-import com.tribesbackend.tribes.services.okstatusservice.TokenIsValid;
+import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -53,7 +53,7 @@ public class MockBuildingRestController {
     @GetMapping(value = "/kingdom/buildings/{id}")
     public @ResponseBody
     ResponseEntity<Object> listTheBuilding(@Validated @PathVariable int id, String xTribesToken) {
-        if (TokenIsValid.isValid(xTribesToken)) {
+        if (buildingRepo.findById(id).isPresent()) {
             return new ResponseEntity(buildingRepo.findById(id), HttpStatus.OK);
         } else return new ResponseEntity(new ErrorResponseModel( "Id not found"),
                 HttpStatus.NOT_FOUND);
@@ -63,7 +63,7 @@ public class MockBuildingRestController {
     public ResponseEntity<Object> upgradeOrDowngradeBuilding(@Validated @PathVariable int id,
                                                              @RequestBody String xTribesToken, Integer typeLevel) {
         // and enough resources
-        if (TokenIsValid.isValid(xTribesToken) && (true)) {
+        if (buildingRepo.findById(id).isPresent() && (true)) {
             buildingRepo.findById(id).get().setHP(typeLevel);
             buildingRepo.save(buildingRepo.findById(id).get());
             return new ResponseEntity(buildingRepo.findById(id).get(), HttpStatus.OK);
