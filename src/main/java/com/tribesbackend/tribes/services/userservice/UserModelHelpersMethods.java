@@ -1,4 +1,5 @@
 package com.tribesbackend.tribes.services.userservice;
+
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.UserTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,7 @@ public class UserModelHelpersMethods {
 
     public static boolean isValid(TribesUser tribesUser) {
         if (tribesUser.getUsername() == null || tribesUser.getPassword() == null ||
-        tribesUser.getUsername().equals("") || tribesUser.getPassword().equals("")) {
+                tribesUser.getUsername().equals("") || tribesUser.getPassword().equals("")) {
             return false;
         } else return true;
     }

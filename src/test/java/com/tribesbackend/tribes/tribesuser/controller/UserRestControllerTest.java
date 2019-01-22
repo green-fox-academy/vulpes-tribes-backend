@@ -3,7 +3,6 @@ package com.tribesbackend.tribes.tribesuser.controller;
 import static org.mockito.ArgumentMatchers.refEq;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-
 import com.tribesbackend.tribes.controllers.usercontrollers.UserRestController;
 import com.tribesbackend.tribes.factories.KingdomFactory;
 import com.tribesbackend.tribes.models.Kingdom;
@@ -11,7 +10,6 @@ import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
 import com.tribesbackend.tribes.repositories.UserTRepository;
-
 import com.tribesbackend.tribes.services.userservice.UserCrudService;
 import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
 import org.hamcrest.Matchers;
@@ -28,7 +26,6 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import java.util.Optional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
