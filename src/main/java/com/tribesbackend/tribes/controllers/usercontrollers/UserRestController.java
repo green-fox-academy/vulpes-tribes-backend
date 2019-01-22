@@ -98,6 +98,7 @@ public class UserRestController {
     public ResponseEntity logoutUser() {
         if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
             userTRepository.findTribesUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
+                    //uncatched get
                     .get().setLoggedIn(false);
             return new ResponseEntity(new LogoutMessages("Logged out successfully!"), HttpStatus.OK);
         } else
