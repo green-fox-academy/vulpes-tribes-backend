@@ -14,7 +14,7 @@ public class Building {
     @JsonIgnore
     Long id;
     @NotNull
-    @Size(min = 2, message = "At least 2 charracters.")
+    @Size(min = 2, message = "At least 2 characters.")
     String type;
     @NotNull
     @Min(value = 0L, message = "The value must be positive" )

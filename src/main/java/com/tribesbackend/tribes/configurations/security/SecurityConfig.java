@@ -1,6 +1,5 @@
 package com.tribesbackend.tribes.configurations.security;
 import com.tribesbackend.tribes.services.userservice.MyUserTrDetailsService;
-import com.tribesbackend.tribes.tribesuser.okstatusservice.RandomToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,8 +16,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
-    @Autowired
-    RandomToken randomToken;
     @Autowired
     MyUserTrDetailsService myUserTrDetailsService;
 

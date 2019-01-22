@@ -1,9 +1,6 @@
 package com.tribesbackend.tribes.security;
 
-import com.tribesbackend.tribes.tribesuser.model.TribesUser;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

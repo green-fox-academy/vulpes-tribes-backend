@@ -1,6 +1,6 @@
 package com.tribesbackend.tribes.security;
 
-import com.tribesbackend.tribes.tribesuser.repository.UserTRepository;
+import com.tribesbackend.tribes.repositories.UserTRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

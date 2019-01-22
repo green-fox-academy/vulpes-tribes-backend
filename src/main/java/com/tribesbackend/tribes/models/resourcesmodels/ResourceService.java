@@ -1,7 +1,9 @@
 package com.tribesbackend.tribes.tribesresources.model;
 
-import com.tribesbackend.tribes.service.TimeService;
-import com.tribesbackend.tribes.tribesresources.repository.ResourceRepository;
+
+import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
+import com.tribesbackend.tribes.repositories.ResourceRepository;
+import com.tribesbackend.tribes.services.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
