@@ -1,4 +1,5 @@
 package com.tribesbackend.tribes.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 
@@ -19,6 +20,10 @@ public class Kingdom {
     @Size(min = 2, message = "Name of Kingdom should have at least 2 characters")
     @Column(name = "kingdomname",nullable = false, unique = true)
     public String kingdomname;
+<<<<<<< Updated upstream
+=======
+    @JsonIgnore
+>>>>>>> Stashed changes
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribe_User_id", nullable = false)
     public TribesUser tribesUser;

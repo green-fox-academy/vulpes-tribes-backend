@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.tribesuser.controller;
+package com.tribesbackend.tribes.services.controller;
 
 import java.security.Principal;
 

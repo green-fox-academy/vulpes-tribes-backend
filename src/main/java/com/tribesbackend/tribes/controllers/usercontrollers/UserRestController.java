@@ -100,6 +100,7 @@ public class UserRestController {
             userTRepository.findTribesUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
                     //uncatched get
                     .get().setLoggedIn(false);
+//            userTRepository.save();
             return new ResponseEntity(new LogoutMessages("Logged out successfully!"), HttpStatus.OK);
         } else
             return new ResponseEntity(new LogoutMessages("Unauthorized request!"), HttpStatus.FORBIDDEN);
