@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table
+@Table (name = "kingdoms")
 public class Kingdom {
 
     @Id

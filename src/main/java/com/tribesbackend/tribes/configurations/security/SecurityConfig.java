@@ -18,6 +18,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     MyUserTrDetailsService myUserTrDetailsService;
 
+    @Autowired
+    UnauthorisedExceptionHandling unauthorisedExceptionHandling;
+
     @Override
     protected void configure (AuthenticationManagerBuilder auth)
             throws  Exception{
