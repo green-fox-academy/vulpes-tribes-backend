@@ -35,8 +35,7 @@ public class TribesUser implements UserDetails {
 
     @Column(name = "logged_in")
     Boolean loggedIn = false;
-
-
+    
     public TribesUser(String username, String password) {
         this.username = username;
         this.password = password;
