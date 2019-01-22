@@ -18,11 +18,14 @@ public class Kingdom {
     @Size(min = 2, message = "Name of Kingdom should have at least 2 characters")
     @Column(name = "kingdomname",nullable = false, unique = true)
     public String kingdomname;
+
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tribe_User_id", nullable = false)
+    @JoinColumn(name = "tribeUser_id", nullable = false)
     public TribesUser tribesUser;
+
     @OneToMany(mappedBy = "kingdom")
     private List <Troop> troops;
+
     @OneToMany(mappedBy = "kingdom")
     public List <ResourcesModel> resourcesModel;
     @OneToMany(fetch = FetchType.LAZY)
