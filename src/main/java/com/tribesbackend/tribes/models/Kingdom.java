@@ -23,10 +23,8 @@ public class Kingdom {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribeUser_id", nullable = false)
     public TribesUser tribesUser;
-
     @OneToMany(mappedBy = "kingdom")
     private List <Troop> troops;
-
     @OneToMany(mappedBy = "kingdom")
     public List <ResourcesModel> resourcesModel;
     @OneToMany(fetch = FetchType.LAZY)
