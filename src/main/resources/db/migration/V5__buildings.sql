@@ -1,4 +1,4 @@
-CREATE TABLE BUILDINGS (ID INT AUTO_INCREMENT PRIMARY KEY,
+CREATE TABLE buildings (ID INT AUTO_INCREMENT PRIMARY KEY,
                         TYPE VARCHAR(45),
                         LEVEL SMALLINT (4),
                         HP SMALLINT (4),
