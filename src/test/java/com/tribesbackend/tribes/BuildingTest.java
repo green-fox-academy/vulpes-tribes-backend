@@ -23,7 +23,6 @@ public class BuildingTest {
     private static ValidatorFactory validatorFactory;
     private static Validator validator;
 
-
     @Before
     public void createValidator() {
         validatorFactory = Validation.buildDefaultValidatorFactory();
@@ -34,7 +33,6 @@ public class BuildingTest {
     public void close() {
         validatorFactory.close();
     }
-
 
     @Test
     public void buildingValid() {
