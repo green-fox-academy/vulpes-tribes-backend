@@ -21,7 +21,7 @@ public class Kingdom {
     public String kingdomname;
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "tribeUser_id", nullable = false)
+    @JoinColumn(name = "tribe_user_id", nullable = false)
     public TribesUser tribesUser;
     @OneToMany(mappedBy = "kingdom")
     private List <Troop> troops;

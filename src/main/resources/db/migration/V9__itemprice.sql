@@ -1,4 +1,4 @@
-CREATE TABLE itemprice (ID INT AUTO_INCREMENT PRIMARY KEY, type varchar (10), gold int);
+CREATE TABLE itemprice (id INT AUTO_INCREMENT PRIMARY KEY, type varchar (10), gold int);
 INSERT INTO itemprice (type, gold)
 VALUES
   ('townhall', 300),

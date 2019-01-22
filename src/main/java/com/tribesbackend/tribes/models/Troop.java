@@ -26,7 +26,7 @@ public class Troop {
     private long startedAt;
     private long finishedAt;
     @ManyToOne
-    @JoinColumn(name = "KINGDOM_ID")
+    @JoinColumn(name = "kingdom_id")
     private Kingdom kingdom;
 
     public Troop() {
