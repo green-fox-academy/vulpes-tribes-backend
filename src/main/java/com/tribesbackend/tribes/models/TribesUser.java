@@ -32,6 +32,8 @@ public class TribesUser implements UserDetails {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "resources_id", nullable = false)
     ResourcesModel resources;
+
+    @Column(name = "logged_in")
     Boolean loggedIn = false;
 
 
