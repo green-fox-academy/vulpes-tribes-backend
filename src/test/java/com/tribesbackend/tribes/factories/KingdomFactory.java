@@ -5,14 +5,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class KingdomFactory {
 
-    @Autowired
-    TribesUserFactory tribesUserFactory;
-
-    public Kingdom createInvalidSampleKingdom(){
-        return new Kingdom("name", tribesUserFactory.createInvalidSampleTribesUser());
+    public static Kingdom createInvalidSampleKingdom(){
+        return new Kingdom("name", TribesUserFactory.createInvalidSampleTribesUser());
     }
 
-    public Kingdom createValidSampleKingdom(){
-        return new Kingdom("name", tribesUserFactory.createValidSampleTribesUser());
+    public static Kingdom createValidSampleKingdom(){
+        return new Kingdom("name", TribesUserFactory.createValidSampleTribesUser());
     }
 }

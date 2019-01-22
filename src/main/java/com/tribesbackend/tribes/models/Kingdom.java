@@ -8,7 +8,8 @@ import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-@Table (name = "kingdoms")
+
+@Table(name = "KINGDOMS")
 public class Kingdom {
 
     @Id
@@ -17,7 +18,7 @@ public class Kingdom {
     @NotNull
     @Size(min = 2, message = "Name of Kingdom should have at least 2 characters")
     @Column(name = "kingdomname",nullable = false, unique = true)
-    public String name;
+    public String kingdomname;
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribe_User_id", nullable = false)
     public TribesUser tribesUser;
@@ -31,11 +32,11 @@ public class Kingdom {
 
 
     public Kingdom(String name) {
-        this.name = name;
+        this.kingdomname = name;
     }
 
     public Kingdom(String name, TribesUser tribesUser) {
-        this.name = name;
+        this.kingdomname = name;
         this.tribesUser = tribesUser;
     }
 
@@ -83,10 +84,10 @@ public class Kingdom {
     }
 
     public String getName() {
-        return name;
+        return kingdomname;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.kingdomname = name;
     }
 }
