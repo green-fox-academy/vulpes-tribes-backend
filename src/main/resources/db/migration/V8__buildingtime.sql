@@ -1,5 +1,5 @@
-CREATE TABLE BUILDINGTIME (ID INT AUTO_INCREMENT PRIMARY KEY, type varchar (10), buildTimeInMin int);
-INSERT INTO BUILDINGTIME (type, buildTimeInMin)
+CREATE TABLE buildingtime (ID INT AUTO_INCREMENT PRIMARY KEY, type varchar (10), buildTimeInMin int);
+INSERT INTO buildingtime (type, buildTimeInMin)
 VALUES
   ('townhall', 3),
   ('mine', 1),
