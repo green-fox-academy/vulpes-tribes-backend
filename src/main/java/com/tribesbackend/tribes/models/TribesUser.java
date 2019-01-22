@@ -12,7 +12,7 @@ import javax.validation.constraints.Size;
 import java.util.Collection;
 
 @Entity
-@Table(name = "users")
+@Table(name = "USERS")
 public class TribesUser implements UserDetails {
     @Id
     @GeneratedValue
