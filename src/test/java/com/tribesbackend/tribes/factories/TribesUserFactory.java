@@ -6,14 +6,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class TribesUserFactory {
 
-    public TribesUser createValidSampleTribesUser(){
+    public static TribesUser createValidSampleTribesUser(){
         return new TribesUser.TribesUserBuilder()
                 .setPassword("password")
                 .setPassword("1234")
                 .build();
     }
 
-    public TribesUser createInvalidSampleTribesUser(){
+    public static TribesUser createInvalidSampleTribesUser(){
         return new TribesUser.TribesUserBuilder()
                 .setPassword(null)
                 .setPassword("1234")

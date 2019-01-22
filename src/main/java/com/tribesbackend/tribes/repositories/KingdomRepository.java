@@ -11,5 +11,7 @@ public interface KingdomRepository extends JpaRepository<Kingdom, Long> {
     @Override
     List<Kingdom> findAll();
 
+    Kingdom findKingdomByTribesUser(String tribeUser);
+
     Kingdom findKingdomByTribesUserUsername(String username);
 }

@@ -1,7 +1,6 @@
 package com.tribesbackend.tribes.models.buildingmodels;
-
 import com.tribesbackend.tribes.models.Kingdom;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -12,9 +11,10 @@ import java.sql.Timestamp;
 public class Building {
     @Id
     @GeneratedValue
+    @JsonIgnore
     Long id;
     @NotNull
-    @Size(min = 2, message = "At least 2 charracters.")
+    @Size(min = 2, message = "At least 2 characters.")
     String type;
     @NotNull
     @Min(value = 0L, message = "The value must be positive" )
@@ -24,7 +24,6 @@ public class Building {
     int HP;
     long startedAt;
     long finishedAt;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "kingdom_id", nullable = false)
     private Kingdom kingdom;
@@ -39,7 +38,6 @@ public class Building {
         this.type = type;
         this.level = level;
         this.HP = HP;
-        this.kingdom = kingdom;
     }
 
     public Building() {}
@@ -88,9 +86,7 @@ public class Building {
         return finishedAt;
     }
 
-    public void setFinishedAt(int finishedAt) {
-        this.finishedAt = finishedAt;
-    }
+    public void setFinishedAt(int finishedAt) {this.finishedAt = finishedAt; }
 
     public Kingdom getKingdom() {
         return kingdom;

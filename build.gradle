@@ -39,14 +39,18 @@ dependencies {
     compileOnly('org.projectlombok:lombok')
     testImplementation('org.springframework.boot:spring-boot-starter-test')
     testImplementation('org.springframework.security:spring-security-test')
+//    implementation('org.springframework.boot:security.spring-security-web')
+//    implementation('org.springframework.boot:spring-security-config');
+//    implementation('org.springframework.boot:spring-webmvc');
+//    implementation('org.springframework.boot:spring-webmvc');
+//    implementation('javax.servlet:javax.servlet-api');
+//    implementation('javax.servlet:javax.servlet.jsp-api');
+    implementation('org.apache.commons:commons-dbcp2');
+
+    //flyway
+    compile('org.flywaydb:flyway-core')
+    //jdbc
     compile('org.springframework.boot:spring-boot-starter-jdbc')
-
-    
-
     implementation 'com.auth0:java-jwt:3.5.0'
-
     testImplementation 'org.mockito:mockito-core:2.7.22'
-    // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
-    testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3'
-
 }
