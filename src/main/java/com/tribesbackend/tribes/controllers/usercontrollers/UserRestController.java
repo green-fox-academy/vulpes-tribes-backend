@@ -4,16 +4,16 @@ package com.tribesbackend.tribes.controllers.usercontrollers;
 import com.auth0.jwt.JWT;
 import com.tribesbackend.tribes.configurations.security.SecurityConstants;
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.repositories.KingdomRepository;
-import com.tribesbackend.tribes.models.jsonmodels.RegistrationInputJson;
-import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponceJson;
 import com.tribesbackend.tribes.models.TribesUser;
-import com.tribesbackend.tribes.services.responseservice.OKstatus;
-import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
+import com.tribesbackend.tribes.models.jsonmodels.RegistrationInputJson;
+import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponseJson;
+import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.repositories.UserTRepository;
+import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
+import com.tribesbackend.tribes.services.responseservice.OKstatus;
 import com.tribesbackend.tribes.services.userservice.LogoutMessages;
 import com.tribesbackend.tribes.services.userservice.UserCrudService;
-import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
+import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -62,7 +62,7 @@ public class UserRestController {
         System.out.println(newUser.getId());
         System.out.println(newUser.getUsername());
         System.out.println(newKingdom.getId());
-        return new ResponseEntity(new RegistrationResponceJson(newUser.getId(), newUser.getUsername(),
+        return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
                 newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
     }
 

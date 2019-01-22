@@ -22,11 +22,8 @@ public class Building {
     @NotNull
     @Min(value = 0L, message = "The value must be positive" )
     int HP;
-
     long startedAt;
     long finishedAt;
-
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "kingdom_id", nullable = false)
     private Kingdom kingdom;
@@ -41,8 +38,6 @@ public class Building {
         this.type = type;
         this.level = level;
         this.HP = HP;
-        this.kingdom = kingdom;
-
     }
 
     public Building() {}
@@ -79,7 +74,6 @@ public class Building {
         this.HP = HP;
     }
 
-
     public long getStartedAt() {
         return startedAt;
     }
@@ -92,10 +86,7 @@ public class Building {
         return finishedAt;
     }
 
-    public void setFinishedAt(int finishedAt) {
-        this.finishedAt = finishedAt;
-
-    }
+    public void setFinishedAt(int finishedAt) {this.finishedAt = finishedAt; }
 
     public Kingdom getKingdom() {
         return kingdom;

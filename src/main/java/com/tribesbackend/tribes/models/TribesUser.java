@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -26,28 +27,18 @@ public class TribesUser implements UserDetails {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "kingdom_id", nullable = false)
     Kingdom kingdom;
-
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "resources_id", nullable = false)
     ResourcesModel resources;
     Boolean loggedIn = false;
 
 
-    public Boolean getLoggedIn() {
-        return loggedIn;
-    }
-
-
-    public void setLoggedIn(Boolean loggedIn) {
-        this.loggedIn = loggedIn;
-    }
-
     public TribesUser(String username, String password) {
         this.username = username;
         this.password = password;
     }
 
-    public TribesUser(@NotNull @Size(min = 2, max = 45, message = "Username should have at least 2, maximum 45 characters") String username, @NotNull @Size(min = 8, message = "Password should have at least 2 characters") String password, Kingdom kingdom) {
+    public TribesUser(String username, String password, Kingdom kingdom) {
         this.username = username;
         this.password = password;
         this.kingdom = kingdom;
@@ -82,13 +73,20 @@ public class TribesUser implements UserDetails {
         this.password = password;
     }
 
-
     public Kingdom getKingdom() {
         return kingdom;
     }
 
     public void setKingdom(Kingdom kingdom) {
         this.kingdom = kingdom;
+    }
+
+    public Boolean getLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(Boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 
     @Override
@@ -117,75 +115,75 @@ public class TribesUser implements UserDetails {
     }
 
 
-        public static class TribesUserBuilder {
-            @Id
-            @GeneratedValue
-            @JsonIgnore
-            Long id;
-            @NotNull
-            @Size(min = 2, max = 45, message = "Username should have at least 2, maximum 45 characters")
-            String username;
-            @NotNull
-            @Size(min = 8, message = "Password should have at least 2 characters")
-            String password;
+    public static class TribesUserBuilder {
+        @Id
+        @GeneratedValue
+        @JsonIgnore
+        Long id;
+        @NotNull
+        @Size(min = 2, max = 45, message = "Username should have at least 2, maximum 45 characters")
+        String username;
+        @NotNull
+        @Size(min = 8, message = "Password should have at least 2 characters")
+        String password;
 
-            @JoinColumn(name = "kingdom_id", nullable = false)
-            @OneToOne(fetch = FetchType.LAZY, optional = false)
-            Kingdom kingdom;
+        @JoinColumn(name = "kingdom_id", nullable = false)
+        @OneToOne(fetch = FetchType.LAZY, optional = false)
+        Kingdom kingdom;
 
-            @OneToOne(fetch = FetchType.LAZY, optional = false)
-            @JoinColumn(name = "resources_id", nullable = false)
-            ResourcesModel resources;
+        @OneToOne(fetch = FetchType.LAZY, optional = false)
+        @JoinColumn(name = "resources_id", nullable = false)
+        ResourcesModel resources;
 
-            public TribesUserBuilder setTribesUser_id(long id) {
-                this.id = id;
-                return this;
-            }
+        public TribesUserBuilder setTribesUser_id(long id) {
+            this.id = id;
+            return this;
+        }
 
-            public TribesUserBuilder setUsername(String username) {
-                this.username = username;
-                return this;
-            }
+        public TribesUserBuilder setUsername(String username) {
+            this.username = username;
+            return this;
+        }
 
-            public TribesUserBuilder setPassword(String password) {
-                this.password = password;
-                return this;
-            }
+        public TribesUserBuilder setPassword(String password) {
+            this.password = password;
+            return this;
+        }
 
-            public TribesUser build() {
-                return new TribesUser(username, password);
-            }
+        public TribesUser build() {
+            return new TribesUser(username, password);
+        }
 
-            public Long getId() {
-                return id;
-            }
+        public Long getId() {
+            return id;
+        }
 
-            public void setId(Long id) {
-                this.id = id;
-            }
+        public void setId(Long id) {
+            this.id = id;
+        }
 
-            public String getUsername() {
-                return username;
-            }
+        public String getUsername() {
+            return username;
+        }
 
-            public String getPassword() {
-                return password;
-            }
+        public String getPassword() {
+            return password;
+        }
 
-            public Kingdom getKingdom() {
-                return kingdom;
-            }
+        public Kingdom getKingdom() {
+            return kingdom;
+        }
 
-            public void setKingdom(Kingdom kingdom) {
-                this.kingdom = kingdom;
-            }
+        public void setKingdom(Kingdom kingdom) {
+            this.kingdom = kingdom;
+        }
 
-            public ResourcesModel getResources() {
-                return resources;
-            }
+        public ResourcesModel getResources() {
+            return resources;
+        }
 
-            public void setResources(ResourcesModel resources) {
-                this.resources = resources;
-            }
+        public void setResources(ResourcesModel resources) {
+            this.resources = resources;
         }
     }
+}

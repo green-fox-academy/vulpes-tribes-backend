@@ -23,7 +23,7 @@ public class Troop {
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
     private int defence;
-    private int startedAt;
+    private long startedAt;
     private long finishedAt;
     @ManyToOne
     @JoinColumn(name = "KINGDOM_ID")
@@ -32,16 +32,14 @@ public class Troop {
     public Troop() {
     }
 
-
-    public Troop(@Min(value = 0L, message = "The value must be positive") @NotNull int level, @Min(value = 0L, message = "The value must be positive") @NotNull int hp, @Min(value = 0L, message = "The value must be positive") @NotNull int attack, @Min(value = 0L, message = "The value must be positive") @NotNull int defence, int started_at, long finished_at) {
+    public Troop(int level, int hp, int attack, int defence, long startedAt, long finishedAt) {
         this.level = level;
         this.hp = hp;
         this.attack = attack;
         this.defence = defence;
-        this.startedAt = started_at;
-        this.finishedAt = finished_at;
+        this.startedAt = startedAt;
+        this.finishedAt = finishedAt;
     }
-
 
     public static class TroopBuilder {
         @Id
@@ -97,7 +95,6 @@ public class Troop {
             this.finished_at = finished_at;
             return this;
         }
-
 
         public Troop build() {
             return new Troop(level, hp, attack, defence, started_at, finished_at);

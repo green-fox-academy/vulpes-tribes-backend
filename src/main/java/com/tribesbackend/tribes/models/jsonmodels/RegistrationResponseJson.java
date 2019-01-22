@@ -1,11 +1,19 @@
 package com.tribesbackend.tribes.models.jsonmodels;
 
-public class RegistrationResponceJson {
+public class RegistrationResponseJson {
     Long id;
     String username;
     Long kingdom_id;
     String avatar;
     int points;
+
+    public RegistrationResponseJson(Long id, String username, Long kingdom_id, String avatar, int points) {
+        this.id = id;
+        this.username = username;
+        this.kingdom_id = kingdom_id;
+        this.avatar = avatar;
+        this.points = points;
+    }
 
     public Long getId() {
         return id;
@@ -47,11 +55,5 @@ public class RegistrationResponceJson {
         this.points = points;
     }
 
-    public RegistrationResponceJson(Long id, String username, Long kingdom_id, String avatar, int points) {
-        this.id = id;
-        this.username = username;
-        this.kingdom_id = kingdom_id;
-        this.avatar = avatar;
-        this.points = points;
-    }
+
 }

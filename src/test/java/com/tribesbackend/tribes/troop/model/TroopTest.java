@@ -2,7 +2,6 @@ package com.tribesbackend.tribes.troop.model;
 
 import com.tribesbackend.tribes.factories.TroopFactory;
 import com.tribesbackend.tribes.models.Troop;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,26 +10,20 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
-
 import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TroopTest {
 
-    private static ValidatorFactory validatorFactory;
     private static Validator validator;
 
     @Before
     public void createValidator() {
-        validatorFactory = Validation.buildDefaultValidatorFactory();
-        validator = validatorFactory.getValidator();
+        validator = Validation.buildDefaultValidatorFactory().getValidator();
     }
-    @After
-    public void close() {
-        validatorFactory.close();
-    }
+
 
     @Test
     public void isValid() {
