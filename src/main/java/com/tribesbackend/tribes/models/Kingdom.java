@@ -1,4 +1,5 @@
 package com.tribesbackend.tribes.models;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 
@@ -22,6 +23,7 @@ public class Kingdom {
 
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribe_user_id", nullable = false)
+    @JsonIgnore
     public TribesUser tribesUser;
     @OneToMany(mappedBy = "kingdom")
     private List <Troop> troops;
