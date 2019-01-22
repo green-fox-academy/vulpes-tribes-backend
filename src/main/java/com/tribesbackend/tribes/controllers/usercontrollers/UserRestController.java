@@ -64,6 +64,7 @@ public class UserRestController {
         System.out.println(newKingdom.getId());
         return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
                 newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
+
     }
 
     @PostMapping(value = "/login")
