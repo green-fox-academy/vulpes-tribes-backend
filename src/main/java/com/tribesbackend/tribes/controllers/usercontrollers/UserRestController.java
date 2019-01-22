@@ -6,7 +6,7 @@ import com.tribesbackend.tribes.configurations.security.SecurityConstants;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationInputJson;
-import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponceJson;
+import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponseJson;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.services.responseservice.OKstatus;
 import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Date;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
-import static com.tribesbackend.tribes.configurations.security.SecurityConstants.EXPIRATION_TIME;
+import static com.tribesbackend.tribes.security.SecurityConstatns.SecurityConstants.EXPIRATION_TIME;
 
 
 @SuppressWarnings("unchecked")
@@ -62,7 +62,7 @@ public class UserRestController {
         System.out.println(newUser.getId());
         System.out.println(newUser.getUsername());
         System.out.println(newKingdom.getId());
-        return new ResponseEntity(new RegistrationResponceJson(newUser.getId(), newUser.getUsername(),
+        return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
                 newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
     }
 
