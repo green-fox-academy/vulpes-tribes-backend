@@ -14,7 +14,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.tribesbackend.tribes.security.SecurityConstatns.SecurityConstants.HEADER_STRING;
+import static com.tribesbackend.tribes.configurations.security.SecurityConstants.HEADER_STRING;
+
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     public JWTAuthorizationFilter(AuthenticationManager authManager) {
