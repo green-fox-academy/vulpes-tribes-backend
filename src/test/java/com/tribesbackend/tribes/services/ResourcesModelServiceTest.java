@@ -22,6 +22,8 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ResourcesModelServiceTest {
 
+    Kingdom testKingdom = new Kingdom();
+    ResourcesModel model = new ResourcesModel("gold",100, testKingdom);
     MockMvc mockMvc;
 
     @Mock
@@ -45,8 +47,6 @@ public class ResourcesModelServiceTest {
 
     @Test
     public void verifyResourceOptionalTest() {
-        Kingdom testKingdom = new Kingdom();
-        ResourcesModel model = new ResourcesModel("gold", testKingdom);
         Optional<ResourcesModel> testOptional = Optional.of(model);
         Optional<ResourcesModel> emptyOptional = Optional.ofNullable(null);
         assertEquals(testOptional.get(), model);
@@ -56,7 +56,7 @@ public class ResourcesModelServiceTest {
     @Test
     public void verifyResourceReturnTest(){
         Kingdom testKingdom = new Kingdom();
-        ResourcesModel model = new ResourcesModel("gold", testKingdom);
+        ResourcesModel model = new ResourcesModel("gold",100, testKingdom);
         long id = 1;
         Optional<ResourcesModel> testOptional = Optional.of(model);
         Mockito.when(resourceRepository.findResourceByResourcesId(id)).thenReturn(testOptional);
@@ -74,7 +74,7 @@ public class ResourcesModelServiceTest {
     @Test
     public void verifyResourceSecondTest(){
         Kingdom testKingdom = new Kingdom();
-        ResourcesModel model = new ResourcesModel("gold", testKingdom);
+        ResourcesModel model = new ResourcesModel("gold",100, testKingdom);
         long id = 1;
         Optional<ResourcesModel> testOptional = Optional.of(model);
         Mockito.when(resourceRepository.findResourceByResourcesId(id)).thenReturn(testOptional);
@@ -86,15 +86,14 @@ public class ResourcesModelServiceTest {
     public void getLastTimestampFromDBTest(){
         long id = 1;
         Kingdom testKingdom = new Kingdom();
-        ResourcesModel model = new ResourcesModel("gold", testKingdom);
+        ResourcesModel model = new ResourcesModel("gold",100, testKingdom);
         model.setTimeStampLastVisit(100);
         assertEquals(resourceService.getLastTimestampFromDB(model), new Timestamp(100));
     }
 
     @Test
-    public void verifyTimestampHasValueTest(){
-
+    public void verifyTimestampHasValueTest() {
+        ResourcesModel testModel = new ResourcesModel();
     }
-
 }
 
