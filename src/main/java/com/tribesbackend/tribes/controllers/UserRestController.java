@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.controllers.usercontrollers;
+package com.tribesbackend.tribes.controllers;
 
 
 import com.auth0.jwt.JWT;
@@ -76,9 +76,12 @@ public class UserRestController {
 
         } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).isPresent()) {
             return new ResponseEntity(ErrorMessagesMethods.notSuchUser(tribesUser.getUsername()), HttpStatus.UNAUTHORIZED);
-        } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword().equals(tribesUser.getPassword())) {
-            userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().setLoggedIn(true);
-            userTRepository.save(userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get());
+        } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword()
+                    .equals(tribesUser.getPassword())) {
+            TribesUser user = userTRepository.findTribesUserByUsername(SecurityContextHolder.getContext()
+                    .getAuthentication().getName()).get();
+            user.setLoggedIn(false);
+            userTRepository.save(user);
             return new ResponseEntity(
                     new OKstatus(
                             JWT.create()

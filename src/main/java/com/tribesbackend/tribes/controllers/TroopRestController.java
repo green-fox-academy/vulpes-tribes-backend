@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.controllers.troopcontrollers;
+package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.repositories.KingdomRepository;

@@ -4,9 +4,8 @@ import static org.mockito.ArgumentMatchers.refEq;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.tribesbackend.tribes.controllers.usercontrollers.UserRestController;
+import com.tribesbackend.tribes.controllers.UserRestController;
 import com.tribesbackend.tribes.factories.KingdomFactory;
-import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;

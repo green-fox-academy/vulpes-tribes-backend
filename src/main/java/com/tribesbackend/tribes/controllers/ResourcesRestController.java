@@ -1,5 +1,5 @@
 
-package com.tribesbackend.tribes.controllers.resourcecontrollers;
+package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.repositories.KingdomRepository;

@@ -1,5 +1,5 @@
 
-package com.tribesbackend.tribes.controllers.buildingcontrollers;
+package com.tribesbackend.tribes.controllers;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
