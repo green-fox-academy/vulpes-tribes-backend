@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.configurations.security;
+package com.tribesbackend.tribes.security;
 
 import com.tribesbackend.tribes.services.userservice.MyUserTrDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
