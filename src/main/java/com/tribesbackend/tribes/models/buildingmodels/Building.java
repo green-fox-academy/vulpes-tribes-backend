@@ -1,4 +1,5 @@
 package com.tribesbackend.tribes.models.buildingmodels;
+
 import com.tribesbackend.tribes.models.Kingdom;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;

@@ -12,7 +12,7 @@ import java.util.List;
 @RestController
 public class ResourcesRestController {
 
-    @GetMapping(value = "/kingdom/resources")
+    @GetMapping(value = "/mock/kingdom/resources")
     public ResponseEntity getResources (ResourcesModelListResponse resourcesModelListResponse) {
         List<ResourcesModelResponse> resources = new ArrayList<ResourcesModelResponse>();
         resources.add(new ResourcesModelResponse("gold",100,1));

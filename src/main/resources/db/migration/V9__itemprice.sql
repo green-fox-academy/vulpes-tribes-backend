@@ -1,5 +1,5 @@
-CREATE TABLE ITEMPRICE (ID INT AUTO_INCREMENT PRIMARY KEY, type varchar (10), gold int);
-INSERT INTO ITEMPRICE (type, gold)
+CREATE TABLE itemprice (id INT AUTO_INCREMENT PRIMARY KEY, type varchar (10), gold int);
+INSERT INTO itemprice (type, gold)
 VALUES
   ('townhall', 300),
   ('mine', 100),

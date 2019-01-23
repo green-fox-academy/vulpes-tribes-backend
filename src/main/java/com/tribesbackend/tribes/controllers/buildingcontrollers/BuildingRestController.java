@@ -1,33 +1,43 @@
 
 package com.tribesbackend.tribes.controllers.buildingcontrollers;
+import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
+import com.tribesbackend.tribes.models.buildingmodels.BuildingModelListResponse;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
+import com.tribesbackend.tribes.repositories.KingdomRepository;
+import com.tribesbackend.tribes.repositories.UserTRepository;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 @RestController
 public class BuildingRestController {
+    UserTRepository userTReposotury;
     BuildingRepository buildingRepo;
+    KingdomRepository kingdomRepository;
 
     @Autowired
-    BuildingRestController(BuildingRepository buildingRepo) {
+    BuildingRestController(UserTRepository userTReposotury, BuildingRepository buildingRepo, KingdomRepository kingdomRepository) {
+        this.kingdomRepository = kingdomRepository;
+        this.userTReposotury = userTReposotury;
         this.buildingRepo = buildingRepo;
     }
 
     @GetMapping(value = "/kingdom/buildings")
-    public ResponseEntity<Object> buildingsOfUser( @RequestHeader (name = "X-Tribes-Token") String xTribesToken) {
-        List<Building> usersBuildings = new ArrayList<Building>();
-        usersBuildings.add(new Building("farm",1,10 ));
-            return new ResponseEntity(usersBuildings, HttpStatus.OK);
+    public  ResponseEntity getBuildings (BuildingModelListResponse buildingModelListResponse) {
+            TribesUser user = userTReposotury.findTribesUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+            BuildingModelListResponse response = new  BuildingModelListResponse(user.getKingdom().getBuildings());
+            return new ResponseEntity(response,HttpStatus.OK) ;
     }
+
 
     @PostMapping(value = "/kingdom/buildings")
     public ResponseEntity<Object> sendBuildings(@RequestHeader (name = "X-Tribes-Token") String xTribesToken,

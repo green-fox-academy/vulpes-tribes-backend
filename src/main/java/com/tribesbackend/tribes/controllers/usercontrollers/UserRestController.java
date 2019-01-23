@@ -97,10 +97,9 @@ public class UserRestController {
     @DeleteMapping(value = "/logout")
     public ResponseEntity logoutUser() {
         if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
-            userTRepository.findTribesUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
-                    //uncatched get
-                    .get().setLoggedIn(false);
-//            userTRepository.save();
+            TribesUser user = userTRepository.findTribesUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+                    user.setLoggedIn(false);
+            userTRepository.save(user);
             return new ResponseEntity(new LogoutMessages("Logged out successfully!"), HttpStatus.OK);
         } else
             return new ResponseEntity(new LogoutMessages("Unauthorized request!"), HttpStatus.FORBIDDEN);

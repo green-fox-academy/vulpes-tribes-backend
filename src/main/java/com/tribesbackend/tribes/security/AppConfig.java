@@ -9,8 +9,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
-import java.security.Key;
-
 
 @Configuration
 @PropertySource("classpath:db.properties")

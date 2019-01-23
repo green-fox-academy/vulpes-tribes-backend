@@ -29,7 +29,7 @@ public class ResourcesControllerTest {
     @Test
     public void testMockJson() throws Exception {
         String json = "{\"resources\":[{\"type\":\"gold\",\"amount\":100,\"generation\":1},{\"type\":\"food\",\"amount\":100,\"generation\":1}]}";
-        mockMvc.perform(MockMvcRequestBuilders.get("/kingdom/resources"))
+        mockMvc.perform(MockMvcRequestBuilders.get("/mock/kingdom/resources"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.content().string(json));
     }
