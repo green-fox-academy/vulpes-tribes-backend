@@ -1,14 +1,18 @@
 package com.tribesbackend.tribes.services.responseservice;
 
-public class OKstatus extends ResponseService {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+public class OKstatus {
+    @JsonProperty
+    String status;
+    @JsonProperty("tribes_token")
     String token;
 
     public OKstatus() {
     }
 
     public OKstatus(String token) {
-        super("ok");
+        status = "ok";
         this.token = token;
     }
 

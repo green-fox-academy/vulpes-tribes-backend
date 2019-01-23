@@ -73,11 +73,6 @@ public class UserRestController {
             userTRepository.save(userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get());
             return new ResponseEntity(
                     new OKstatus(JWTService.createToken(tribesUser.getUsername())),HttpStatus.OK);
-//                            JWT.create()
-//                                    .withSubject(tribesUser.getUsername())
-//                                    .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-//                                    .sign(HMAC512(SecurityConstants.SECRET.getBytes())))
-
         } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword()
                 .equals(tribesUser.getPassword())) {
             return new ResponseEntity(ErrorMessagesMethods.wrongPassword()
@@ -94,9 +89,9 @@ public class UserRestController {
                     .getAuthentication().getName()).get();
             user.setLoggedIn(false);
             userTRepository.save(user);
-            return new ResponseEntity(new LogoutMessages("Logged out successfully!"), HttpStatus.OK);
+            return new ResponseEntity(new LogoutMessages("ok","Logged out successfully!"), HttpStatus.OK);
         } else
-            return new ResponseEntity(new LogoutMessages("Unauthorized request!"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity(new LogoutMessages("error","Unauthorized request!"), HttpStatus.FORBIDDEN);
     }
 
     @GetMapping(value = "/user/testjwt")

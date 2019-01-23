@@ -1,6 +1,7 @@
 package com.tribesbackend.tribes.security;
 
 import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 
 import java.util.Date;
 
@@ -17,11 +18,11 @@ public class JWTService {
     return jwtToken;
     }
 
-//    public static String extractUsername (String jwtToken){
-//        String user = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()))
-//                .build()
-//                .verify(jwtToken)
-//                .getSubject();
-//        return user;
-//    }
+    public static String extractUsername (String jwtToken){
+        String user = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()))
+                .build()
+                .verify(jwtToken)
+                .getSubject();
+        return user;
+    }
 }

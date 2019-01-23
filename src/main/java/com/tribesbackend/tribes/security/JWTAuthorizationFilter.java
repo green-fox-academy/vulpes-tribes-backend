@@ -1,7 +1,5 @@
 package com.tribesbackend.tribes.security;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -41,10 +39,13 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
-            String user = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()))
-                    .build()
-                    .verify(token)
-                    .getSubject();
+
+          String user = JWTService.extractUsername(token);
+
+//            String user = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()))
+//                    .build()
+//                    .verify(token)
+//                    .getSubject();
 
         //   String user = JWTService.extractUsername(token);
             System.out.println("USER IS:::::::::::::::::::::" + user);
