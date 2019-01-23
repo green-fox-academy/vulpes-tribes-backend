@@ -1,13 +1,13 @@
 package com.tribesbackend.tribes.models.resourcesmodels;
 
 
-public class ResourcesModelConstructor {
+public class ResourcesModelResponse {
 
     String type;
     int amount;
     int generation;
 
-    public ResourcesModelConstructor (String type, int amount, int generation) {
+    public ResourcesModelResponse (String type, int amount, int generation) {
         this.type = type;
         this.amount = amount;
         this.generation =generation;
