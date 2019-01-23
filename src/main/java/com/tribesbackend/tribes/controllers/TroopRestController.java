@@ -3,6 +3,7 @@ package com.tribesbackend.tribes.controllers;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 
+import com.tribesbackend.tribes.services.KingdomService;
 import com.tribesbackend.tribes.services.troopservice.TroopModelHelpersMethods;
 import com.tribesbackend.tribes.repositories.TroopRepository;
 import com.tribesbackend.tribes.services.troopservice.TroopCrudService;
@@ -19,19 +20,21 @@ public class TroopRestController {
     KingdomRepository kingdomRepository;
     TroopModelHelpersMethods troopModelHelpersMethods;
     TroopCrudService troopCrudService;
+    KingdomService kingdomService;
 
     @Autowired
-    public TroopRestController (TroopRepository troopRepository, KingdomRepository kingdomRepository, TroopModelHelpersMethods troopModelHelpersMethods, TroopCrudService troopCrudService ){
+    public TroopRestController (TroopRepository troopRepository, KingdomRepository kingdomRepository,
+                                TroopModelHelpersMethods troopModelHelpersMethods, TroopCrudService troopCrudService, KingdomService kingdomService ){
         this.troopRepository = troopRepository;
         this.kingdomRepository = kingdomRepository;
         this.troopModelHelpersMethods = troopModelHelpersMethods;
         this.troopCrudService = troopCrudService;
+        this.kingdomService = kingdomService;
     }
 
     @GetMapping(value = "/kingdom/troops")
     public ResponseEntity getBuilding(@RequestHeader(name = "username")String username){
-        Kingdom selectedKingdom =  kingdomRepository.findKingdomByTribesUserUsername(username);
-
-        return new ResponseEntity(troopRepository.findAllByKingdom(selectedKingdom).get(), HttpStatus.OK);
+        Kingdom selectedKingdom =  kingdomService.verifyKingdom(username);
+        return ResponseEntity.ok(troopRepository.findAllByKingdom(selectedKingdom).get());
     }
 }
