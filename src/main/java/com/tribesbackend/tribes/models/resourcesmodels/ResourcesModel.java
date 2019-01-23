@@ -28,7 +28,7 @@ public class ResourcesModel {
 
     public ResourcesModel() {
     }
-
+//kingdom, type, amount, whenewer kingdom is save to db, related resources should be saved as well. In users controller.
     public ResourcesModel(String type, Kingdom kingdom) {
         if (type.equals("gold") || type.equals("food")) {
             this.type = type;
