@@ -3,7 +3,7 @@ package com.tribesbackend.tribes.services.resourcesservice;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.timeservice.TimeService;
-import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
+import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,22 +21,24 @@ public class ResourceService {
         this.resourceRepository = resourceRepository;
         this.kingdomRepository = kingdomRepository;
     }
-    public ResourcesModel extractFromKingdom (String username){
-        //or getActualKingdom() from token
+    public ResourcesModel extractResourceFromKingdom (String username){
         Optional<Kingdom> optionalKingdom = kingdomRepository.findKingdomByTribesUserUsername(username);
-        Kingdom k = new Kingdom();
+        Kingdom kingdom = new Kingdom();
         if(optionalKingdom.isPresent()){
-            k = optionalKingdom.get();
+             kingdom = optionalKingdom.get();
         }
-        ResourcesModel goldModel = new ResourcesModel();
+        ResourcesModel goldModel;
         ResourcesModel foodModel = new ResourcesModel();
-        List<ResourcesModel> r = k.getResourcesModel();
-        for(ResourcesModel rm: r){
-            if(rm.getType().equals("gold")){
-                goldModel = rm;
-                return goldModel;
+        List<ResourcesModel> resourcesList = kingdom.getResourcesModel();
+        for(ResourcesModel rm: resourcesList){
+            switch (rm.getType()){
+                case "gold":
+                    goldModel = rm;
+                    return goldModel;
+                case "food":
+                    foodModel = rm;
+                    break;
             }
-            else foodModel = rm;
         }
         return foodModel;
     }
@@ -70,13 +72,13 @@ public class ResourceService {
         else return getLastTimestampFromDB(verifiedResourcesModel);
     }
 
-    public long getDifferenceInMinutes (long id){
-        return TimeService.timeDifferenceInMin(verifyTimestampHasValue(verifyResource(id)), getCurrentTimestamp());
+    public long getDifferenceInMinutes (String username){
+        return TimeService.timeDifferenceInMin(verifyTimestampHasValue(extractResourceFromKingdom(username)), getCurrentTimestamp());
     }
 
-    public ResourcesModel resourceDisplayandUpdate (long id, int amountGeneratedPerMinute){
-        ResourcesModel resourcesModel = verifyResource(id);
-        long updatedResourceAmount = resourcesModel.getAmount() + (getDifferenceInMinutes(id) * amountGeneratedPerMinute);
+    public ResourcesModel resourceDisplayandUpdate (String username, int amountGeneratedPerMinute){
+        ResourcesModel resourcesModel = extractResourceFromKingdom(username);
+        long updatedResourceAmount = resourcesModel.getAmount() + (getDifferenceInMinutes(username) * amountGeneratedPerMinute);
         resourcesModel.setAmount(updatedResourceAmount);
         resourcesModel.setTimeStampLastVisit(getCurrentTimestamp().getTime());
         resourceRepository.save(resourcesModel);

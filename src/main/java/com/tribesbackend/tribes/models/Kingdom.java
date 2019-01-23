@@ -1,7 +1,6 @@
 package com.tribesbackend.tribes.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
-import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;

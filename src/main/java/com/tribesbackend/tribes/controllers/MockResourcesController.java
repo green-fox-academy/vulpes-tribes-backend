@@ -1,7 +1,7 @@
 package com.tribesbackend.tribes.controllers;
 
 
-import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
+import com.tribesbackend.tribes.models.ResourcesModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

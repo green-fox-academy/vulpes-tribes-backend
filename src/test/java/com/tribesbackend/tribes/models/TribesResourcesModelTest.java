@@ -1,8 +1,6 @@
-package com.tribesbackend.tribes;
+package com.tribesbackend.tribes.models;
 
 
-import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
