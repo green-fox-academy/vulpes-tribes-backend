@@ -21,7 +21,7 @@ public class KingdomService {
         this.kingdomRepo = kingdomRepo;
     }
 
-    private Optional<Kingdom> getOptKingdom(String username){
+    public Optional<Kingdom> getOptKingdom(String username){
         return kingdomRepo.findKingdomByTribesUserUsername(username);
     }
 
