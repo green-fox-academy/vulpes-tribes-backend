@@ -1,7 +1,5 @@
 package com.tribesbackend.tribes.configurations.security;
 
-import com.auth0.jwt.JWT;
-import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -26,17 +24,13 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     protected void doFilterInternal(HttpServletRequest req,
                                     HttpServletResponse res,
                                     FilterChain chain) throws IOException, ServletException {
-
-
      String header = req.getHeader(HEADER_STRING);
-
+      //  System.out.println("header is: " + header);
         if (header == null) {
             chain.doFilter(req, res);
             return;
         }
-
         UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
-
         SecurityContextHolder.getContext().setAuthentication(authentication);
         chain.doFilter(req, res);
     }
@@ -45,10 +39,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
-            String user = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()))
-                    .build()
-                    .verify(token)
-                    .getSubject();
+           String user = JWTService.extractUsername(token);
             System.out.println("USER IS:::::::::::::::::::::" + user);
             if (user != null) {return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
             }

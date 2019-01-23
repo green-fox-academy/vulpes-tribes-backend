@@ -1,8 +1,7 @@
 package com.tribesbackend.tribes.controllers;
 
 
-import com.auth0.jwt.JWT;
-import com.tribesbackend.tribes.configurations.security.SecurityConstants;
+import com.tribesbackend.tribes.configurations.security.JWTService;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationInputJson;
@@ -20,11 +19,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Date;
-
-import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
-import static com.tribesbackend.tribes.configurations.security.SecurityConstants.EXPIRATION_TIME;
 
 
 @SuppressWarnings("unchecked")
@@ -72,38 +66,31 @@ public class UserRestController {
         if (tribesUser.getUsername() == null || tribesUser.getUsername().isEmpty() ||
                 tribesUser.getPassword() == null || tribesUser.getPassword().isEmpty()) {
             return new ResponseEntity(ErrorMessagesMethods.jsonFieldIsEmpty(tribesUser), HttpStatus.BAD_REQUEST);
-
-
         } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).isPresent()) {
             return new ResponseEntity(ErrorMessagesMethods.notSuchUser(tribesUser.getUsername()), HttpStatus.UNAUTHORIZED);
         } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword()
-                    .equals(tribesUser.getPassword())) {
+                .equals(tribesUser.getPassword())) {
             TribesUser user = userTRepository.findTribesUserByUsername(SecurityContextHolder.getContext()
                     .getAuthentication().getName()).get();
             user.setLoggedIn(false);
             userTRepository.save(user);
             return new ResponseEntity(
-                    new OKstatus(
-                            JWT.create()
-                                    .withSubject(tribesUser.getUsername())
-                                    .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                                    .sign(HMAC512(SecurityConstants.SECRET.getBytes())))
-                    , HttpStatus.OK);
+                    new OKstatus(JWTService.createToken(tribesUser.getUsername())), HttpStatus.OK);
         } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword()
                 .equals(tribesUser.getPassword())) {
             return new ResponseEntity(ErrorMessagesMethods.wrongPassword()
                     , HttpStatus.UNAUTHORIZED);
         }
-
         return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
     @DeleteMapping(value = "/logout")
     public ResponseEntity logoutUser() {
         if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
-            userTRepository.findTribesUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
-                    //uncatched get
-                    .get().setLoggedIn(false);
+            TribesUser user = userTRepository.findTribesUserByUsername(SecurityContextHolder.getContext()
+                    .getAuthentication().getName()).get();
+            user.setLoggedIn(false);
+            userTRepository.save(user);
             return new ResponseEntity(new LogoutMessages("Logged out successfully!"), HttpStatus.OK);
         } else
             return new ResponseEntity(new LogoutMessages("Unauthorized request!"), HttpStatus.FORBIDDEN);
