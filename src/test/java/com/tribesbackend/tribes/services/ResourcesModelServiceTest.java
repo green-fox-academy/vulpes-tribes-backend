@@ -50,6 +50,14 @@ public class ResourcesModelServiceTest {
     }
 
     @Test
+    public void extract(){
+        testKingdom.setResourcesModel(listOfResources);
+        assertFalse(testKingdom.getResourcesModel().isEmpty());
+        assertEquals(testKingdom.getResourcesModel(), resourceService.extractResourceFromKingdom("Alf"));
+    }
+
+
+    @Test
     public void getCurrentTimestampTest() {
         Timestamp now = new Timestamp(System.currentTimeMillis());
         Timestamp toTest = resourceService.getCurrentTimestamp();

@@ -30,13 +30,13 @@ public class ResourceService {
         ResourcesModel goldModel;
         ResourcesModel foodModel = new ResourcesModel();
         List<ResourcesModel> resourcesList = kingdom.getResourcesModel();
-        for(ResourcesModel rm: resourcesList){
-            switch (rm.getType()){
+        for(ResourcesModel r: resourcesList){
+            switch (r.getType()){
                 case "gold":
-                    goldModel = rm;
+                    goldModel = r;
                     return goldModel;
                 case "food":
-                    foodModel = rm;
+                    foodModel = r;
                     break;
             }
         }
