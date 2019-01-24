@@ -1,8 +1,10 @@
 package com.tribesbackend.tribes.services;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.ResourcesModel;
+import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
+import com.tribesbackend.tribes.services.timeservice.TimeService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.sql.Timestamp;
-import java.util.Optional;
+import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
@@ -24,10 +27,19 @@ public class ResourcesModelServiceTest {
 
     private Kingdom testKingdom = new Kingdom();
     private ResourcesModel model = new ResourcesModel("gold",100, testKingdom);
-    private MockMvc mockMvc;
+    private ResourcesModel modelFood = new ResourcesModel("food", 0, testKingdom);
+    private List<ResourcesModel> listOfResources = new ArrayList<>();
+
+
 
     @Mock
     private ResourceRepository resourceRepository;
+
+    @Mock
+    private KingdomRepository kingdomRepository;
+
+    @Mock
+    private TimeService timeService;
 
     @InjectMocks
     private ResourceService resourceService;
@@ -35,7 +47,6 @@ public class ResourcesModelServiceTest {
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        mockMvc = MockMvcBuilders.standaloneSetup(resourceService).build();
     }
 
     @Test
@@ -107,10 +118,20 @@ public class ResourcesModelServiceTest {
         long fromFnc = resourceService.verifyTimestampHasValue(model).getTime();
         assertEquals(directlyFromModel, fromFnc);
     }
+//        return TimeService.timeDifferenceInMin(verifyTimestampHasValue(extractResourceFromKingdom(username)), getCurrentTimestamp());
 
     @Test
     public void getDifferenceInMinutesZeroDiff(){
+        model.setTimeStampLastVisit(1548322289246L);
+        Timestamp stamp = new Timestamp(model.getTimeStampLastVisit());
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        long differenceInMin = TimeUnit.MILLISECONDS.toMinutes(now.getTime() - stamp.getTime());
+        model.setTimeStampLastVisit(stamp.getTime());
+        Mockito.when(resourceService.extractResourceFromKingdom("Alf")).thenReturn(model);
+        Mockito.when(resourceService.verifyTimestampHasValue(model)).thenReturn(stamp);
 
+        assertEquals(differenceInMin, resourceService.getDifferenceInMinutes("Alf"));
     }
+
 }
 
