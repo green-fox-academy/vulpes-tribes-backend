@@ -69,8 +69,11 @@ public class UserRestController {
         } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).isPresent()) {
             return new ResponseEntity(ErrorMessagesMethods.notSuchUser(tribesUser.getUsername()), HttpStatus.UNAUTHORIZED);
         } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword().equals(tribesUser.getPassword())) {
-            userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().setLoggedIn(true);
-            userTRepository.save(userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get());
+
+            TribesUser user = userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get();
+            user.setLoggedIn(true);
+            userTRepository.save(user);
+
             return new ResponseEntity(
                     new OKstatus(JWTService.createToken(tribesUser.getUsername())),HttpStatus.OK);
         } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword()

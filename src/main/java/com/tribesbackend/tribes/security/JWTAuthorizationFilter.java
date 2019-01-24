@@ -41,13 +41,12 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             // parse the token.
 
           String user = JWTService.extractUsername(token);
-
+//
 //            String user = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()))
 //                    .build()
 //                    .verify(token)
 //                    .getSubject();
 
-        //   String user = JWTService.extractUsername(token);
             System.out.println("USER IS:::::::::::::::::::::" + user);
             if (user != null) {return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
             }

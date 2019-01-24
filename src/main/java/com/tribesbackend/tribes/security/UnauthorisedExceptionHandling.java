@@ -14,7 +14,4 @@ public class UnauthorisedExceptionHandling extends ResponseEntityExceptionHandle
     public ResponseEntity exception (){
         return new ResponseEntity(new ErrorResponseModel("No token"), HttpStatus.FORBIDDEN);
     }
-
-
-
 }
