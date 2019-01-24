@@ -21,8 +21,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     MyUserTrDetailsService myUserTrDetailsService;
 
-    @Autowired
-    UnauthorisedExceptionHandling unauthorisedExceptionHandling;
+//    @Autowired
+//    UnauthorisedExceptionHandling unauthorisedExceptionHandling;
 
     @Autowired
     ForbiddenExceptionHandler forbiddenExceptionHandler;
