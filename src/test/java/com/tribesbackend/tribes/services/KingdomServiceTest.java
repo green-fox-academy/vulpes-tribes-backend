@@ -15,14 +15,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class KingdomServiceTest {
-    TribesUser testUser = new TribesUser("Alf", "123");
-    Kingdom testKingdom = new Kingdom("mockdom", testUser);
+    private TribesUser testUser = new TribesUser("Alf", "123");
+    private Kingdom testKingdom = new Kingdom("mockdom", testUser);
+    private Optional<Kingdom> testOpt = Optional.of(testKingdom);
 
     MockMvc mockMvc;
 
@@ -43,11 +45,29 @@ public class KingdomServiceTest {
 
     @Test
     public void getOptKingdomTest(){
-        Optional<Kingdom> testOpt = Optional.of(testKingdom);
         Mockito.when(kingdomService.getOptKingdom("Alf")).thenReturn(testOpt);
+        assertTrue(testOpt.isPresent());
         assertEquals("mockdom", testOpt.get().getName());
         assertEquals("Alf", testOpt.get().getTribesUser().getUsername());
     }
+
+    @Test
+    public void verifyKingdomNotNullTest(){
+        Mockito.when(kingdomService.getOptKingdom("Alf")).thenReturn(testOpt);
+        assertTrue(testOpt.isPresent());
+        assertEquals(testKingdom, kingdomService.verifyKingdom("Alf"));
+        assertEquals("Alf", kingdomService.verifyKingdom("Alf").getTribesUser().getUsername());
+    }
+
+    @Test(expected = NoSuchElementException.class)
+    public void verifyKingdomNullValueTest(){
+        Optional<Kingdom> nullOptKingdom = Optional.ofNullable(null);
+        Mockito.when(kingdomService.getOptKingdom("Alf")).thenReturn(nullOptKingdom);
+        Kingdom nullKingdom = kingdomService.verifyKingdom("Alf");
+    }
+
+
+
 
 
 
