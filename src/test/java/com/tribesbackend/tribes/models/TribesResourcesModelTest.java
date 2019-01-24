@@ -42,14 +42,5 @@ public class TribesResourcesModelTest {
         //then:
         assertTrue(violations.isEmpty());
     }
-
-    @Test (expected =  IllegalArgumentException.class)
-    public void shouldDetectIllegalArgumentException() {
-        //given :
-        ResourcesModel illegalArgumentExceptionSampleResources = new ResourcesModel.ResourcesBuilder()
-                .setKingdom(new Kingdom())
-                .setType("silver")
-                .build();
-
-    }
+    
 }
