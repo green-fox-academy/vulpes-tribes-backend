@@ -58,7 +58,7 @@ public class BuildingRestController {
     }
 
     @PutMapping(value = "/kingdom/buildings/{id}")
-    public ResponseEntity<Object> upgradeOrDowngradeBuilding(@Validated @PathVariable long id,
+    public ResponseEntity<Object> upgradeOrDowngradeBuilding(@PathVariable long id,
                                                              @RequestBody String xTribesToken, Integer typeLevel) {
         // and enough resources
         if (buildingRepo.findById(id).isPresent() && (true)) {
