@@ -42,7 +42,7 @@ public class ResourceService {
         }
         return foodModel;
     }
-    
+
     public ResourcesModel verifyResource (long id) {
         Optional<ResourcesModel> optionalResource = resourceRepository.findResourceByResourcesId(id);
         if (optionalResource.isPresent()) {
