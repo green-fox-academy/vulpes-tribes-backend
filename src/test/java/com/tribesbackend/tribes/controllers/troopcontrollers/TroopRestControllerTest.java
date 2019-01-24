@@ -11,6 +11,11 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers;
+import org.springframework.security.web.FilterChainProxy;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -23,8 +28,11 @@ import java.util.Optional;
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
 @RunWith(SpringJUnit4ClassRunner.class)
+@AutoConfigureMockMvc
+@SpringBootTest
 public class TroopRestControllerTest {
 
+    @Autowired
     private MockMvc mockMvc;
     @Mock
     KingdomRepository kingdomRepository;
@@ -34,6 +42,8 @@ public class TroopRestControllerTest {
     @Before
     public void setup() {
         mockMvc = MockMvcBuilders.standaloneSetup(troopRestController)
+//                .apply(SecurityMockMvcConfigurers.springSecurity())
+//                .addFilter(filterChainProxy)
                     .build();
     }
 
@@ -42,9 +52,8 @@ public class TroopRestControllerTest {
         Optional<Kingdom> kingdom = KingdomFactory.createOptionalValidSampleKingdom();
         Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
         mockMvc.perform(MockMvcRequestBuilders.get("/kingdom/troops")
-                .header("X-Tribes-Token",
-//                        ""))
-                        TokenFactory.createValidToken()))
+                .header("X-Tribes-Token",""))
+//                        TokenFactory.createValidToken())
                 .andExpect(MockMvcResultMatchers.status().isOk())
         .andDo(MockMvcResultHandlers.print());
     }

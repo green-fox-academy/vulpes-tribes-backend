@@ -37,9 +37,7 @@ public class TroopRestController {
 
     @GetMapping
     public ResponseEntity getTroops(){
-        Optional<Kingdom> kingdom =  kingdomRepository.findKingdomByTribesUserUsername(
-                "Vojtisek");
-//                SecurityContextHolder.getContext().getAuthentication().getName());
+        Optional<Kingdom> kingdom =  kingdomRepository.findKingdomByTribesUserUsername(SecurityContextHolder.getContext().getAuthentication().getName());
         return new ResponseEntity(new TroopList(kingdom.get().getTroops()), HttpStatus.OK);
     }
 }

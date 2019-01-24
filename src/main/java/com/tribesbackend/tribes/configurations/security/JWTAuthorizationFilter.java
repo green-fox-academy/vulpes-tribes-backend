@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 import static com.tribesbackend.tribes.configurations.security.SecurityConstants.HEADER_STRING;
 
-
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
     public JWTAuthorizationFilter(AuthenticationManager authManager) {
         super(authManager);

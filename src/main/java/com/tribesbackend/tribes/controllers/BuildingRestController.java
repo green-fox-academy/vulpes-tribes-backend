@@ -40,12 +40,13 @@ public class BuildingRestController {
     }
 
     @PostMapping(value = "/kingdom/buildings")
-    public ResponseEntity<Object> createBuilding(@RequestBody String type, int level) {
+    public ResponseEntity<Object> createBuilding(@RequestBody String type) {
         if (type == null || type.equals("")) {
             return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): type!"), HttpStatus.BAD_REQUEST);
-        } else if (type.equals("farm") || type.equals("mine") || type.equals("barrack") || type.equals("townhall")) {
+        }
+        else if (type.equals("farm") || type.equals("mine") || type.equals("barrack") || type.equals("townhall")) {
             Optional<Kingdom> kingdom = kingdomRepository.findKingdomByTribesUserUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-            if (purchaseService.purchasableItem(kingdom.get().getId(), type, level)) {
+            if (purchaseService.purchasableItem(kingdom.get().getId(), type, 1)) {
                 Building newBuilding = new Building(type);
                 kingdom.get().getBuildings().add(newBuilding);
                 buildingRepo.save(newBuilding);
