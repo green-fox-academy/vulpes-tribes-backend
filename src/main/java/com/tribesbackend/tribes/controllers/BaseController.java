@@ -22,6 +22,7 @@ public class BaseController {
 
 
     public Kingdom getCurrentKingdom(String jwtToken){
+      //  String token = request.getHeader(HEADER_STRING);
         Kingdom currentKingdom = kingdomRepository.findKingdomByTribesUser(JWTService.extractUsername(jwtToken));
         return currentKingdom;
     }
