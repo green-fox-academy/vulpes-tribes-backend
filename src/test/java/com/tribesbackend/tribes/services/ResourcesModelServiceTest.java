@@ -31,10 +31,7 @@ public class ResourcesModelServiceTest {
     private ResourcesModel modelGold = new ResourcesModel("gold",100, testKingdom);
     private ResourcesModel modelFood = new ResourcesModel("food", 0, testKingdom);
     private List<ResourcesModel> listOfResources = Arrays.asList(modelGold, modelFood);
-
-
-
-
+    
     @Mock
     private ResourceRepository resourceRepository;
 
