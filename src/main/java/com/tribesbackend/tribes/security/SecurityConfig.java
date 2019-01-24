@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.configurations.security;
+package com.tribesbackend.tribes.security;
 
 import com.tribesbackend.tribes.services.userservice.MyUserTrDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -22,6 +23,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UnauthorisedExceptionHandling unauthorisedExceptionHandling;
+
+    @Autowired
+    ForbiddenExceptionHandler forbiddenExceptionHandler;
 
     @Override
     protected void configure (AuthenticationManagerBuilder auth)
@@ -41,6 +45,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
@@ -48,7 +53,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/kingdom/**","/user/**").authenticated()
                 .antMatchers("/").permitAll()
                 .and()
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()));
+                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+
+                // handle an authorized attempts
+                .exceptionHandling().authenticationEntryPoint(forbiddenExceptionHandler);
+
     }
 
     @Bean

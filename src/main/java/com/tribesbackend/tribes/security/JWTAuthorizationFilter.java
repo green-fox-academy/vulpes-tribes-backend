@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.configurations.security;
+package com.tribesbackend.tribes.security;
 
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static com.tribesbackend.tribes.configurations.security.SecurityConstants.HEADER_STRING;
+import static com.tribesbackend.tribes.security.SecurityConstants.HEADER_STRING;
 
 
 public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
@@ -39,7 +39,14 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
             // parse the token.
-           String user = JWTService.extractUsername(token);
+
+          String user = JWTService.extractUsername(token);
+//
+//            String user = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()))
+//                    .build()
+//                    .verify(token)
+//                    .getSubject();
+
             System.out.println("USER IS:::::::::::::::::::::" + user);
             if (user != null) {return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
             }

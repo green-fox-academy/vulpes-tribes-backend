@@ -1,10 +1,13 @@
-package com.tribesbackend.tribes.configurations.security;
+package com.tribesbackend.tribes.security;
+
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+
 import java.util.Date;
+
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
-import static com.tribesbackend.tribes.configurations.security.SecurityConstants.EXPIRATION_TIME;
+import static com.tribesbackend.tribes.security.SecurityConstants.EXPIRATION_TIME;
 
 public class JWTService {
 

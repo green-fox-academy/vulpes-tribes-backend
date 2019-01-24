@@ -22,9 +22,9 @@ import static org.junit.Assert.assertEquals;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class ResourcesModelServiceTest {
 
-    Kingdom testKingdom = new Kingdom();
-    ResourcesModel model = new ResourcesModel("gold",100, testKingdom);
-    MockMvc mockMvc;
+    private Kingdom testKingdom = new Kingdom();
+    private ResourcesModel model = new ResourcesModel("gold",100, testKingdom);
+    private MockMvc mockMvc;
 
     @Mock
     private ResourceRepository resourceRepository;
@@ -92,8 +92,25 @@ public class ResourcesModelServiceTest {
     }
 
     @Test
-    public void verifyTimestampHasValueTest() {
-        ResourcesModel testModel = new ResourcesModel();
+    public void verifyTimestampHasValueZeroTimeTest(){
+        ResourcesModel testModel = new ResourcesModel("gold", 0, testKingdom);
+        testModel.setTimeStampLastVisit(0);
+        long now = new Timestamp(System.currentTimeMillis()).getTime();
+        long fromFnc = resourceService.verifyTimestampHasValue(testModel).getTime();
+        assertEquals(now, fromFnc);
+    }
+
+    @Test
+    public void verifyTimestampHasValueTest(){
+        model.setTimeStampLastVisit(1548322289246L);
+        long directlyFromModel = model.getTimeStampLastVisit();
+        long fromFnc = resourceService.verifyTimestampHasValue(model).getTime();
+        assertEquals(directlyFromModel, fromFnc);
+    }
+
+    @Test
+    public void getDifferenceInMinutesZeroDiff(){
+
     }
 }
 
