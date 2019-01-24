@@ -23,7 +23,7 @@ public class BuildingRestController {
     }
 
     @GetMapping(value = "/kingdom/buildings")
-    public ResponseEntity<Object> buildingsOfUser( @RequestHeader (name = "X-Tribes-Token") String xTribesToken) {
+    public ResponseEntity<Object> buildingsOfUser() {
         List<Building> usersBuildings = new ArrayList<Building>();
         usersBuildings.add(new Building("farm",1,10 ));
             return new ResponseEntity(usersBuildings, HttpStatus.OK);
