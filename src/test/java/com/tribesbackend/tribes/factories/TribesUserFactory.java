@@ -8,8 +8,9 @@ public class TribesUserFactory {
 
     public static TribesUser createValidSampleTribesUser(){
         return new TribesUser.TribesUserBuilder()
-                .setPassword("password")
-                .setPassword("1234")
+                .setUsername("Vojtisek")
+                .setPassword("12345678abc")
+                .setKingdom("mightykingdom")
                 .build();
     }
 

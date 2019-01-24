@@ -6,6 +6,8 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -30,8 +32,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
 
         String header = req.getHeader(HEADER_STRING);
 
-        System.out.println("Header is running");
-        System.out.println(header);
+        System.out.println("Header is:" + header);
 
         if (header == null) {
             chain.doFilter(req, res);

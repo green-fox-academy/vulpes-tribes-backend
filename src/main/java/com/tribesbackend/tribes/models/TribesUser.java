@@ -152,6 +152,10 @@ public class TribesUser implements UserDetails {
             this.password = password;
             return this;
         }
+        public TribesUserBuilder setKingdom(String kingdomname) {
+            this.kingdom = new Kingdom(kingdomname);
+            return this;
+        }
 
         public TribesUser build() {
             return new TribesUser(username, password);
