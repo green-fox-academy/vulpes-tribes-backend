@@ -42,8 +42,7 @@ public class ResourceService {
         }
         return foodModel;
     }
-
-    //find by kingdom
+    
     public ResourcesModel verifyResource (long id) {
         Optional<ResourcesModel> optionalResource = resourceRepository.findResourceByResourcesId(id);
         if (optionalResource.isPresent()) {
