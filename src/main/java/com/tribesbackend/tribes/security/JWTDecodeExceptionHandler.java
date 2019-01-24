@@ -15,11 +15,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 @Component
-public class ForbiddenExceptionHandler implements AuthenticationEntryPoint {
-
+public class JWTDecodeExceptionHandler implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException
-                         ) throws IOException, ServletException {
+    ) throws IOException, ServletException {
 
         Authentication auth
                 = SecurityContextHolder.getContext().getAuthentication();
@@ -37,7 +36,9 @@ public class ForbiddenExceptionHandler implements AuthenticationEntryPoint {
         response.setCharacterEncoding("UTF-8");
         out.print(jsonString);
         out.flush();
+
+//    @Override
+//    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+//
     }
-
-
 }

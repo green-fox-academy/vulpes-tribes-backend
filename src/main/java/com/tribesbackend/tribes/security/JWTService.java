@@ -8,6 +8,7 @@ import java.util.Date;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static com.tribesbackend.tribes.security.SecurityConstants.EXPIRATION_TIME;
+import static com.tribesbackend.tribes.security.SecurityConstants.HEADER_STRING;
 
 public class JWTService {
 
