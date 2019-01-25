@@ -1,6 +1,7 @@
 
 package com.tribesbackend.tribes.controllers;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
+import com.tribesbackend.tribes.models.jsonmodels.BuildingInputJson;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,13 +60,14 @@ public class BuildingRestController {
 
     @PutMapping(value = "/kingdom/buildings/{id}")
     public ResponseEntity<Object> upgradeOrDowngradeBuilding(@PathVariable long id,
-                                                             @RequestBody String xTribesToken, Integer typeLevel) {
+                                                             @RequestBody BuildingInputJson buildingInputJson) {
         // and enough resources
         if (buildingRepo.findById(id).isPresent() && (true)) {
-            buildingRepo.findById(id).get().setHP(typeLevel);
+            buildingRepo.findById(id).get().setHP(buildingInputJson.getLevel());
             buildingRepo.save(buildingRepo.findById(id).get());
             return new ResponseEntity(buildingRepo.findById(id).get(), HttpStatus.OK);
-        } else if (typeLevel < 0 || typeLevel == null || typeLevel.toString().isEmpty()) {
+        } else if ((buildingInputJson.getLevel() < 0 ) || buildingInputJson.getLevel() == null
+                ||  buildingInputJson.getLevel().toString().isEmpty()) {
             return new ResponseEntity(new ErrorResponseModel( "Missing parameter(s): !"), HttpStatus.BAD_REQUEST);
         } else if (!(buildingRepo.findById(id).isPresent())) {
             return new ResponseEntity(new ErrorResponseModel( "Id not found"), HttpStatus.NOT_FOUND);
