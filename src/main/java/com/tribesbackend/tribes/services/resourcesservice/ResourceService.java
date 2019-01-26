@@ -30,8 +30,7 @@ public class ResourceService {
         List<ResourcesModel> preFilled = new ArrayList<>();
         preFilled.add(new ResourcesModel("gold", 380, newKingdom));
         preFilled.add(new ResourcesModel("food", 0, newKingdom));
-        List<ResourcesModel> toReturn = setDefaultTimestamps(preFilled);
-        return toReturn;
+        return setDefaultTimestamps(preFilled);
 
     }
     public List<ResourcesModel> setDefaultTimestamps(List<ResourcesModel> resourcesModelsList){

@@ -50,6 +50,20 @@ public class ResourcesModelServiceTest {
     }
 
     @Test
+    public void newUserResourcesPreFill(){
+        Kingdom kingdom = new Kingdom();
+        List<ResourcesModel> testList = resourceService.newUserResourcesPreFill(kingdom);
+        Timestamp now = new Timestamp(System.currentTimeMillis());
+        assertEquals(2, testList.size());
+        assertEquals(now.getTime(), testList.get(0).getTimeStampLastVisit());
+        assertEquals(now.getTime(), testList.get(1).getTimeStampLastVisit());
+        assertEquals("gold", testList.get(0).getType());
+        assertEquals("food", testList.get(1).getType());
+        assertEquals(380, testList.get(0).getAmount());
+        assertEquals(0, testList.get(1).getAmount());
+    }
+
+    @Test
     public void extract(){
         testKingdom.setResourcesModel(listOfResources);
         assertFalse(testKingdom.getResourcesModel().isEmpty());
