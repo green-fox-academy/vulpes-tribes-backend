@@ -2,6 +2,7 @@ package com.tribesbackend.tribes.services.resourcesservice;
 
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
+import com.tribesbackend.tribes.services.KingdomService;
 import com.tribesbackend.tribes.services.timeservice.TimeService;
 import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,11 +18,29 @@ import java.util.Optional;
 public class ResourceService {
     ResourceRepository resourceRepository;
     KingdomRepository kingdomRepository;
+    KingdomService kingdomService;
     @Autowired
-    public ResourceService(ResourceRepository resourceRepository, KingdomRepository kingdomRepository) {
+    public ResourceService(ResourceRepository resourceRepository, KingdomRepository kingdomRepository, KingdomService kingdomService) {
         this.resourceRepository = resourceRepository;
         this.kingdomRepository = kingdomRepository;
+        this.kingdomService = kingdomService;
     }
+
+    public List<ResourcesModel> newUserResourcesPreFill(Kingdom newKingdom){
+        List<ResourcesModel> preFilled = new ArrayList<>();
+        preFilled.add(new ResourcesModel("gold", 380, newKingdom));
+        preFilled.add(new ResourcesModel("food", 0, newKingdom));
+        List<ResourcesModel> toReturn = setDefaultTimestamps(preFilled);
+        return toReturn;
+
+    }
+    public List<ResourcesModel> setDefaultTimestamps(List<ResourcesModel> resourcesModelsList){
+        for(ResourcesModel r : resourcesModelsList){
+            r.setTimeStampLastVisit(getCurrentTimestamp().getTime());
+        }
+        return resourcesModelsList;
+    }
+
     public ResourcesModel extractResourceFromKingdom (String username){
         Optional<Kingdom> optionalKingdom = kingdomRepository.findKingdomByTribesUserUsername(username);
         Kingdom kingdom = new Kingdom();

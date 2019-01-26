@@ -8,6 +8,7 @@ import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponseJson;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.repositories.UserTRepository;
 import com.tribesbackend.tribes.security.JWTService;
+import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
 import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.services.responseservice.OKstatus;
 import com.tribesbackend.tribes.services.userservice.LogoutMessages;
@@ -29,15 +30,16 @@ public class UserRestController {
     UserModelHelpersMethods userMethods;
     UserCrudService userCrudService;
     KingdomRepository kingdomRepo;
-
+    ResourceService resourceService;
 
     @Autowired
     public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods,
-                              UserCrudService userCrudService, KingdomRepository kingdomRepo) {
+                              UserCrudService userCrudService, KingdomRepository kingdomRepo, ResourceService resourceService) {
         this.userTRepository = userTRepository;
         this.userMethods = userMethods;
         this.userCrudService = userCrudService;
         this.kingdomRepo = kingdomRepo;
+        this.resourceService = resourceService;
     }
 
     @PostMapping(value = "/register")
@@ -52,6 +54,7 @@ public class UserRestController {
         newUser.setKingdom(newKingdom);
         System.out.println(newKingdom.getName());
         System.out.println(newKingdom.getId());
+        newKingdom.setResourcesModel(resourceService.newUserResourcesPreFill(newKingdom));
         kingdomRepo.save(newKingdom);
         System.out.println(newUser.getId());
         System.out.println(newUser.getUsername());
