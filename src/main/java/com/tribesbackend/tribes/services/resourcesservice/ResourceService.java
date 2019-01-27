@@ -39,6 +39,13 @@ public class ResourceService {
         }
         return resourcesModelsList;
     }
+    //lets refactor working with optional first - into new simple method
+
+    public List<ResourcesModel> getRMListFromDB(String username){
+        Kingdom kingdomFromDB = kingdomService.verifyKingdom(username);
+        List<ResourcesModel> rm = kingdomFromDB.getResourcesModel();
+        return rm;
+    }
 
     public ResourcesModel extractResourceFromKingdom (String username){
         Optional<Kingdom> optionalKingdom = kingdomRepository.findKingdomByTribesUserUsername(username);
@@ -89,15 +96,21 @@ public class ResourceService {
     }
 
     public long getDifferenceInMinutes (String username){
-        return TimeService.timeDifferenceInMin(verifyTimestampHasValue(extractResourceFromKingdom(username)), getCurrentTimestamp());
+        List<ResourcesModel> withTimeStamps = getRMListFromDB(username);
+        return TimeService.timeDifferenceInMin(verifyTimestampHasValue(withTimeStamps.get(0)), getCurrentTimestamp());
     }
 
-    public ResourcesModel resourceDisplayandUpdate (String username, int amountGeneratedPerMinute){
-        ResourcesModel resourcesModel = extractResourceFromKingdom(username);
-        long updatedResourceAmount = resourcesModel.getAmount() + (getDifferenceInMinutes(username) * amountGeneratedPerMinute);
-        resourcesModel.setAmount(updatedResourceAmount);
-        resourcesModel.setTimeStampLastVisit(getCurrentTimestamp().getTime());
-        resourceRepository.save(resourcesModel);
-        return resourcesModel;
+    public Kingdom resourceDisplayandUpdate (String username, int amountGeneratedPerMinute){
+        Kingdom kingdomFromDB = kingdomService.verifyKingdom(username);
+        List<ResourcesModel> rmListFromDB = kingdomFromDB.getResourcesModel();
+        long updatedResourcesAmount;
+        for(ResourcesModel r : rmListFromDB ){
+            updatedResourcesAmount = r.getAmount() + (getDifferenceInMinutes(username) * amountGeneratedPerMinute);
+            r.setAmount(updatedResourcesAmount);
+            r.setTimeStampLastVisit(getCurrentTimestamp().getTime());
+        }
+        kingdomFromDB.setResourcesModel(rmListFromDB);
+        kingdomRepository.save(kingdomFromDB);
+        return kingdomFromDB;
     }
 }
