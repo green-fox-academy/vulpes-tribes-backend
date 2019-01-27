@@ -31,8 +31,7 @@ public class BuildingRestController {
     }
 
     @PostMapping(value = "/kingdom/buildings")
-    public ResponseEntity<Object> sendBuildings(@RequestHeader (name = "X-Tribes-Token") String xTribesToken,
-                                                @RequestBody  String type) {
+    public ResponseEntity<Object> sendBuildings(@RequestBody  String type) {
         if (type.equals("farm") || type.equals("mine") || type.equals("barrack") || type.equals("barrack")) {
             return new ResponseEntity(new Building(type), HttpStatus.OK);
         }
@@ -51,7 +50,7 @@ public class BuildingRestController {
 
     @GetMapping(value = "/kingdom/buildings/{id}")
     public @ResponseBody
-    ResponseEntity<Object> listTheBuilding(@Validated @PathVariable long id, String xTribesToken) {
+    ResponseEntity<Object> listTheBuilding(@Validated @PathVariable long id) {
         if (buildingRepo.findById(id).isPresent()) {
             return new ResponseEntity(buildingRepo.findById(id), HttpStatus.OK);
         } else return new ResponseEntity(new ErrorResponseModel( "Id not found"),

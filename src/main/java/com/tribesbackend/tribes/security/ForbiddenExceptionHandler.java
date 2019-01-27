@@ -13,7 +13,6 @@ import java.io.IOException;
 
 @Component
 public class ForbiddenExceptionHandler implements AuthenticationEntryPoint {
-
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException
                          ) throws IOException, ServletException {
@@ -25,19 +24,6 @@ public class ForbiddenExceptionHandler implements AuthenticationEntryPoint {
                     + " attempted to access the protected URL: "
                     + request.getRequestURI());
         }
-
-
         JWTService.invalidTokenResponce(response);
-
-//        response.setStatus(403);
-//        PrintWriter out = response.getWriter();
-//        ObjectMapper objectMapper= new ObjectMapper();
-//        String jsonString = objectMapper.writeValueAsString(new ErrorResponseModel("No token"));
-//        response.setContentType("application/json");
-//        response.setCharacterEncoding("UTF-8");
-//        out.print(jsonString);
-//        out.flush();
     }
-
-
 }

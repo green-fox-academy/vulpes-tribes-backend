@@ -35,36 +35,16 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             chain.doFilter(req, res);
         }catch (JWTDecodeException e ){
-
             JWTService.invalidTokenResponce(res);
-//            res.setStatus(403);
-//            PrintWriter out = res.getWriter();
-//            ObjectMapper objectMapper= new ObjectMapper();
-//            String jsonString = objectMapper.writeValueAsString(new ErrorResponseModel("Invalid token"));
-//            res.setContentType("application/json");
-//            res.setCharacterEncoding("UTF-8");
-//            out.print(jsonString);
-//            out.flush();
         }
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
-            // parse the token.
-
             String user = JWTService.extractUsername(token);
-//
-//            String user = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()))
-//                    .build()
-//                    .verify(token)
-//                    .getSubject();
-
-            System.out.println("USER IS:::::::::::::::::::::" + user);
-
             if (user != null) {
                 return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-
             }
         }
         return null;
