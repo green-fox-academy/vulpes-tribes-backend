@@ -3,13 +3,17 @@ package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
+import com.tribesbackend.tribes.models.jsonmodels.CreateBuildingJson;
+import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
+import com.tribesbackend.tribes.repositories.ResourceRepository;
 import com.tribesbackend.tribes.services.PurchaseService;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -24,12 +28,14 @@ public class BuildingRestController {
     BuildingRepository buildingRepo;
     private KingdomRepository kingdomRepository;
     private PurchaseService purchaseService;
+    private ResourceRepository resourceRepository;
 
     @Autowired
-    BuildingRestController(BuildingRepository buildingRepo, KingdomRepository kingdomRepository, PurchaseService purchaseService) {
+    BuildingRestController(BuildingRepository buildingRepo, KingdomRepository kingdomRepository, PurchaseService purchaseService, ResourceRepository resourceRepository) {
         this.buildingRepo = buildingRepo;
         this.kingdomRepository = kingdomRepository;
         this.purchaseService = purchaseService;
+        this.resourceRepository = resourceRepository;
     }
 
     @GetMapping(value = "/kingdom/buildings")
@@ -40,15 +46,14 @@ public class BuildingRestController {
     }
 
     @PostMapping(value = "/kingdom/buildings")
-    public ResponseEntity<Object> createBuilding(@RequestBody String type) {
-        if (type == null || type.equals("")) {
+    public ResponseEntity<Object> createBuilding(@RequestBody CreateBuildingJson createBuildingJson) {
+        if (createBuildingJson.getType() == null || createBuildingJson.getType().equals("")) {
             return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): type!"), HttpStatus.BAD_REQUEST);
         }
-        else if (type.equals("farm") || type.equals("mine") || type.equals("barrack") || type.equals("townhall")) {
+        else if (createBuildingJson.getType().equals("farm") || createBuildingJson.getType().equals("mine") || createBuildingJson.getType().equals("barrack") || createBuildingJson.getType().equals("townhall")) {
             Optional<Kingdom> kingdom = kingdomRepository.findKingdomByTribesUserUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-            if (purchaseService.purchasableItem(kingdom.get().getId(), type, 1)) {
-                Building newBuilding = new Building(type);
-                kingdom.get().getBuildings().add(newBuilding);
+            if (purchaseService.purchasableItem(kingdom.get().getId(), createBuildingJson.getType(), 1)) {
+                Building newBuilding = new Building(createBuildingJson.getType(), kingdom.get());
                 buildingRepo.save(newBuilding);
                 return new ResponseEntity(newBuilding, HttpStatus.OK);
             } else return new ResponseEntity(new ErrorResponseModel("Not enough resources"), HttpStatus.CONFLICT);

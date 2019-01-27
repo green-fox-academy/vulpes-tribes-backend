@@ -11,19 +11,19 @@ import javax.validation.constraints.NotNull;
 
 @Validated
 @Entity
-@Table(name = "resourcesModels")
+@Table(name = "resources")
 public class ResourcesModel {
     @Id
     @GeneratedValue
-    long resourcesId;
+    long id;
     String type;
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
     long amount;
     @JsonIgnore
-    long timeStampLastVisit;
+    Long updatedAt;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "kingdom_id", nullable = false)
+    @JoinColumn(name = "kingdom", nullable = false)
     Kingdom kingdom;
 
     public ResourcesModel() {
@@ -65,17 +65,17 @@ public class ResourcesModel {
     }
 
     public long getTimeStampLastVisit() {
-        return timeStampLastVisit;
+        return updatedAt;
     }
 
     public void setTimeStampLastVisit(long timeStampLastVisit) {
-        this.timeStampLastVisit = timeStampLastVisit;
+        this.updatedAt = timeStampLastVisit;
     }
 
     public static class ResourcesBuilder {
         @Id
         @GeneratedValue
-        long resourcesId;
+        long id;
         String type;
         @Min(value = 0L, message = "The value must be positive")
         @NotNull
@@ -93,8 +93,8 @@ public class ResourcesModel {
             return kingdom;
         }
 
-        public ResourcesModel.ResourcesBuilder setResourcesId(long resourcesId) {
-            this.resourcesId = resourcesId;
+        public ResourcesModel.ResourcesBuilder setId(long id) {
+            this.id = id;
             return this;
         }
 

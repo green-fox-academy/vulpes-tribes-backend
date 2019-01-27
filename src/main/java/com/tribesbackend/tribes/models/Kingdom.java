@@ -6,6 +6,7 @@ import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -28,10 +29,9 @@ public class Kingdom {
     @OneToMany(mappedBy = "kingdom")
     private List <Troop> troops;
     @OneToMany(mappedBy = "kingdom")
-    public List <ResourcesModel> resourcesModel;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "building_id", nullable = false)
-    List<Building> buildings;
+    private List <ResourcesModel> resourcesModel;
+    @OneToMany(mappedBy = "kingdom")
+    private List<Building> buildings;
 
 
     public Kingdom(String name) {
@@ -41,6 +41,7 @@ public class Kingdom {
     public Kingdom(String name, TribesUser tribesUser) {
         this.kingdomname = name;
         this.tribesUser = tribesUser;
+        troops = new ArrayList<>();
     }
 
     public Kingdom() {

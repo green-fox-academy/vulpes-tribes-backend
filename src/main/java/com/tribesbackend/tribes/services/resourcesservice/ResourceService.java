@@ -18,7 +18,7 @@ public class ResourceService {
     }
 
     public ResourcesModel verifyResource (long id) {
-        Optional<ResourcesModel> optionalResource = resourceRepository.findResourceByResourcesId(id);
+        Optional<ResourcesModel> optionalResource = resourceRepository.findResourceById(id);
         if (optionalResource.isPresent()) {
             return optionalResource.get();
         } else throw new IllegalArgumentException();

@@ -8,10 +8,10 @@ import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "buildings")
 public class Building {
     @Id
     @GeneratedValue
-    @JsonIgnore
     Long id;
     @NotNull
     @Size(min = 2, message = "At least 2 characters.")
@@ -24,15 +24,25 @@ public class Building {
     int HP;
     long startedAt;
     long finishedAt;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "kingdom_id", nullable = false)
     private Kingdom kingdom;
+
+    public Building(@NotNull @Size(min = 2, message = "At least 2 characters.") String type, Kingdom kingdom) {
+        this.type = type;
+        this.kingdom = kingdom;
+        level = 1;
+        HP = 100;
+        startedAt= 12;
+    }
 
     public Building(String type) {
         this.type = type;
         level = 1;
         HP = 100;
-        startedAt= new Timestamp(System.currentTimeMillis()).getNanos();
+        startedAt= 12;
+//                new Timestamp(System.currentTimeMillis()).getNanos();
     }
     public Building(String type, int level, int HP) {
         this.type = type;

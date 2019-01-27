@@ -60,8 +60,8 @@ public class Troop {
         @Min(value = 0L, message = "The value must be positive")
         @NotNull
         private int defence;
-        private int started_at;
-        private long finished_at;
+        private int startedAt;
+        private long finishedAt;
         @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "kingdom_id")
@@ -95,18 +95,18 @@ public class Troop {
             return this;
         }
 
-        public TroopBuilder setStarted_at(int started_at) {
-            this.started_at = started_at;
+        public TroopBuilder setStartedAt(int startedAt) {
+            this.startedAt = startedAt;
             return this;
         }
 
-        public TroopBuilder setFinished_at(long finished_at) {
-            this.finished_at = finished_at;
+        public TroopBuilder setFinishedAt(long finishedAt) {
+            this.finishedAt = finishedAt;
             return this;
         }
 
         public Troop build() {
-            return new Troop(level, hp, attack, defence, started_at, finished_at);
+            return new Troop(level, hp, attack, defence, startedAt, finishedAt);
         }
     }
 
