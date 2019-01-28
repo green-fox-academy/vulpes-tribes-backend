@@ -4,7 +4,6 @@ package com.tribesbackend.tribes.controllers;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.models.jsonmodels.CreateBuildingJson;
-import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
@@ -13,9 +12,7 @@ import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -39,7 +36,7 @@ public class BuildingRestController {
     }
 
     @GetMapping(value = "/kingdom/buildings")
-    public ResponseEntity<Object> buildingsOfUser(@RequestHeader(name = "X-Tribes-Token") String xTribesToken) {
+    public ResponseEntity<Object> buildingsOfUser() {
         List<Building> usersBuildings = new ArrayList<Building>();
         usersBuildings.add(new Building("farm", 1, 10));
         return new ResponseEntity(usersBuildings, HttpStatus.OK);
@@ -64,7 +61,7 @@ public class BuildingRestController {
 
     @GetMapping(value = "/kingdom/buildings/{id}")
     public @ResponseBody
-    ResponseEntity<Object> listTheBuilding(@Validated @PathVariable long id, String xTribesToken) {
+    ResponseEntity<Object> listTheBuilding(@PathVariable long id) {
         if (buildingRepo.findById(id).isPresent()) {
             return new ResponseEntity(buildingRepo.findById(id), HttpStatus.OK);
         } else return new ResponseEntity(new ErrorResponseModel("Id not found"),
@@ -72,8 +69,8 @@ public class BuildingRestController {
     }
 
     @PutMapping(value = "/kingdom/buildings/{id}")
-    public ResponseEntity<Object> upgradeOrDowngradeBuilding(@Validated @PathVariable long id,
-                                                             @RequestBody String xTribesToken, Integer typeLevel) {
+    public ResponseEntity<Object> upgradeOrDowngradeBuilding(@PathVariable long id,
+                                                             Integer typeLevel) {
         // and enough resources
         if (buildingRepo.findById(id).isPresent() && (true)) {
             buildingRepo.findById(id).get().setHP(typeLevel);
