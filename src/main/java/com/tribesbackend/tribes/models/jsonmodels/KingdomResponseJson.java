@@ -2,9 +2,9 @@ package com.tribesbackend.tribes.models.jsonmodels;
 
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.Location;
+import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.models.Troop;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
-import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ public class KingdomResponseJson {
 
     Long id;
     String name;
-    long user_id;
+    long userId;
     List<Building> buildings;
     List <ResourcesModel> resources;
     List <Troop> troops;
@@ -21,7 +21,7 @@ public class KingdomResponseJson {
     public KingdomResponseJson(Kingdom kingdom ) {
         this.id = kingdom.getId();
         this.name = kingdom.getName();
-        this.user_id = kingdom.getTribesUser().getId();
+        this.userId = kingdom.getTribesUser().getId();
         this.buildings = kingdom.getBuildings();
         this.resources = kingdom.getResourcesModel();
         this.troops = kingdom.getTroops();
@@ -45,11 +45,11 @@ public class KingdomResponseJson {
     }
 
     public long getUser_id() {
-        return user_id;
+        return userId;
     }
 
     public void setUser_id(Long user_id) {
-        this.user_id = user_id;
+        this.userId = user_id;
     }
 
     public List<Building> getBuildings() {

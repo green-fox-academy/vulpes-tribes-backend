@@ -28,10 +28,6 @@ public class TribesUser implements UserDetails {
     @JoinColumn(name = "kingdom_id", nullable = false)
     Kingdom kingdom;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "resources_id", nullable = false)
-    ResourcesModel resources;
-
     @Column(name = "logged_in")
     Boolean loggedIn = false;
     
@@ -149,6 +145,10 @@ public class TribesUser implements UserDetails {
 
         public TribesUserBuilder setPassword(String password) {
             this.password = password;
+            return this;
+        }
+        public TribesUserBuilder setKingdom(String kingdomname) {
+            this.kingdom = new Kingdom(kingdomname);
             return this;
         }
 

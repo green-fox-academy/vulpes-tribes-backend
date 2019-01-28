@@ -2,11 +2,10 @@ package com.tribesbackend.tribes.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "locations")
 public class Location {
     @JsonIgnore
     @Id
@@ -14,6 +13,10 @@ public class Location {
     long id;
     int x;
     int y;
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "kingdom_id", nullable = false)
+    Kingdom kingdom;
+
 
     public int getX() {
         return x;

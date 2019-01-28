@@ -14,6 +14,9 @@ public class ItemPrice {
     String type;
     int gold;
 
+    public ItemPrice() {
+    }
+
     public ItemPrice(String type, int gold) {
         this.type = type;
         this.gold = gold;
