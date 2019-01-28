@@ -95,7 +95,7 @@ public class ResourcesModelServiceTest {
         ResourcesModel model = new ResourcesModel("gold",100, testKingdom);
         long id = 1;
         Optional<ResourcesModel> testOptional = Optional.of(model);
-        Mockito.when(resourceRepository.findResourceByResourcesId(id)).thenReturn(testOptional);
+        Mockito.when(resourceRepository.findResourceById(id)).thenReturn(testOptional);
         assertEquals(resourceService.verifyResource(id), model);
     }
 
@@ -103,7 +103,7 @@ public class ResourcesModelServiceTest {
     public void verifyResourceEmptyOptionalTest(){
         long id = 1;
         Optional<ResourcesModel> emptyOptional = Optional.ofNullable(null);
-        Mockito.when(resourceRepository.findResourceByResourcesId(id)).thenReturn(emptyOptional);
+        Mockito.when(resourceRepository.findResourceById(id)).thenReturn(emptyOptional);
         resourceService.verifyResource(id);
     }
 
@@ -113,7 +113,7 @@ public class ResourcesModelServiceTest {
         ResourcesModel model = new ResourcesModel("gold",100, testKingdom);
         long id = 1;
         Optional<ResourcesModel> testOptional = Optional.of(model);
-        Mockito.when(resourceRepository.findResourceByResourcesId(id)).thenReturn(testOptional);
+        Mockito.when(resourceRepository.findResourceById(id)).thenReturn(testOptional);
         ResourcesModel verified = resourceService.verifyResource(id);
         assertEquals("gold", verified.getType());
     }

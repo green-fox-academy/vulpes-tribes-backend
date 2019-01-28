@@ -10,6 +10,7 @@ import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
+import com.tribesbackend.tribes.repositories.ResourceRepository;
 import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
 import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
 import com.tribesbackend.tribes.repositories.UserTRepository;
@@ -49,6 +50,8 @@ public class UserRestControllerTest {
     private KingdomRepository kingdomRepository;
     @Mock
     private ResourceService resourceService;
+    @Mock
+    private ResourceRepository resourceRepository;
     @InjectMocks
     private UserRestController userRestController;
 
@@ -69,8 +72,12 @@ public class UserRestControllerTest {
     newUser.setKingdom(newKingdom);
 
     Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(false);
+    Mockito.when(resourceService.newUserResourcesPreFill(newKingdom)).thenReturn(newResources);
     Mockito.doNothing().when(userCrudService).save(newUser);
-    Mockito.doNothing().when(kingdomRepository);
+    Mockito.doNothing().when(kingdomRepository.save(newKingdom));
+    Mockito.doNothing().when(resourceRepository.save(newResources.get(0)));
+    Mockito.doNothing().when(resourceRepository.save(newResources.get(1)));
+
     mockMvc.perform(MockMvcRequestBuilders.post("/register")
     .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
     .content(asJsonString(newUser)))
