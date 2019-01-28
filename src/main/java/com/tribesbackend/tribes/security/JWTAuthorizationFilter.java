@@ -34,8 +34,8 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
             SecurityContextHolder.getContext().setAuthentication(authentication);
             chain.doFilter(req, res);
-        }catch (JWTDecodeException e ){
-            JWTService.invalidTokenResponce(res);
+        } catch (JWTDecodeException e) {
+            JWTService.invalidTokenResponse(res);
         }
     }
 

@@ -10,12 +10,10 @@ import org.springframework.stereotype.Controller;
 public class BaseController {
 
     KingdomRepository kingdomRepository;
-//    UserTRepository userTRepository;
 
     @Autowired
     public void setKingdomRepository (KingdomRepository kingdomRepository){
     this.kingdomRepository = kingdomRepository;
- //   this.userTRepository = userTRepository;
     }
 
     public Kingdom getCurrentKingdom(){

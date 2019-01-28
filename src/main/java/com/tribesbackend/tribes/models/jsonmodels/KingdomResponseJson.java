@@ -21,11 +21,11 @@ public class KingdomResponseJson {
     public KingdomResponseJson(Kingdom kingdom ) {
         this.id = kingdom.getId();
         this.name = kingdom.getName();
-        this.user_id = user_id;
-        this.buildings = buildings;
-        this.resources = resources;
-        this.troops = troops;
-        this.location = location;
+        this.user_id = kingdom.getTribesUser().getId();
+        this.buildings = kingdom.getBuildings();
+        this.resources = kingdom.getResourcesModel();
+        this.troops = kingdom.getTroops();
+        this.location = kingdom.getLocation();
     }
 
     public long getId() {

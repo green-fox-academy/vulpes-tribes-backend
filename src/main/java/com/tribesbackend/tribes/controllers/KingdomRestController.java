@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class KingdomRestController extends BaseController {
 
-    KingdomRepository kingdomRepository;
-
     @Autowired
     public KingdomRestController(KingdomRepository kingdomRepository) {
         this.kingdomRepository = kingdomRepository;
@@ -33,8 +31,7 @@ public class KingdomRestController extends BaseController {
         kingdom.setName(kingdomInputJson.getName());
         kingdom.setLocation(new Location(kingdomInputJson.getLocation_x(), kingdomInputJson.getLocation_y()));
         kingdomRepository.save(kingdom);
-        return new ResponseEntity(new KingdomResponseJson(kingdom.getId(), kingdom.getName(), kingdom.getTribesUser().getId(),
-                kingdom.getBuildings(), kingdom.getResourcesModel(), kingdom.getTroops(), kingdom.getLocation()), HttpStatus.OK);
+        return new ResponseEntity(new KingdomResponseJson(kingdom), HttpStatus.OK);
     }
 
     @GetMapping(value = "/kingdom/{id}")
@@ -44,8 +41,7 @@ public class KingdomRestController extends BaseController {
         } else {
 
             Kingdom kingdom = kingdomRepository.findKingdomById(id).get();
-            return new ResponseEntity(new KingdomResponseJson(kingdom.getId(), kingdom.getName(), kingdom.getTribesUser().getId(),
-                    kingdom.getBuildings(), kingdom.getResourcesModel(), kingdom.getTroops(), kingdom.getLocation()), HttpStatus.OK);
+            return new ResponseEntity(new KingdomResponseJson(kingdom), HttpStatus.OK);
         }
     }
 }

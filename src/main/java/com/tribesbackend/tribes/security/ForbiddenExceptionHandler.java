@@ -24,6 +24,6 @@ public class ForbiddenExceptionHandler implements AuthenticationEntryPoint {
                     + " attempted to access the protected URL: "
                     + request.getRequestURI());
         }
-        JWTService.invalidTokenResponce(response);
+        JWTService.invalidTokenResponse(response);
     }
 }

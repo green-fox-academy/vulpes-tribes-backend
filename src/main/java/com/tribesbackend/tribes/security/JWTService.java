@@ -33,7 +33,7 @@ public class JWTService {
         return user;
     }
 
-    public static void invalidTokenResponce (HttpServletResponse response) {
+    public static void invalidTokenResponse (HttpServletResponse response) {
         response.setStatus(403);
         PrintWriter out = null;
         try {

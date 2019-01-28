@@ -49,8 +49,8 @@ public class BuildingRestController {
     }
 
     @GetMapping(value = "/kingdom/buildings/{id}")
-    public @ResponseBody
-    ResponseEntity<Object> listTheBuilding(@Validated @PathVariable long id) {
+   @ResponseBody
+    public ResponseEntity<Object> listTheBuilding( @PathVariable long id) {
         if (buildingRepo.findById(id).isPresent()) {
             return new ResponseEntity(buildingRepo.findById(id), HttpStatus.OK);
         } else return new ResponseEntity(new ErrorResponseModel( "Id not found"),
