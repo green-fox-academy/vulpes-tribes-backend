@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class KingdomRestController {
+public class KingdomRestController extends BaseController {
 
     KingdomRepository kingdomRepository;
 

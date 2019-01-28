@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class BaseController {
 
- //   BuildingRepository buildingRepo;
     KingdomRepository kingdomRepository;
     UserTRepository userTRepository;
 
@@ -22,7 +21,6 @@ public class BaseController {
 
 
     public Kingdom getCurrentKingdom(String jwtToken){
-      //  String token = request.getHeader(HEADER_STRING);
         Kingdom currentKingdom = kingdomRepository.findKingdomByTribesUser(JWTService.extractUsername(jwtToken));
         return currentKingdom;
     }
