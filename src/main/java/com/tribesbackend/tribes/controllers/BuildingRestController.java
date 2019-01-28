@@ -1,38 +1,33 @@
-
 package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
+import com.tribesbackend.tribes.models.jsonmodels.BuildingInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.CreateBuildingJson;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
-import com.tribesbackend.tribes.repositories.ResourceRepository;
 import com.tribesbackend.tribes.services.PurchaseService;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 @RestController
-public class BuildingRestController {
-    BuildingRepository buildingRepo;
+public class BuildingRestController extends BaseController{
+    private BuildingRepository buildingRepo;
     private KingdomRepository kingdomRepository;
     private PurchaseService purchaseService;
-    private ResourceRepository resourceRepository;
 
     @Autowired
-    BuildingRestController(BuildingRepository buildingRepo, KingdomRepository kingdomRepository, PurchaseService purchaseService, ResourceRepository resourceRepository) {
+    BuildingRestController(BuildingRepository buildingRepo, KingdomRepository kingdomRepository, PurchaseService purchaseService) {
         this.buildingRepo = buildingRepo;
         this.kingdomRepository = kingdomRepository;
         this.purchaseService = purchaseService;
-        this.resourceRepository = resourceRepository;
     }
 
     @GetMapping(value = "/kingdom/buildings")
@@ -48,9 +43,9 @@ public class BuildingRestController {
             return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): type!"), HttpStatus.BAD_REQUEST);
         }
         else if (createBuildingJson.getType().equals("farm") || createBuildingJson.getType().equals("mine") || createBuildingJson.getType().equals("barrack") || createBuildingJson.getType().equals("townhall")) {
-            Optional<Kingdom> kingdom = kingdomRepository.findKingdomByTribesUserUsername(SecurityContextHolder.getContext().getAuthentication().getName());
-            if (purchaseService.purchasableItem(kingdom.get().getId(), createBuildingJson.getType(), 1)) {
-                Building newBuilding = new Building(createBuildingJson.getType(), kingdom.get());
+            Kingdom kingdom = getCurrentKingdom();
+            if (purchaseService.purchasableItem(kingdom.getId(), createBuildingJson.getType(), 1)) {
+                Building newBuilding = new Building(createBuildingJson.getType(), kingdom);
                 buildingRepo.save(newBuilding);
                 return new ResponseEntity(newBuilding, HttpStatus.OK);
             } else return new ResponseEntity(new ErrorResponseModel("Not enough resources"), HttpStatus.CONFLICT);
@@ -58,10 +53,9 @@ public class BuildingRestController {
         else return new ResponseEntity(new ErrorResponseModel("Invalid building type"), HttpStatus.NOT_ACCEPTABLE);
     }
 
-
     @GetMapping(value = "/kingdom/buildings/{id}")
-    public @ResponseBody
-    ResponseEntity<Object> listTheBuilding(@PathVariable long id) {
+    @ResponseBody
+    public ResponseEntity<Object> listTheBuilding(@PathVariable long id) {
         if (buildingRepo.findById(id).isPresent()) {
             return new ResponseEntity(buildingRepo.findById(id), HttpStatus.OK);
         } else return new ResponseEntity(new ErrorResponseModel("Id not found"),
@@ -70,13 +64,14 @@ public class BuildingRestController {
 
     @PutMapping(value = "/kingdom/buildings/{id}")
     public ResponseEntity<Object> upgradeOrDowngradeBuilding(@PathVariable long id,
-                                                             Integer typeLevel) {
+                                                             @RequestBody BuildingInputJson buildingInputJson) {
         // and enough resources
         if (buildingRepo.findById(id).isPresent() && (true)) {
-            buildingRepo.findById(id).get().setHP(typeLevel);
+            buildingRepo.findById(id).get().setHP(buildingInputJson.getLevel());
             buildingRepo.save(buildingRepo.findById(id).get());
             return new ResponseEntity(buildingRepo.findById(id).get(), HttpStatus.OK);
-        } else if (typeLevel < 0 || typeLevel == null || typeLevel.toString().isEmpty()) {
+        } else if ((buildingInputJson.getLevel() < 0) || buildingInputJson.getLevel() == null
+                || buildingInputJson.getLevel().toString().isEmpty()) {
             return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): !"), HttpStatus.BAD_REQUEST);
         } else if (!(buildingRepo.findById(id).isPresent())) {
             return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);

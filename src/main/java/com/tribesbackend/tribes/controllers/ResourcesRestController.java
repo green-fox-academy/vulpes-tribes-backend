@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ResourcesRestController {
+public class ResourcesRestController extends BaseController {
     ResourceRepository resourceRepository;
     KingdomRepository kingdomRepository;
     ResourceCrudService resourceCrudService;
@@ -25,10 +25,9 @@ public class ResourcesRestController {
         this.kingdomRepository = kingdomRepository;
         this.resourceCrudService = resourceCrudService;
     }
-//
-//    @GetMapping(value = "/kingdom/resources")
-//    public ResponseEntity getBuilding(@RequestHeader(name = "username")String username){
-//        Kingdom selectedKingdom =  kingdomRepository.findKingdomByTribesUserUsername(username);
-//        return new ResponseEntity(resourceRepository.findAllByKingdom(selectedKingdom), HttpStatus.OK);
-//    }
+
+    @GetMapping(value = "/kingdom/resources")
+    public ResponseEntity getBuilding(){
+        return new ResponseEntity(resourceRepository.findAllByKingdom(getCurrentKingdom()), HttpStatus.OK);
+    }
 }

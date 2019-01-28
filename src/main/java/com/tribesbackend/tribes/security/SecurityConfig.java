@@ -1,4 +1,5 @@
-package com.tribesbackend.tribes.configurations.security;
+package com.tribesbackend.tribes.security;
+
 import com.tribesbackend.tribes.services.userservice.MyUserTrDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,31 +12,30 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
     MyUserTrDetailsService myUserTrDetailsService;
 
     @Autowired
-    UnauthorisedExceptionHandling unauthorisedExceptionHandling;
+    ForbiddenExceptionHandler forbiddenExceptionHandler;
 
     @Override
-    protected void configure (AuthenticationManagerBuilder auth)
-            throws  Exception{
-        auth.authenticationProvider( authenticationProvider());
+    protected void configure(AuthenticationManagerBuilder auth)
+            throws Exception {
+        auth.authenticationProvider(authenticationProvider());
     }
 
     @Bean
     public DaoAuthenticationProvider authenticationProvider() {
         DaoAuthenticationProvider authenticationProvider
                 = new DaoAuthenticationProvider();
-        authenticationProvider.setUserDetailsService( myUserTrDetailsService );
-        authenticationProvider.setPasswordEncoder( encoder());
+        authenticationProvider.setUserDetailsService(myUserTrDetailsService);
+        authenticationProvider.setPasswordEncoder(encoder());
         return authenticationProvider;
     }
 
@@ -46,10 +46,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/").permitAll()
                 .antMatchers("/kingdom/**", "/user/**").authenticated()
+                .antMatchers("/").permitAll()
                 .and()
-                .addFilter(new JWTAuthorizationFilter(authenticationManager()));
+                .addFilter(new JWTAuthorizationFilter(authenticationManager()))
+                .exceptionHandling().authenticationEntryPoint(forbiddenExceptionHandler);
     }
 
     @Bean

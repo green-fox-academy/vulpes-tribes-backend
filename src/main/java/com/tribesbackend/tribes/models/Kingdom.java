@@ -1,7 +1,7 @@
 package com.tribesbackend.tribes.models;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
-import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,19 +19,20 @@ public class Kingdom {
     Long id;
     @NotNull
     @Size(min = 2, message = "Name of Kingdom should have at least 2 characters")
-    @Column(name = "kingdomname",nullable = false, unique = true)
+    @Column(name = "kingdomname", nullable = false, unique = true)
     public String kingdomname;
-
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribe_user_id", nullable = false)
     @JsonIgnore
     public TribesUser tribesUser;
     @OneToMany(mappedBy = "kingdom")
-    private List <Troop> troops;
+    private List<Troop> troops;
     @OneToMany(mappedBy = "kingdom")
     private List <ResourcesModel> resourcesModel;
     @OneToMany(mappedBy = "kingdom")
     private List<Building> buildings;
+    @OneToOne(mappedBy = "kingdom")
+    Location location;
 
 
     public Kingdom(String name) {
@@ -93,5 +94,13 @@ public class Kingdom {
 
     public void setName(String name) {
         this.kingdomname = name;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

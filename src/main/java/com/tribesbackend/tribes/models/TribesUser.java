@@ -2,7 +2,6 @@ package com.tribesbackend.tribes.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -28,10 +27,6 @@ public class TribesUser implements UserDetails {
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "kingdom_id", nullable = false)
     Kingdom kingdom;
-
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "resources_id", nullable = false)
-    ResourcesModel resources;
 
     @Column(name = "logged_in")
     Boolean loggedIn = false;

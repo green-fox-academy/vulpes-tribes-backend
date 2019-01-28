@@ -1,14 +1,13 @@
 package com.tribesbackend.tribes.controllers;
 
 
-import com.auth0.jwt.JWT;
-import com.tribesbackend.tribes.configurations.security.SecurityConstants;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponseJson;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.repositories.UserTRepository;
+import com.tribesbackend.tribes.security.JWTService;
 import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.services.responseservice.OKstatus;
 import com.tribesbackend.tribes.services.userservice.LogoutMessages;
@@ -22,21 +21,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
-
-import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
-import static com.tribesbackend.tribes.configurations.security.SecurityConstants.EXPIRATION_TIME;
-
-
 @SuppressWarnings("unchecked")
 
 @RestController
-public class UserRestController {
-    UserTRepository userTRepository;
-    UserModelHelpersMethods userMethods;
-    UserCrudService userCrudService;
-    KingdomRepository kingdomRepo;
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+public class UserRestController extends BaseController {
+    private UserTRepository userTRepository;
+    private UserModelHelpersMethods userMethods;
+    private UserCrudService userCrudService;
+    private KingdomRepository kingdomRepo;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
     @Autowired
@@ -52,18 +45,13 @@ public class UserRestController {
     @PostMapping(value = "/register")
     public ResponseEntity registerUser(@Validated @RequestBody RegistrationInputJson regjson) {
         TribesUser newUser = new TribesUser(regjson.getUsername(), bCryptPasswordEncoder.encode(regjson.getPassword()));
-
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(ErrorMessagesMethods.usernameAlreadyTaken(), HttpStatus.CONFLICT);
         } else
             userTRepository.save(newUser);
         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
         newUser.setKingdom(newKingdom);
-
         kingdomRepo.save(newKingdom);
-        System.out.println(newUser.getId());
-        System.out.println(newUser.getUsername());
-        System.out.println(newKingdom.getId());
         return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
                 newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
 
@@ -74,39 +62,28 @@ public class UserRestController {
         if (tribesUser.getUsername() == null || tribesUser.getPassword() == null || tribesUser.getUsername().isEmpty() ||
                 tribesUser.getPassword().isEmpty()) {
             return new ResponseEntity(ErrorMessagesMethods.jsonFieldIsEmpty(tribesUser), HttpStatus.BAD_REQUEST);
-
-
         } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).isPresent()) {
             return new ResponseEntity(ErrorMessagesMethods.notSuchUser(tribesUser.getUsername()), HttpStatus.UNAUTHORIZED);
         } else if (bCryptPasswordEncoder.matches((tribesUser.getPassword()), userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword())) {
             userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().setLoggedIn(true);
             userTRepository.save(userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get());
-            return new ResponseEntity(
-                    new OKstatus(
-                            JWT.create()
-                                    .withSubject(tribesUser.getUsername())
-                                    .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
-                                    .sign(HMAC512(SecurityConstants.SECRET.getBytes())))
-                    , HttpStatus.OK);
-        } else
-//            if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword()
-//                .equals(tribesUser.getPassword())) {
-            return new ResponseEntity(ErrorMessagesMethods.wrongPassword(), HttpStatus.UNAUTHORIZED);
-//        }
+            return new ResponseEntity(new OKstatus(JWTService.createToken(tribesUser.getUsername())), HttpStatus.OK);
 
-//        return new ResponseEntity(HttpStatus.CONFLICT);
+        } else return new ResponseEntity(ErrorMessagesMethods.wrongPassword(), HttpStatus.UNAUTHORIZED);
     }
 
     @DeleteMapping(value = "/logout")
     public ResponseEntity logoutUser() {
         if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
-            userTRepository.findTribesUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName())
-                    //uncatched get
-                    .get().setLoggedIn(false);
-            return new ResponseEntity(new LogoutMessages("Logged out successfully!"), HttpStatus.OK);
+            TribesUser user = userTRepository.findTribesUserByUsername(SecurityContextHolder.getContext()
+                    .getAuthentication().getName()).get();
+            user.setLoggedIn(false);
+            userTRepository.save(user);
+            return new ResponseEntity(new LogoutMessages("ok", "Logged out successfully!"), HttpStatus.OK);
         } else
-            return new ResponseEntity(new LogoutMessages("Unauthorized request!"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity(new LogoutMessages("error", "Unauthorized request!"), HttpStatus.FORBIDDEN);
     }
+
 
     @GetMapping(value = "/user/testjwt")
     public String testingEndpoint() {

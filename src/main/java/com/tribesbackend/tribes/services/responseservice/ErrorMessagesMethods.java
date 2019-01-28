@@ -1,7 +1,9 @@
 package com.tribesbackend.tribes.services.responseservice;
 
 import com.tribesbackend.tribes.models.TribesUser;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ErrorMessagesMethods {
 
     public static ErrorResponseModel usernameAlreadyTaken() {
@@ -32,5 +34,8 @@ public class ErrorMessagesMethods {
 
     public static ErrorResponseModel notSuchUser(String username) {
         return new ErrorResponseModel("Not such user: " + username);
+    }
+    public ErrorResponseModel notSuchKingdom(String username){
+        return new ErrorResponseModel("Not such kingdom: "+ username);
     }
 }

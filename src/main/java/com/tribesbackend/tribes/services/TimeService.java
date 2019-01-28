@@ -2,12 +2,14 @@ package com.tribesbackend.tribes.services;
 
 import com.tribesbackend.tribes.repositories.BuildingTimeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
+@Service
 public class TimeService {
 
     @Autowired

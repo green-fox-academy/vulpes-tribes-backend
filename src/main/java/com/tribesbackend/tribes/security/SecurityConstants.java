@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.configurations.security;
+package com.tribesbackend.tribes.security;
 
 //Added by Jirina coz JWT token
 public class SecurityConstants {

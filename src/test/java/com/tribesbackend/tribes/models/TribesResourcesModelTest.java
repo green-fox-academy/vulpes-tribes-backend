@@ -1,8 +1,6 @@
-package com.tribesbackend.tribes;
+package com.tribesbackend.tribes.models;
 
 
-import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -44,14 +42,5 @@ public class TribesResourcesModelTest {
         //then:
         assertTrue(violations.isEmpty());
     }
-
-    @Test (expected =  IllegalArgumentException.class)
-    public void shouldDetectIllegalArgumentException() {
-        //given :
-        ResourcesModel illegalArgumentExceptionSampleResources = new ResourcesModel.ResourcesBuilder()
-                .setKingdom(new Kingdom())
-                .setType("silver")
-                .build();
-
-    }
+    
 }
