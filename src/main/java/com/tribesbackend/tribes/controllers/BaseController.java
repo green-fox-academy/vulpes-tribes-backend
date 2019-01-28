@@ -12,13 +12,14 @@ public class BaseController {
     KingdomRepository kingdomRepository;
 
     @Autowired
-    public void setKingdomRepository (KingdomRepository kingdomRepository){
-    this.kingdomRepository = kingdomRepository;
+    public void setKingdomRepository(KingdomRepository kingdomRepository) {
+        this.kingdomRepository = kingdomRepository;
     }
 
-    public Kingdom getCurrentKingdom(){
-        Kingdom currentKingdom =  kingdomRepository.findKingdomByTribesUserUsername(SecurityContextHolder.getContext()
-                .getAuthentication().getName()).get();;
+
+    public Kingdom getCurrentKingdom() {
+        Kingdom currentKingdom = kingdomRepository.findKingdomByTribesUserUsername(SecurityContextHolder.getContext()
+                .getAuthentication().getName()).get();
         return currentKingdom;
     }
 }

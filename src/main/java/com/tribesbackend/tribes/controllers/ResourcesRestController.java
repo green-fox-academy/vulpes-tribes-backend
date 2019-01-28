@@ -2,6 +2,8 @@
 package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.repositories.ResourceRepository;
+import com.tribesbackend.tribes.services.KingdomService;
+import com.tribesbackend.tribes.services.resourcesservice.ResourceCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

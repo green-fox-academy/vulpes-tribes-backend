@@ -12,14 +12,12 @@ public class TroopRestController extends BaseController {
     TroopRepository troopRepository;
 
     @Autowired
-
-    TroopRestController(  TroopRepository troopRepository) {
+    TroopRestController(TroopRepository troopRepository) {
         this.troopRepository = troopRepository;
     }
 
-
     @GetMapping(value = "/kingdom/troops")
-    public ResponseEntity getBuilding(){
+    public ResponseEntity getBuilding() {
 
         return new ResponseEntity(troopRepository.findAllByKingdom(getCurrentKingdom()), HttpStatus.OK);
     }

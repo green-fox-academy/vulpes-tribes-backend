@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes;
+package com.tribesbackend.tribes.models;
 
 import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.factories.BuildingFactory;

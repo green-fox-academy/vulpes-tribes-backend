@@ -5,15 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Buildings {
+public class BuildingResponse {
     List<Building> buildingList = new ArrayList<Building>();
 
-    public Buildings(List<Building> buildingList) {
+    public BuildingResponse(List<Building> buildingList) {
         this.buildingList = buildingList;
     }
 
-    public Buildings() {
-    }
+    public BuildingResponse(){}
 
     public List<Building> getBuildingList() {
         return buildingList;

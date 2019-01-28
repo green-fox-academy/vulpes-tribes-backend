@@ -1,7 +1,6 @@
-package com.tribesbackend.tribes.models.resourcesmodels;
+package com.tribesbackend.tribes.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tribesbackend.tribes.models.Kingdom;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -28,8 +27,13 @@ public class ResourcesModel {
 
     public ResourcesModel() {
     }
-
-    public ResourcesModel(String type, Kingdom kingdom) {
+    public ResourcesModel(String type, long amount, Kingdom kingdom){
+        this.type = type;
+        this.amount = amount;
+        this.kingdom = kingdom;
+    }
+//kingdom, type, amount, whenewer kingdom is save to db, related resources should be saved as well. In users controller.
+    /*public ResourcesModel(String type, Kingdom kingdom) {
         if (type.equals("gold") || type.equals("food")) {
             this.type = type;
         } else throw new IllegalArgumentException();
@@ -42,9 +46,8 @@ public class ResourcesModel {
                 this.amount = 0;
                 break;
         }
-
         this.kingdom = kingdom;
-    }
+    }*/
 
     public String getType() {
         return type;
@@ -119,7 +122,7 @@ public class ResourcesModel {
         }
 
         public ResourcesModel build() {
-            return new ResourcesModel(type, kingdom);
+            return new ResourcesModel(type,amount, kingdom);
         }
     }
 }

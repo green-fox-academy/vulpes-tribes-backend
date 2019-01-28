@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes;
+package com.tribesbackend.tribes.models;
 
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
