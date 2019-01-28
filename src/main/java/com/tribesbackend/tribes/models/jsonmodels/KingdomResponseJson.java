@@ -2,9 +2,9 @@ package com.tribesbackend.tribes.models.jsonmodels;
 
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.Location;
+import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.models.Troop;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
-import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
 
 import java.util.List;
 

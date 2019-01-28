@@ -28,10 +28,9 @@ public class Kingdom {
     private List<Troop> troops;
     @OneToMany(mappedBy = "kingdom")
     public List<ResourcesModel> resourcesModel;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "building_id", nullable = false)
+    @OneToMany(mappedBy = "kingdom")
     List<Building> buildings;
-    @OneToOne(mappedBy = "kingdom")
+    @OneToOne (   mappedBy = "kingdom")
     Location location;
 
 
