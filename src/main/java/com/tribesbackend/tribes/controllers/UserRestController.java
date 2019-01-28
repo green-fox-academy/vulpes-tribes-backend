@@ -3,12 +3,15 @@ package com.tribesbackend.tribes.controllers;
 
 
 import com.tribesbackend.tribes.models.Kingdom;
+import com.tribesbackend.tribes.models.Resources.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponseJson;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
+import com.tribesbackend.tribes.repositories.ResourceRepository;
 import com.tribesbackend.tribes.repositories.UserTRepository;
 import com.tribesbackend.tribes.security.JWTService;
+import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
 import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
 import com.tribesbackend.tribes.services.responseservice.OKstatus;
 import com.tribesbackend.tribes.services.userservice.LogoutMessages;
@@ -22,6 +25,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @SuppressWarnings("unchecked")
 
 @RestController
@@ -31,16 +36,21 @@ public class UserRestController extends BaseController {
     private UserCrudService userCrudService;
     private KingdomRepository kingdomRepo;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private ResourceService resourceService;
+    private ResourceRepository resourceRepository;
 
 
     @Autowired
     public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods,
-                              UserCrudService userCrudService, KingdomRepository kingdomRepo, BCryptPasswordEncoder bCryptPasswordEncoder) {
+                              UserCrudService userCrudService, KingdomRepository kingdomRepo,
+                              BCryptPasswordEncoder bCryptPasswordEncoder, ResourceService resourceService, ResourceRepository resourceRepository) {
         this.userTRepository = userTRepository;
         this.userMethods = userMethods;
         this.userCrudService = userCrudService;
         this.kingdomRepo = kingdomRepo;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.resourceService = resourceService;
+        this.resourceRepository = resourceRepository;
     }
 
     @PostMapping(value = "/register")
@@ -48,14 +58,34 @@ public class UserRestController extends BaseController {
         TribesUser newUser = new TribesUser(regjson.getUsername(), bCryptPasswordEncoder.encode(regjson.getPassword()));
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(ErrorMessagesMethods.usernameAlreadyTaken(), HttpStatus.CONFLICT);
-        } else
-            userTRepository.save(newUser);
+        }
+        userTRepository.save(newUser);
         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
-        newUser.setKingdom(newKingdom);
         kingdomRepo.save(newKingdom);
+        List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);	//        newUser.setKingdom(newKingdom);
+        newKingdom.setResourcesModel(newResources);
+        newUser.setKingdom(newKingdom);
+        newResources.forEach(resourcesModel -> resourceRepository.save(resourcesModel));
+
         return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
                 newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
 
+
+
+        /*userTRepository.save(newUser);
+
+
+         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);	        Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
+        List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);	//        newUser.setKingdom(newKingdom);
+        newKingdom.setResourcesModel(newResources);
+        newUser.setKingdom(newKingdom);
+        userTRepository.save(newUser);
+        kingdomRepo.save(newKingdom);	        kingdomRepo.save(newKingdom);
+        List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);
+        	        newResources.forEach(resourcesModel -> resourceRepository.save(resourcesModel));
+        //newKingdom.setResourcesModel(newResources);
+         return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),	        return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
+                newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);	                newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);*/
     }
 
     @PostMapping(value = "/login")
