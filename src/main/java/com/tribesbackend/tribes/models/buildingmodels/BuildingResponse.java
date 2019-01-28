@@ -6,6 +6,7 @@ import java.util.List;
 
 
 public class BuildingResponse {
+
     List<Building> buildingList = new ArrayList<Building>();
 
     public BuildingResponse(List<Building> buildingList) {

@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tribesbackend.tribes.controllers.UserRestController;
 import com.tribesbackend.tribes.factories.KingdomFactory;
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.ResourcesModel;
+import com.tribesbackend.tribes.models.Resources.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.repositories.ResourceRepository;

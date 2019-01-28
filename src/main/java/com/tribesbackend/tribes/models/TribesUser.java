@@ -2,6 +2,7 @@ package com.tribesbackend.tribes.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tribesbackend.tribes.models.Resources.ResourcesModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 

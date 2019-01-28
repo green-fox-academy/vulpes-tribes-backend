@@ -1,6 +1,6 @@
 package com.tribesbackend.tribes.services;
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.ResourcesModel;
+import com.tribesbackend.tribes.models.Resources.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
@@ -85,35 +85,6 @@ public class ResourcesModelServiceTest {
         Optional<ResourcesModel> emptyOptional = Optional.ofNullable(null);
         assertEquals(testOptional.get(), modelGold);
         assertFalse(emptyOptional.isPresent());
-    }
-
-    @Test
-    public void verifyResourceReturnTest(){
-        Kingdom testKingdom = new Kingdom();
-        ResourcesModel model = new ResourcesModel("gold",100, testKingdom);
-        long id = 1;
-        Optional<ResourcesModel> testOptional = Optional.of(model);
-        Mockito.when(resourceRepository.findResourceById(id)).thenReturn(testOptional);
-        assertEquals(resourceService.verifyResource(id), model);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void verifyResourceEmptyOptionalTest(){
-        long id = 1;
-        Optional<ResourcesModel> emptyOptional = Optional.ofNullable(null);
-        Mockito.when(resourceRepository.findResourceById(id)).thenReturn(emptyOptional);
-        resourceService.verifyResource(id);
-    }
-
-    @Test
-    public void verifyResourceSecondTest(){
-        Kingdom testKingdom = new Kingdom();
-        ResourcesModel model = new ResourcesModel("gold",100, testKingdom);
-        long id = 1;
-        Optional<ResourcesModel> testOptional = Optional.of(model);
-        Mockito.when(resourceRepository.findResourceById(id)).thenReturn(testOptional);
-        ResourcesModel verified = resourceService.verifyResource(id);
-        assertEquals("gold", verified.getType());
     }
 
     @Test

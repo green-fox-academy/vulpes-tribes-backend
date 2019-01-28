@@ -1,6 +1,7 @@
-package com.tribesbackend.tribes.models;
+package com.tribesbackend.tribes.models.Resources;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tribesbackend.tribes.models.Kingdom;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
