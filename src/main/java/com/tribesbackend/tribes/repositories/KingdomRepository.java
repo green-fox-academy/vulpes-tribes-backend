@@ -1,4 +1,5 @@
 package com.tribesbackend.tribes.repositories;
+
 import com.tribesbackend.tribes.models.Kingdom;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -11,8 +12,5 @@ public interface KingdomRepository extends JpaRepository<Kingdom, Long> {
 
     @Override
     List<Kingdom> findAll();
-    // prepared for OneToMany Kingdoms
-    //List<Kingdom> findKingdomsByTribesUserUsername(String username);
-
     Optional<Kingdom> findKingdomByTribesUserUsername(String username);
 }

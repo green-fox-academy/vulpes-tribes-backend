@@ -1,5 +1,6 @@
 package com.tribesbackend.tribes.security;
 
+import com.auth0.jwt.exceptions.JWTDecodeException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -29,28 +30,21 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
             chain.doFilter(req, res);
             return;
         }
-        UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
-        SecurityContextHolder.getContext().setAuthentication(authentication);
-        chain.doFilter(req, res);
+        try {
+            UsernamePasswordAuthenticationToken authentication = getAuthentication(req);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+            chain.doFilter(req, res);
+        } catch (JWTDecodeException e) {
+            JWTService.invalidTokenResponse(res);
+        }
     }
 
     private UsernamePasswordAuthenticationToken getAuthentication(HttpServletRequest request) {
         String token = request.getHeader(HEADER_STRING);
         if (token != null) {
-            // parse the token.
-
             String user = JWTService.extractUsername(token);
-//
-//            String user = JWT.require(Algorithm.HMAC512(SecurityConstants.SECRET.getBytes()))
-//                    .build()
-//                    .verify(token)
-//                    .getSubject();
-
-            System.out.println("USER IS:::::::::::::::::::::" + user);
-
             if (user != null) {
                 return new UsernamePasswordAuthenticationToken(user, null, new ArrayList<>());
-
             }
         }
         return null;

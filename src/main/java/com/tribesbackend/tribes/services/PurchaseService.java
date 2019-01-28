@@ -3,7 +3,9 @@ package com.tribesbackend.tribes.services;
 import com.tribesbackend.tribes.repositories.ItemPriceRepository;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class PurchaseService {
 
     @Autowired

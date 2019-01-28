@@ -43,19 +43,13 @@ public class UserRestController {
     @PostMapping(value = "/register")
     public ResponseEntity registerUser(@Validated @RequestBody RegistrationInputJson regjson) {
         TribesUser newUser = new TribesUser(regjson.getUsername(), regjson.getPassword());
-
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(ErrorMessagesMethods.usernameAlreadyTaken(), HttpStatus.CONFLICT);
         } else
             userTRepository.save(newUser);
         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
         newUser.setKingdom(newKingdom);
-        System.out.println(newKingdom.getName());
-        System.out.println(newKingdom.getId());
         kingdomRepo.save(newKingdom);
-        System.out.println(newUser.getId());
-        System.out.println(newUser.getUsername());
-        System.out.println(newKingdom.getId());
         return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
                 newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
 
@@ -69,11 +63,9 @@ public class UserRestController {
         } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).isPresent()) {
             return new ResponseEntity(ErrorMessagesMethods.notSuchUser(tribesUser.getUsername()), HttpStatus.UNAUTHORIZED);
         } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword().equals(tribesUser.getPassword())) {
-
             TribesUser user = userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get();
             user.setLoggedIn(true);
             userTRepository.save(user);
-
             return new ResponseEntity(
                     new OKstatus(JWTService.createToken(tribesUser.getUsername())),HttpStatus.OK);
         } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword()
@@ -81,7 +73,6 @@ public class UserRestController {
             return new ResponseEntity(ErrorMessagesMethods.wrongPassword()
                     , HttpStatus.UNAUTHORIZED);
         }
-
         return new ResponseEntity(HttpStatus.CONFLICT);
     }
 
