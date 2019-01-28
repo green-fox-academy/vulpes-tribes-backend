@@ -24,11 +24,11 @@ public class TribesUser implements UserDetails {
     @Size(min = 2, message = "Password should have at least 2 characters")
     String password;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "kingdom_id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "kingdom_id")
     Kingdom kingdom;
 
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resources_id", nullable = false)
     ResourcesModel resources;
 

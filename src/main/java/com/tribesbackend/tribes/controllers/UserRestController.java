@@ -2,10 +2,12 @@ package com.tribesbackend.tribes.controllers;
 
 
 import com.tribesbackend.tribes.models.Kingdom;
+import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponseJson;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
+import com.tribesbackend.tribes.repositories.ResourceRepository;
 import com.tribesbackend.tribes.repositories.UserTRepository;
 import com.tribesbackend.tribes.security.JWTService;
 import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
@@ -21,6 +23,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @SuppressWarnings("unchecked")
 
@@ -31,15 +35,18 @@ public class UserRestController {
     UserCrudService userCrudService;
     KingdomRepository kingdomRepo;
     ResourceService resourceService;
+    ResourceRepository resourceRepository;
 
     @Autowired
     public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods,
-                              UserCrudService userCrudService, KingdomRepository kingdomRepo, ResourceService resourceService) {
+                              UserCrudService userCrudService, KingdomRepository kingdomRepo,
+                              ResourceService resourceService, ResourceRepository resourceRepository) {
         this.userTRepository = userTRepository;
         this.userMethods = userMethods;
         this.userCrudService = userCrudService;
         this.kingdomRepo = kingdomRepo;
         this.resourceService = resourceService;
+        this.resourceRepository = resourceRepository;
     }
 
     @PostMapping(value = "/register")
@@ -48,17 +55,16 @@ public class UserRestController {
 
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(ErrorMessagesMethods.usernameAlreadyTaken(), HttpStatus.CONFLICT);
-        } else
-            userTRepository.save(newUser);
+        }
+
         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
+        List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);
+        newKingdom.setResourcesModel(newResources);
         newUser.setKingdom(newKingdom);
-        System.out.println(newKingdom.getName());
-        System.out.println(newKingdom.getId());
-        newKingdom.setResourcesModel(resourceService.newUserResourcesPreFill(newKingdom));
+        userTRepository.save(newUser);
         kingdomRepo.save(newKingdom);
-        System.out.println(newUser.getId());
-        System.out.println(newUser.getUsername());
-        System.out.println(newKingdom.getId());
+        newResources.forEach(resourcesModel -> resourceRepository.save(resourcesModel));
+
         return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
                 newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
 

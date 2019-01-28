@@ -25,8 +25,12 @@ public class Kingdom {
     public TribesUser tribesUser;
     @OneToMany(mappedBy = "kingdom")
     private List <Troop> troops;
-    @OneToMany(mappedBy = "kingdom")
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
+            mappedBy = "kingdom", orphanRemoval = true)
+    //@JoinColumn(name = "resources_model_id")
     public List <ResourcesModel> resourcesModel;
+
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id", nullable = false)
     List<Building> buildings;

@@ -35,7 +35,7 @@ public class TroopRestController {
     @GetMapping(value = "/kingdom/troops")
     public ResponseEntity getBuilding(@RequestHeader(name = "username")String username){
         Kingdom selectedKingdom = kingdomService.verifyKingdom(username);
-        
+
         return ResponseEntity.ok(troopRepository.findAllByKingdom(selectedKingdom).get());
     }
 }

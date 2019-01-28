@@ -14,15 +14,16 @@ import javax.validation.constraints.NotNull;
 public class ResourcesModel {
     @Id
     @GeneratedValue
-    long resourcesId;
+    long id;
     String type;
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
     long amount;
+    @Column(name = "updated_at")
     @JsonIgnore
     long timeStampLastVisit;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "kingdom_id", nullable = false)
+    //@JoinColumn(name = "kingdom_id", nullable = false)
     Kingdom kingdom;
 
     public ResourcesModel() {
@@ -32,22 +33,6 @@ public class ResourcesModel {
         this.amount = amount;
         this.kingdom = kingdom;
     }
-//kingdom, type, amount, whenewer kingdom is save to db, related resources should be saved as well. In users controller.
-    /*public ResourcesModel(String type, Kingdom kingdom) {
-        if (type.equals("gold") || type.equals("food")) {
-            this.type = type;
-        } else throw new IllegalArgumentException();
-
-        switch (type) {
-            case "gold":
-                this.amount = 100;// to be specified
-                break;
-            case "food":
-                this.amount = 0;
-                break;
-        }
-        this.kingdom = kingdom;
-    }*/
 
     public String getType() {
         return type;
