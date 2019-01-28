@@ -9,8 +9,8 @@ public class TroopFactory {
                 .setHp(100)
                 .setAttack(50)
                 .setDefence(20)
-                .setStarted_at(1231232312)
-                .setFinished_at(765214612)
+                .setStartedAt(1231232312)
+                .setFinishedAt(765214612)
                 .build();
     }
 
@@ -20,8 +20,8 @@ public class TroopFactory {
                 .setHp(100)
                 .setAttack(-50)
                 .setDefence(20)
-                .setStarted_at(1231232312)
-                .setFinished_at(765214612)
+                .setStartedAt(1231232312)
+                .setFinishedAt(765214612)
                 .build();
     }
 }

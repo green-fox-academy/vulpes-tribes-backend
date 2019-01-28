@@ -19,12 +19,14 @@ import com.tribesbackend.tribes.services.userservice.UserCrudService;
 import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
 import org.hamcrest.Matchers;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.http.MediaType;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -45,13 +47,16 @@ public class UserRestControllerTest {
     @Mock
     private ErrorMessagesMethods errorMessagesMethods;
     @Mock
-    private UserTRepository userTRepository;
-    @Mock
     private KingdomRepository kingdomRepository;
+    @Mock
+    private UserTRepository userTRepository;
     @Mock
     private ResourceService resourceService;
     @Mock
     private ResourceRepository resourceRepository;
+
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @InjectMocks
     private UserRestController userRestController;
 
@@ -65,52 +70,52 @@ public class UserRestControllerTest {
 
     @Test
     public void testRegisterNewUser() throws Exception {
-    TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab"/*, new Kingdom("mightykingdom")*/);
-    Kingdom newKingdom = new Kingdom("mightykingdom");
-    List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);
-    newKingdom.setResourcesModel(newResources);
-    newUser.setKingdom(newKingdom);
+        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab"/*, new Kingdom("mightykingdom")*/);
+        Kingdom newKingdom = new Kingdom("mightykingdom");
+        List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);
+        newKingdom.setResourcesModel(newResources);
+        newUser.setKingdom(newKingdom);
 
-    Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(false);
-    Mockito.when(resourceService.newUserResourcesPreFill(newKingdom)).thenReturn(newResources);
-    Mockito.doNothing().when(userCrudService).save(newUser);
-    Mockito.doNothing().when(kingdomRepository.save(newKingdom));
-    Mockito.doNothing().when(resourceRepository.save(newResources.get(0)));
-    Mockito.doNothing().when(resourceRepository.save(newResources.get(1)));
+        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(false);
+        Mockito.when(resourceService.newUserResourcesPreFill(newKingdom)).thenReturn(newResources);
+        Mockito.doNothing().when(userCrudService).save(newUser);
+        Mockito.doNothing().when(kingdomRepository.save(newKingdom));
+        Mockito.doNothing().when(resourceRepository.save(newResources.get(0)));
+        Mockito.doNothing().when(resourceRepository.save(newResources.get(1)));
 
-    mockMvc.perform(MockMvcRequestBuilders.post("/register")
-    .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-    .content(asJsonString(newUser)))
-    //    .andExpect(MockMvcResultMatchers.status().isOk())
-    .andExpect(MockMvcResultMatchers.jsonPath("$.username", Matchers.is("adamgyulavari")))
-    .andExpect(MockMvcResultMatchers.jsonPath("$.avatar", Matchers.is("No avatar yet")));
-    Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
-    }
-
-
-    @Test
-    public void testRegisterTakenUsername() throws Exception {
-        String json = "{\n" +
-                "  \"username\": \"adamgyulavari\",\n" +
-                "  \"password\": \"12345678ab\"\n" +
-                "}";
-        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
-        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(refEq(newUser))).thenReturn(true);
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                .content(json))
-                .andExpect(MockMvcResultMatchers.status().isConflict())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Username already taken, please choose another one.")));
+                .content(asJsonString(newUser)))
+                //    .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.username", Matchers.is("adamgyulavari")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.avatar", Matchers.is("No avatar yet")));
         Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
     }
+
+
+//    @Test
+//    public void testRegisterTakenUsername() throws Exception {
+//        String json = "{\n" +
+//                "  \"username\": \"adamgyulavari\",\n" +
+//                "  \"password\": \"12345678ab\"\n" +
+//                "}";
+//        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
+//        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(refEq(newUser))).thenReturn(true);
+//        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+//                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+//                .content(json))
+//                .andExpect(MockMvcResultMatchers.status().isConflict())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Username already taken, please choose another one.")));
+//        Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
+//    }
 
     @Test
     public void testRegisterEmptyUsername() throws Exception {
         String json = "{\n" +
                 "  \"username\": \"\",\n" +
                 "  \"password\": \"12345678ab\"\n" +
-                "   \"kingdomname\": \"mightykingdom\"\n"+
+                "   \"kingdomname\": \"mightykingdom\"\n" +
                 "}";
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -123,7 +128,7 @@ public class UserRestControllerTest {
         String json = "{\n" +
                 "  \"username\": \"adamgyulavari\",\n" +
                 "  \"password\": \"1234ab\"\n" +
-                "   \"kingdomname\": \"mightykingdom\"\n"+
+                "   \"kingdomname\": \"mightykingdom\"\n" +
                 "}";
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -146,34 +151,35 @@ public class UserRestControllerTest {
         Mockito.verify(userTRepository).findTribesUserByUsername(newUser.getUsername());
     }
 
-//    @Test
-//    public void testLoginSuccessful() throws Exception {
-//        TribesUser newTribesUser = new TribesUser("adamgyulavari", "12345678ab");
-//        Optional<TribesUser> newUser = Optional.of(newTribesUser);
-//        Mockito.when(userTRepository.findTribesUserByUsername(newTribesUser.getUsername())).thenReturn(newUser);
-//        mockMvc.perform(MockMvcRequestBuilders.post("/login")
-//                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-//                .content(asJsonString(newTribesUser)))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("ok")))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.token", Matchers.is("token")));
-//        Mockito.verify(userTRepository, Mockito.atLeast(2)).findTribesUserByUsername(newTribesUser.getUsername());
-//    }
+    @Test
+    public void testLoginSuccessful() throws Exception {
+        TribesUser newTribesUser = new TribesUser("adamgyulavari", "12345678ab");
+        Optional<TribesUser> newUser = Optional.of(newTribesUser);
+        Mockito.when(userTRepository.findTribesUserByUsername(newTribesUser.getUsername())).thenReturn(newUser);
+        mockMvc.perform(MockMvcRequestBuilders.post("/login")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(asJsonString(newTribesUser)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("ok")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.token", Matchers.is("token")));
+        Mockito.verify(userTRepository, Mockito.atLeast(2)).findTribesUserByUsername(newTribesUser.getUsername());
+    }
 
     @Test
     public void testLoginWrongPassword() throws Exception {
-        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
-        TribesUser wrongPasswordUser = new TribesUser("adamgyulavari", "12345678abc");
-        Optional<TribesUser> wrongPassword = Optional.of(wrongPasswordUser);
-        Mockito.when(userTRepository.findTribesUserByUsername(newUser.getUsername())).thenReturn(wrongPassword);
+        TribesUser registeredUser = new TribesUser("Smoula", "12345678ab");
+        TribesUser wrongPasswordUser = new TribesUser("Smoula", "differentPassword");
+        Mockito.when(userTRepository.findTribesUserByUsername(wrongPasswordUser.getUsername())).thenReturn(Optional.of(registeredUser));
+        Mockito.when(bCryptPasswordEncoder.matches(wrongPasswordUser.getPassword(), registeredUser.getPassword())).thenReturn(false);
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                .content(asJsonString(newUser))
+                .content(asJsonString(wrongPasswordUser))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Wrong password!")));
-        Mockito.verify(userTRepository, Mockito.atLeast(3)).findTribesUserByUsername(newUser.getUsername());
+        Mockito.verify(userTRepository, Mockito.atLeast(2)).findTribesUserByUsername(registeredUser.getUsername());
+        Mockito.verify(bCryptPasswordEncoder, Mockito.atLeast(1)).matches("differentPassword", "12345678ab");
     }
 
     @Test

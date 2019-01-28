@@ -1,4 +1,5 @@
 
+
 package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
@@ -30,9 +31,9 @@ public class ResourcesRestController {
     ErrorMessagesMethods errorMessagesMethods;
 
     @Autowired
-    public ResourcesRestController (ResourceRepository resourceRepository, KingdomRepository kingdomRepository,
-                                    ResourceCrudService resourceCrudService, KingdomService kingdomService,
-                                    ResourceService resourceService, ErrorMessagesMethods errorMessagesMethods ){
+    public ResourcesRestController(ResourceRepository resourceRepository, KingdomRepository kingdomRepository,
+                                   ResourceCrudService resourceCrudService, KingdomService kingdomService,
+                                   ResourceService resourceService, ErrorMessagesMethods errorMessagesMethods) {
         this.resourceRepository = resourceRepository;
         this.kingdomRepository = kingdomRepository;
         this.resourceCrudService = resourceCrudService;
@@ -42,9 +43,9 @@ public class ResourcesRestController {
     }
 
     @GetMapping(value = "/kingdom/resources")
-    public ResponseEntity getBuilding(){
+    public ResponseEntity getBuilding() {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
-        if (userName == null || userName.isEmpty()){
+        if (userName == null || userName.isEmpty()) {
             return new ResponseEntity(errorMessagesMethods.jsonUsernameNotProvided(), HttpStatus.BAD_REQUEST);
         }
         Kingdom selectedOne = resourceService.resourceDisplayandUpdate(userName, 1);

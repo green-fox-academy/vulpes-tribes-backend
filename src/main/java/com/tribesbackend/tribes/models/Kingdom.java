@@ -1,4 +1,5 @@
 package com.tribesbackend.tribes.models;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.models.Resources.ResourcesModel;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
@@ -6,6 +7,7 @@ import com.tribesbackend.tribes.models.buildingmodels.Building;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -18,7 +20,7 @@ public class Kingdom {
     Long id;
     @NotNull
     @Size(min = 2, message = "Name of Kingdom should have at least 2 characters")
-    @Column(name = "kingdomname",nullable = false, unique = true)
+    @Column(name = "kingdomname", nullable = false, unique = true)
     public String kingdomname;
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribe_user_id", nullable = false)
@@ -33,6 +35,9 @@ public class Kingdom {
             mappedBy = "kingdom" /*, orphanRemoval = true*/)
     public List <ResourcesModel> resourcesModel;
 
+    @OneToOne(mappedBy = "kingdom")
+    Location location;
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "kingdom")
     List<Building> buildings;
 
@@ -43,6 +48,7 @@ public class Kingdom {
     public Kingdom(String name, TribesUser tribesUser) {
         this.kingdomname = name;
         this.tribesUser = tribesUser;
+        troops = new ArrayList<>();
     }
 
     public Kingdom() {
@@ -94,5 +100,13 @@ public class Kingdom {
 
     public void setName(String name) {
         this.kingdomname = name;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 }

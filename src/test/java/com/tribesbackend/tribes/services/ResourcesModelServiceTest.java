@@ -14,7 +14,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
 import java.sql.Timestamp;
 import java.util.*;
 
@@ -88,6 +87,7 @@ public class ResourcesModelServiceTest {
     }
 
     @Test
+
     public void getLastTimestampFromDBTest(){
 
         Kingdom testKingdom = new Kingdom();

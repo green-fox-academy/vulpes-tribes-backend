@@ -30,7 +30,8 @@ public class ResourcesModel {
 
     public ResourcesModel() {
     }
-    public ResourcesModel(String type, long amount, Kingdom kingdom){
+
+    public ResourcesModel(String type, long amount, Kingdom kingdom) {
         this.type = type;
         this.amount = amount;
         this.kingdom = kingdom;
@@ -62,10 +63,18 @@ public class ResourcesModel {
         this.updatedAt = updatedAt;
     }
 
+    public long getTimeStampLastVisit() {
+        return updatedAt;
+    }
+
+    public void setTimeStampLastVisit(long timeStampLastVisit) {
+        this.updatedAt = timeStampLastVisit;
+    }
+
     public static class ResourcesBuilder {
         @Id
         @GeneratedValue
-        long resourcesId;
+        long id;
         String type;
         @Min(value = 0L, message = "The value must be positive")
         @NotNull
@@ -83,8 +92,8 @@ public class ResourcesModel {
             return kingdom;
         }
 
-        public ResourcesModel.ResourcesBuilder setResourcesId(long resourcesId) {
-            this.resourcesId = resourcesId;
+        public ResourcesModel.ResourcesBuilder setId(long id) {
+            this.id = id;
             return this;
         }
 
@@ -109,7 +118,7 @@ public class ResourcesModel {
         }
 
         public ResourcesModel build() {
-            return new ResourcesModel(type,amount, kingdom);
+            return new ResourcesModel(type, amount, kingdom);
         }
     }
 }

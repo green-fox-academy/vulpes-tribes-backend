@@ -1,6 +1,8 @@
 package com.tribesbackend.tribes.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -25,6 +27,7 @@ public class Troop {
     private int defence;
     private long startedAt;
     private long finishedAt;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "kingdom_id")
     private Kingdom kingdom;
@@ -57,13 +60,19 @@ public class Troop {
         @Min(value = 0L, message = "The value must be positive")
         @NotNull
         private int defence;
-        private int started_at;
-        private long finished_at;
+        private int startedAt;
+        private long finishedAt;
+        @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "kingdom_id")
         private Kingdom kingdom;
 
         public TroopBuilder() {
+        }
+
+        public TroopBuilder setKingdom(Kingdom kingdom) {
+            this.kingdom = kingdom;
+            return this;
         }
 
         public TroopBuilder setLevel(int level) {
@@ -86,18 +95,90 @@ public class Troop {
             return this;
         }
 
-        public TroopBuilder setStarted_at(int started_at) {
-            this.started_at = started_at;
+        public TroopBuilder setStartedAt(int startedAt) {
+            this.startedAt = startedAt;
             return this;
         }
 
-        public TroopBuilder setFinished_at(long finished_at) {
-            this.finished_at = finished_at;
+        public TroopBuilder setFinishedAt(long finishedAt) {
+            this.finishedAt = finishedAt;
             return this;
         }
 
         public Troop build() {
-            return new Troop(level, hp, attack, defence, started_at, finished_at);
+            return new Troop(level, hp, attack, defence, startedAt, finishedAt);
         }
+    }
+
+    public Kingdom getKingdom() {
+        return kingdom;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getAttack() {
+        return attack;
+    }
+
+    public int getDefence() {
+        return defence;
+    }
+
+    public long getStartedAt() {
+        return startedAt;
+    }
+
+    public long getFinishedAt() {
+        return finishedAt;
+    }
+
+    public Troop setId(Long id) {
+        this.id = id;
+        return this;
+    }
+
+    public Troop setLevel(int level) {
+        this.level = level;
+        return this;
+    }
+
+    public Troop setHp(int hp) {
+        this.hp = hp;
+        return this;
+    }
+
+    public Troop setAttack(int attack) {
+        this.attack = attack;
+        return this;
+    }
+
+    public Troop setDefence(int defence) {
+        this.defence = defence;
+        return this;
+    }
+
+    public Troop setStartedAt(long startedAt) {
+        this.startedAt = startedAt;
+        return this;
+    }
+
+    public Troop setFinishedAt(long finishedAt) {
+        this.finishedAt = finishedAt;
+        return this;
+    }
+
+    public Troop setKingdom(Kingdom kingdom) {
+        this.kingdom = kingdom;
+        return this;
     }
 }
