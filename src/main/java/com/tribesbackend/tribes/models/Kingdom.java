@@ -26,15 +26,12 @@ public class Kingdom {
     @OneToMany(mappedBy = "kingdom")
     private List <Troop> troops;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY,
-            mappedBy = "kingdom", orphanRemoval = true)
-    //@JoinColumn(name = "resources_model_id")
+    @OneToMany(fetch = FetchType.LAZY,
+            mappedBy = "kingdom" /*, orphanRemoval = true*/)
     public List <ResourcesModel> resourcesModel;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "building_id", nullable = false)
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "kingdom")
     List<Building> buildings;
-
 
     public Kingdom(String name) {
         this.kingdomname = name;

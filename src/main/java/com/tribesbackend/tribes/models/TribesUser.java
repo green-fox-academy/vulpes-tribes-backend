@@ -28,10 +28,6 @@ public class TribesUser implements UserDetails {
     @JoinColumn(name = "kingdom_id")
     Kingdom kingdom;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "resources_id", nullable = false)
-    ResourcesModel resources;
-
     @Column(name = "logged_in")
     Boolean loggedIn = false;
     

@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @Validated
 @Entity
-@Table(name = "resourcesModels")
+@Table(name = "resources")
 public class ResourcesModel {
     @Id
     @GeneratedValue
@@ -19,11 +19,12 @@ public class ResourcesModel {
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
     long amount;
+
     @Column(name = "updated_at")
     @JsonIgnore
-    long timeStampLastVisit;
+    long updatedAt;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    //@JoinColumn(name = "kingdom_id", nullable = false)
+    @JoinColumn(name = "kingdom"/*kingdom_id in table*/, nullable = false)
     Kingdom kingdom;
 
     public ResourcesModel() {
@@ -52,12 +53,12 @@ public class ResourcesModel {
         this.amount = amount;
     }
 
-    public long getTimeStampLastVisit() {
-        return timeStampLastVisit;
+    public long getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setTimeStampLastVisit(long timeStampLastVisit) {
-        this.timeStampLastVisit = timeStampLastVisit;
+    public void setUpdatedAt(long updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public static class ResourcesBuilder {

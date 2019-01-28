@@ -35,7 +35,7 @@ public class ResourceService {
     }
     public List<ResourcesModel> setDefaultTimestamps(List<ResourcesModel> resourcesModelsList){
         for(ResourcesModel r : resourcesModelsList){
-            r.setTimeStampLastVisit(getCurrentTimestamp().getTime());
+            r.setUpdatedAt(getCurrentTimestamp().getTime());
         }
         return resourcesModelsList;
     }
@@ -47,49 +47,17 @@ public class ResourceService {
         return rm;
     }
 
-    public ResourcesModel extractResourceFromKingdom (String username){
-        Optional<Kingdom> optionalKingdom = kingdomRepository.findKingdomByTribesUserUsername(username);
-        Kingdom kingdom = new Kingdom();
-        if(optionalKingdom.isPresent()){
-             kingdom = optionalKingdom.get();
-        }
-        ResourcesModel goldModel;
-        ResourcesModel foodModel = new ResourcesModel();
-        List<ResourcesModel> resourcesList = kingdom.getResourcesModel();
-        for(ResourcesModel r: resourcesList){
-            switch (r.getType()){
-                case "gold":
-                    goldModel = r;
-                    return goldModel;
-                case "food":
-                    foodModel = r;
-                    break;
-            }
-        }
-        return foodModel;
-    }
-
-    public ResourcesModel verifyResource (long id) {
-        Optional<ResourcesModel> optionalResource = resourceRepository.findResourceById(id);
-        if (optionalResource.isPresent()) {
-            return optionalResource.get();
-        } else throw new IllegalArgumentException();
-
-        //return Optional.ofNullable(optionalResource)
-        //      .map(r -> r.get())
-        //      .orElseThrow(IllegalArgumentException::new);
-    }
 
     public Timestamp getCurrentTimestamp(){
         return new Timestamp(System.currentTimeMillis());
     }
 
     public Timestamp getLastTimestampFromDB (ResourcesModel verifiedResourcesModel) {
-        return new Timestamp(verifiedResourcesModel.getTimeStampLastVisit());
+        return new Timestamp(verifiedResourcesModel.getUpdatedAt());
     }
 
     public Timestamp verifyTimestampHasValue (ResourcesModel verifiedResourcesModel){
-        if (verifiedResourcesModel.getTimeStampLastVisit() == 0){
+        if (verifiedResourcesModel.getUpdatedAt() == 0){
             return getCurrentTimestamp();
         }
         else return getLastTimestampFromDB(verifiedResourcesModel);
@@ -107,7 +75,7 @@ public class ResourceService {
         for(ResourcesModel r : rmListFromDB ){
             updatedResourcesAmount = r.getAmount() + (getDifferenceInMinutes(username) * amountGeneratedPerMinute);
             r.setAmount(updatedResourcesAmount);
-            r.setTimeStampLastVisit(getCurrentTimestamp().getTime());
+            r.setUpdatedAt(getCurrentTimestamp().getTime());
         }
         kingdomFromDB.setResourcesModel(rmListFromDB);
         kingdomRepository.save(kingdomFromDB);

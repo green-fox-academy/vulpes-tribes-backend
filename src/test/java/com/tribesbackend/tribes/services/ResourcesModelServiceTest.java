@@ -14,11 +14,9 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+
 import java.sql.Timestamp;
 import java.util.*;
-import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
 
@@ -57,8 +55,8 @@ public class ResourcesModelServiceTest {
         List<ResourcesModel> testList = resourceService.newUserResourcesPreFill(kingdom);
         Timestamp now = new Timestamp(System.currentTimeMillis());
         assertEquals(2, testList.size());
-        assertEquals(now.getTime(), testList.get(0).getTimeStampLastVisit());
-        assertEquals(now.getTime(), testList.get(1).getTimeStampLastVisit());
+        assertEquals(now.getTime(), testList.get(0).getUpdatedAt());
+        assertEquals(now.getTime(), testList.get(1).getUpdatedAt());
         assertEquals("gold", testList.get(0).getType());
         assertEquals("food", testList.get(1).getType());
         assertEquals(380, testList.get(0).getAmount());
@@ -123,14 +121,14 @@ public class ResourcesModelServiceTest {
 
         Kingdom testKingdom = new Kingdom();
         ResourcesModel model = new ResourcesModel("gold",100, testKingdom);
-        model.setTimeStampLastVisit(100);
+        model.setUpdatedAt(100);
         assertEquals(resourceService.getLastTimestampFromDB(model), new Timestamp(100));
     }
 
     @Test
     public void verifyTimestampHasValueZeroTimeTest(){
         ResourcesModel testModel = new ResourcesModel("gold", 0, testKingdom);
-        testModel.setTimeStampLastVisit(0);
+        testModel.setUpdatedAt(0);
         long now = new Timestamp(System.currentTimeMillis()).getTime();
         long fromFnc = resourceService.verifyTimestampHasValue(testModel).getTime();
         assertEquals(now, fromFnc);
@@ -138,8 +136,8 @@ public class ResourcesModelServiceTest {
 
     @Test
     public void verifyTimestampHasValueTest(){
-        modelGold.setTimeStampLastVisit(1548322289246L);
-        long directlyFromModel = modelGold.getTimeStampLastVisit();
+        modelGold.setUpdatedAt(1548322289246L);
+        long directlyFromModel = modelGold.getUpdatedAt();
         long fromFnc = resourceService.verifyTimestampHasValue(modelGold).getTime();
         assertEquals(directlyFromModel, fromFnc);
     }
@@ -162,12 +160,12 @@ public class ResourcesModelServiceTest {
         //Mockito.when(resourceService.getRMListFromDB("Alex")).thenReturn(testKingdom.getResourcesModel());
         assertEquals(0L, resourceService.getDifferenceInMinutes("Alex"));
         /*Mockito.when(resourceService.getRMListFromDB("Alf")).thenReturn(testKingdom.getResourcesModel());
-        //modelGold.setTimeStampLastVisit(1548322289246L);
-        Timestamp stamp = new Timestamp(testKingdom.getResourcesModel().get(1).getTimeStampLastVisit());
+        //modelGold.setUpdatedAt(1548322289246L);
+        Timestamp stamp = new Timestamp(testKingdom.getResourcesModel().get(1).getUpdatedAt());
 
         long differenceInMin = TimeUnit.MILLISECONDS.toMinutes(now.getTime() - stamp.getTime());
         Mockito.when(resourceService.getRMListFromDB("Alf")).thenReturn(testKingdom.getResourcesModel());
-        //Mockito.when(resourceService.verifyTimestampHasValue(new Timestamp(testKingdom.getResourcesModel().get(1).getTimeStampLastVisit()))).thenReturn(stamp);
+        //Mockito.when(resourceService.verifyTimestampHasValue(new Timestamp(testKingdom.getResourcesModel().get(1).getUpdatedAt()))).thenReturn(stamp);
 
         assertEquals(differenceInMin, resourceService.getDifferenceInMinutes("Alf"));
         */

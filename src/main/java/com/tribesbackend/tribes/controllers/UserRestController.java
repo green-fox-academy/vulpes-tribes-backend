@@ -56,14 +56,15 @@ public class UserRestController {
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(ErrorMessagesMethods.usernameAlreadyTaken(), HttpStatus.CONFLICT);
         }
+        userTRepository.save(newUser);
 
         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
-        List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);
-        newKingdom.setResourcesModel(newResources);
-        newUser.setKingdom(newKingdom);
-        userTRepository.save(newUser);
+//        newUser.setKingdom(newKingdom);
         kingdomRepo.save(newKingdom);
+        List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);
         newResources.forEach(resourcesModel -> resourceRepository.save(resourcesModel));
+        //newKingdom.setResourcesModel(newResources);
+
 
         return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
                 newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
