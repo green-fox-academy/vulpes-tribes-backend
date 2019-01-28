@@ -35,14 +35,14 @@ import java.util.Optional;
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserRestControllerTest {
 
-//    @Mock
-//    private UserCrudService userCrudService;
-//    @Mock
-//    private UserModelHelpersMethods userModelHelpersMethods;
-//    @Mock
-//    private ErrorMessagesMethods errorMessagesMethods;
-//    @Mock
-//    private KingdomRepository kingdomRepository;
+    @Mock
+    private UserCrudService userCrudService;
+    @Mock
+    private UserModelHelpersMethods userModelHelpersMethods;
+    @Mock
+    private ErrorMessagesMethods errorMessagesMethods;
+    @Mock
+    private KingdomRepository kingdomRepository;
     @Mock
     private UserTRepository userTRepository;
     @Mock
@@ -72,22 +72,24 @@ public class UserRestControllerTest {
 //        Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
 //    }
 
-//    @Test
-//    public void testRegisterTakenUsername() throws Exception {
-//        String json = "{\n" +
-//                "  \"username\": \"adamgyulavari\",\n" +
-//                "  \"password\": \"12345678ab\"\n" +
-//                "}";
-//        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
-//        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(refEq(newUser))).thenReturn(true);
-//        mockMvc.perform(MockMvcRequestBuilders.post("/register")
-//                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-//                .content(json))
-//                .andExpect(MockMvcResultMatchers.status().isConflict())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Username already taken, please choose another one.")));
-//        Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
-//    }
+    @Test
+    public void testRegisterTakenUsername() throws Exception {
+        String json = "{\n" +
+                "  \"username\": \"adamgyulavari\",\n" +
+                "  \"password\": \"12345678ab\",\n" +
+                "   \"kingdomname\": \"mightykingdom\"\n"+
+                "}";
+        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab");
+        Mockito.when(bCryptPasswordEncoder.encode("12345678ab")).thenReturn("12345678ab");
+        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(refEq(newUser))).thenReturn(true);
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(json))
+                .andExpect(MockMvcResultMatchers.status().isConflict())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Username already taken, please choose another one.")));
+        Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
+    }
 
     @Test
     public void testRegisterEmptyUsername() throws Exception {
