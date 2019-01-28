@@ -33,6 +33,7 @@ public class Kingdom {
     @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "building_id", nullable = false)
     List<Building> buildings;
+    @OneToOne(mappedBy = "kingdom")
     Location location;
 
 

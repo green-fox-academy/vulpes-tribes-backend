@@ -1,5 +1,6 @@
 package com.tribesbackend.tribes.models.jsonmodels;
 
+import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.Location;
 import com.tribesbackend.tribes.models.Troop;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
@@ -17,9 +18,9 @@ public class KingdomResponseJson {
     List <Troop> troops;
     Location location;
 
-    public KingdomResponseJson(Long id, String name, Long user_id, List<Building> buildings, List<ResourcesModel> resources, List<Troop> troops, Location location) {
-        this.id = id;
-        this.name = name;
+    public KingdomResponseJson(Kingdom kingdom ) {
+        this.id = kingdom.getId();
+        this.name = kingdom.getName();
         this.user_id = user_id;
         this.buildings = buildings;
         this.resources = resources;
