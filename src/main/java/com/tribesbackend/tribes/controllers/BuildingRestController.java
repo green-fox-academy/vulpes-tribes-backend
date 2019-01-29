@@ -1,6 +1,7 @@
 package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
+import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.models.jsonmodels.BuildingInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.CreateBuildingJson;
