@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 
 import java.util.NoSuchElementException;
 
-@CrossOrigin(value = "*")
+//@CrossOrigin(value = "*")
 @Controller
 public class BaseController {
     KingdomRepository kingdomRepository;
