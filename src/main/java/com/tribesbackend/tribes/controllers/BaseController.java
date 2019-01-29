@@ -7,9 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
+import java.util.NoSuchElementException;
+
 @Controller
 public class BaseController {
-    KingdomService kingdomService;
     KingdomRepository kingdomRepository;
 
     @Autowired
@@ -17,13 +18,9 @@ public class BaseController {
         this.kingdomRepository = kingdomRepository;
     }
 
-    @Autowired
-    public void setKingdomService(KingdomService kingdomService) {
-        this.kingdomService = kingdomService;
-    }
-
     public Kingdom getCurrentKingdom() {
-        return kingdomService.verifyKingdom(SecurityContextHolder.getContext()
-                .getAuthentication().getName());
+        return kingdomRepository.findKingdomByTribesUserUsername(SecurityContextHolder.getContext()
+                .getAuthentication().getName()).orElseThrow(NoSuchElementException::new);
+
     }
 }
