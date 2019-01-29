@@ -41,9 +41,6 @@ public class ResourcesRestController {
             return new ResponseEntity(errorMessagesMethods.jsonUsernameNotProvided(), HttpStatus.BAD_REQUEST);
         }
         List<ResourcesModel> updatedList = resourceService.resourceDisplayandUpdate(userName, 60);
-        Kingdom kingdom = kingdomRepository.findKingdomByTribesUserUsername(userName).get();
-        kingdom.setResourcesModel(updatedList);
-        kingdomRepository.save(kingdom);
         Resources resources = new Resources();
         resources.setResources(updatedList);
         return ResponseEntity.ok(resources);

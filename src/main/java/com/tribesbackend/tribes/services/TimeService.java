@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.sql.Timestamp;
 import java.util.concurrent.TimeUnit;
 
 @Service
@@ -15,10 +14,9 @@ public class TimeService {
     @Autowired
     BuildingTimeRepository buildingTimeRepository;
 
-    public static long timeDifferenceInMin(Timestamp timestamp1, Timestamp timestamp2) {
-        long milliseconds = timestamp2.getTime() - timestamp1.getTime();
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds);
-        return minutes;
+    public static long timeDifferenceInMin(long timestamp1, long timestamp2) {
+        long milliseconds = timestamp2 - timestamp1;
+        return TimeUnit.MILLISECONDS.toMinutes(milliseconds);
     }
 
     public int buildingTimeInMin(String type, int level) {

@@ -12,15 +12,18 @@ import org.springframework.stereotype.Service;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ResourceService {
     ResourceRepository resourceRepository;
     KingdomRepository kingdomRepository;
     KingdomService kingdomService;
+    TimeService timeService ;
 
     @Autowired
-    public ResourceService(ResourceRepository resourceRepository, KingdomRepository kingdomRepository, KingdomService kingdomService) {
+    public ResourceService(ResourceRepository resourceRepository, KingdomRepository kingdomRepository,
+                           KingdomService kingdomService ) {
         this.resourceRepository = resourceRepository;
         this.kingdomRepository = kingdomRepository;
         this.kingdomService = kingdomService;
@@ -54,33 +57,20 @@ public class ResourceService {
         return getCurrentTimestamp().getTime();
     }
 
-    public Timestamp getLastTimestampFromDB(ResourcesModel verifiedResourcesModel) {
-        return new Timestamp(verifiedResourcesModel.getUpdatedAt());
-    }
-
-    public Timestamp verifyTimestampHasValue(ResourcesModel verifiedResourcesModel) {
-        if (verifiedResourcesModel.getUpdatedAt() == 0) {
-            return getCurrentTimestamp();
-        } else return getLastTimestampFromDB(verifiedResourcesModel);
-    }
-
-    public long getDifferenceInMinutes(String username) {
-        List<ResourcesModel> listWithTimeStamps = getRMListFromDB(username);
-        return TimeService.timeDifferenceInMin(verifyTimestampHasValue(listWithTimeStamps.get(0)), getCurrentTimestamp());
-    }
-
-    public long getResourceAmountForUpdate(ResourcesModel resource, String username, int amountPerMinute) {
-        return resource.getAmount() + (getDifferenceInMinutes(username) + amountPerMinute);
+    public long timeDifferenceInMinIn(long timestamp1, long timestamp2) {
+        long milliseconds = timestamp2 - timestamp1;
+        return TimeUnit.MILLISECONDS.toMinutes(milliseconds);
     }
 
     public List<ResourcesModel> resourceDisplayandUpdate(String username, int amountGeneratedPerMinute) {
         Kingdom kingdomFromDB = kingdomService.verifyKingdom(username);
         List<ResourcesModel> rmListFromDB = kingdomFromDB.getResourcesModel();
         for (ResourcesModel r : rmListFromDB) {
-            r.setAmount(r.getAmount() + (getDifferenceInMinutes(username) * amountGeneratedPerMinute));
+            r.setAmount(r.getAmount() + (timeDifferenceInMinIn(r.getUpdatedAt(),System.currentTimeMillis()) * amountGeneratedPerMinute));
             r.setUpdatedAt(getCurrentTimestamp().getTime());
             resourceRepository.save(r);
         }
+
 //        rmListFromDB.forEach(resourcesModel -> {
 //            resourcesModel.setAmount(resourcesModel.getAmount() + (getDifferenceInMinutes(username) * amountGeneratedPerMinute));
 //            resourcesModel.setUpdatedAt(getCurrTimeAsLong());

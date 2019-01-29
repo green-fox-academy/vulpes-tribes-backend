@@ -66,7 +66,6 @@ public class UserRestController extends BaseController {
         newKingdom.setResourcesModel(newResources);
         newUser.setKingdom(newKingdom);
         newResources.forEach(resourcesModel -> resourceRepository.save(resourcesModel));
-
         return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
                 newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
     }
