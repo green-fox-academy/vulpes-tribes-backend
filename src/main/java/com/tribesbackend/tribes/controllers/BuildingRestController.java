@@ -5,7 +5,6 @@ import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.models.jsonmodels.BuildingInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.CreateBuildingJson;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
-import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.PurchaseService;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,13 +19,11 @@ import java.util.List;
 @RestController
 public class BuildingRestController extends BaseController{
     private BuildingRepository buildingRepo;
-    private KingdomRepository kingdomRepository;
     private PurchaseService purchaseService;
 
     @Autowired
-    BuildingRestController(BuildingRepository buildingRepo, KingdomRepository kingdomRepository, PurchaseService purchaseService) {
+    BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService) {
         this.buildingRepo = buildingRepo;
-        this.kingdomRepository = kingdomRepository;
         this.purchaseService = purchaseService;
     }
 

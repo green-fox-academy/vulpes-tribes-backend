@@ -26,7 +26,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import java.util.Optional;
 
-import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TroopRestControllerTest {
