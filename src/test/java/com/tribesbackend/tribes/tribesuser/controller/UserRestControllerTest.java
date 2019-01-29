@@ -8,6 +8,7 @@ import com.tribesbackend.tribes.controllers.UserRestController;
 import com.tribesbackend.tribes.factories.KingdomFactory;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
+import com.tribesbackend.tribes.security.JWTService;
 import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
 import com.tribesbackend.tribes.repositories.UserTRepository;
 
@@ -135,14 +136,14 @@ public class UserRestControllerTest {
     @Test
     public void testLoginSuccessful() throws Exception {
         TribesUser newTribesUser = new TribesUser("adamgyulavari", "12345678ab");
-        Optional<TribesUser> newUser = Optional.of(newTribesUser);
-        Mockito.when(userTRepository.findTribesUserByUsername(newTribesUser.getUsername())).thenReturn(newUser);
+        Mockito.when(userTRepository.findTribesUserByUsername(newTribesUser.getUsername())).thenReturn(Optional.of(newTribesUser));
+        Mockito.when(bCryptPasswordEncoder.matches("12345678ab", newTribesUser.getPassword())).thenReturn(true);
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content(asJsonString(newTribesUser)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("ok")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.token", Matchers.is("token")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("ok")));
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.tribes_token", Matchers.is(JWTService.createToken(newTribesUser.getUsername()))));
         Mockito.verify(userTRepository, Mockito.atLeast(2)).findTribesUserByUsername(newTribesUser.getUsername());
     }
 
