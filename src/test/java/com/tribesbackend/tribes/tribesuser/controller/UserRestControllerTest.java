@@ -1,13 +1,11 @@
 package com.tribesbackend.tribes.tribesuser.controller;
 
-import static org.mockito.ArgumentMatchers.refEq;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.tribesbackend.tribes.controllers.UserRestController;
 import com.tribesbackend.tribes.factories.KingdomFactory;
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.Resources.ResourcesModel;
+import com.tribesbackend.tribes.models.resources.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
@@ -19,7 +17,6 @@ import com.tribesbackend.tribes.services.userservice.UserCrudService;
 import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
 import org.hamcrest.Matchers;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

@@ -1,6 +1,6 @@
 package com.tribesbackend.tribes.repositories;
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.Resources.ResourcesModel;
+import com.tribesbackend.tribes.models.resources.ResourcesModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.List;

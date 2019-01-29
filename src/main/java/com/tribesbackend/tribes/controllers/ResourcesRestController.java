@@ -2,13 +2,9 @@
 
 package com.tribesbackend.tribes.controllers;
 
-import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.Resources.Resources;
-import com.tribesbackend.tribes.models.Resources.ResourcesModel;
+import com.tribesbackend.tribes.models.resources.Resources;
+import com.tribesbackend.tribes.models.resources.ResourcesModel;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
-import com.tribesbackend.tribes.repositories.ResourceRepository;
-import com.tribesbackend.tribes.services.KingdomService;
-import com.tribesbackend.tribes.services.resourcesservice.ResourceCrudService;
 import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
 import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
 import org.springframework.beans.factory.annotation.Autowired;

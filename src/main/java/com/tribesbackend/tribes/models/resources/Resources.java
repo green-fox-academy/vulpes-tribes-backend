@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.models.Resources;
+package com.tribesbackend.tribes.models.resources;
 
 import java.util.List;
 

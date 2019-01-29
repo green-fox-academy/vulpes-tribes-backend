@@ -4,7 +4,7 @@ import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.KingdomService;
 import com.tribesbackend.tribes.services.timeservice.TimeService;
-import com.tribesbackend.tribes.models.Resources.ResourcesModel;
+import com.tribesbackend.tribes.models.resources.ResourcesModel;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

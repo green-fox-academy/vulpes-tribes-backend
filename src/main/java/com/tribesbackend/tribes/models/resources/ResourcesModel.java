@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.models.Resources;
+package com.tribesbackend.tribes.models.resources;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.models.Kingdom;
