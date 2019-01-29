@@ -68,23 +68,9 @@ public class ResourceService {
         for (ResourcesModel r : rmListFromDB) {
             r.setAmount(r.getAmount() + (timeDifferenceInMinIn(r.getUpdatedAt(),System.currentTimeMillis()) * amountGeneratedPerMinute));
             r.setUpdatedAt(getCurrentTimestamp().getTime());
+            r.setGenerated(timeDifferenceInMinIn(r.getUpdatedAt(),System.currentTimeMillis()));
             resourceRepository.save(r);
         }
-
-//        rmListFromDB.forEach(resourcesModel -> {
-//            resourcesModel.setAmount(resourcesModel.getAmount() + (getDifferenceInMinutes(username) * amountGeneratedPerMinute));
-//            resourcesModel.setUpdatedAt(getCurrTimeAsLong());
-//            resourceRepository.save(resourcesModel);
-//        });
-
-//       for (int i = 0; i < rmListFromDB.size() ; i++) {
-//            rmListFromDB.get(i).setAmount(rmListFromDB.get(i).getAmount() +(getDifferenceInMinutes(username) * amountGeneratedPerMinute));
-//            rmListFromDB.get(i).setUpdatedAt(getCurrentTimestamp().getTime());
-//            resourceRepository.save(rmListFromDB.get(i));
-//        }
-        //kingdomFromDB.setResourcesModel(rmListFromDB);
-        //rmListFromDB.forEach(rm -> resourceRepository.save(rm));
-        //kingdomRepository.save(kingdomFromDB);
         return rmListFromDB;
     }
 }
