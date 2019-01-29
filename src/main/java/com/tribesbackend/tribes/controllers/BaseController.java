@@ -10,6 +10,12 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class BaseController {
     KingdomService kingdomService;
+    KingdomRepository kingdomRepository;
+
+    @Autowired
+    public void setKingdomRepository(KingdomRepository kingdomRepository) {
+        this.kingdomRepository = kingdomRepository;
+    }
 
     @Autowired
     public void setKingdomService(KingdomService kingdomService) {

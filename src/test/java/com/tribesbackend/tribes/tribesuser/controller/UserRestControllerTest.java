@@ -34,6 +34,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.List;
 import java.util.Optional;
 
+import static org.mockito.ArgumentMatchers.refEq;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 public class UserRestControllerTest {
 
