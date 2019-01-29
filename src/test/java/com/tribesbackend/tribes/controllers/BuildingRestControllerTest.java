@@ -54,6 +54,7 @@ public class BuildingRestControllerTest {
         Kingdom mightykingdom = KingdomFactory.createValidSampleKingdom();
         mightykingdom.setId((long) 1);
         Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(Optional.of(mightykingdom));
+        buildingRestController.setKingdomRepository(kingdomRepository);
         Mockito.when(purchaseService.purchasableItem(mightykingdom.getId(), "farm", 1)).thenReturn(true);
         mockMvc.perform(MockMvcRequestBuilders.post("/kingdom/buildings")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -72,6 +73,7 @@ public class BuildingRestControllerTest {
         Kingdom mightykingdom = KingdomFactory.createValidSampleKingdom();
         mightykingdom.setId((long) 1);
         Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(Optional.of(mightykingdom));
+        buildingRestController.setKingdomRepository(kingdomRepository);
         Mockito.when(purchaseService.purchasableItem(mightykingdom.getId(), "farm", 1)).thenReturn(false);
         mockMvc.perform(MockMvcRequestBuilders.post("/kingdom/buildings")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)

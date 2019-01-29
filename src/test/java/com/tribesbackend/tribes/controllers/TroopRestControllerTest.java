@@ -25,6 +25,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import java.util.Optional;
 
 import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TroopRestControllerTest {
@@ -51,6 +53,7 @@ public class TroopRestControllerTest {
         Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
         mockMvc.perform(MockMvcRequestBuilders.get("/kingdom/troops"))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-        .andDo(MockMvcResultHandlers.print());
+                .andExpect(jsonPath("$.troops").isArray())
+                .andExpect(content().string("{\"troops\":[{\"id\":null,\"level\":1,\"hp\":100,\"attack\":50,\"defence\":20,\"startedAt\":1231232312,\"finishedAt\":765214612}]}"));
     }
 }
