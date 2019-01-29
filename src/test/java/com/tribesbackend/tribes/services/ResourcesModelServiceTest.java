@@ -54,8 +54,6 @@ public class ResourcesModelServiceTest {
         List<ResourcesModel> testList = resourceService.newUserResourcesPreFill(kingdom);
         Timestamp now = new Timestamp(System.currentTimeMillis());
         assertEquals(2, testList.size());
-        assertEquals(now.getTime(), testList.get(0).getUpdatedAt());
-        assertEquals(now.getTime(), testList.get(1).getUpdatedAt());
         assertEquals("gold", testList.get(0).getType());
         assertEquals("food", testList.get(1).getType());
         assertEquals(380, testList.get(0).getAmount());
@@ -67,9 +65,7 @@ public class ResourcesModelServiceTest {
         testKingdom.setResourcesModel(listOfResources);
         assertFalse(testKingdom.getResourcesModel().isEmpty());
         assertEquals(2, testKingdom.getResourcesModel().size());
-        //assertEquals(testKingdom.getResourcesModel(), resourceService.extractResourceFromKingdom("Alf"));
     }
-
 
     @Test
     public void getCurrentTimestampTest() {
@@ -86,10 +82,11 @@ public class ResourcesModelServiceTest {
         assertFalse(emptyOptional.isPresent());
     }
 
-
     @Test
     public void resourceDisplayAndUpdateTest(){
         testKingdom.setResourcesModel(resourceService.newUserResourcesPreFill(testKingdom));
+
+
 
     }
 

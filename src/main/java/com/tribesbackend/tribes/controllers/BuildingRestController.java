@@ -21,19 +21,17 @@ import java.util.List;
 @RestController
 public class BuildingRestController extends BaseController{
     private BuildingRepository buildingRepo;
-    private KingdomRepository kingdomRepository;
     private PurchaseService purchaseService;
 
     @Autowired
-    BuildingRestController(BuildingRepository buildingRepo, KingdomRepository kingdomRepository, PurchaseService purchaseService) {
+    BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService) {
         this.buildingRepo = buildingRepo;
-        this.kingdomRepository = kingdomRepository;
         this.purchaseService = purchaseService;
     }
 
     @GetMapping(value = "/kingdom/buildings")
     public ResponseEntity<Object> buildingsOfUser() {
-        List<Building> usersBuildings = new ArrayList<Building>();
+        List<Building> usersBuildings = new ArrayList<>();
         usersBuildings.add(new Building("farm", 1, 10));
         return new ResponseEntity(usersBuildings, HttpStatus.OK);
     }

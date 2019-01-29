@@ -2,24 +2,22 @@ package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
+import com.tribesbackend.tribes.services.KingdomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 
 @Controller
 public class BaseController {
-
-    KingdomRepository kingdomRepository;
+    KingdomService kingdomService;
 
     @Autowired
-    public void setKingdomRepository(KingdomRepository kingdomRepository) {
-        this.kingdomRepository = kingdomRepository;
+    public void setKingdomService(KingdomService kingdomService) {
+        this.kingdomService = kingdomService;
     }
 
-
     public Kingdom getCurrentKingdom() {
-        Kingdom currentKingdom = kingdomRepository.findKingdomByTribesUserUsername(SecurityContextHolder.getContext()
-                .getAuthentication().getName()).get();
-        return currentKingdom;
+        return kingdomService.verifyKingdom(SecurityContextHolder.getContext()
+                .getAuthentication().getName());
     }
 }
