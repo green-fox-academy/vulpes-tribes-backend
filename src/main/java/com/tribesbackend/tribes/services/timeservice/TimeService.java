@@ -7,8 +7,7 @@ public class TimeService {
 
     public static long timeDifferenceInMin(Timestamp timestamp1, Timestamp timestamp2) {
         long milliseconds = timestamp2.getTime() - timestamp1.getTime();
-        long minutes = TimeUnit.MILLISECONDS.toMinutes(milliseconds);
-        return minutes;
+        return TimeUnit.MILLISECONDS.toMinutes(milliseconds);
 
     }
 }

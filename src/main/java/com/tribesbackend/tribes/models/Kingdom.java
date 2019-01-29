@@ -1,6 +1,7 @@
 package com.tribesbackend.tribes.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tribesbackend.tribes.models.Resources.ResourcesModel;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
 
 import javax.persistence.*;
@@ -23,17 +24,22 @@ public class Kingdom {
     public String kingdomname;
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribe_user_id", nullable = false)
+
     @JsonIgnore
     public TribesUser tribesUser;
+
     @OneToMany(mappedBy = "kingdom")
-    private List<Troop> troops;
-    @OneToMany(mappedBy = "kingdom")
-    private List <ResourcesModel> resourcesModel;
-    @OneToMany(mappedBy = "kingdom")
-    private List<Building> buildings;
+    private List <Troop> troops;
+
+    @OneToMany(fetch = FetchType.LAZY,
+            mappedBy = "kingdom" /*, orphanRemoval = true*/)
+    public List <ResourcesModel> resourcesModel;
+
     @OneToOne(mappedBy = "kingdom")
     Location location;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "kingdom")
+    List<Building> buildings;
 
     public Kingdom(String name) {
         this.kingdomname = name;

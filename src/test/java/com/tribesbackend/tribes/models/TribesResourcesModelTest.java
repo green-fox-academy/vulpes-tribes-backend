@@ -1,6 +1,7 @@
 package com.tribesbackend.tribes.models;
 
 
+import com.tribesbackend.tribes.models.Resources.ResourcesModel;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;

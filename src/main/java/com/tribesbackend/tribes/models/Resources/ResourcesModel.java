@@ -1,6 +1,7 @@
-package com.tribesbackend.tribes.models;
+package com.tribesbackend.tribes.models.Resources;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.tribesbackend.tribes.models.Kingdom;
 import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.*;
@@ -19,35 +20,22 @@ public class ResourcesModel {
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
     long amount;
+
+    @Column(name = "updated_at")
     @JsonIgnore
-    Long updatedAt;
+    long updatedAt;
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "kingdom_id", nullable = false)
+    @JoinColumn(name = "kingdom"/*kingdom_id in table*/, nullable = false)
     Kingdom kingdom;
 
     public ResourcesModel() {
     }
-    public ResourcesModel(String type, long amount, Kingdom kingdom){
+
+    public ResourcesModel(String type, long amount, Kingdom kingdom) {
         this.type = type;
         this.amount = amount;
         this.kingdom = kingdom;
     }
-//kingdom, type, amount, whenewer kingdom is save to db, related resources should be saved as well. In users controller.
-    /*public ResourcesModel(String type, Kingdom kingdom) {
-        if (type.equals("gold") || type.equals("food")) {
-            this.type = type;
-        } else throw new IllegalArgumentException();
-
-        switch (type) {
-            case "gold":
-                this.amount = 100;// to be specified
-                break;
-            case "food":
-                this.amount = 0;
-                break;
-        }
-        this.kingdom = kingdom;
-    }*/
 
     public String getType() {
         return type;
@@ -65,6 +53,14 @@ public class ResourcesModel {
 
     public void setAmount(long amount) {
         this.amount = amount;
+    }
+
+    public long getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(long updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public long getTimeStampLastVisit() {
@@ -122,7 +118,7 @@ public class ResourcesModel {
         }
 
         public ResourcesModel build() {
-            return new ResourcesModel(type,amount, kingdom);
+            return new ResourcesModel(type, amount, kingdom);
         }
     }
 }

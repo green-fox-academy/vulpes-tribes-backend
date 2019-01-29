@@ -35,33 +35,33 @@ public class TimeServiceTest {
 
     @Test
     public void timeDifference10min() {
-        Timestamp timestamp1 = new Timestamp(System.currentTimeMillis());
+        long timestamp1 = System.currentTimeMillis();
         Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(timestamp1.getTime());
+        cal.setTimeInMillis(timestamp1);
 
         // add some seconds to the calendar
         cal.add(Calendar.SECOND, 600);
-        Timestamp timestamp2 = new Timestamp(cal.getTime().getTime());
-        assertEquals(10, TimeService.timeDifferenceInMin(timestamp1, timestamp2));
+        long timestamp2 = cal.getTime().getTime();
+        assertEquals(10, timeService.timeDifferenceInMin(timestamp1, timestamp2));
     }
 
     @Test
     public void timeDifferenceNegative() {
-        Timestamp timestamp1 = new Timestamp(System.currentTimeMillis());
+        long timestamp1 = System.currentTimeMillis();
         Calendar cal = Calendar.getInstance();
-        cal.setTimeInMillis(timestamp1.getTime());
+        cal.setTimeInMillis(timestamp1);
 
         // add some seconds to the calendar
         cal.add(Calendar.SECOND, -600);
-        Timestamp timestamp2 = new Timestamp(cal.getTime().getTime());
-        assertEquals(-10, TimeService.timeDifferenceInMin(timestamp1, timestamp2));
+        long timestamp2 = cal.getTime().getTime();
+        assertEquals(-10, timeService.timeDifferenceInMin(timestamp1, timestamp2));
     }
 
     @Test
     public void timeDifferenceNone() {
-        Timestamp timestamp1 = new Timestamp(System.currentTimeMillis());
-        Timestamp timestamp2 = new Timestamp(System.currentTimeMillis());
-        assertEquals(0, TimeService.timeDifferenceInMin(timestamp1, timestamp2));
+        long timestamp1 = System.currentTimeMillis();
+        long timestamp2 = System.currentTimeMillis();
+        assertEquals(0, timeService.timeDifferenceInMin(timestamp1, timestamp2));
     }
 
     @Test

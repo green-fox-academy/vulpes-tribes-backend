@@ -6,8 +6,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.tribesbackend.tribes.controllers.UserRestController;
 import com.tribesbackend.tribes.factories.KingdomFactory;
+import com.tribesbackend.tribes.models.Kingdom;
+import com.tribesbackend.tribes.models.Resources.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
+import com.tribesbackend.tribes.repositories.ResourceRepository;
+import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
 import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
 import com.tribesbackend.tribes.repositories.UserTRepository;
 
@@ -30,6 +34,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
+import java.util.List;
 import java.util.Optional;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -46,7 +51,12 @@ public class UserRestControllerTest {
     @Mock
     private UserTRepository userTRepository;
     @Mock
+    private ResourceService resourceService;
+    @Mock
+    private ResourceRepository resourceRepository;
+
     BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @InjectMocks
     private UserRestController userRestController;
 
@@ -57,20 +67,28 @@ public class UserRestControllerTest {
         mockMvc = MockMvcBuilders.standaloneSetup(userRestController).build();
     }
 
-//    @Test
-//    public void testRegisterNewUser() throws Exception {
-//        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab", new Kingdom("mightykingdom"));
-//        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(false);
-//        Mockito.doNothing().when(userCrudService).save(newUser);
-//        Mockito.doNothing().when(kingdomRepository);
-//        mockMvc.perform(MockMvcRequestBuilders.post("/register")
-//                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-//                .content(asJsonString(newUser)))
-////                .andExpect(MockMvcResultMatchers.status().isOk())
+
+    @Test
+    public void testRegisterNewUser() throws Exception {
+        TribesUser newUser = new TribesUser("adamgyulavari", "12345678ab"/*, new Kingdom("mightykingdom")*/);
+        Kingdom newKingdom = new Kingdom("mightykingdom");
+        List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);
+        newKingdom.setResourcesModel(newResources);
+        newUser.setKingdom(newKingdom);
+
+        Mockito.when(userModelHelpersMethods.usernameAlreadyTaken(newUser)).thenReturn(false);
+        Mockito.when(resourceService.newUserResourcesPreFill(newKingdom)).thenReturn(newResources);
+
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/register")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(asJsonString(newUser)))
+                    .andExpect(MockMvcResultMatchers.status().isOk());
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.username", Matchers.is("adamgyulavari")))
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.avatar", Matchers.is("No avatar yet")));
 //        Mockito.verify(userModelHelpersMethods).usernameAlreadyTaken(refEq(newUser));
-//    }
+    }
+
 
     @Test
     public void testRegisterTakenUsername() throws Exception {
@@ -96,7 +114,7 @@ public class UserRestControllerTest {
         String json = "{\n" +
                 "  \"username\": \"\",\n" +
                 "  \"password\": \"12345678ab\"\n" +
-                "   \"kingdomname\": \"mightykingdom\"\n"+
+                "   \"kingdomname\": \"mightykingdom\"\n" +
                 "}";
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -109,7 +127,7 @@ public class UserRestControllerTest {
         String json = "{\n" +
                 "  \"username\": \"adamgyulavari\",\n" +
                 "  \"password\": \"1234ab\"\n" +
-                "   \"kingdomname\": \"mightykingdom\"\n"+
+                "   \"kingdomname\": \"mightykingdom\"\n" +
                 "}";
         mockMvc.perform(MockMvcRequestBuilders.post("/register")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
