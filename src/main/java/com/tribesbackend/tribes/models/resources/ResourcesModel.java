@@ -24,6 +24,10 @@ public class ResourcesModel {
     @Column(name = "updated_at")
     @JsonIgnore
     long updatedAt;
+
+    @Transient
+    long generated;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "kingdom"/*kingdom_id in table*/, nullable = false)
     Kingdom kingdom;
@@ -63,12 +67,12 @@ public class ResourcesModel {
         this.updatedAt = updatedAt;
     }
 
-    public long getTimeStampLastVisit() {
-        return updatedAt;
+    public long getGenerated() {
+        return generated;
     }
 
-    public void setTimeStampLastVisit(long timeStampLastVisit) {
-        this.updatedAt = timeStampLastVisit;
+    public void setGenerated(long generated) {
+        this.generated = generated;
     }
 
     public static class ResourcesBuilder {
