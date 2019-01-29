@@ -1,12 +1,11 @@
 package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.ResourcesModel;
+import com.tribesbackend.tribes.models.resources.ResourcesModel;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.models.jsonmodels.BuildingInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.CreateBuildingJson;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
-import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.PurchaseService;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +18,7 @@ import java.util.List;
 
 
 @RestController
-public class BuildingRestController extends BaseController{
+public class BuildingRestController extends BaseController {
     private BuildingRepository buildingRepo;
     private PurchaseService purchaseService;
 
@@ -40,16 +39,14 @@ public class BuildingRestController extends BaseController{
     public ResponseEntity<Object> createBuilding(@RequestBody CreateBuildingJson createBuildingJson) {
         if (createBuildingJson.getType() == null || createBuildingJson.getType().equals("")) {
             return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): type!"), HttpStatus.BAD_REQUEST);
-        }
-        else if (createBuildingJson.getType().equals("farm") || createBuildingJson.getType().equals("mine") || createBuildingJson.getType().equals("barrack") || createBuildingJson.getType().equals("townhall")) {
+        } else if (createBuildingJson.getType().equals("farm") || createBuildingJson.getType().equals("mine") || createBuildingJson.getType().equals("barrack") || createBuildingJson.getType().equals("townhall")) {
             Kingdom kingdom = getCurrentKingdom();
             if (purchaseService.purchasableItem(kingdom.getId(), createBuildingJson.getType(), 1)) {
                 Building newBuilding = new Building(createBuildingJson.getType(), kingdom);
                 buildingRepo.save(newBuilding);
                 return new ResponseEntity(newBuilding, HttpStatus.OK);
             } else return new ResponseEntity(new ErrorResponseModel("Not enough resources"), HttpStatus.CONFLICT);
-        }
-        else return new ResponseEntity(new ErrorResponseModel("Invalid building type"), HttpStatus.NOT_ACCEPTABLE);
+        } else return new ResponseEntity(new ErrorResponseModel("Invalid building type"), HttpStatus.NOT_ACCEPTABLE);
     }
 
     @GetMapping(value = "/kingdom/buildings/{id}")
