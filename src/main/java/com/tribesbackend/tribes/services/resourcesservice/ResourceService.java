@@ -8,6 +8,7 @@ import com.tribesbackend.tribes.models.Resources.ResourcesModel;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,6 @@ public class ResourceService {
         preFilled.add(new ResourcesModel("gold", 380, newKingdom));
         preFilled.add(new ResourcesModel("food", 0, newKingdom));
         return setDefaultTimestamps(preFilled);
-
     }
 
     public List<ResourcesModel> setDefaultTimestamps(List<ResourcesModel> resourcesModelsList) {
@@ -50,6 +50,10 @@ public class ResourceService {
         return new Timestamp(System.currentTimeMillis());
     }
 
+    public long getCurrentTimeAsLong() {
+        return getCurrentTimestamp().getTime();
+    }
+
     public Timestamp getLastTimestampFromDB(ResourcesModel verifiedResourcesModel) {
         return new Timestamp(verifiedResourcesModel.getUpdatedAt());
     }
@@ -61,26 +65,36 @@ public class ResourceService {
     }
 
     public long getDifferenceInMinutes(String username) {
-        List<ResourcesModel> withTimeStamps = getRMListFromDB(username);
-        return TimeService.timeDifferenceInMin(verifyTimestampHasValue(withTimeStamps.get(0)), getCurrentTimestamp());
+        List<ResourcesModel> listWithTimeStamps = getRMListFromDB(username);
+        return TimeService.timeDifferenceInMin(verifyTimestampHasValue(listWithTimeStamps.get(0)), getCurrentTimestamp());
     }
 
-    public Kingdom resourceDisplayandUpdate(String username, int amountGeneratedPerMinute) {
+    public long getResourceAmountForUpdate(ResourcesModel resource, String username, int amountPerMinute) {
+        return resource.getAmount() + (getDifferenceInMinutes(username) + amountPerMinute);
+    }
+
+    public List<ResourcesModel> resourceDisplayandUpdate(String username, int amountGeneratedPerMinute) {
         Kingdom kingdomFromDB = kingdomService.verifyKingdom(username);
         List<ResourcesModel> rmListFromDB = kingdomFromDB.getResourcesModel();
-        long updatedResourcesAmount  = rmListFromDB.get(1).getAmount() +(getDifferenceInMinutes(username) * amountGeneratedPerMinute);
-       /* for (ResourcesModel r : rmListFromDB) {
-            updatedResourcesAmount = r.getAmount() + (getDifferenceInMinutes(username) * amountGeneratedPerMinute);
-            r.setAmount(updatedResourcesAmount);
+        for (ResourcesModel r : rmListFromDB) {
+            r.setAmount(r.getAmount() + (getDifferenceInMinutes(username) * amountGeneratedPerMinute));
             r.setUpdatedAt(getCurrentTimestamp().getTime());
-        }*/
-        for (int i = 0; i <=1 ; i++) {
-            rmListFromDB.get(i).setAmount(rmListFromDB.get(i).getAmount() +(getDifferenceInMinutes(username) * amountGeneratedPerMinute));
-            rmListFromDB.get(i).setUpdatedAt(getCurrentTimestamp().getTime());
+            resourceRepository.save(r);
         }
-        kingdomFromDB.setResourcesModel(rmListFromDB);
-        rmListFromDB.forEach(rm ->resourceRepository.save(rm));
-        kingdomRepository.save(kingdomFromDB);
-        return kingdomFromDB;
+//        rmListFromDB.forEach(resourcesModel -> {
+//            resourcesModel.setAmount(resourcesModel.getAmount() + (getDifferenceInMinutes(username) * amountGeneratedPerMinute));
+//            resourcesModel.setUpdatedAt(getCurrTimeAsLong());
+//            resourceRepository.save(resourcesModel);
+//        });
+
+//       for (int i = 0; i < rmListFromDB.size() ; i++) {
+//            rmListFromDB.get(i).setAmount(rmListFromDB.get(i).getAmount() +(getDifferenceInMinutes(username) * amountGeneratedPerMinute));
+//            rmListFromDB.get(i).setUpdatedAt(getCurrentTimestamp().getTime());
+//            resourceRepository.save(rmListFromDB.get(i));
+//        }
+        //kingdomFromDB.setResourcesModel(rmListFromDB);
+        //rmListFromDB.forEach(rm -> resourceRepository.save(rm));
+        //kingdomRepository.save(kingdomFromDB);
+        return rmListFromDB;
     }
 }

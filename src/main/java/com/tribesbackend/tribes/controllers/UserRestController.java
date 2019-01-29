@@ -62,30 +62,13 @@ public class UserRestController extends BaseController {
         userTRepository.save(newUser);
         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
         kingdomRepo.save(newKingdom);
-        List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);	//        newUser.setKingdom(newKingdom);
+        List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);    //        newUser.setKingdom(newKingdom);
         newKingdom.setResourcesModel(newResources);
         newUser.setKingdom(newKingdom);
         newResources.forEach(resourcesModel -> resourceRepository.save(resourcesModel));
 
         return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
                 newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
-
-
-
-        /*userTRepository.save(newUser);
-
-
-         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);	        Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
-        List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);	//        newUser.setKingdom(newKingdom);
-        newKingdom.setResourcesModel(newResources);
-        newUser.setKingdom(newKingdom);
-        userTRepository.save(newUser);
-        kingdomRepo.save(newKingdom);	        kingdomRepo.save(newKingdom);
-        List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);
-        	        newResources.forEach(resourcesModel -> resourceRepository.save(resourcesModel));
-        //newKingdom.setResourcesModel(newResources);
-         return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),	        return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
-                newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);	                newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);*/
     }
 
     @PostMapping(value = "/login")

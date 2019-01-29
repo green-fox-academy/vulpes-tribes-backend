@@ -1,4 +1,4 @@
-/*package com.tribesbackend.tribes.models.Resources;
+package com.tribesbackend.tribes.models.Resources;
 
 import java.util.List;
 
@@ -20,4 +20,4 @@ public class Resources {
         this.resources = resources;
     }
 }
-*/
+
