@@ -31,7 +31,6 @@ public class TroopRestController {
     @GetMapping(value = "/kingdom/troops")
     public ResponseEntity getBuilding(@RequestHeader(name = "username")String username){
         Kingdom selectedKingdom =  kingdomRepository.findKingdomByTribesUserUsername(username);
-
         return new ResponseEntity(troopRepository.findAllByKingdom(selectedKingdom).get(), HttpStatus.OK);
     }
 }

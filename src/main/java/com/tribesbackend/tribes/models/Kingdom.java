@@ -2,14 +2,12 @@ package com.tribesbackend.tribes.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.models.resourcesmodels.ResourcesModel;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
-
 @Table(name = "kingdoms")
 public class Kingdom {
 
@@ -20,7 +18,6 @@ public class Kingdom {
     @Size(min = 2, message = "Name of Kingdom should have at least 2 characters")
     @Column(name = "kingdomname",nullable = false, unique = true)
     public String kingdomname;
-
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribe_user_id", nullable = false)
     @JsonIgnore
@@ -29,10 +26,8 @@ public class Kingdom {
     private List <Troop> troops;
     @OneToMany(mappedBy = "kingdom")
     public List <ResourcesModel> resourcesModel;
-    @OneToMany(fetch = FetchType.LAZY)
-    @JoinColumn(name = "building_id", nullable = false)
-    List<Building> buildings;
-
+    @OneToMany(mappedBy = "kingdom")
+    private List<Building> buildings;
 
     public Kingdom(String name) {
         this.kingdomname = name;

@@ -58,7 +58,6 @@ public class UserRestController {
         System.out.println(newKingdom.getId());
         return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
                 newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
-
     }
 
     @PostMapping(value = "/login")
@@ -69,11 +68,10 @@ public class UserRestController {
         } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).isPresent()) {
             return new ResponseEntity(ErrorMessagesMethods.notSuchUser(tribesUser.getUsername()), HttpStatus.UNAUTHORIZED);
         } else if (userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword().equals(tribesUser.getPassword())) {
-
             TribesUser user = userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get();
+            user.getPassword();
             user.setLoggedIn(true);
             userTRepository.save(user);
-
             return new ResponseEntity(
                     new OKstatus(JWTService.createToken(tribesUser.getUsername())),HttpStatus.OK);
         } else if (!userTRepository.findTribesUserByUsername(tribesUser.getUsername()).get().getPassword()
@@ -81,7 +79,6 @@ public class UserRestController {
             return new ResponseEntity(ErrorMessagesMethods.wrongPassword()
                     , HttpStatus.UNAUTHORIZED);
         }
-
         return new ResponseEntity(HttpStatus.CONFLICT);
     }
 

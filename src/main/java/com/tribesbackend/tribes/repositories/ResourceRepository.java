@@ -14,5 +14,4 @@ public interface ResourceRepository extends JpaRepository <ResourcesModel, Long>
     Optional<ResourcesModel> findResourceByResourcesId(long id);
     Optional<ResourcesModel> findAllByKingdom (Kingdom kingdom);
     Optional<ResourcesModel> findByKingdom_IdAndType(Long kingdom_id, String type);
-
-}
+    }

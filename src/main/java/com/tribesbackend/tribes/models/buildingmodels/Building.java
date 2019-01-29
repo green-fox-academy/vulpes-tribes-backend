@@ -8,6 +8,7 @@ import javax.validation.constraints.Size;
 import java.sql.Timestamp;
 
 @Entity
+@Table(name = "buildings")
 public class Building {
     @Id
     @GeneratedValue

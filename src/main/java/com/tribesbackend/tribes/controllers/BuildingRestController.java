@@ -1,11 +1,15 @@
 
 package com.tribesbackend.tribes.controllers;
+import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
+import com.tribesbackend.tribes.models.buildingmodels.BuildingModelListResponse;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
+import com.tribesbackend.tribes.repositories.UserTRepository;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,17 +20,19 @@ import java.util.List;
 @RestController
 public class BuildingRestController {
     BuildingRepository buildingRepo;
+    UserTRepository userTRepository;
 
     @Autowired
-    BuildingRestController(BuildingRepository buildingRepo) {
+    BuildingRestController(BuildingRepository buildingRepo, UserTRepository userTRepository) {
         this.buildingRepo = buildingRepo;
+        this.userTRepository = userTRepository;
     }
 
     @GetMapping(value = "/kingdom/buildings")
-    public ResponseEntity<Object> buildingsOfUser() {
-        List<Building> usersBuildings = new ArrayList<Building>();
-        usersBuildings.add(new Building("farm",1,10 ));
-            return new ResponseEntity(usersBuildings, HttpStatus.OK);
+    public  ResponseEntity getBuildings (BuildingModelListResponse buildingModelListResponse) {
+        TribesUser user = userTRepository.findTribesUserByUsername(SecurityContextHolder.getContext().getAuthentication().getName()).get();
+        BuildingModelListResponse response = new BuildingModelListResponse(user.getKingdom().getBuildings());
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
     @PostMapping(value = "/kingdom/buildings")
