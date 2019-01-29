@@ -33,7 +33,7 @@ public class KingdomRestController extends BaseController {
         return new ResponseEntity(new KingdomResponseJson(kingdom), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/kingdom/{id}")
+    @GetMapping(value = "/ki ngdom/{id}")
     public ResponseEntity getKingdomId(@PathVariable Long id) {
         if (kingdomRepository.findKingdomById(id).get() == null || !kingdomRepository.findKingdomById(id).isPresent()) {
             return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);
