@@ -27,8 +27,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@SuppressWarnings("unchecked")
-
+@CrossOrigin("*")
 @RestController
 public class UserRestController extends BaseController {
     private UserTRepository userTRepository;

@@ -1,5 +1,4 @@
 
-
 package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.resources.Resources;
@@ -11,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 public class ResourcesRestController {
     ResourceService resourceService;
