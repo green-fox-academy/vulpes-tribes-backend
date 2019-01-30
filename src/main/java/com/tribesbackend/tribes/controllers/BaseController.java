@@ -1,15 +1,15 @@
 package com.tribesbackend.tribes.controllers;
-
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
-import com.tribesbackend.tribes.services.KingdomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import java.util.NoSuchElementException;
 
+@CrossOrigin(value = "*")
 @Controller
 public class BaseController {
-    KingdomService kingdomService;
     KingdomRepository kingdomRepository;
 
     @Autowired
@@ -17,13 +17,8 @@ public class BaseController {
         this.kingdomRepository = kingdomRepository;
     }
 
-    @Autowired
-    public void setKingdomService(KingdomService kingdomService) {
-        this.kingdomService = kingdomService;
-    }
-
     public Kingdom getCurrentKingdom() {
-        return kingdomService.verifyKingdom(SecurityContextHolder.getContext()
-                .getAuthentication().getName());
+        return kingdomRepository.findKingdomByTribesUserUsername(SecurityContextHolder.getContext().getAuthentication().getName())
+                .orElseThrow(NoSuchElementException::new);
     }
 }
