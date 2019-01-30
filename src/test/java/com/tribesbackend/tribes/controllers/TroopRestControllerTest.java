@@ -34,7 +34,6 @@ import static com.auth0.jwt.algorithms.Algorithm.HMAC512;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
-
 @RunWith(SpringJUnit4ClassRunner.class)
 public class TroopRestControllerTest {
 
