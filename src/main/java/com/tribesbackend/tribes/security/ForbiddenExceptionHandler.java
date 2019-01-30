@@ -17,7 +17,6 @@ public class ForbiddenExceptionHandler implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException
                          ) throws IOException, ServletException {
         if(request.getMethod().equals("OPTIONS")) {
-            response.addHeader("Access-Control-Allow-Origin", "*");
             return;
         }
         Authentication auth
