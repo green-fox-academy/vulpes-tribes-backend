@@ -27,7 +27,7 @@ public class TroopRestController extends BaseController {
 
     @GetMapping(value = "/kingdom/troops")
     public ResponseEntity getTroops() {
-        return new ResponseEntity(new TroopModelListResponse(getCurrentKingdom().getTroops()), HttpStatus.OK);
+        return ResponseEntity.ok(new TroopModelListResponse(getCurrentKingdom().getTroops()));
     }
 
 //    @PostMapping(value = "/kingdom/troops")
