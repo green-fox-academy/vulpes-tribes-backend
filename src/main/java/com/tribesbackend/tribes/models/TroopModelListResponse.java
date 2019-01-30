@@ -4,20 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TroopModelListResponse {
-    List<Troop> troopList = new ArrayList<Troop>();
+    private List<Troop> troops;
 
-    public TroopModelListResponse(List<Troop> troopList) {
-        this.troopList = troopList;
+    public TroopModelListResponse(List<Troop> troops) {
+        this.troops = troops;
     }
 
-    public TroopModelListResponse() {
+    public List<Troop> getTroops() {
+        return troops;
     }
 
-    public List<Troop> getTroopList() {
-        return troopList;
-    }
-
-    public void setTroopList(List<Troop> troopList) {
-        this.troopList = troopList;
+    public void setTroops(List<Troop> troops) {
+        this.troops = troops;
     }
 }
