@@ -27,7 +27,7 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
                                     FilterChain chain) throws IOException, ServletException {
         String header = req.getHeader(HEADER_STRING);
         
-        if (header == null || req.getMethod().equals("OPTIONS")) {
+        if (header == null) {
             chain.doFilter(req, res);
             return;
         }
