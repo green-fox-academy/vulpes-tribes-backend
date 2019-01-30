@@ -12,7 +12,7 @@ public class KingdomResponseJson {
 
     Long id;
     String name;
-    long userId;
+    Long userId;
     List<Building> buildings;
     List <ResourcesModel> resources;
     List <Troop> troops;
@@ -28,7 +28,7 @@ public class KingdomResponseJson {
         this.location = kingdom.getLocation();
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -44,7 +44,7 @@ public class KingdomResponseJson {
         this.name = name;
     }
 
-    public long getUser_id() {
+    public Long getUser_id() {
         return userId;
     }
 

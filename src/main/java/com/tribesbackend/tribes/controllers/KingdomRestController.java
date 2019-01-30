@@ -21,7 +21,7 @@ public class KingdomRestController extends BaseController {
 
     @GetMapping(value = "/kingdom")
     public ResponseEntity getKingdom() {
-        return new ResponseEntity(getCurrentKingdom(), HttpStatus.OK);
+        return new ResponseEntity(new KingdomResponseJson(getCurrentKingdom()), HttpStatus.OK);
     }
 
     @PutMapping(value = "/kingdom")
