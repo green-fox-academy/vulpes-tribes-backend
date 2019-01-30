@@ -2,13 +2,13 @@ package com.tribesbackend.tribes.models.resources;
 
 import java.util.List;
 
-public class Resources {
+public class ResourcesModelListResponse {
     List<ResourcesModel> resources;
 
-    public Resources() {
+    public ResourcesModelListResponse() {
     }
 
-    public Resources(List<ResourcesModel> resources) {
+    public ResourcesModelListResponse(List<ResourcesModel> resources) {
         this.resources = resources;
     }
 
