@@ -16,15 +16,17 @@ public class ForbiddenExceptionHandler implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException
                          ) throws IOException, ServletException {
-        if(!request.getMethod().equals("OPTIONS")) {
-            Authentication auth
-                    = SecurityContextHolder.getContext().getAuthentication();
-            if (auth != null) {
-                System.out.println("User: " + auth.getName()
-                        + " attempted to access the protected URL: "
-                        + request.getRequestURI());
-            }
-            JWTService.invalidTokenResponse(response);
+        if(request.getMethod().equals("OPTIONS")) {
+            response.addHeader("Access-Control-Allow-Origin", "*");
+            return;
         }
+        Authentication auth
+                = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null) {
+            System.out.println("User: " + auth.getName()
+                    + " attempted to access the protected URL: "
+                    + request.getRequestURI());
+        }
+        JWTService.invalidTokenResponse(response);
     }
 }
