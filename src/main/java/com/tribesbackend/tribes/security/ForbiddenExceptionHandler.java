@@ -16,7 +16,9 @@ public class ForbiddenExceptionHandler implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException
                          ) throws IOException, ServletException {
-
+        if(request.getMethod().equals("OPTIONS")) {
+            return;
+        }
         Authentication auth
                 = SecurityContextHolder.getContext().getAuthentication();
         if (auth != null) {
