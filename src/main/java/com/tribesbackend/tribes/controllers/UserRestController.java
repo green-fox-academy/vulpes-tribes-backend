@@ -95,11 +95,4 @@ public class UserRestController extends BaseController {
         } else
             return new ResponseEntity(new LogoutMessages("error", "Unauthorized request!"), HttpStatus.FORBIDDEN);
     }
-
-
-    @GetMapping(value = "/user/testjwt")
-    public String testingEndpoint() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
-    }
 }
-
