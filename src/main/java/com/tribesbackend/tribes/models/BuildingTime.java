@@ -14,6 +14,9 @@ public class BuildingTime {
     private String type;
     private int buildTimeInMin;
 
+    public BuildingTime() {
+    }
+
     public BuildingTime(String type, int buildTimeInMin) {
         this.type = type;
         this.buildTimeInMin = buildTimeInMin;

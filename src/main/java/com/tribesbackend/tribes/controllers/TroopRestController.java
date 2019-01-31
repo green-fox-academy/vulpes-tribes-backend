@@ -9,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin("*")
-@RequestMapping(value = "/kingdom/troops")
-
 @RestController
 public class TroopRestController extends BaseController {
     private TroopRepository troopRepository;

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "troops")
@@ -35,13 +36,12 @@ public class Troop {
     public Troop() {
     }
 
-    public Troop(int level, int hp, int attack, int defence, long startedAt, long finishedAt) {
+    public Troop(int level, int hp, int attack, int defence) {
         this.level = level;
         this.hp = hp;
         this.attack = attack;
         this.defence = defence;
-        this.startedAt = startedAt;
-        this.finishedAt = finishedAt;
+        startedAt = (new Timestamp(System.currentTimeMillis())).getTime();
     }
 
     public static class TroopBuilder {
@@ -106,7 +106,7 @@ public class Troop {
         }
 
         public Troop build() {
-            return new Troop(level, hp, attack, defence, startedAt, finishedAt);
+            return new Troop(level, hp, attack, defence);
         }
     }
 
