@@ -5,6 +5,8 @@ public class KingdomInputJson {
     int locationX;
     int locationY;
 
+    public KingdomInputJson() {
+    }
     public KingdomInputJson(String name, int locationX, int locationY) {
         this.name = name;
         this.locationX = locationX;
@@ -34,4 +36,6 @@ public class KingdomInputJson {
     public void setLocationY(int locationY) {
         this.locationY = locationY;
     }
+
+
 }

@@ -17,7 +17,18 @@ public class Location {
     @JoinColumn(name = "kingdom_id", nullable = false)
     Kingdom kingdom;
 
+    public Location() {
+    }
+    public Location(int x, int y, Kingdom kingdom) {
+        this.x = x;
+        this.y = y;
+        this.kingdom = kingdom;
+    }
 
+    public Location(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
     public int getX() {
         return x;
     }
@@ -34,8 +45,5 @@ public class Location {
         this.y = y;
     }
 
-    public Location(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
+
 }

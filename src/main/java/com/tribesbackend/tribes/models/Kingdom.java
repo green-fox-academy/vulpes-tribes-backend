@@ -35,7 +35,7 @@ public class Kingdom {
             mappedBy = "kingdom" /*, orphanRemoval = true*/)
     public List <ResourcesModel> resourcesModel;
 
-    @OneToOne(mappedBy = "kingdom")
+    @OneToOne(mappedBy = "kingdom", cascade = CascadeType.ALL)
     Location location;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "kingdom")
