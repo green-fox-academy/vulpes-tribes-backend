@@ -37,7 +37,7 @@ public class ResourcesRestController {
         if (userName == null || userName.isEmpty()) {
             return new ResponseEntity(errorMessagesMethods.jsonUsernameNotProvided(), HttpStatus.BAD_REQUEST);
         }
-        List<ResourcesModel> updatedList = resourceService.resourceDisplayandUpdate(userName, 60);
+        List<ResourcesModel> updatedList = resourceService.resourceDisplayandUpdate(userName, 1);
         ResourcesModelListResponseJson resourcesModelListResponse = new ResourcesModelListResponseJson();
         resourcesModelListResponse.setResources(updatedList);
         return ResponseEntity.ok(resourcesModelListResponse);

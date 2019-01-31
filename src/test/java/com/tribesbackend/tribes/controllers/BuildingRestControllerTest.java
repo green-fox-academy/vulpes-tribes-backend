@@ -52,32 +52,25 @@ public class BuildingRestControllerTest {
                 new UsernamePasswordAuthenticationToken(testUser.getUsername(), testUser.getPassword()));
     }
 
-    @Test
-    public void createBuildingTest() throws Exception {
-        String json = "{\n" +
-                "  \"type\": \"farm\"\n" +
-                "}";
-
-        Kingdom mightykingdom = KingdomFactory.createValidSampleKingdom();
-        mightykingdom.setId((long) 1);
-        Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(Optional.of(mightykingdom));
-        buildingRestController.setKingdomRepository(kingdomRepository);
-        Mockito.when(purchaseService.purchasableItem(mightykingdom.getId(), "farm", 1)).thenReturn(true);
-
-//        Optional<Kingdom> kingdom = KingdomFactory.createOptionalValidSampleKingdom();
-//        Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
-//        kingdom.get().setId((long) 1);
+//    @Test
+//    public void createBuildingTest() throws Exception {
+//        String json = "{\n" +
+//                "  \"type\": \"farm\"\n" +
+//                "}";
+//
+//        Kingdom mightykingdom = KingdomFactory.createValidSampleKingdom();
+//        mightykingdom.setId((long) 1);
+//        Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(Optional.of(mightykingdom));
 //        buildingRestController.setKingdomRepository(kingdomRepository);
-//        Mockito.when(purchaseService.purchasableItem(kingdom.get().getId(), "farm", 1)).thenReturn(true);
-
-        mockMvc.perform(MockMvcRequestBuilders.post("/kingdom/buildings")
-                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                .content(json))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.type", Matchers.is("farm")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.level", Matchers.is(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.hp", Matchers.is(100)));
-    }
+//        Mockito.when(purchaseService.purchasableItem(mightykingdom.getId(), "farm", 1)).thenReturn(true);
+//        mockMvc.perform(MockMvcRequestBuilders.post("/kingdom/buildings")
+//                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+//                .content(json))
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.type", Matchers.is("farm")))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.level", Matchers.is(1)))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.hp", Matchers.is(100)));
+//    }
 
     @Test
     public void notResourcesTest() throws Exception {

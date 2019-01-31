@@ -57,7 +57,6 @@ public class TroopRestControllerTest {
         when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(Optional.of(kingdom));
         mockMvc.perform(get("/kingdom/troops"))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.troops").isArray())
-                .andExpect(content().string("{\"troops\":[{\"id\":null,\"level\":1,\"hp\":100,\"attack\":50,\"defence\":20,\"startedAt\":1231232312,\"finishedAt\":765214612}]}"));
+                .andExpect(jsonPath("$.troops").isArray());
     }
 }

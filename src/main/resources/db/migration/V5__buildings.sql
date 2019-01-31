@@ -4,4 +4,3 @@ CREATE TABLE buildings (id INT AUTO_INCREMENT PRIMARY KEY,
                         hp INT (4),
                         started_at BIGINT (10),
                         finished_at BIGINT (10) );
-
