@@ -1,14 +1,16 @@
-package com.tribesbackend.tribes.models.resources;
+package com.tribesbackend.tribes.models.jsonmodels;
+
+import com.tribesbackend.tribes.models.ResourcesModel;
 
 import java.util.List;
 
-public class ResourcesModelListResponse {
+public class ResourcesModelListResponseJson {
     List<ResourcesModel> resources;
 
-    public ResourcesModelListResponse() {
+    public ResourcesModelListResponseJson() {
     }
 
-    public ResourcesModelListResponse(List<ResourcesModel> resources) {
+    public ResourcesModelListResponseJson(List<ResourcesModel> resources) {
         this.resources = resources;
     }
 

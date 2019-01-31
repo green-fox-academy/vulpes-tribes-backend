@@ -1,16 +1,18 @@
-package com.tribesbackend.tribes.models.buildingmodels;
+package com.tribesbackend.tribes.models.jsonmodels;
+
+import com.tribesbackend.tribes.models.Building;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class BuildingModelListResponse {
+public class BuildingModelListResponseJson {
 
     List<Building> buildingList = new ArrayList<Building>();
 
-    public BuildingModelListResponse() {
+    public BuildingModelListResponseJson() {
     }
 
-    public BuildingModelListResponse(List<Building> buildingList) {
+    public BuildingModelListResponseJson(List<Building> buildingList) {
         this.buildingList = buildingList;
     }
 

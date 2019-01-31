@@ -4,8 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.tribesbackend.tribes.controllers.UserRestController;
 import com.tribesbackend.tribes.factories.KingdomFactory;
-import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.resources.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
@@ -31,7 +29,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.util.List;
 import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.refEq;

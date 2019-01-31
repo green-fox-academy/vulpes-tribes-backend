@@ -1,12 +1,14 @@
-package com.tribesbackend.tribes.models;
+package com.tribesbackend.tribes.models.jsonmodels;
+
+import com.tribesbackend.tribes.models.Troop;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TroopModelListResponse {
+public class TroopModelListResponseJson {
     private List<Troop> troops;
 
-    public TroopModelListResponse(List<Troop> troops) {
+    public TroopModelListResponseJson(List<Troop> troops) {
         this.troops = troops;
     }
 

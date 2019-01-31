@@ -1,6 +1,6 @@
 package com.tribesbackend.tribes.services;
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.resources.ResourcesModel;
+import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.resourcesservice.ResourceService;

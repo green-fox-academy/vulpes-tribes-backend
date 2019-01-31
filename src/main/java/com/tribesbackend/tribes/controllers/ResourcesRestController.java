@@ -1,8 +1,8 @@
 
 package com.tribesbackend.tribes.controllers;
 
-import com.tribesbackend.tribes.models.resources.ResourcesModel;
-import com.tribesbackend.tribes.models.resources.ResourcesModelListResponse;
+import com.tribesbackend.tribes.models.ResourcesModel;
+import com.tribesbackend.tribes.models.jsonmodels.ResourcesModelListResponseJson;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
 import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
@@ -38,7 +38,7 @@ public class ResourcesRestController {
             return new ResponseEntity(errorMessagesMethods.jsonUsernameNotProvided(), HttpStatus.BAD_REQUEST);
         }
         List<ResourcesModel> updatedList = resourceService.resourceDisplayandUpdate(userName, 60);
-        ResourcesModelListResponse resourcesModelListResponse = new ResourcesModelListResponse();
+        ResourcesModelListResponseJson resourcesModelListResponse = new ResourcesModelListResponseJson();
         resourcesModelListResponse.setResources(updatedList);
         return ResponseEntity.ok(resourcesModelListResponse);
     }

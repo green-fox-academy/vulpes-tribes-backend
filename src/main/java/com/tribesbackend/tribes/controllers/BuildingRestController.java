@@ -1,8 +1,8 @@
 package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.buildingmodels.BuildingModelListResponse;
-import com.tribesbackend.tribes.models.buildingmodels.Building;
+import com.tribesbackend.tribes.models.jsonmodels.BuildingModelListResponseJson;
+import com.tribesbackend.tribes.models.Building;
 import com.tribesbackend.tribes.models.jsonmodels.BuildingInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.CreateBuildingJson;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
@@ -30,7 +30,7 @@ public class BuildingRestController extends BaseController {
     @GetMapping(value = "/kingdom/buildings")
     public  ResponseEntity getBuildings () {
         List<Building> updatedList = getCurrentKingdom().getBuildings();
-        BuildingModelListResponse buildingModelListResponse = new BuildingModelListResponse();
+        BuildingModelListResponseJson buildingModelListResponse = new BuildingModelListResponseJson();
         buildingModelListResponse.setBuildingList(updatedList);
         return new ResponseEntity(buildingModelListResponse, HttpStatus.OK);
     }
