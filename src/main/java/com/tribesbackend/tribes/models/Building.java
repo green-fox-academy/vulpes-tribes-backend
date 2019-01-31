@@ -1,6 +1,8 @@
-package com.tribesbackend.tribes.models.buildingmodels;
+package com.tribesbackend.tribes.models;
+
 import com.tribesbackend.tribes.models.Kingdom;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -17,10 +19,10 @@ public class Building {
     @Size(min = 2, message = "At least 2 characters.")
     String type;
     @NotNull
-    @Min(value = 0L, message = "The value must be positive" )
+    @Min(value = 0L, message = "The value must be positive")
     int level;
     @NotNull
-    @Min(value = 0L, message = "The value must be positive" )
+    @Min(value = 0L, message = "The value must be positive")
     int HP;
     long startedAt;
     long finishedAt;
@@ -34,23 +36,25 @@ public class Building {
         this.kingdom = kingdom;
         level = 1;
         HP = 100;
-        startedAt= 12;
+        startedAt = (new Timestamp(System.currentTimeMillis())).getTime();
     }
 
     public Building(String type) {
         this.type = type;
         level = 1;
         HP = 100;
-        startedAt= 12;
-//                new Timestamp(System.currentTimeMillis()).getNanos();
+        startedAt = (new Timestamp(System.currentTimeMillis())).getTime();
     }
+
     public Building(String type, int level, int HP) {
         this.type = type;
         this.level = level;
         this.HP = HP;
+        startedAt = (new Timestamp(System.currentTimeMillis())).getTime();
     }
 
-    public Building() {}
+    public Building() {
+    }
 
     public Long getId() {
         return id;
@@ -96,7 +100,9 @@ public class Building {
         return finishedAt;
     }
 
-    public void setFinishedAt(int finishedAt) {this.finishedAt = finishedAt; }
+    public void setFinishedAt(long finishedAt) {
+        this.finishedAt = finishedAt;
+    }
 
     public Kingdom getKingdom() {
         return kingdom;

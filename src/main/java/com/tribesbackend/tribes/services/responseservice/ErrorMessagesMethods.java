@@ -38,4 +38,8 @@ public class ErrorMessagesMethods {
     public ErrorResponseModel notSuchKingdom(String username){
         return new ErrorResponseModel("Not such kingdom: "+ username);
     }
+
+    public ErrorResponseModel jsonUsernameNotProvided(){
+        return new ErrorResponseModel("Wrong token provided");
+    }
 }

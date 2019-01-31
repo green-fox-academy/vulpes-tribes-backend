@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.models.buildingmodels;
+package com.tribesbackend.tribes.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +13,9 @@ public class BuildingTime {
     Long id;
     private String type;
     private int buildTimeInMin;
+
+    public BuildingTime() {
+    }
 
     public BuildingTime(String type, int buildTimeInMin) {
         this.type = type;
