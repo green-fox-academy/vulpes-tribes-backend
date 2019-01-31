@@ -84,7 +84,7 @@ public class UserRestController extends BaseController {
         } else return new ResponseEntity(ErrorMessagesMethods.wrongPassword(), HttpStatus.UNAUTHORIZED);
     }
 
-    @DeleteMapping(value = "/user/logout")
+    @DeleteMapping(value = "/logout")
     public ResponseEntity logoutUser() {
         if (SecurityContextHolder.getContext().getAuthentication().isAuthenticated()) {
             TribesUser user = userTRepository.findTribesUserByUsername(SecurityContextHolder.getContext()
