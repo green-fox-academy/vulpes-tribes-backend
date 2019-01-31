@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/kingdom/**", "/user/**").authenticated()
+                .antMatchers("/kingdom/**", "/players/**").authenticated()
                 .antMatchers("/").permitAll()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))

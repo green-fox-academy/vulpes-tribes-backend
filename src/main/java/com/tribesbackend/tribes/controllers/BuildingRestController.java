@@ -38,7 +38,7 @@ public class BuildingRestController extends BaseController {
     public ResponseEntity<Object> createBuilding(@RequestBody CreateBuildingJson createBuildingJson) {
         if (createBuildingJson.getType() == null || createBuildingJson.getType().equals("")) {
             return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): type!"), HttpStatus.BAD_REQUEST);
-        } else if (createBuildingJson.getType().equals("farm") || createBuildingJson.getType().equals("mine") || createBuildingJson.getType().equals("barrack") || createBuildingJson.getType().equals("townhall")) {
+        } else if (createBuildingJson.getType().equals("farm") || createBuildingJson.getType().equals("mine") || createBuildingJson.getType().equals("barracks") || createBuildingJson.getType().equals("townhall")) {
             Kingdom kingdom = getCurrentKingdom();
             if (purchaseService.purchasableItem(kingdom.getId(), createBuildingJson.getType(), 1)) {
                 Building newBuilding = new Building(createBuildingJson.getType(), kingdom);
