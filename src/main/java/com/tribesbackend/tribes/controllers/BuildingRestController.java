@@ -1,7 +1,7 @@
 package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.resources.ResourcesModel;
+import com.tribesbackend.tribes.models.buildingmodels.BuildingModelListResponse;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.models.jsonmodels.BuildingInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.CreateBuildingJson;
@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -29,10 +28,11 @@ public class BuildingRestController extends BaseController {
     }
 
     @GetMapping(value = "/kingdom/buildings")
-    public ResponseEntity<Object> buildingsOfUser() {
-        List<Building> usersBuildings = new ArrayList<>();
-        usersBuildings.add(new Building("farm", 1, 10));
-        return new ResponseEntity(usersBuildings, HttpStatus.OK);
+    public  ResponseEntity getBuildings () {
+        List<Building> updatedList = getCurrentKingdom().getBuildings();
+        BuildingModelListResponse buildingModelListResponse = new BuildingModelListResponse();
+        buildingModelListResponse.setBuildingList(updatedList);
+        return new ResponseEntity(buildingModelListResponse, HttpStatus.OK);
     }
 
     @PostMapping(value = "/kingdom/buildings")
