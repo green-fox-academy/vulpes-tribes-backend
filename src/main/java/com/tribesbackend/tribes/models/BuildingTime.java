@@ -1,4 +1,4 @@
-package com.tribesbackend.tribes.models.buildingmodels;
+package com.tribesbackend.tribes.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

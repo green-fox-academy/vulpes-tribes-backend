@@ -3,7 +3,7 @@ package com.tribesbackend.tribes.controllers;
 
 
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.resources.ResourcesModel;
+import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponseJson;
@@ -27,8 +27,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@SuppressWarnings("unchecked")
-
+@CrossOrigin("*")
 @RestController
 public class UserRestController extends BaseController {
     private UserTRepository userTRepository;

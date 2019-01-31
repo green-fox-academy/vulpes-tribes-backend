@@ -1,6 +1,6 @@
 package com.tribesbackend.tribes.factories;
 
-import com.tribesbackend.tribes.models.buildingmodels.Building;
+import com.tribesbackend.tribes.models.Building;
 
 import java.util.ArrayList;
 import java.util.List;

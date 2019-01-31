@@ -1,6 +1,6 @@
 package com.tribesbackend.tribes.services.resourcesservice;
 
-import com.tribesbackend.tribes.models.resources.ResourcesModel;
+import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

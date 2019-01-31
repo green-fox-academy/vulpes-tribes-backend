@@ -14,8 +14,8 @@ public class PurchaseService {
     @Autowired
     ItemPriceRepository itemPriceRepository;
 
-    public int priceOfItem(String type, int level) {
 
+    public int priceOfItem(String type, int level) {
         if (level >= 1 && level <= 5 && itemPriceRepository.findByType(type).isPresent()) {
             return itemPriceRepository.findByType(type).get().getGold() * level;
         } else throw new IllegalArgumentException();
