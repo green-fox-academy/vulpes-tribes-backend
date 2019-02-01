@@ -48,10 +48,9 @@ public class KingdomRestControllerTest {
 
     @Mock
     private KingdomInputJson kingdomInputJson;
-    
+
     @Mock
     private KingdomResponseJson kingdomResponseJson;
-
 
 
     @Test
@@ -65,13 +64,11 @@ public class KingdomRestControllerTest {
 
     @Test
     public void testPutKingdom() throws Exception {
-
         String json = "{\n" +
                 "  \"name\": \"azeho\",\n" +
                 "\"locationX\":4,\n" +
                 "\"locationY\":6\n" +
                 "}";
-
         when(kingdomRepository.findKingdomByTribesUserUsername(any())).thenReturn(java.util.Optional
                 .of(KingdomFactory.createValidSampleKingdom()));
         kingdomRestController.setKingdomRepository(kingdomRepository);
@@ -83,21 +80,44 @@ public class KingdomRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.location.y", Matchers.is(6)))
                 .andExpect(status().isOk())
                 .andDo(print());
+    }
 
-       // kingdomRepository.findKingdomByTribesUserUsername(any())
+    @Test
+    public void testIDnotfound() throws Exception {
 
-             //   .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Not enough resources")))
+        when(kingdomRepository.findKingdomById(any())).thenReturn(null);
+        kingdomRestController.setKingdomRepository(kingdomRepository);
+        mockMvc.perform(get("/kingdom/{id}", 1)
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                //      .content(Integer.toString (id)))
+          .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
+                .andExpect(status().isNotFound())
+                .andDo(print());
 
     }
-    // original endpoint:
-//    @PutMapping(value = "/kingdom")
-//    public ResponseEntity putKingdom(@RequestBody KingdomInputJson kingdomInputJson) {
-//        Kingdom kingdom = getCurrentKingdom();
-//        kingdom.setName(kingdomInputJson.getName());
-//        kingdom.setLocation(new Location(kingdomInputJson.getLocationX(), kingdomInputJson.getLocationY()));
-//        kingdomRepository.save(kingdom);
-//        return new ResponseEntity(new KingdomResponseJson(kingdom), HttpStatus.OK);
-//    }
 
+    @Test
+    public void testIDOKfound() throws Exception {
+//        when(kingdomRepository.findKingdomByTribesUserUsername(any())).thenReturn(java.util.Optional
+//                .of(KingdomFactory.createValidSampleKingdom()));
+        when(kingdomRepository.findKingdomById(any())).thenReturn(java.util.Optional
+                .of(KingdomFactory.createValidSampleKingdom()));
+        kingdomRestController.setKingdomRepository(kingdomRepository);
+        mockMvc.perform(put("/kingdom/{id}", 1))
+              //  .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.is("mighty kingdom")))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+//    @GetMapping(value = "/kingdom/{id}")
+//    public ResponseEntity getKingdomId(@PathVariable Long id) {
+//        if (!kingdomRepository.findKingdomById(id).isPresent() ) {
+//            return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);
+//        } else {
+//
+//            Kingdom kingdom = kingdomRepository.findKingdomById(id).orElseThrow(NoSuchElementException::new);
+//            return new ResponseEntity(new KingdomResponseJson(kingdom), HttpStatus.OK);
+//        }
+//    }
 
 }
