@@ -19,6 +19,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.nio.charset.Charset;
+import java.util.Optional;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
@@ -84,28 +85,25 @@ public class KingdomRestControllerTest {
 
     @Test
     public void testIDnotfound() throws Exception {
-
-        when(kingdomRepository.findKingdomById(any())).thenReturn(null);
-        kingdomRestController.setKingdomRepository(kingdomRepository);
-        mockMvc.perform(get("/kingdom/{id}", 1)
+        when(kingdomRepository.findKingdomById(any())).thenReturn(Optional.empty());
+      kingdomRestController.setKingdomRepository(kingdomRepository);
+        mockMvc.perform(get("/kingdom/{id}",2,3)
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                //      .content(Integer.toString (id)))
-          .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
+                  //    .content(Integer.toString (id)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Id not found")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
                 .andExpect(status().isNotFound())
                 .andDo(print());
 
     }
 
     @Test
-    public void testIDOKfound() throws Exception {
-//        when(kingdomRepository.findKingdomByTribesUserUsername(any())).thenReturn(java.util.Optional
-//                .of(KingdomFactory.createValidSampleKingdom()));
-        when(kingdomRepository.findKingdomById(any())).thenReturn(java.util.Optional
-                .of(KingdomFactory.createValidSampleKingdom()));
+    public void testIDOK() throws Exception {
+        when(kingdomRepository.findKingdomById(any())).thenReturn(java.util.Optional.of(KingdomFactory.createValidSampleKingdom()));
         kingdomRestController.setKingdomRepository(kingdomRepository);
-        mockMvc.perform(put("/kingdom/{id}", 1))
-              //  .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.is("mighty kingdom")))
+        mockMvc.perform(get("/kingdom/{id}", 1))
+                //  .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name", Matchers.is("mightykingdom")))
                 .andExpect(status().isOk())
                 .andDo(print());
     }
