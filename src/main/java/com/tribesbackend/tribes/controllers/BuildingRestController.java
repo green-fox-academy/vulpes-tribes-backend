@@ -7,6 +7,7 @@ import com.tribesbackend.tribes.models.jsonmodels.BuildingInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.CreateBuildingJson;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.services.PurchaseService;
+import com.tribesbackend.tribes.services.TimeService;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,11 +21,13 @@ import java.util.List;
 public class BuildingRestController extends BaseController {
     private BuildingRepository buildingRepo;
     private PurchaseService purchaseService;
+    private TimeService timeService;
 
     @Autowired
-    BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService) {
+    BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService, TimeService timeService) {
         this.buildingRepo = buildingRepo;
         this.purchaseService = purchaseService;
+        this.timeService = timeService;
     }
 
     @GetMapping(value = "/kingdom/buildings")
@@ -39,10 +42,11 @@ public class BuildingRestController extends BaseController {
     public ResponseEntity<Object> createBuilding(@RequestBody CreateBuildingJson createBuildingJson) {
         if (createBuildingJson.getType() == null || createBuildingJson.getType().equals("")) {
             return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): type!"), HttpStatus.BAD_REQUEST);
-        } else if (createBuildingJson.getType().equals("farm") || createBuildingJson.getType().equals("mine") || createBuildingJson.getType().equals("barrack") || createBuildingJson.getType().equals("townhall")) {
+        } else if (createBuildingJson.getType().equals("farm") || createBuildingJson.getType().equals("mine") || createBuildingJson.getType().equals("barracks") || createBuildingJson.getType().equals("townhall")) {
             Kingdom kingdom = getCurrentKingdom();
             if (purchaseService.purchasableItem(kingdom.getId(), createBuildingJson.getType(), 1)) {
                 Building newBuilding = new Building(createBuildingJson.getType(), kingdom);
+                newBuilding.setFinishedAt(timeService.finishedAtBuilding(newBuilding.getStartedAt(), createBuildingJson.getType(), 1));
                 buildingRepo.save(newBuilding);
                 return new ResponseEntity(newBuilding, HttpStatus.OK);
             } else return new ResponseEntity(new ErrorResponseModel("Not enough resources"), HttpStatus.CONFLICT);

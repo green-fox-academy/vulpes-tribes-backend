@@ -12,6 +12,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import javax.servlet.http.HttpServletResponse;
+
 
 @Configuration
 @EnableWebSecurity
@@ -29,8 +31,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
+                .logout().disable()
                 .authorizeRequests()
-                .antMatchers("/kingdom/**", "/user/**").authenticated()
+                .antMatchers("/kingdom/**", "/player/**").authenticated()
                 .antMatchers("/").permitAll()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
@@ -46,8 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                    .allowedOrigins("*")
-                    .allowedMethods("*");
+                        .allowedOrigins("*")
+                        .allowedMethods("*");
             }
         };
     }

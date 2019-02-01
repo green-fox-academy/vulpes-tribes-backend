@@ -59,9 +59,10 @@ public class UserRestController extends BaseController {
             //return new ResponseEntity(, HttpStatus.CONFLICT);
             return ResponseEntity.status(HttpStatus.CONFLICT).body(ErrorMessagesMethods.usernameAlreadyTaken());
         }
-        userTRepository.save(newUser);
         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
-        kingdomRepo.save(newKingdom);
+        newUser.setKingdom(newKingdom);
+        userTRepository.save(newUser);
+        //kingdomRepo.save(newKingdom);
         List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);    //        newUser.setKingdom(newKingdom);
         newKingdom.setResourcesModel(newResources);
         newUser.setKingdom(newKingdom);
@@ -98,6 +99,7 @@ public class UserRestController extends BaseController {
         } else
             return new ResponseEntity(new LogoutMessages("error", "Unauthorized request!"), HttpStatus.FORBIDDEN);
     }
+
 
     @GetMapping(value = "/user/testjwt")
     public String testingEndpoint() {
