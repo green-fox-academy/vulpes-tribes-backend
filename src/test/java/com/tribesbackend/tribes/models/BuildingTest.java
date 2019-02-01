@@ -1,6 +1,5 @@
 package com.tribesbackend.tribes.models;
 
-import com.tribesbackend.tribes.models.buildingmodels.Building;
 import com.tribesbackend.tribes.factories.BuildingFactory;
 import org.junit.After;
 import org.junit.Before;

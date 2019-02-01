@@ -1,19 +1,19 @@
 package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.resources.ResourcesModel;
-import com.tribesbackend.tribes.models.buildingmodels.Building;
+import com.tribesbackend.tribes.models.jsonmodels.BuildingModelListResponseJson;
+import com.tribesbackend.tribes.models.Building;
 import com.tribesbackend.tribes.models.jsonmodels.BuildingInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.CreateBuildingJson;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.services.PurchaseService;
+import com.tribesbackend.tribes.services.TimeService;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @CrossOrigin("*")
@@ -21,28 +21,32 @@ import java.util.List;
 public class BuildingRestController extends BaseController {
     private BuildingRepository buildingRepo;
     private PurchaseService purchaseService;
+    private TimeService timeService;
 
     @Autowired
-    BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService) {
+    BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService, TimeService timeService) {
         this.buildingRepo = buildingRepo;
         this.purchaseService = purchaseService;
+        this.timeService = timeService;
     }
 
     @GetMapping(value = "/kingdom/buildings")
-    public ResponseEntity<Object> buildingsOfUser() {
-        List<Building> usersBuildings = new ArrayList<>();
-        usersBuildings.add(new Building("farm", 1, 10));
-        return new ResponseEntity(usersBuildings, HttpStatus.OK);
+    public  ResponseEntity getBuildings () {
+        List<Building> updatedList = getCurrentKingdom().getBuildings();
+        BuildingModelListResponseJson buildingModelListResponse = new BuildingModelListResponseJson();
+        buildingModelListResponse.setBuildingList(updatedList);
+        return new ResponseEntity(buildingModelListResponse, HttpStatus.OK);
     }
 
     @PostMapping(value = "/kingdom/buildings")
     public ResponseEntity<Object> createBuilding(@RequestBody CreateBuildingJson createBuildingJson) {
         if (createBuildingJson.getType() == null || createBuildingJson.getType().equals("")) {
             return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): type!"), HttpStatus.BAD_REQUEST);
-        } else if (createBuildingJson.getType().equals("farm") || createBuildingJson.getType().equals("mine") || createBuildingJson.getType().equals("barrack") || createBuildingJson.getType().equals("townhall")) {
+        } else if (createBuildingJson.getType().equals("farm") || createBuildingJson.getType().equals("mine") || createBuildingJson.getType().equals("barracks") || createBuildingJson.getType().equals("townhall")) {
             Kingdom kingdom = getCurrentKingdom();
             if (purchaseService.purchasableItem(kingdom.getId(), createBuildingJson.getType(), 1)) {
                 Building newBuilding = new Building(createBuildingJson.getType(), kingdom);
+                newBuilding.setFinishedAt(timeService.finishedAtBuilding(newBuilding.getStartedAt(), createBuildingJson.getType(), 1));
                 buildingRepo.save(newBuilding);
                 return new ResponseEntity(newBuilding, HttpStatus.OK);
             } else return new ResponseEntity(new ErrorResponseModel("Not enough resources"), HttpStatus.CONFLICT);
