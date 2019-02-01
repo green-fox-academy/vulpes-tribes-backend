@@ -56,7 +56,8 @@ public class UserRestController extends BaseController {
     public ResponseEntity registerUser(@Validated @RequestBody RegistrationInputJson regjson) {
         TribesUser newUser = new TribesUser(regjson.getUsername(), bCryptPasswordEncoder.encode(regjson.getPassword()));
         if (userMethods.usernameAlreadyTaken(newUser)) {
-            return new ResponseEntity(ErrorMessagesMethods.usernameAlreadyTaken(), HttpStatus.CONFLICT);
+            //return new ResponseEntity(, HttpStatus.CONFLICT);
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(ErrorMessagesMethods.usernameAlreadyTaken());
         }
         userTRepository.save(newUser);
         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
@@ -65,8 +66,10 @@ public class UserRestController extends BaseController {
         newKingdom.setResourcesModel(newResources);
         newUser.setKingdom(newKingdom);
         newResources.forEach(resourcesModel -> resourceRepository.save(resourcesModel));
-        return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
-                newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
+//        return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
+//                newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
+        return ResponseEntity.ok(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
+                newKingdom.getId(), "No avatar yet", 0));
     }
 
     @PostMapping(value = "/login")
@@ -95,7 +98,6 @@ public class UserRestController extends BaseController {
         } else
             return new ResponseEntity(new LogoutMessages("error", "Unauthorized request!"), HttpStatus.FORBIDDEN);
     }
-
 
     @GetMapping(value = "/user/testjwt")
     public String testingEndpoint() {

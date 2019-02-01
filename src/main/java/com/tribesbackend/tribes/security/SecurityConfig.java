@@ -35,7 +35,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
                 .exceptionHandling().authenticationEntryPoint(forbiddenExceptionHandler)
-                .and().cors();
+                .and().cors()
+                .and().logout().disable()
+        ;
     }
 
     @Bean
@@ -52,6 +54,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public BCryptPasswordEncoder encoder() {
-        return new BCryptPasswordEncoder();
+        return new BCryptPasswordEncoder(11);
     }
 }
