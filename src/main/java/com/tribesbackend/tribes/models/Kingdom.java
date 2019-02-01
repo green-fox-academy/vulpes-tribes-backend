@@ -22,7 +22,6 @@ public class Kingdom {
     public String kingdomname;
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribe_user_id", nullable = false)
-
     @JsonIgnore
     public TribesUser tribesUser;
 

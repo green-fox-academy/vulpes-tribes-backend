@@ -58,9 +58,10 @@ public class UserRestController extends BaseController {
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(ErrorMessagesMethods.usernameAlreadyTaken(), HttpStatus.CONFLICT);
         }
-        userTRepository.save(newUser);
         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
-        kingdomRepo.save(newKingdom);
+        newUser.setKingdom(newKingdom);
+        userTRepository.save(newUser);
+        //kingdomRepo.save(newKingdom);
         List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);    //        newUser.setKingdom(newKingdom);
         newKingdom.setResourcesModel(newResources);
         newUser.setKingdom(newKingdom);
