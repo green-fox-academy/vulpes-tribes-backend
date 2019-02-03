@@ -1,6 +1,6 @@
 package com.tribesbackend.tribes.repositories;
 
-import com.tribesbackend.tribes.models.buildingmodels.BuildingTime;
+import com.tribesbackend.tribes.models.BuildingTime;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

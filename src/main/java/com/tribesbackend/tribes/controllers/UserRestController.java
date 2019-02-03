@@ -3,7 +3,7 @@ package com.tribesbackend.tribes.controllers;
 
 
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.resources.ResourcesModel;
+import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponseJson;
@@ -27,30 +27,28 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@SuppressWarnings("unchecked")
-
+@CrossOrigin("*")
 @RestController
 public class UserRestController extends BaseController {
     private UserTRepository userTRepository;
     private UserModelHelpersMethods userMethods;
-    private UserCrudService userCrudService;
-    private KingdomRepository kingdomRepo;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
     private ResourceService resourceService;
     private ResourceRepository resourceRepository;
+private KingdomRepository kingdomRepository;
 
 
     @Autowired
     public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods,
                               UserCrudService userCrudService, KingdomRepository kingdomRepo,
-                              BCryptPasswordEncoder bCryptPasswordEncoder, ResourceService resourceService, ResourceRepository resourceRepository) {
+                              BCryptPasswordEncoder bCryptPasswordEncoder, ResourceService resourceService,
+                              ResourceRepository resourceRepository, KingdomRepository kingdomRepository) {
         this.userTRepository = userTRepository;
         this.userMethods = userMethods;
-        this.userCrudService = userCrudService;
-        this.kingdomRepo = kingdomRepo;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.resourceService = resourceService;
         this.resourceRepository = resourceRepository;
+        this.kingdomRepository = kingdomRepository;
     }
 
     @PostMapping(value = "/register")
@@ -59,9 +57,10 @@ public class UserRestController extends BaseController {
         if (userMethods.usernameAlreadyTaken(newUser)) {
             return new ResponseEntity(ErrorMessagesMethods.usernameAlreadyTaken(), HttpStatus.CONFLICT);
         }
-        userTRepository.save(newUser);
         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
-        kingdomRepo.save(newKingdom);
+        newUser.setKingdom(newKingdom);
+        userTRepository.save(newUser);
+       kingdomRepository.save(newKingdom);
         List<ResourcesModel> newResources = resourceService.newUserResourcesPreFill(newKingdom);    //        newUser.setKingdom(newKingdom);
         newKingdom.setResourcesModel(newResources);
         newUser.setKingdom(newKingdom);
@@ -96,11 +95,4 @@ public class UserRestController extends BaseController {
         } else
             return new ResponseEntity(new LogoutMessages("error", "Unauthorized request!"), HttpStatus.FORBIDDEN);
     }
-
-
-    @GetMapping(value = "/user/testjwt")
-    public String testingEndpoint() {
-        return SecurityContextHolder.getContext().getAuthentication().getName();
-    }
 }
-

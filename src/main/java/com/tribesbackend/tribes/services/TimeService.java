@@ -35,4 +35,12 @@ public class TimeService {
             return value;
         } else throw new IllegalArgumentException();
     }
+
+    public long finishedAtBuilding(long startedAt, String type, int level) {
+        return startedAt + buildingTimeInMin(type, level) * 60000;
+    }
+
+    public long finishedAtTroop(long startedAt, int troopLevel, int barracksLevel) {
+        return (long)(startedAt + troopTimeinMin(troopLevel, barracksLevel) * 60000);
+    }
 }

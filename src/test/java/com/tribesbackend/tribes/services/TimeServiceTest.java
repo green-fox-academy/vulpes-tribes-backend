@@ -1,6 +1,6 @@
 package com.tribesbackend.tribes.services;
 
-import com.tribesbackend.tribes.models.buildingmodels.BuildingTime;
+import com.tribesbackend.tribes.models.BuildingTime;
 import com.tribesbackend.tribes.repositories.BuildingTimeRepository;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +12,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Optional;
 
