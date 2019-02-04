@@ -1,7 +1,6 @@
 package com.tribesbackend.tribes.factories;
 
 import com.tribesbackend.tribes.models.Kingdom;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.Optional;
 

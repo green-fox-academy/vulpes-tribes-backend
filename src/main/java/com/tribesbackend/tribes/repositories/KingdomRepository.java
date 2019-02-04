@@ -15,5 +15,5 @@ public interface KingdomRepository extends JpaRepository<Kingdom, Long> {
 
     Optional<Kingdom> findKingdomByTribesUserUsername(String username);
 
-    Optional<Kingdom> findKingdomById(Long id);
+    Optional<Kingdom>  findKingdomById(Long id);
 }

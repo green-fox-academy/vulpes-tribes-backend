@@ -11,7 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.util.NoSuchElementException;
+
+
 @CrossOrigin("*")
+
 @RestController
 public class KingdomRestController extends BaseController {
 
@@ -22,25 +27,25 @@ public class KingdomRestController extends BaseController {
 
     @GetMapping(value = "/kingdom")
     public ResponseEntity getKingdom() {
-        return new ResponseEntity(getCurrentKingdom(), HttpStatus.OK);
+        return new ResponseEntity(new KingdomResponseJson(getCurrentKingdom()), HttpStatus.OK);
     }
 
     @PutMapping(value = "/kingdom")
     public ResponseEntity putKingdom(@RequestBody KingdomInputJson kingdomInputJson) {
         Kingdom kingdom = getCurrentKingdom();
         kingdom.setName(kingdomInputJson.getName());
-        kingdom.setLocation(new Location(kingdomInputJson.getLocationX(), kingdomInputJson.getLocationY()));
+        kingdom.setLocation(new Location(kingdomInputJson.getLocationX(), kingdomInputJson.getLocationY(),kingdom));
         kingdomRepository.save(kingdom);
         return new ResponseEntity(new KingdomResponseJson(kingdom), HttpStatus.OK);
     }
 
     @GetMapping(value = "/kingdom/{id}")
     public ResponseEntity getKingdomId(@PathVariable Long id) {
-        if (kingdomRepository.findKingdomById(id).get() == null || !kingdomRepository.findKingdomById(id).isPresent()) {
+        if (!kingdomRepository.findKingdomById(id).isPresent()) {
             return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);
         } else {
 
-            Kingdom kingdom = kingdomRepository.findKingdomById(id).get();
+            Kingdom kingdom = kingdomRepository.findKingdomById(id).orElseThrow(NoSuchElementException::new);
             return new ResponseEntity(new KingdomResponseJson(kingdom), HttpStatus.OK);
         }
     }

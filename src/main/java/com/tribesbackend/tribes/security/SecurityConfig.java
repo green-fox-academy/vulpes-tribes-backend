@@ -1,6 +1,5 @@
 package com.tribesbackend.tribes.security;
 
-import com.tribesbackend.tribes.services.userservice.MyUserTrDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,15 +11,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-import javax.servlet.http.HttpServletResponse;
-
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
-    @Autowired
-    MyUserTrDetailsService myUserTrDetailsService;
 
     @Autowired
     ForbiddenExceptionHandler forbiddenExceptionHandler;
@@ -52,7 +46,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             }
         };
     }
-
     @Bean
     public BCryptPasswordEncoder encoder() {
         return new BCryptPasswordEncoder();

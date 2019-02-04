@@ -2,10 +2,8 @@ package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.factories.KingdomFactory;
 import com.tribesbackend.tribes.factories.TribesUserFactory;
-import com.tribesbackend.tribes.factories.TroopFactory;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.TribesUser;
-import com.tribesbackend.tribes.models.Troop;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.PurchaseService;
@@ -26,8 +24,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Optional;
-
-import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BuildingRestControllerTest {
@@ -114,6 +110,14 @@ public class BuildingRestControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Missing parameter(s): type!")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")));
+    }
+
+    @Test
+    public void buildingUploadedOK() {
+        String json = "{\n" +
+                "  \"level\": \"\"\n" +
+                "}";
+
     }
 
 }

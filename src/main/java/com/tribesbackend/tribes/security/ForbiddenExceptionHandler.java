@@ -21,11 +21,11 @@ public class ForbiddenExceptionHandler implements AuthenticationEntryPoint {
         }
         Authentication auth
                 = SecurityContextHolder.getContext().getAuthentication();
-        if (auth != null) {
-            System.out.println("User: " + auth.getName()
-                    + " attempted to access the protected URL: "
-                    + request.getRequestURI());
-        }
+//        if (auth != null) {
+//            System.out.println("User: " + auth.getName()
+//                    + " attempted to access the protected URL: "
+//                    + request.getRequestURI());
+//        }
         JWTService.invalidTokenResponse(response);
     }
 }
