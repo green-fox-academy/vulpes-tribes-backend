@@ -1,4 +1,4 @@
-/*package com.tribesbackend.tribes.models;
+package com.tribesbackend.tribes.models;
 
 import javax.persistence.*;
 import java.util.List;
@@ -13,6 +13,8 @@ public class Battle {
     @JoinColumn(name = "kingdom_id", nullable = false)
     Kingdom defender;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "kingdom_id", nullable = false)
     Kingdom attacker;
 
     List<Troop> attackerTroops;
@@ -50,4 +52,4 @@ public class Battle {
         this.attackerTroops = attackerTroops;
     }
 }
-*/
+

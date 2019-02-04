@@ -35,7 +35,7 @@ public class ResourcesRestController {
     public ResponseEntity getResources() {
         String userName = SecurityContextHolder.getContext().getAuthentication().getName();
         if (userName == null || userName.isEmpty()) {
-            return ResponseEntity.status(400).body(errorMessagesMethods.jsonUsernameNotProvided());
+            return ResponseEntity.status(404).body(errorMessagesMethods.jsonUsernameNotProvided());
         }
         List<ResourcesModel> updatedList = resourceService.resourceDisplayandUpdate(userName,
                 Integer.valueOf(System.getenv("RESOURCES_GENRATE")));

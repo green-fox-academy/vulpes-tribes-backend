@@ -24,7 +24,8 @@ public class ResourcesModel {
     @JsonIgnore
     long updatedAt;
 
-    @Column(name = "generated_amount")
+    //@Column(name = "generated_amount")
+    @Transient
     long generated;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
