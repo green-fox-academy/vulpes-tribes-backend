@@ -107,15 +107,6 @@ public class KingdomRestControllerTest {
                 .andExpect(status().isOk())
                 .andDo(print());
     }
-//    @GetMapping(value = "/kingdom/{id}")
-//    public ResponseEntity getKingdomId(@PathVariable Long id) {
-//        if (!kingdomRepository.findKingdomById(id).isPresent() ) {
-//            return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);
-//        } else {
-//
-//            Kingdom kingdom = kingdomRepository.findKingdomById(id).orElseThrow(NoSuchElementException::new);
-//            return new ResponseEntity(new KingdomResponseJson(kingdom), HttpStatus.OK);
-//        }
-//    }
+
 
 }

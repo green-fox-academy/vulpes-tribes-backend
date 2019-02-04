@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout().disable()
                 .authorizeRequests()
-                .antMatchers("/kingdom/**", "/player/**").authenticated()
+                .antMatchers("/kingdom/**", "/players/**").authenticated()
                 .antMatchers("/").permitAll()
                 .and()
                 .addFilter(new JWTAuthorizationFilter(authenticationManager()))
@@ -51,4 +51,3 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 }
-
