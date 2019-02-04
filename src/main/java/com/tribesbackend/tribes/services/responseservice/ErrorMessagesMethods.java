@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class ErrorMessagesMethods {
 
     public static ErrorResponseModel usernameAlreadyTaken() {
-        return new ErrorResponseModel("Username already taken, please choose another one.");
+        return new ErrorResponseModel("Username already taken, please choose anotherr one.");
     }
 
     public static ErrorResponseModel jsonFieldIsEmpty(TribesUser user) {

@@ -1,8 +1,6 @@
 package com.tribesbackend.tribes.models;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -33,6 +31,10 @@ public class Troop {
     private Kingdom kingdom;
 
     public Troop() {
+    }
+
+    public Troop(Kingdom kingdom) {
+        this.kingdom = kingdom;
     }
 
     public Troop(int level, int hp, int attack, int defence, long startedAt, long finishedAt) {

@@ -34,8 +34,6 @@ public class TribesUserTest {
         Assert.assertEquals(true, UserModelHelpersMethods.isValid(tribesUser));
     }
 
-
-
     @Test
     public void usernameMissing() {
         TribesUser tribesUser = new TribesUser(null, "1235");

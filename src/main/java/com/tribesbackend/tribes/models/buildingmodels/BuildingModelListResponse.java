@@ -5,20 +5,20 @@ import java.util.List;
 
 public class BuildingModelListResponse {
 
-    List<Building> buildingList = new ArrayList<Building>();
+    List<Building> buildings = new ArrayList<Building>();
 
     public BuildingModelListResponse() {
     }
 
-    public BuildingModelListResponse(List<Building> buildingList) {
-        this.buildingList = buildingList;
+    public BuildingModelListResponse(List<Building> buildings) {
+        this.buildings = buildings;
     }
 
-    public List<Building> getBuildingList() {
-        return buildingList;
+    public List<Building> getBuildings() {
+        return buildings;
     }
 
-    public void  setBuildingList(List<Building> buildingList) {
-        this.buildingList = buildingList;
+    public void  setBuildings(List<Building> buildings) {
+        this.buildings = buildings;
     }
 }

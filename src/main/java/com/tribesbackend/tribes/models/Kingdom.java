@@ -3,7 +3,6 @@ package com.tribesbackend.tribes.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.tribesbackend.tribes.models.resources.ResourcesModel;
 import com.tribesbackend.tribes.models.buildingmodels.Building;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -24,7 +23,6 @@ public class Kingdom {
     public String kingdomname;
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "tribe_user_id", nullable = false)
-
     @JsonIgnore
     public TribesUser tribesUser;
 
