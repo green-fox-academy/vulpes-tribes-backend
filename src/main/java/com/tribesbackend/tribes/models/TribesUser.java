@@ -2,7 +2,6 @@ package com.tribesbackend.tribes.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.tribesbackend.tribes.models.resources.ResourcesModel;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -24,11 +23,8 @@ public class TribesUser implements UserDetails {
     @NotNull
     @Size(min = 2, message = "Password should have at least 2 characters")
     String password;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "kingdom_id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "tribesUser")
     Kingdom kingdom;
-
     @Column(name = "logged_in")
     Boolean loggedIn = false;
     

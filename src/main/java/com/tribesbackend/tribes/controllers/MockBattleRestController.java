@@ -39,7 +39,7 @@ public class MockBattleRestController extends BaseController{
     public ResponseEntity startBattle(@PathVariable("id") Long id, @RequestBody TroopIdsJson troopIdsJson) {
         Optional<Kingdom> enemyKingdom = kingdomRepository.findKingdomById(id);
         if (enemyKingdom.isPresent()) {
-            return new ResponseEntity(new OKstatus("Battle started against" + enemyKingdom.get().getName()), HttpStatus.OK);
+            return new ResponseEntity(new OKstatus("Battle started against " + enemyKingdom.get().getName()), HttpStatus.OK);
         }
         else return new ResponseEntity(new ErrorResponseModel("No such kingdom"), HttpStatus.CONFLICT);
     }

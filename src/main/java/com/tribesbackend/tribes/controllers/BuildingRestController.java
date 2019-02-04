@@ -1,12 +1,13 @@
 package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.buildingmodels.BuildingModelListResponse;
-import com.tribesbackend.tribes.models.buildingmodels.Building;
+import com.tribesbackend.tribes.models.jsonmodels.BuildingModelListResponseJson;
+import com.tribesbackend.tribes.models.Building;
 import com.tribesbackend.tribes.models.jsonmodels.BuildingInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.CreateBuildingJson;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.services.PurchaseService;
+import com.tribesbackend.tribes.services.TimeService;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,21 +16,24 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin("*")
 @RestController
 public class BuildingRestController extends BaseController {
     private BuildingRepository buildingRepo;
     private PurchaseService purchaseService;
+    private TimeService timeService;
 
     @Autowired
-    BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService) {
+    BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService, TimeService timeService) {
         this.buildingRepo = buildingRepo;
         this.purchaseService = purchaseService;
+        this.timeService = timeService;
     }
 
     @GetMapping(value = "/kingdom/buildings")
     public  ResponseEntity getBuildings () {
         List<Building> updatedList = getCurrentKingdom().getBuildings();
-        BuildingModelListResponse buildingModelListResponse = new BuildingModelListResponse();
+        BuildingModelListResponseJson buildingModelListResponse = new BuildingModelListResponseJson();
         buildingModelListResponse.setBuildingList(updatedList);
         return new ResponseEntity(buildingModelListResponse, HttpStatus.OK);
     }
@@ -42,6 +46,7 @@ public class BuildingRestController extends BaseController {
             Kingdom kingdom = getCurrentKingdom();
             if (purchaseService.purchasableItem(kingdom.getId(), createBuildingJson.getType(), 1)) {
                 Building newBuilding = new Building(createBuildingJson.getType(), kingdom);
+                newBuilding.setFinishedAt(timeService.finishedAtBuilding(newBuilding.getStartedAt(), createBuildingJson.getType(), 1));
                 buildingRepo.save(newBuilding);
                 return new ResponseEntity(newBuilding, HttpStatus.OK);
             } else return new ResponseEntity(new ErrorResponseModel("Not enough resources"), HttpStatus.CONFLICT);

@@ -1,19 +1,14 @@
+
 package com.tribesbackend.tribes.controllers;
 
-import com.tribesbackend.tribes.models.Kingdom;
-import com.tribesbackend.tribes.models.Troop;
-import com.tribesbackend.tribes.models.TroopModelListResponse;
+import com.tribesbackend.tribes.models.jsonmodels.TroopModelListResponseJson;
 import com.tribesbackend.tribes.repositories.TroopRepository;
 import com.tribesbackend.tribes.services.PurchaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
+@CrossOrigin("*")
 @RestController
 public class TroopRestController extends BaseController {
     private TroopRepository troopRepository;
@@ -27,7 +22,7 @@ public class TroopRestController extends BaseController {
 
     @GetMapping(value = "/kingdom/troops")
     public ResponseEntity getTroops() {
-        return ResponseEntity.ok(new TroopModelListResponse(getCurrentKingdom().getTroops()));
+        return ResponseEntity.ok(new TroopModelListResponseJson(getCurrentKingdom().getTroops()));
     }
 
 //    @PostMapping(value = "/kingdom/troops")
