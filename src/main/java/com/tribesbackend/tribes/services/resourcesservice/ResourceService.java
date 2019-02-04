@@ -53,7 +53,9 @@ public class ResourceService {
         long milliseconds = timestamp2 - timestamp1;
         return TimeUnit.MILLISECONDS.toMinutes(milliseconds);
     }
-    
+    public int getResourcesCoeeficient(){
+
+    }
 
     public List<ResourcesModel> resourceDisplayandUpdate(String username, int amountGeneratedPerMinute) {
         Kingdom kingdomFromDB = kingdomService.verifyKingdom(username);
