@@ -1,27 +1,28 @@
-package com.tribesbackend.tribes.models;
+/*package com.tribesbackend.tribes.models;
 
-import javax.persistence.Entity;
+import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Battle {
+    @Id
+    @GeneratedValue
+    long id;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "kingdom_id", nullable = false)
     Kingdom defender;
 
     Kingdom attacker;
 
-    List<Troop> defendersTroops;
-
     List<Troop> attackerTroops;
 
     public Battle(){
-
     }
 
-    public Battle(Kingdom defender, Kingdom attacker, List<Troop> defendersTroops, List<Troop> attackerTroops) {
+    public Battle(Kingdom defender, Kingdom attacker, List<Troop> attackerTroops) {
         this.defender = defender;
         this.attacker = attacker;
-        this.defendersTroops = defendersTroops;
         this.attackerTroops = attackerTroops;
     }
 
@@ -41,14 +42,6 @@ public class Battle {
         this.attacker = attacker;
     }
 
-    public List<Troop> getDefendersTroops() {
-        return defendersTroops;
-    }
-
-    public void setDefendersTroops(List<Troop> defendersTroops) {
-        this.defendersTroops = defendersTroops;
-    }
-
     public List<Troop> getAttackerTroops() {
         return attackerTroops;
     }
@@ -57,3 +50,4 @@ public class Battle {
         this.attackerTroops = attackerTroops;
     }
 }
+*/

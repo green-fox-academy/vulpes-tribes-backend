@@ -24,7 +24,7 @@ public class ResourcesModel {
     @JsonIgnore
     long updatedAt;
 
-    @Transient
+    @Column(name = "generated_amount")
     long generated;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -83,7 +83,7 @@ public class ResourcesModel {
         @NotNull
         long amount;
         @JsonIgnore
-        long timeStampLastVisit;
+        long updatedAt;
         @ManyToOne(fetch = FetchType.LAZY, optional = false)
         @JoinColumn(name = "kingdom_id", nullable = false)
         Kingdom kingdom;
@@ -110,8 +110,8 @@ public class ResourcesModel {
             return this;
         }
 
-        public ResourcesModel.ResourcesBuilder setTimeStampLastVisit(int timeStampLastVisit) {
-            this.timeStampLastVisit = timeStampLastVisit;
+        public ResourcesModel.ResourcesBuilder updatedAt(long updatedAt) {
+            this.updatedAt = updatedAt;
             return this;
         }
 

@@ -66,9 +66,10 @@ public class ResourceService {
         Kingdom kingdomFromDB = kingdomService.verifyKingdom(username);
         List<ResourcesModel> rmListFromDB = kingdomFromDB.getResourcesModel();
         for (ResourcesModel r : rmListFromDB) {
-            r.setAmount(r.getAmount() + (timeDifferenceInMinIn(r.getUpdatedAt(),System.currentTimeMillis()) * amountGeneratedPerMinute));
+            long getOriginalUpdatedAt = r.getUpdatedAt();
+            r.setAmount(r.getAmount() + (timeDifferenceInMinIn(getOriginalUpdatedAt,System.currentTimeMillis()) * amountGeneratedPerMinute));
             r.setUpdatedAt(getCurrentTimestamp().getTime());
-            r.setGenerated(timeDifferenceInMinIn(r.getUpdatedAt(),System.currentTimeMillis()));
+            r.setGenerated(timeDifferenceInMinIn(getOriginalUpdatedAt,System.currentTimeMillis()));
             resourceRepository.save(r);
         }
         return rmListFromDB;

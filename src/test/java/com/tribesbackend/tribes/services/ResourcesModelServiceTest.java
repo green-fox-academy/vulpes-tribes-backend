@@ -10,6 +10,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.sql.Timestamp;
@@ -22,7 +23,7 @@ public class ResourcesModelServiceTest {
 
     private TribesUser testUser = new TribesUser("Alex", "123");
     private Kingdom testKingdom = new Kingdom("mockDom", testUser);
-    private ResourcesModel modelGold = new ResourcesModel("gold",100, testKingdom);
+    private ResourcesModel modelGold = new ResourcesModel("gold",380, testKingdom);
     private ResourcesModel modelFood = new ResourcesModel("food", 0, testKingdom);
     private List<ResourcesModel> listOfResources = Arrays.asList(modelGold, modelFood);
 
@@ -51,6 +52,7 @@ public class ResourcesModelServiceTest {
         Kingdom kingdom = new Kingdom();
         List<ResourcesModel> testList = resourceService.newUserResourcesPreFill(kingdom);
         Timestamp now = new Timestamp(System.currentTimeMillis());
+        assertEquals(now.getTime(), testList.get(0).getUpdatedAt());
         assertEquals(2, testList.size());
         assertEquals("gold", testList.get(0).getType());
         assertEquals("food", testList.get(1).getType());
@@ -83,8 +85,14 @@ public class ResourcesModelServiceTest {
     @Test
     public void resourceDisplayAndUpdateTest(){
         testKingdom.setResourcesModel(resourceService.newUserResourcesPreFill(testKingdom));
-
-
+        List<ResourcesModel> listResources = testKingdom.getResourcesModel();
+        long someTime = 1549256400000L;
+        listResources.get(0).setUpdatedAt(someTime);
+        assertEquals(2, listResources.size());
+        assertEquals(1549256400000L, listResources.get(0).getUpdatedAt());
+        Mockito.when(kingdomService.verifyKingdom("Alex")).thenReturn(testKingdom);
+//        assertEquals( resourceService.resourceDisplayandUpdate("Alex", 1)
+//        .get(0).getUpdatedAt(), new Timestamp(System.currentTimeMillis()).getTime());
 
     }
 
