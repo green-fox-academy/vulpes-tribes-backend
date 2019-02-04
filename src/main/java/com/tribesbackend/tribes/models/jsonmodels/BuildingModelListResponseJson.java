@@ -7,20 +7,21 @@ import java.util.List;
 
 public class BuildingModelListResponseJson {
 
-    List<Building> buildingList = new ArrayList<Building>();
+    List<Building> buildings;
 
     public BuildingModelListResponseJson() {
     }
 
-    public BuildingModelListResponseJson(List<Building> buildingList) {
-        this.buildingList = buildingList;
+    public BuildingModelListResponseJson(List<Building> buildings) {
+        this.buildings = buildings;
     }
 
-    public List<Building> getBuildingList() {
-        return buildingList;
+    public List<Building> getBuildings() {
+        return buildings;
     }
 
-    public void  setBuildingList(List<Building> buildingList) {
-        this.buildingList = buildingList;
+    public BuildingModelListResponseJson setBuildings(List<Building> buildings) {
+        this.buildings = buildings;
+        return this;
     }
 }
