@@ -54,10 +54,21 @@ public class ResourceService {
         long milliseconds = timestamp2 - timestamp1;
         return TimeUnit.MILLISECONDS.toMinutes(milliseconds);
     }
-    public List<Building> getGoldResourcesCoeficient(Kingdom kingdom){
+
+    public List<Building> getGoldResources(Kingdom kingdom) {
         return buildingRepository.findAllByKingdom(kingdom).stream()
                 .filter(building -> building.getType().equals("mine"))
                 .collect(Collectors.toList());
+    }
+
+    public List<Building> getFoodResources(Kingdom kingdom) {
+        return buildingRepository.findAllByKingdom(kingdom).stream()
+                .filter(building -> building.getType().equals("farm"))
+                .collect(Collectors.toList());
+    }
+    public int getSumOfLevels(Kingdom kingdom){
+        int sumGold = getGoldResources(kingdom).stream().filter()
+        
     }
 
     public List<ResourcesModel> resourceDisplayandUpdate(String username, int amountGeneratedPerMinute) {
@@ -65,9 +76,9 @@ public class ResourceService {
         List<ResourcesModel> rmListFromDB = kingdomFromDB.getResourcesModel();
         for (ResourcesModel r : rmListFromDB) {
             long getOriginalUpdatedAt = r.getUpdatedAt();
-            r.setAmount(r.getAmount() + (timeDifferenceInMinIn(getOriginalUpdatedAt,System.currentTimeMillis()) * amountGeneratedPerMinute));
+            r.setAmount(r.getAmount() + (timeDifferenceInMinIn(getOriginalUpdatedAt, System.currentTimeMillis()) * amountGeneratedPerMinute));
             r.setUpdatedAt(getCurrentTimestamp().getTime());
-            r.setGenerated(timeDifferenceInMinIn(getOriginalUpdatedAt,System.currentTimeMillis()));
+            r.setGenerated(timeDifferenceInMinIn(getOriginalUpdatedAt, System.currentTimeMillis()));
             resourceRepository.save(r);
         }
         return rmListFromDB;

@@ -1,7 +1,10 @@
 package com.tribesbackend.tribes.services;
+import com.tribesbackend.tribes.factories.BuildingFactory;
+import com.tribesbackend.tribes.models.Building;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
+import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
@@ -38,6 +41,11 @@ public class ResourcesModelServiceTest {
 
     @Mock
     private KingdomService kingdomService;
+
+    @Mock
+    private BuildingRepository buildingRepository;
+
+    BuildingFactory buildingFactory = new BuildingFactory();
 
     @InjectMocks
     private ResourceService resourceService;
@@ -83,8 +91,14 @@ public class ResourcesModelServiceTest {
     }
     @Test
     public void filterMinesBuildings(){
-        List<>
-        testKingdom.setBuildings();
+        List<Building> buildings = buildingFactory.giveMeSomeBuildingsList();
+        Mockito.when(buildingRepository.findAllByKingdom(testKingdom)).thenReturn(buildings);
+        List<Building> mineList = resourceService.getGoldResources(testKingdom);
+        assertNotNull(mineList);
+        assertFalse(mineList.isEmpty());
+        assertEquals(2, mineList.size());
+        assertEquals("mine", mineList.get(0).getType());
+        assertEquals("mine", mineList.get(1).getType());
     }
 
     @Test

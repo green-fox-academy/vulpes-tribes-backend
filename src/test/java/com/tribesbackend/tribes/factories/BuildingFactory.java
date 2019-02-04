@@ -18,8 +18,8 @@ public class BuildingFactory {
         validBuildings.add(new Building("farm",1, 12));
         validBuildings.add(new Building("mine", 2, 12));
         validBuildings.add(new Building("farm", 2, 12));
-        validBuildings.add(new Building("barracs"));
-
+        validBuildings.add(new Building("barracks", 1, 12));
+        return validBuildings;
     }
 
     public static List<Building> createInvalidBuildingList() {
