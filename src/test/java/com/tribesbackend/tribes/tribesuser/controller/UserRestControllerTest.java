@@ -7,6 +7,7 @@ import com.tribesbackend.tribes.factories.KingdomFactory;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
+import com.tribesbackend.tribes.services.ObjectToJsonConverter;
 import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
 
 import com.tribesbackend.tribes.services.userservice.UserModelHelpersMethods;
@@ -21,6 +22,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -139,7 +141,7 @@ public class UserRestControllerTest {
         Mockito.when(userTRepository.findTribesUserByUsername(newUser.getUsername())).thenReturn(foundUser);
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                .content(asJsonString(newUser)))
+                .content(ObjectToJsonConverter.asJsonString(newUser)))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Not such user: adamgyulavari")))
@@ -154,7 +156,7 @@ public class UserRestControllerTest {
         Mockito.when(bCryptPasswordEncoder.matches("12345678ab", newTribesUser.getPassword())).thenReturn(true);
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                .content(asJsonString(newTribesUser)))
+                .content(ObjectToJsonConverter.asJsonString(newTribesUser)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("ok")));
         Mockito.verify(userTRepository, Mockito.atLeast(2)).findTribesUserByUsername(newTribesUser.getUsername());
@@ -169,7 +171,7 @@ public class UserRestControllerTest {
         Mockito.when(bCryptPasswordEncoder.matches(wrongPasswordUser.getPassword(), registeredUser.getPassword())).thenReturn(false);
         mockMvc.perform(MockMvcRequestBuilders.post("/login")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                .content(asJsonString(wrongPasswordUser))
+                .content(ObjectToJsonConverter.asJsonString(wrongPasswordUser))
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isUnauthorized())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
@@ -192,13 +194,4 @@ public class UserRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Missing parameter(s): username")));
     }
 
-    public static String asJsonString(final TribesUser user) {
-        try {
-            final ObjectMapper mapper = new ObjectMapper();
-            final String jsonContent = mapper.writeValueAsString(user);
-            return jsonContent;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
-    }
 }
