@@ -69,8 +69,6 @@ public class BuildingRestController extends BaseController {
     @PutMapping(value = "/kingdom/buildings/{id}")
     public ResponseEntity<Object> upgradeOrDowngradeBuilding(@PathVariable Long id,
                                                              @RequestBody BuildingInputJson buildingInputJson) {
-        //  long currentGoldAmount = resourceRepository.findByKingdom_IdAndType(getCurrentKingdom().getId(), "gold").get().getAmount();
-
         if (buildingRepo.findById(id).isPresent()
                 && (buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() == 1)
                 && (purchaseService.purchasableItem(id, "gold", buildingInputJson.getLevel()))

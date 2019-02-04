@@ -112,4 +112,12 @@ public class BuildingRestControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")));
     }
 
+    @Test
+    public void buildingUploadedOK() {
+        String json = "{\n" +
+                "  \"level\": \"\"\n" +
+                "}";
+
+    }
+
 }
