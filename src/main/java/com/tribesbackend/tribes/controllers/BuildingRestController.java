@@ -34,7 +34,7 @@ public class BuildingRestController extends BaseController {
     public  ResponseEntity getBuildings () {
         List<Building> updatedList = getCurrentKingdom().getBuildings();
         BuildingModelListResponseJson buildingModelListResponse = new BuildingModelListResponseJson();
-        buildingModelListResponse.setBuildingList(updatedList);
+        buildingModelListResponse.setBuildings(updatedList);
         return new ResponseEntity(buildingModelListResponse, HttpStatus.OK);
     }
 
