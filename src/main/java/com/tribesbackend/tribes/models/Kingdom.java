@@ -24,7 +24,6 @@ public class Kingdom {
     @JoinColumn(name = "tribe_user_id", nullable = false)
     @JsonIgnore
     public TribesUser tribesUser;
-
     @OneToMany(mappedBy = "kingdom")
     private List <Troop> troops;
 

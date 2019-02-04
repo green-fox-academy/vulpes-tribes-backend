@@ -12,7 +12,7 @@ public class ItemPrice {
     @GeneratedValue
     Long id;
     String type;
-    int gold;
+    long gold;
 
     public ItemPrice() {
     }
@@ -40,11 +40,11 @@ public class ItemPrice {
         return this;
     }
 
-    public int getGold() {
+    public long getGold() {
         return gold;
     }
 
-    public ItemPrice setGold(int gold) {
+    public ItemPrice setGold(long gold) {
         this.gold = gold;
         return this;
     }
