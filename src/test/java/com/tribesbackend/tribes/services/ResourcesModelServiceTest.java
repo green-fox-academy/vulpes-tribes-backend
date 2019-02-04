@@ -81,6 +81,11 @@ public class ResourcesModelServiceTest {
         assertEquals(testOptional.get(), modelGold);
         assertFalse(emptyOptional.isPresent());
     }
+    @Test
+    public void filterMinesBuildings(){
+        List<>
+        testKingdom.setBuildings();
+    }
 
     @Test
     public void resourceDisplayAndUpdateTest(){

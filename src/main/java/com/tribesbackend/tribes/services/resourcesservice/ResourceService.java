@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 public class ResourceService {
@@ -53,8 +54,10 @@ public class ResourceService {
         long milliseconds = timestamp2 - timestamp1;
         return TimeUnit.MILLISECONDS.toMinutes(milliseconds);
     }
-    public int getResourcesCoeeficient(){
-
+    public List<Building> getGoldResourcesCoeficient(Kingdom kingdom){
+        return buildingRepository.findAllByKingdom(kingdom).stream()
+                .filter(building -> building.getType().equals("mine"))
+                .collect(Collectors.toList());
     }
 
     public List<ResourcesModel> resourceDisplayandUpdate(String username, int amountGeneratedPerMinute) {
