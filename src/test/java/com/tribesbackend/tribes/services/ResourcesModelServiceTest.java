@@ -110,8 +110,8 @@ public class ResourcesModelServiceTest {
         assertEquals(2, listResources.size());
         assertEquals(1549256400000L, listResources.get(0).getUpdatedAt());
         Mockito.when(kingdomService.verifyKingdom("Alex")).thenReturn(testKingdom);
-//        assertEquals( resourceService.resourceDisplayandUpdate("Alex", 1)
-//        .get(0).getUpdatedAt(), new Timestamp(System.currentTimeMillis()).getTime());
+       assertEquals( resourceService.resourceDisplayandUpdate("Alex", 1)
+       .get(0).getUpdatedAt(), new Timestamp(System.currentTimeMillis()).getTime());
 
     }
 

@@ -18,19 +18,19 @@ public class ResourcesModel {
     String type;
     @Min(value = 0L, message = "The value must be positive")
     @NotNull
-    long amount;
+    private long amount;
 
     @Column(name = "updated_at")
     @JsonIgnore
-    long updatedAt;
+    private long updatedAt;
 
     //@Column(name = "generated_amount")
     @Transient
-    long generated;
+    private long generated;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "kingdom"/*kingdom_id in table*/, nullable = false)
-    Kingdom kingdom;
+    private Kingdom kingdom;
 
     public ResourcesModel() {
     }

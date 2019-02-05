@@ -61,24 +61,14 @@ public class ResourceService {
                 .collect(Collectors.toList());
     }
 
-    public List<Building> getFoodResources(Kingdom kingdom) {
-        return buildingRepository.findAllByKingdom(kingdom).stream()
-                .filter(building -> building.getType().equals("farm"))
-                .collect(Collectors.toList());
-    }
-    public int getSumOfLevels(Kingdom kingdom){
-        int sumGold = getGoldResources(kingdom).stream().filter()
-        
-    }
-
     public List<ResourcesModel> resourceDisplayandUpdate(String username, int amountGeneratedPerMinute) {
         Kingdom kingdomFromDB = kingdomService.verifyKingdom(username);
         List<ResourcesModel> rmListFromDB = kingdomFromDB.getResourcesModel();
         for (ResourcesModel r : rmListFromDB) {
-            long getOriginalUpdatedAt = r.getUpdatedAt();
-            r.setAmount(r.getAmount() + (timeDifferenceInMinIn(getOriginalUpdatedAt, System.currentTimeMillis()) * amountGeneratedPerMinute));
+            long OriginalUpdatedAt = r.getUpdatedAt();
+            r.setAmount(r.getAmount() + (timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis()) * amountGeneratedPerMinute));
             r.setUpdatedAt(getCurrentTimestamp().getTime());
-            r.setGenerated(timeDifferenceInMinIn(getOriginalUpdatedAt, System.currentTimeMillis()));
+            r.setGenerated(timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis()));
             resourceRepository.save(r);
         }
         return rmListFromDB;

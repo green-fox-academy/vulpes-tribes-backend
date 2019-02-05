@@ -1,6 +1,7 @@
 
 package com.tribesbackend.tribes.controllers;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.models.jsonmodels.ResourcesModelListResponseJson;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
@@ -18,7 +19,7 @@ import java.util.List;
 
 @CrossOrigin("*")
 @RestController
-public class ResourcesRestController {
+public class ResourcesRestController extends BaseController {
     ResourceService resourceService;
     ErrorMessagesMethods errorMessagesMethods;
     KingdomRepository kingdomRepository;
@@ -33,7 +34,7 @@ public class ResourcesRestController {
 
     @GetMapping(value = "/kingdom/resources")
     public ResponseEntity getResources() {
-        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        String userName = getCurrentKingdom().getName();
         if (userName == null || userName.isEmpty()) {
             return ResponseEntity.status(403).body(errorMessagesMethods.jsonUsernameNotProvided());
         }
