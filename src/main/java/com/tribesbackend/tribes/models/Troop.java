@@ -44,6 +44,10 @@ public class Troop {
         startedAt = (new Timestamp(System.currentTimeMillis())).getTime();
     }
 
+    public Troop(Kingdom kingdom) {
+        this.kingdom = kingdom;
+    }
+
     public static class TroopBuilder {
         @Id
         @GeneratedValue

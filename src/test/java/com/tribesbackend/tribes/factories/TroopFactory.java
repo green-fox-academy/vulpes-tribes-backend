@@ -18,7 +18,6 @@ public class TroopFactory {
                 .setHp(100)
                 .setAttack(-50)
                 .setDefence(20)
-
                 .build();
     }
 }

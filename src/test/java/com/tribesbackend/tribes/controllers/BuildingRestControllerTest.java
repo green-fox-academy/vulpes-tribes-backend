@@ -1,7 +1,9 @@
 package com.tribesbackend.tribes.controllers;
 
+import com.tribesbackend.tribes.factories.BuildingFactory;
 import com.tribesbackend.tribes.factories.KingdomFactory;
 import com.tribesbackend.tribes.factories.TribesUserFactory;
+import com.tribesbackend.tribes.models.Building;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
@@ -24,6 +26,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Optional;
+
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BuildingRestControllerTest {
@@ -68,6 +74,52 @@ public class BuildingRestControllerTest {
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.hp", Matchers.is(100)));
 //    }
 
+
+    @Test
+    public void buildingListTest() throws Exception {
+
+//        Optional<Kingdom> kingdom = KingdomFactory.createOptionalValidSampleKingdom();
+//        Troop troop = TroopFactory.createSampleTroop();
+//        kingdom.get().getTroops().add(troop);
+//
+//        Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
+//        mockMvc.perform(MockMvcRequestBuilders.get("/kingdom/troops"))
+//                .andExpect(MockMvcResultMatchers.status().isOk());
+//
+//        when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
+//        mockMvc.perform(get("/kingdom/troops"))
+//                .andExpect(status().isOk())
+//
+//                .andExpect(jsonPath("$.troops").isArray())
+//                .andExpect(content().string("{\"troops\":[{\"id\":null,\"level\":1,\"hp\":100,\"attack\":50,\"defence\":20,\"startedAt\":1231232312,\"finishedAt\":765214612}]}"));
+
+
+
+
+//        Optional<Troop> troop = Optional.ofNullable(TroopFactory.createSampleTroop());
+//
+//        Kingdom mightykingdom = KingdomFactory.createValidSampleKingdom();
+//        mightykingdom.setId((long) 1);
+
+
+
+        Optional<Kingdom> kingdom = KingdomFactory.createOptionalValidSampleKingdom();
+        Building building = BuildingFactory.createSampleBuilding();
+        kingdom.get().getBuildings().add(building);
+
+        when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
+        mockMvc.perform(get("/kingdom/buildings"))
+                .andExpect(status().isOk());
+
+        when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
+        mockMvc.perform(get("/kingdom/buildings"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.buildings").isArray())
+                .andExpect(content().string("{\"buildings\":[{\"id\":null,\"level\":1,\"hp\":100,\"attack\":50,\"defence\":20,\"startedAt\":1231232312,\"finishedAt\":765214612}]}"));
+    }
+
+
+
     @Test
     public void notResourcesTest() throws Exception {
         String json = "{\n" +
@@ -75,15 +127,15 @@ public class BuildingRestControllerTest {
                 "}";
         Kingdom mightykingdom = KingdomFactory.createValidSampleKingdom();
         mightykingdom.setId((long) 1);
-        Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(Optional.of(mightykingdom));
+        when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(Optional.of(mightykingdom));
         buildingRestController.setKingdomRepository(kingdomRepository);
-        Mockito.when(purchaseService.purchasableItem(mightykingdom.getId(), "farm", 1)).thenReturn(false);
+        when(purchaseService.purchasableItem(mightykingdom.getId(), "farm", 1)).thenReturn(false);
         mockMvc.perform(MockMvcRequestBuilders.post("/kingdom/buildings")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content(json))
-                .andExpect(MockMvcResultMatchers.status().isConflict())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Not enough resources")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")));
+                .andExpect(status().isConflict())
+                .andExpect(jsonPath("$.message", Matchers.is("Not enough resources")))
+                .andExpect(jsonPath("$.status", Matchers.is("error")));
     }
 
     @Test
@@ -94,9 +146,9 @@ public class BuildingRestControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/kingdom/buildings")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content(json))
-                .andExpect(MockMvcResultMatchers.status().isNotAcceptable())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Invalid building type")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")));
+                .andExpect(status().isNotAcceptable())
+                .andExpect(jsonPath("$.message", Matchers.is("Invalid building type")))
+                .andExpect(jsonPath("$.status", Matchers.is("error")));
     }
 
     @Test
@@ -107,9 +159,9 @@ public class BuildingRestControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.post("/kingdom/buildings")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
                 .content(json))
-                .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Missing parameter(s): type!")))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")));
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.message", Matchers.is("Missing parameter(s): type!")))
+                .andExpect(jsonPath("$.status", Matchers.is("error")));
     }
 
     @Test
