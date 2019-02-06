@@ -52,6 +52,7 @@ public class BuildingRestController extends BaseController {
                 Building newBuilding = new Building(createBuildingJson.getType(), kingdom);
                 newBuilding.setFinishedAt(timeService.finishedAtBuilding(newBuilding.getStartedAt(), createBuildingJson.getType(), 1));
                 buildingRepo.save(newBuilding);
+                purchaseService.decreaseGold(1L,getCurrentKingdom().getId(),createBuildingJson.getType());
                 return new ResponseEntity(newBuilding, HttpStatus.OK);
             } else return new ResponseEntity(new ErrorResponseModel("Not enough resources"), HttpStatus.CONFLICT);
         } else return new ResponseEntity(new ErrorResponseModel("Invalid building type"), HttpStatus.NOT_ACCEPTABLE);
@@ -69,28 +70,30 @@ public class BuildingRestController extends BaseController {
     @PutMapping(value = "/kingdom/buildings/{id}")
     public ResponseEntity<Object> upgradeOrDowngradeBuilding(@PathVariable Long id,
                                                              @RequestBody BuildingInputJson buildingInputJson) {
-        if (buildingRepo.findById(id).isPresent()
-                && (buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() == 1)
-                && (purchaseService.purchasableItem(id, "gold", buildingInputJson.getLevel()))
-                && purchaseService.priceOfItem("gold", buildingInputJson.getLevel())
-                <= purchaseService.currentGoldAmount(getCurrentKingdom().getId())) {
-            buildingRepo.findById(id).get().setLevel(buildingInputJson.getLevel());
-            purchaseService.decreaseGold(buildingInputJson.getLevel(),
-                    getCurrentKingdom().getId(),
-                    buildingRepo.findById(id).get().getType());
-            buildingRepo.save(buildingRepo.findById(id).get());
-            return new ResponseEntity(buildingRepo.findById(id).get(), HttpStatus.OK);
-        } else if (buildingInputJson.getLevel() == null || buildingInputJson.getLevel().toString().isEmpty()) {
+        if (buildingInputJson.getLevel() == null || buildingInputJson.getLevel().toString().isEmpty()) {
             return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): level !"), HttpStatus.BAD_REQUEST);
+            //not valid level of the building
         } else if (!(buildingRepo.findById(id).isPresent())) {
             return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);
-        }
-        //not valid level of the building
-        else if ((buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() != 1) || buildingInputJson.getLevel() > 5) {
+        } else if ((buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() != 1) || buildingInputJson.getLevel() > 5) {
             return new ResponseEntity(new ErrorResponseModel("Invalid building level"), HttpStatus.NOT_ACCEPTABLE);
+        } else if (buildingRepo.findById(id).isPresent()
+                && (buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() == 1)
+                && (purchaseService.purchasableItem(getCurrentKingdom().getId(), buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel()))
+               && purchaseService.purchasableItem(getCurrentKingdom().getId(), buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel()))
+//                && purchaseService.priceOfItem(buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel())
+//                <= purchaseService.currentGoldAmount(getCurrentKingdom().getId()))
+            {
+          Building updatedB = buildingRepo.findById(id).get();
+                  updatedB.setLevel(buildingInputJson.getLevel());
+                  buildingRepo.save(updatedB);
+            purchaseService.decreaseGold(buildingInputJson.getLevel(),getCurrentKingdom().getId(),buildingRepo.findById(id).get().getType());
+            return new ResponseEntity(buildingRepo.findById(id).get(), HttpStatus.OK);
+
         }
+
         //not enough resource
-        else if (purchaseService.priceOfItem("gold", buildingInputJson.getLevel())
+        else if (purchaseService.priceOfItem(buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel())
                 > purchaseService.currentGoldAmount(getCurrentKingdom().getId())) {
             return new ResponseEntity(new ErrorResponseModel("Not enough resource"), HttpStatus.CONFLICT);
         } else return new ResponseEntity(new ErrorResponseModel("This never can happen"), HttpStatus.IM_USED);
