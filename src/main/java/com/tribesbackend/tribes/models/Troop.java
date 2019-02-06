@@ -39,8 +39,7 @@ public class Troop {
                     CascadeType.PERSIST,
                     CascadeType.MERGE
             },
-            mappedBy = "troops")
-
+            mappedBy = "attackerTroops")
     List<Battle> battlesParticipated;
 
     public Troop() {

@@ -29,7 +29,7 @@ public class ResourcesModel {
     private long generated;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "kingdom"/*kingdom_id in table*/, nullable = false)
+    @JoinColumn(name = "kingdom_id"/*kingdom_id in table*/, nullable = false)
     private Kingdom kingdom;
 
     public ResourcesModel() {

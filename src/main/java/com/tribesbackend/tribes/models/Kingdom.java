@@ -38,10 +38,10 @@ public class Kingdom {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "kingdom")
     List<Building> buildings;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "kingdom")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "defender")
     List<Battle> AttackerBattles;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "kingdom")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "attacker")
     List<Battle> DefenderBattles;
 
     public Kingdom(String name) {
