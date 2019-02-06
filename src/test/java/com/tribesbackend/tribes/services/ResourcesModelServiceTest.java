@@ -1,5 +1,6 @@
 package com.tribesbackend.tribes.services;
 import com.tribesbackend.tribes.factories.BuildingFactory;
+import com.tribesbackend.tribes.factories.KingdomFactory;
 import com.tribesbackend.tribes.models.Building;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.ResourcesModel;
@@ -19,6 +20,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.sql.Timestamp;
 import java.util.*;
 
+import static com.tribesbackend.tribes.factories.KingdomFactory.createValidSampleKingdom;
 import static org.junit.Assert.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -46,6 +48,8 @@ public class ResourcesModelServiceTest {
     private BuildingRepository buildingRepository;
 
     BuildingFactory buildingFactory = new BuildingFactory();
+
+    KingdomFactory kingdomFactory = new KingdomFactory();
 
     @InjectMocks
     private ResourceService resourceService;
@@ -102,6 +106,15 @@ public class ResourcesModelServiceTest {
     }
 
     @Test
+    public void getsumofBuildingLevelsTest(){
+        List<Building> buildings = buildingFactory.giveMeSomeBuildingsList();
+        Kingdom testKingdom = createValidSampleKingdom();
+        testKingdom.setBuildings(buildings);
+        int mysteriousOne = resourceService.getSumOfBuildingLevels(testKingdom, "mine");
+        assertEquals(3, mysteriousOne);
+    }
+
+    @Test
     public void resourceDisplayAndUpdateTest(){
         testKingdom.setResourcesModel(resourceService.newUserResourcesPreFill(testKingdom));
         List<ResourcesModel> listResources = testKingdom.getResourcesModel();
@@ -110,8 +123,15 @@ public class ResourcesModelServiceTest {
         assertEquals(2, listResources.size());
         assertEquals(1549256400000L, listResources.get(0).getUpdatedAt());
         Mockito.when(kingdomService.verifyKingdom("Alex")).thenReturn(testKingdom);
-       assertEquals( resourceService.resourceDisplayandUpdate("Alex", 1)
-       .get(0).getUpdatedAt(), new Timestamp(System.currentTimeMillis()).getTime());
+        List<Building> buildings = buildingFactory.giveMeSomeBuildingsList();
+        testKingdom.setBuildings(buildings);
+        long resourceBefore = testKingdom.getResourcesModel().get(0).getAmount();
+        assertFalse(testKingdom.getBuildings().isEmpty());
+
+//       assertEquals(resourceService.resourceDisplayandUpdate("Alex")
+//       .get(0).getUpdatedAt(), new Timestamp(System.currentTimeMillis()).getTime());
+       assertTrue(resourceService.resourceDisplayandUpdate("Alex")
+               .get(0).getAmount() > resourceBefore);
 
     }
 

@@ -58,7 +58,7 @@ public class ResourcesRestControllerTest {
         Kingdom kingdom = KingdomFactory.createValidSampleKingdom();
         List<ResourcesModel> rmList = resourcesFactory.createValidSampleResources();
         kingdom.setResourcesModel(rmList);
-        Mockito.when(resourceService.resourceDisplayandUpdate("Vojtisek", 1)).thenReturn(rmList);
+        Mockito.when(resourceService.resourceDisplayandUpdate("Vojtisek")).thenReturn(rmList);
 
         mockMvc.perform(get("/kingdom/resources"))
                 .andExpect(status().isOk());

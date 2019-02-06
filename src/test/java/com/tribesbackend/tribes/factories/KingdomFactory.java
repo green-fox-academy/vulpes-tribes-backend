@@ -9,13 +9,6 @@ import java.util.Optional;
 public class KingdomFactory {
 
 
-    ResourceService resourceService;
-
-    @Autowired
-    public KingdomFactory(ResourceService resourceService) {
-        this.resourceService = resourceService;
-    }
-
     public static Kingdom createInvalidSampleKingdom(){
         return new Kingdom("name", TribesUserFactory.createInvalidSampleTribesUser());
     }

@@ -38,8 +38,7 @@ public class ResourcesRestController extends BaseController {
         if (userName == null || userName.isEmpty()) {
             return ResponseEntity.status(403).body(errorMessagesMethods.jsonUsernameNotProvided());
         }
-        List<ResourcesModel> updatedList = resourceService.resourceDisplayandUpdate(userName,
-                Integer.valueOf(System.getenv("RESOURCES_GENRATE")));
+        List<ResourcesModel> updatedList = resourceService.resourceDisplayandUpdate(userName);
         ResourcesModelListResponseJson resourcesModelListResponse = new ResourcesModelListResponseJson();
         resourcesModelListResponse.setResources(updatedList);
         return ResponseEntity.ok(resourcesModelListResponse);

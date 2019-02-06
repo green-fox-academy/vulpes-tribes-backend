@@ -61,12 +61,20 @@ public class ResourceService {
                 .collect(Collectors.toList());
     }
 
-    public List<ResourcesModel> resourceDisplayandUpdate(String username, int amountGeneratedPerMinute) {
+    public int getSumOfBuildingLevels(Kingdom kingdom, String buildingType) {
+        return kingdom.getBuildings().stream()
+                .filter(b -> b.getType().equals(buildingType))
+                .mapToInt(Building::getLevel)
+                .sum();
+    }
+
+    public List<ResourcesModel> resourceDisplayandUpdate(String username) {
         Kingdom kingdomFromDB = kingdomService.verifyKingdom(username);
         List<ResourcesModel> rmListFromDB = kingdomFromDB.getResourcesModel();
         for (ResourcesModel r : rmListFromDB) {
             long OriginalUpdatedAt = r.getUpdatedAt();
-            r.setAmount(r.getAmount() + (timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis()) * amountGeneratedPerMinute));
+            String buildingType =r.getType();
+            r.setAmount(r.getAmount() + (timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis()) * getSumOfBuildingLevels(kingdomFromDB, buildingType)));
             r.setUpdatedAt(getCurrentTimestamp().getTime());
             r.setGenerated(timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis()));
             resourceRepository.save(r);

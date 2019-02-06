@@ -10,11 +10,11 @@ public class Battle {
     long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "kingdom_id", nullable = false)
+    @JoinColumn(name = "defender_id", nullable = false)//
     Kingdom defender;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "kingdom_id", nullable = false)
+    @JoinColumn(name = "attacker_id", nullable = false)//
     Kingdom attacker;
 
     List<Troop> attackerTroops;
