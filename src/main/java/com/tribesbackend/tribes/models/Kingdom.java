@@ -26,14 +26,11 @@ public class Kingdom {
     public TribesUser tribesUser;
     @OneToMany(mappedBy = "kingdom")
     private List <Troop> troops;
-
     @OneToMany(fetch = FetchType.LAZY,
             mappedBy = "kingdom" /*, orphanRemoval = true*/)
     public List <ResourcesModel> resourcesModel;
-
     @OneToOne(mappedBy = "kingdom", cascade = CascadeType.ALL)
     Location location;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "kingdom")
     List<Building> buildings;
 

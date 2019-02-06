@@ -8,7 +8,6 @@ import java.util.Optional;
 
 @Repository
 public interface BuildingRepository extends JpaRepository <Building, Long> {
-        Optional<Building> findByType(String type);
 
         List<Building> findByKingdomIdAndType(Long id, String type);
     }

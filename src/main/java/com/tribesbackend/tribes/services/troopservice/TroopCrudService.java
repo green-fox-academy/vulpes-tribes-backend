@@ -20,12 +20,13 @@ public class TroopCrudService {
     private BuildingRepository buildingRepository;
 
     @Autowired
-    public TroopCrudService(TroopRepository troopRepository, TimeService timeService, BuildingRepository buildingRepository) {this.troopRepository = troopRepository;
+    public TroopCrudService(TroopRepository troopRepository, TimeService timeService, BuildingRepository buildingRepository) {
+        this.troopRepository = troopRepository;
         this.timeService = timeService;
         this.buildingRepository = buildingRepository;
     }
 
-    public  void save(Troop newTroop) throws Exception{
+    public void save(Troop newTroop) throws Exception {
         troopRepository.save(newTroop);
     }
 
@@ -34,12 +35,26 @@ public class TroopCrudService {
 //        (newBuilding.getStartedAt(), createBuildingJson.getType(), 1
 //        .stream().filter(buildings -> buildings.getType().equals("barrack"))
 
-    public Troop createAndSaveTroop(Kingdom kingdom){
+    public Troop createAndSaveTroop(Kingdom kingdom, List<Building> barrackList) {
         Troop newTroop = new Troop(1, 100, 50, 20);
-        List<Building> listOfBarracks = buildingRepository.findByKingdomIdAndType(kingdom.getId(),"barracks");
-        int maxLevel = listOfBarracks.stream().max(Comparator.comparing(Building::getLevel)).get().getLevel();
-        newTroop.setFinishedAt(timeService.finishedAtTroop(newTroop.getStartedAt(),1, maxLevel));
-    troopRepository.save(newTroop);
+        newTroop.setKingdom(kingdom);
+        int maxLevel = barrackList.stream().max(Comparator.comparing(Building::getLevel)).get().getLevel();
+        newTroop.setFinishedAt(timeService.finishedAtTroop(newTroop.getStartedAt(), 1, maxLevel));
+        troopRepository.save(newTroop);
         return newTroop;
+    }
+
+    public boolean barrackIsAvaliable(Kingdom kingdom, List<Building> barrackList) {
+        List<Troop> troopList = troopRepository.findAllByKingdom(kingdom);
+        int counterOfBuildingTroops = 0;
+
+
+        for (Troop troop : troopList
+        ) {
+            if (troop.getFinishedAt() > (System.currentTimeMillis())) {
+                counterOfBuildingTroops++;
+            }
+        }
+        return (counterOfBuildingTroops < barrackList.size());
     }
 }

@@ -3,21 +3,21 @@ package com.tribesbackend.tribes.models.jsonmodels;
 import java.util.List;
 
 public class TroopIdsJson {
-    List<Long> troopIds;
+    List<Long> troopIdsJson;
 
     public TroopIdsJson() {
     }
 
-    public TroopIdsJson(List<Long> troopIds) {
-        this.troopIds = troopIds;
+    public TroopIdsJson(List<Long> troopIdsJson) {
+        this.troopIdsJson = troopIdsJson;
     }
 
-    public List<Long> getTroopIds() {
-        return troopIds;
+    public List<Long> getTroopIdsJson() {
+        return troopIdsJson;
     }
 
-    public TroopIdsJson setTroopIds(List<Long> troopIds) {
-        this.troopIds = troopIds;
+    public TroopIdsJson setTroopIdsJson(List<Long> troopIdsJson) {
+        this.troopIdsJson = troopIdsJson;
         return this;
     }
 }

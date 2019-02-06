@@ -64,7 +64,7 @@ public class Troop {
         @Min(value = 0L, message = "The value must be positive")
         @NotNull
         private int defence;
-        private int startedAt;
+        private long startedAt;
         private long finishedAt;
         @JsonIgnore
         @ManyToOne(fetch = FetchType.LAZY)
@@ -99,7 +99,7 @@ public class Troop {
             return this;
         }
 
-        public TroopBuilder setStartedAt(int startedAt) {
+        public TroopBuilder setStartedAt(long startedAt) {
             this.startedAt = startedAt;
             return this;
         }
