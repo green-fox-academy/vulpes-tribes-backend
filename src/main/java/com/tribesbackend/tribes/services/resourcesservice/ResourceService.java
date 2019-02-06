@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -71,13 +72,28 @@ public class ResourceService {
     public List<ResourcesModel> resourceDisplayandUpdate(String username) {
         Kingdom kingdomFromDB = kingdomService.verifyKingdom(username);
         List<ResourcesModel> rmListFromDB = kingdomFromDB.getResourcesModel();
-        for (ResourcesModel r : rmListFromDB) {
-            long OriginalUpdatedAt = r.getUpdatedAt();
-            String buildingType =r.getType();
-            r.setAmount(r.getAmount() + (timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis()) * getSumOfBuildingLevels(kingdomFromDB, buildingType)));
-            r.setUpdatedAt(getCurrentTimestamp().getTime());
-            r.setGenerated(timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis()));
-            resourceRepository.save(r);
+        List<String>buildingTypes = Arrays.asList("mine","farm");
+//        for (ResourcesModel r : rmListFromDB) {
+//            long OriginalUpdatedAt = r.getUpdatedAt();
+//            String buildingType = kingdomFromDB.getBuildings().get(0).getType();
+//            //long plusToOriginalResValue = timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis()) * getSumOfBuildingLevels(kingdomFromDB, buildingType);
+//            long timeDiff = timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis());
+//            long sumRes = getSumOfBuildingLevels(kingdomFromDB, buildingType);
+//            r.setAmount(r.getAmount() + (timeDiff * sumRes));
+//            r.setUpdatedAt(getCurrentTimestamp().getTime());
+//            r.setGenerated(timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis()) * getSumOfBuildingLevels(kingdomFromDB, buildingType));
+//            resourceRepository.save(r);
+//        }
+        for (int i = 0; i < 2; i++) {
+            long OriginalUpdatedAt = rmListFromDB.get(i).getUpdatedAt();
+            String buildingType = buildingTypes.get(i);
+            long timeDiff = timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis());
+            long sumRes = getSumOfBuildingLevels(kingdomFromDB, buildingType);
+
+            rmListFromDB.get(i).setAmount(rmListFromDB.get(i).getAmount() + (timeDiff * sumRes));
+            rmListFromDB.get(i).setUpdatedAt(getCurrentTimestamp().getTime());
+            rmListFromDB.get(i).setGenerated(timeDiff * sumRes);
+            resourceRepository.save(rmListFromDB.get(i));
         }
         return rmListFromDB;
     }

@@ -131,7 +131,7 @@ public class ResourcesModelServiceTest {
 //       assertEquals(resourceService.resourceDisplayandUpdate("Alex")
 //       .get(0).getUpdatedAt(), new Timestamp(System.currentTimeMillis()).getTime());
        assertTrue(resourceService.resourceDisplayandUpdate("Alex")
-               .get(0).getAmount() > resourceBefore);
+               .get(0).getAmount() > 10733 );
 
     }
 
