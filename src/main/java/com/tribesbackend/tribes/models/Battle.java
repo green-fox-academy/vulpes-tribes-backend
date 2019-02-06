@@ -10,13 +10,21 @@ public class Battle {
     long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "defender_id", nullable = false)//
+    @JoinColumn(name = "defender_id", nullable = false)
     Kingdom defender;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "attacker_id", nullable = false)//
+    @JoinColumn(name = "attacker_id", nullable = false)
     Kingdom attacker;
 
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(name = "troops_battles",
+            joinColumns = { @JoinColumn(name = "battle_id") },
+            inverseJoinColumns = { @JoinColumn(name = "troop_id") })
     List<Troop> attackerTroops;
 
     public Battle(){
