@@ -19,6 +19,9 @@ public class BuildingTime {
         this.buildTimeInMin = buildTimeInMin;
     }
 
+    public BuildingTime() {
+    }
+
     public Long getId() {
         return id;
     }

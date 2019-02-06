@@ -45,15 +45,15 @@ public class BuildingTest {
     }
 }
 
-  /*  @Test
-    public void isNotValid(){
-        List<Building> invalidBuildingList = BuildingFactory.createInvalidBuildingList();
-        for (int i = 0; i <invalidBuildingList.size() ; i++) {
-            Set<ConstraintViolation<Building>>violations = validator.validate(invalidBuildingList.get(i));
-            assertEquals(violations.size(),1);
-
-        }
-
-    }
-}
-*/
+//  /*  @Test
+//    public void isNotValid(){
+//        List<Building> invalidBuildingList = BuildingFactory.createInvalidBuildingList();
+//        for (int i = 0; i <invalidBuildingList.size() ; i++) {
+//            Set<ConstraintViolation<Building>>violations = validator.validate(invalidBuildingList.get(i));
+//            assertEquals(violations.size(),1);
+//
+//        }
+//
+//    }
+//}
+//*/

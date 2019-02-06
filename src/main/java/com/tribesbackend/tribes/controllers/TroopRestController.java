@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import java.util.List;
 
 @RestController
@@ -40,10 +39,12 @@ public class TroopRestController extends BaseController {
     @PostMapping(value = "/kingdom/troops")
     public ResponseEntity<Object> createTroop() {
         Kingdom kingdom = getCurrentKingdom();
-        if (purchaseService.purchasableItem(kingdom.getId(), "troop", 1)){
+        if (purchaseService.purchasableItem(kingdom.getId(), "troop", 1)==true){
             if(kingdom.getBuildings().contains("barrack")) {
+
+//                kingdom.getBuildings().stream().filter(buildings -> buildings.getType().equals("barrack")).count();
+
                 Troop newTroop = new Troop(kingdom);
-                int id;
                 troopCrudService.createAndSaveTroop(kingdom);
                 return new ResponseEntity(newTroop, HttpStatus.OK);
             } else return new ResponseEntity(new ErrorResponseModel("Not enough barrack"), HttpStatus.CONFLICT);

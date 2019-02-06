@@ -96,7 +96,7 @@ public class Building {
         return finishedAt;
     }
 
-    public void setFinishedAt(int finishedAt) {this.finishedAt = finishedAt; }
+    public void setFinishedAt(long finishedAt) {this.finishedAt = finishedAt; }
 
     public Kingdom getKingdom() {
         return kingdom;
