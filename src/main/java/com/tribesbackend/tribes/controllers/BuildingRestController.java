@@ -25,6 +25,7 @@ public class BuildingRestController extends BaseController {
     private TimeService timeService;
     private ResourceRepository resourceRepository;
 
+
     @Autowired
     BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService, TimeService timeService,
                            ResourceRepository resourceRepository) {
@@ -77,21 +78,23 @@ public class BuildingRestController extends BaseController {
             return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);
         } else if ((buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() != 1) || buildingInputJson.getLevel() > 5) {
             return new ResponseEntity(new ErrorResponseModel("Invalid building level"), HttpStatus.NOT_ACCEPTABLE);
+        }else if (buildingRepo.findById(id).get().getFinishedAt()> System.currentTimeMillis()){
+            return new ResponseEntity(new ErrorResponseModel("Building is not created yet, cannot be updated"), HttpStatus.NOT_ACCEPTABLE);
         } else if (buildingRepo.findById(id).isPresent()
                 && (buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() == 1)
                 && (purchaseService.purchasableItem(getCurrentKingdom().getId(), buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel()))
                && purchaseService.purchasableItem(getCurrentKingdom().getId(), buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel()))
-//                && purchaseService.priceOfItem(buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel())
-//                <= purchaseService.currentGoldAmount(getCurrentKingdom().getId()))
             {
           Building updatedB = buildingRepo.findById(id).get();
                   updatedB.setLevel(buildingInputJson.getLevel());
+                  updatedB.setStartedAt(System.currentTimeMillis());
+                  updatedB.setFinishedAt(timeService.finishedAtBuilding(updatedB.getStartedAt(), updatedB.getType(), updatedB.getLevel()));
                   buildingRepo.save(updatedB);
             purchaseService.decreaseGold(buildingInputJson.getLevel(),getCurrentKingdom().getId(),buildingRepo.findById(id).get().getType());
+
             return new ResponseEntity(buildingRepo.findById(id).get(), HttpStatus.OK);
 
         }
-
         //not enough resource
         else if (purchaseService.priceOfItem(buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel())
                 > purchaseService.currentGoldAmount(getCurrentKingdom().getId())) {
