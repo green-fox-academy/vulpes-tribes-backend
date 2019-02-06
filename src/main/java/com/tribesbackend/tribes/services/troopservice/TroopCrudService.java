@@ -35,14 +35,10 @@ public class TroopCrudService {
 //        .stream().filter(buildings -> buildings.getType().equals("barrack"))
 
     public Troop createAndSaveTroop(Kingdom kingdom){
-        Troop newTroop = new Troop(kingdom);
-
+        Troop newTroop = new Troop(1, 100, 50, 20);
         List<Building> listOfBarracks = buildingRepository.findByKingdomIdAndType(kingdom.getId(),"barracks");
-        listOfBarracks.stream().max(Comparator.comparing(Building::getLevel));
-
-
-        kingdom.getBuildings().stream().filter(buildings -> buildings.getType().equals("barrack"));
-        newTroop.setFinishedAt(timeService.finishedAtTroop(newTroop.getStartedAt(),1,   listOfBarracks.stream().max(Comparator.comparing(Building::getLevel)).get().getLevel()));
+        int maxLevel = listOfBarracks.stream().max(Comparator.comparing(Building::getLevel)).get().getLevel();
+        newTroop.setFinishedAt(timeService.finishedAtTroop(newTroop.getStartedAt(),1, maxLevel));
     troopRepository.save(newTroop);
         return newTroop;
     }

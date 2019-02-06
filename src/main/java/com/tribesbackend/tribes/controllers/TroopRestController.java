@@ -23,9 +23,10 @@ public class TroopRestController extends BaseController {
     private BuildingRepository buildingRepository;
 
     @Autowired
-    public TroopRestController(TroopRepository troopRepository, PurchaseService purchaseService, BuildingRepository buildingRepository) {
+    public TroopRestController(TroopRepository troopRepository, PurchaseService purchaseService, TroopCrudService troopCrudService, BuildingRepository buildingRepository) {
         this.troopRepository = troopRepository;
         this.purchaseService = purchaseService;
+        this.troopCrudService = troopCrudService;
         this.buildingRepository = buildingRepository;
     }
 
