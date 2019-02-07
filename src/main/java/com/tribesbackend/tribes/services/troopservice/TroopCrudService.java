@@ -10,6 +10,7 @@ import com.tribesbackend.tribes.services.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -49,6 +50,13 @@ public class TroopCrudService {
     }
 
     public boolean barrackIsAvaliable(Kingdom kingdom, List<Building> barrackList) {
+        List<Building> toRemove = new ArrayList<>();
+        for(Building creatingBarracks: barrackList){
+            if(creatingBarracks.getFinishedAt() > System.currentTimeMillis() ){
+                toRemove.add(creatingBarracks);
+            }
+        }
+        barrackList.removeAll(toRemove);
         List<Troop> troopList = troopRepository.findAllByKingdom(kingdom);
         int counterOfBuildingTroops = 0;
 
