@@ -34,7 +34,7 @@ public class ResourcesRestController extends BaseController {
 
     @GetMapping(value = "/kingdom/resources")
     public ResponseEntity getResources() {
-        String userName = getCurrentKingdom().getName();
+        String userName = getCurrentUser().getUsername();
         if (userName == null || userName.isEmpty()) {
             return ResponseEntity.status(403).body(errorMessagesMethods.jsonUsernameNotProvided());
         }
