@@ -24,7 +24,6 @@ public class Kingdom {
     @JoinColumn(name = "tribe_user_id", nullable = false)
     @JsonIgnore
     public TribesUser tribesUser;
-
     @OneToMany(mappedBy = "kingdom")
     private List <Troop> troops;
 
@@ -32,7 +31,7 @@ public class Kingdom {
             mappedBy = "kingdom" /*, orphanRemoval = true*/)
     public List <ResourcesModel> resourcesModel;
 
-    @OneToOne(mappedBy = "kingdom")
+    @OneToOne(mappedBy = "kingdom", cascade = CascadeType.ALL)
     Location location;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "kingdom")

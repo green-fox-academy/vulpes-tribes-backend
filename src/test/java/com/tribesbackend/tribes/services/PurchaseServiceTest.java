@@ -50,12 +50,12 @@ public class PurchaseServiceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void wrongLevelOfFarmTest() {
-        int gold = purchaseService.priceOfItem("farm", 9);
+        long gold = purchaseService.priceOfItem("farm", 9);
     }
 
     @Test(expected = IllegalArgumentException.class)
     public void wrongTypeOfItemTest() {
-        int gold = purchaseService.priceOfItem("aze", 2);
+        long gold = purchaseService.priceOfItem("aze", 2);
     }
 
 //    @Test

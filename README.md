@@ -2,6 +2,8 @@
 URL of deployed week branch:
 https://vulpes-tribes-backend.herokuapp.com/
 
+URL of deployed week branch: https://vulpes-tribes-backend.herokuapp.com/
+
 Variables properties setting:
 
     **NAME                 VALUE**

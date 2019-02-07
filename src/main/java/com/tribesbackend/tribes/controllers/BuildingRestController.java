@@ -6,6 +6,7 @@ import com.tribesbackend.tribes.models.Building;
 import com.tribesbackend.tribes.models.jsonmodels.BuildingInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.CreateBuildingJson;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
+import com.tribesbackend.tribes.repositories.ResourceRepository;
 import com.tribesbackend.tribes.services.PurchaseService;
 import com.tribesbackend.tribes.services.TimeService;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
@@ -22,16 +23,20 @@ public class BuildingRestController extends BaseController {
     private BuildingRepository buildingRepo;
     private PurchaseService purchaseService;
     private TimeService timeService;
+    private ResourceRepository resourceRepository;
+
 
     @Autowired
-    BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService, TimeService timeService) {
+    BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService, TimeService timeService,
+                           ResourceRepository resourceRepository) {
         this.buildingRepo = buildingRepo;
         this.purchaseService = purchaseService;
         this.timeService = timeService;
+        this.resourceRepository = resourceRepository;
     }
 
     @GetMapping(value = "/kingdom/buildings")
-    public  ResponseEntity getBuildings () {
+    public ResponseEntity getBuildings() {
         List<Building> updatedList = getCurrentKingdom().getBuildings();
         BuildingModelListResponseJson buildingModelListResponse = new BuildingModelListResponseJson();
         buildingModelListResponse.setBuildingList(updatedList);
@@ -48,6 +53,7 @@ public class BuildingRestController extends BaseController {
                 Building newBuilding = new Building(createBuildingJson.getType(), kingdom);
                 newBuilding.setFinishedAt(timeService.finishedAtBuilding(newBuilding.getStartedAt(), createBuildingJson.getType(), 1));
                 buildingRepo.save(newBuilding);
+                purchaseService.decreaseGold(1L,getCurrentKingdom().getId(),createBuildingJson.getType());
                 return new ResponseEntity(newBuilding, HttpStatus.OK);
             } else return new ResponseEntity(new ErrorResponseModel("Not enough resources"), HttpStatus.CONFLICT);
         } else return new ResponseEntity(new ErrorResponseModel("Invalid building type"), HttpStatus.NOT_ACCEPTABLE);
@@ -63,26 +69,36 @@ public class BuildingRestController extends BaseController {
     }
 
     @PutMapping(value = "/kingdom/buildings/{id}")
-    public ResponseEntity<Object> upgradeOrDowngradeBuilding(@PathVariable long id,
+    public ResponseEntity<Object> upgradeOrDowngradeBuilding(@PathVariable Long id,
                                                              @RequestBody BuildingInputJson buildingInputJson) {
-        // and enough resources
-        if (buildingRepo.findById(id).isPresent() && (true)) {
-            buildingRepo.findById(id).get().setHP(buildingInputJson.getLevel());
-            buildingRepo.save(buildingRepo.findById(id).get());
-            return new ResponseEntity(buildingRepo.findById(id).get(), HttpStatus.OK);
-        } else if ((buildingInputJson.getLevel() < 0) || buildingInputJson.getLevel() == null
-                || buildingInputJson.getLevel().toString().isEmpty()) {
-            return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): !"), HttpStatus.BAD_REQUEST);
+        if (buildingInputJson.getLevel() == null || buildingInputJson.getLevel().toString().isEmpty()) {
+            return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): level !"), HttpStatus.BAD_REQUEST);
+            //not valid level of the building
         } else if (!(buildingRepo.findById(id).isPresent())) {
             return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);
-        }
-        //not valid level of the building
-        else if (false) {
+        } else if ((buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() != 1) || buildingInputJson.getLevel() > 5) {
             return new ResponseEntity(new ErrorResponseModel("Invalid building level"), HttpStatus.NOT_ACCEPTABLE);
+        }else if (buildingRepo.findById(id).get().getFinishedAt()> System.currentTimeMillis()){
+            return new ResponseEntity(new ErrorResponseModel("Building is not created yet, cannot be updated"), HttpStatus.NOT_ACCEPTABLE);
+        } else if (buildingRepo.findById(id).isPresent()
+                && (buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() == 1)
+                && (purchaseService.purchasableItem(getCurrentKingdom().getId(), buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel()))
+               && purchaseService.purchasableItem(getCurrentKingdom().getId(), buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel()))
+            {
+          Building updatedB = buildingRepo.findById(id).get();
+                  updatedB.setLevel(buildingInputJson.getLevel());
+                  updatedB.setStartedAt(System.currentTimeMillis());
+                  updatedB.setFinishedAt(timeService.finishedAtBuilding(updatedB.getStartedAt(), updatedB.getType(), updatedB.getLevel()));
+                  buildingRepo.save(updatedB);
+            purchaseService.decreaseGold(buildingInputJson.getLevel(),getCurrentKingdom().getId(),buildingRepo.findById(id).get().getType());
+
+            return new ResponseEntity(buildingRepo.findById(id).get(), HttpStatus.OK);
+
         }
         //not enough resource
-        else if (false) {
+        else if (purchaseService.priceOfItem(buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel())
+                > purchaseService.currentGoldAmount(getCurrentKingdom().getId())) {
             return new ResponseEntity(new ErrorResponseModel("Not enough resource"), HttpStatus.CONFLICT);
-        } else return new ResponseEntity(new ErrorResponseModel("Unexpected error"), HttpStatus.IM_USED);
+        } else return new ResponseEntity(new ErrorResponseModel("This never can happen"), HttpStatus.IM_USED);
     }
 }
