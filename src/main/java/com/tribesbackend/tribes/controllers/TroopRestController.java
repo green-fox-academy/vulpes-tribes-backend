@@ -4,7 +4,6 @@ package com.tribesbackend.tribes.controllers;
 import com.tribesbackend.tribes.models.Building;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.Troop;
-import com.tribesbackend.tribes.models.jsonmodels.TroopIdsJson;
 import com.tribesbackend.tribes.models.jsonmodels.TroopModelListResponseJson;
 import com.tribesbackend.tribes.models.jsonmodels.TroopSoloIdJson;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
@@ -18,8 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin("*")
 @RestController
@@ -28,14 +27,16 @@ public class TroopRestController extends BaseController {
     private PurchaseService purchaseService;
     private TroopCrudService troopCrudService;
     private BuildingRepository buildingRepository;
+    private TimeService timeService;
 
 
     @Autowired
-    public TroopRestController(TroopRepository troopRepository, PurchaseService purchaseService, TroopCrudService troopCrudService, BuildingRepository buildingRepository) {
+    public TroopRestController(TroopRepository troopRepository, PurchaseService purchaseService, TroopCrudService troopCrudService, BuildingRepository buildingRepository, TimeService timeService) {
         this.troopRepository = troopRepository;
         this.purchaseService = purchaseService;
         this.troopCrudService = troopCrudService;
         this.buildingRepository = buildingRepository;
+        this.timeService = timeService;
     }
 
     @GetMapping(value = "/kingdom/troops")
@@ -63,26 +64,29 @@ public class TroopRestController extends BaseController {
                 HttpStatus.NOT_FOUND);
     }
 
-//    @PutMapping(value = "/kingdom/troops/{id}")
-//    public ResponseEntity<Object> upgradeTroopLevel(@PathVariable Long id, @RequestBody TroopSoloIdJson troopSoloIdJson) {
-//        Kingdom kingdom = getCurrentKingdom();
-//        Troop troop = troopRepository.findById(id).get();
-//
-//        if (troopSoloIdJson.getLevel() - 1 == troop.getLevel()) {
-//            if (troopRepository.findById(id).isPresent()){
-//                if(purchaseService.purchasableItem(kingdom.getId(), "troop", troop.getLevel() + 1) == true) {
-//                    int updatedLevel = troop.getLevel() + 1;
-//                    troop.setLevel(updatedLevel);
-//                    troop.setStartedAt(System.currentTimeMillis());
-//                    troop.setFinishedAt(TimeService.finishedAtTroop(troop.getStartedAt(), troop.getLevel(),);
-//
-//                    int maxLevel = barrackList.stream().max(Comparator.comparing(Building::getLevel)).get().getLevel();
-//
-//                    troopRepository.save(troop);
-//                    purchaseService.decreaseGold(troopSoloIdJson.getLevel(),kingdom.getId(),"troop");
-//                    return new ResponseEntity(troop, HttpStatus.OK);
-//                }return new ResponseEntity(new ErrorResponseModel("Not enough resource"),HttpStatus.CONFLICT);
-//            } else return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);
-//        } else return new ResponseEntity(new ErrorResponseModel("Invalid troop level"), HttpStatus.NOT_ACCEPTABLE);
-//    }
+    @PutMapping(value = "/kingdom/troops/{id}")
+    public ResponseEntity<Object> upgradeTroopLevel(@PathVariable Long id, @RequestBody TroopSoloIdJson troopSoloIdJson) {
+        Kingdom kingdom = getCurrentKingdom();
+        Troop troop = troopRepository.findById(id).get();
+
+        if (troopSoloIdJson.getLevel() - 1 == troop.getLevel()) {
+            if (troopRepository.findById(id).isPresent()){
+                if(purchaseService.purchasableItem(kingdom.getId(), "troop", troop.getLevel() + 1) == true) {
+                    if (troop.getFinishedAt()<=System.currentTimeMillis()) {
+                        if (troopCrudService.barrackIsAvaliable(kingdom, buildingRepository.findByKingdomIdAndType(kingdom.getId(), "barracks"))==true) {
+                            int updatedLevel = troop.getLevel() + 1;
+                            troop.setLevel(updatedLevel);
+                            troop.setStartedAt(System.currentTimeMillis());
+                            List<Building> barrackList = buildingRepository.findByKingdomIdAndType(kingdom.getId(), "barracks");
+                            int maxLevel = barrackList.stream().max(Comparator.comparing(Building::getLevel)).get().getLevel();
+                            troop.setFinishedAt(timeService.finishedAtTroop(troop.getStartedAt(), troop.getLevel(), maxLevel));
+                            troopRepository.save(troop);
+                            purchaseService.decreaseGold(troopSoloIdJson.getLevel(), kingdom.getId(), "troop");
+                        }else new ResponseEntity(new ErrorResponseModel("No barracks available"), HttpStatus.CONFLICT);
+                    }else new ResponseEntity(new ErrorResponseModel("Troop is still creating"), HttpStatus.NOT_ACCEPTABLE);
+                    return new ResponseEntity(troop, HttpStatus.OK);
+                }return new ResponseEntity(new ErrorResponseModel("Not enough resource"),HttpStatus.CONFLICT);
+            } else return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);
+        } else return new ResponseEntity(new ErrorResponseModel("Invalid troop level"), HttpStatus.NOT_ACCEPTABLE);
+    }
 }
