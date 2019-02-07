@@ -2,21 +2,17 @@ package com.tribesbackend.tribes.controllers;
 
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.jsonmodels.PlayerListJson;
-import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponseJson;
 import com.tribesbackend.tribes.models.jsonmodels.TroopIdsJson;
+
 import com.tribesbackend.tribes.repositories.KingdomRepository;
-import com.tribesbackend.tribes.repositories.UserTRepository;
 import com.tribesbackend.tribes.services.BattleService;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import com.tribesbackend.tribes.services.responseservice.OKstatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 @RestController

@@ -80,11 +80,11 @@ public class MockBattleRestControllerTest {
     @Test
     public void battleNotStartedTest() throws Exception {
         List<Long> listOfIds = Arrays.asList((long) 1, (long) 2, (long) 3);
-        TroopIdsJson troopIdsJson = new TroopIdsJson(listOfIds);
+        TroopIdsJson troopInputJson = new TroopIdsJson(listOfIds);
         when(kingdomRepository.findKingdomById((long) 1)).thenReturn(Optional.empty());
         mockMvc.perform(post("/kingdom/{id}/battle", "1")
                 .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
-                .content(ObjectToJsonConverter.asJsonString(troopIdsJson)))
+                .content(ObjectToJsonConverter.asJsonString(troopInputJson)))
                 .andExpect(status().isConflict())
                 .andExpect(jsonPath("$.status", Matchers.is("error")))
                 .andExpect(jsonPath("$.message", Matchers.is("No such kingdom")));

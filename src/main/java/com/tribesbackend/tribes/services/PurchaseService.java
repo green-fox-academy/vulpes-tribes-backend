@@ -40,4 +40,3 @@ public class PurchaseService {
         } else throw new IllegalArgumentException();
     }
 }
-
