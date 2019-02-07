@@ -76,7 +76,7 @@ public class BuildingRestController extends BaseController {
             //not valid level of the building
         } else if (!(buildingRepo.findById(id).isPresent())) {
             return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);
-        } else if ((buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() != 1) || buildingInputJson.getLevel() > 5) {
+        } else if ((buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() != 1) ||  buildingInputJson.getLevel() <0|| buildingInputJson.getLevel()>5) {
             return new ResponseEntity(new ErrorResponseModel("Invalid building level"), HttpStatus.NOT_ACCEPTABLE);
         } else if (buildingRepo.findById(id).get().getFinishedAt() > System.currentTimeMillis()) {
             return new ResponseEntity(new ErrorResponseModel("Building is not created yet, cannot be updated"), HttpStatus.NOT_ACCEPTABLE);

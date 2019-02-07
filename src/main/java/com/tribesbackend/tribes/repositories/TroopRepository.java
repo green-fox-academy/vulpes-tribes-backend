@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface TroopRepository extends JpaRepository<Troop, Long> {
@@ -15,4 +16,6 @@ public interface TroopRepository extends JpaRepository<Troop, Long> {
     List<Troop> findAll();
 
     List<Troop>findAllByKingdom(Kingdom kingdom);
+
+    Optional<Troop>findById(Long id);
 }
