@@ -67,7 +67,7 @@ public class TroopRestController extends BaseController {
         Kingdom kingdom = getCurrentKingdom();
         if (troopRepository.findById(id).isPresent()) {
             Troop troop = troopRepository.findById(id).get();
-            if (troop.getId() == 0 || troop.getLevel() == 0 || troop.getHp() == 0 || troop.getAttack() == 0 || troop.getDefence() == 0 || troop.getStartedAt() == 0 || troop.getFinishedAt() == 0) {
+            if (troopSoloIdJson!=null) {
                 if (troopSoloIdJson.getLevel() - 1 == troop.getLevel()) {
                     if (purchaseService.purchasableItem(kingdom.getId(), "troop", troop.getLevel() + 1) == true) {
                         if (troop.getFinishedAt() <= System.currentTimeMillis()) {

@@ -17,7 +17,7 @@ public class PurchaseService {
 
     public long priceOfItem(String type, long level) {
         if (level >= 1 && level <= 5 && itemPriceRepository.findByType(type).isPresent()) {
-            return itemPriceRepository.findByType(type).get().getGold() * level/2;
+            return itemPriceRepository.findByType(type).get().getGold() * level;
         } else throw new IllegalArgumentException();
     }
 

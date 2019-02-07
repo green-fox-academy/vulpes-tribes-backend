@@ -24,21 +24,19 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-
 import java.util.Optional;
-
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 public class BuildingRestControllerTest {
-    @Mock
-    BaseController baseController;
+
     @Mock
     private KingdomRepository kingdomRepository;
+
     @Mock
-    private BuildingRepository buildingRepository;
+    private BuildingRepository buildingRepo;
     @Mock
     PurchaseService purchaseService;
     @InjectMocks
@@ -75,48 +73,48 @@ public class BuildingRestControllerTest {
 //    }
 
 
-    @Test
-    public void buildingListTest() throws Exception {
-
-//        Optional<Kingdom> kingdom = KingdomFactory.createOptionalValidSampleKingdom();
-//        Troop troop = TroopFactory.createSampleTroop();
-//        kingdom.get().getTroops().add(troop);
+//    @Test
+//    public void buildingListTest() throws Exception {
 //
-//        Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
-//        mockMvc.perform(MockMvcRequestBuilders.get("/kingdom/troops"))
-//                .andExpect(MockMvcResultMatchers.status().isOk());
+////        Optional<Kingdom> kingdom = KingdomFactory.createOptionalValidSampleKingdom();
+////        Troop troop = TroopFactory.createSampleTroop();
+////        kingdom.get().getTroops().add(troop);
+////
+////        Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
+////        mockMvc.perform(MockMvcRequestBuilders.get("/kingdom/troops"))
+////                .andExpect(MockMvcResultMatchers.status().isOk());
+////
+////        when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
+////        mockMvc.perform(get("/kingdom/troops"))
+////                .andExpect(status().isOk())
+////
+////                .andExpect(jsonPath("$.troops").isArray())
+////                .andExpect(content().string("{\"troops\":[{\"id\":null,\"level\":1,\"hp\":100,\"attack\":50,\"defence\":20,\"startedAt\":1231232312,\"finishedAt\":765214612}]}"));
+//
+//
+//
+//
+////        Optional<Troop> troop = Optional.ofNullable(TroopFactory.createSampleTroop());
+////
+////        Kingdom mightykingdom = KingdomFactory.createValidSampleKingdom();
+////        mightykingdom.setId((long) 1);
+//
+//
+//
+//        Optional<Kingdom> kingdom = KingdomFactory.createOptionalValidSampleKingdom();
+//        Building building = BuildingFactory.createSampleBuilding();
+//        kingdom.get().getBuildings().add(building);
 //
 //        when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
-//        mockMvc.perform(get("/kingdom/troops"))
+//        mockMvc.perform(get("/kingdom/buildings"))
+//                .andExpect(status().isOk());
+//
+//        when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
+//        mockMvc.perform(get("/kingdom/buildings"))
 //                .andExpect(status().isOk())
-//
-//                .andExpect(jsonPath("$.troops").isArray())
-//                .andExpect(content().string("{\"troops\":[{\"id\":null,\"level\":1,\"hp\":100,\"attack\":50,\"defence\":20,\"startedAt\":1231232312,\"finishedAt\":765214612}]}"));
-
-
-
-
-//        Optional<Troop> troop = Optional.ofNullable(TroopFactory.createSampleTroop());
-//
-//        Kingdom mightykingdom = KingdomFactory.createValidSampleKingdom();
-//        mightykingdom.setId((long) 1);
-
-
-
-        Optional<Kingdom> kingdom = KingdomFactory.createOptionalValidSampleKingdom();
-        Building building = BuildingFactory.createSampleBuilding();
-        kingdom.get().getBuildings().add(building);
-
-        when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
-        mockMvc.perform(get("/kingdom/buildings"))
-                .andExpect(status().isOk());
-
-        when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
-        mockMvc.perform(get("/kingdom/buildings"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.buildings").isArray())
-                .andExpect(content().string("{\"buildings\":[{\"id\":null,\"level\":1,\"hp\":100,\"attack\":50,\"defence\":20,\"startedAt\":1231232312,\"finishedAt\":765214612}]}"));
-    }
+//                .andExpect(jsonPath("$.buildings").isArray())
+//                .andExpect(content().string("{\"buildings\":[{\"id\":null,\"level\":1,\"hp\":100,\"attack\":50,\"defence\":20,\"startedAt\":1231232312,\"finishedAt\":765214612}]}"));
+//    }
 
 
 
@@ -163,13 +161,94 @@ public class BuildingRestControllerTest {
                 .andExpect(jsonPath("$.message", Matchers.is("Missing parameter(s): type!")))
                 .andExpect(jsonPath("$.status", Matchers.is("error")));
     }
+//    @GetMapping(value = "/kingdom/buildings/{id}")
+//    @ResponseBody
+//    public ResponseEntity<Object> listTheBuilding(@PathVariable long id) {
+//        if (buildingRepo.findById(id).isPresent()) {
+//            return new ResponseEntity(buildingRepo.findById(id), HttpStatus.OK);
+//        } else return new ResponseEntity(new ErrorResponseModel("Id not found"),
+//                HttpStatus.NOT_FOUND);
+//    }
+
+//    @Test
+//    public void buildingUploadedOK() throws Exception {
+//        String buildingInputJson = "{\n" +
+//                "  \"level\": \"2\"\n" +
+//                "}";
+//        Optional<Kingdom> kingdom = KingdomFactory.createOptionalValidSampleKingdom();
+//        Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
+//        buildingRestController.setKingdomRepository(kingdomRepository);
+//        when(kingdomRepository.findKingdomById(any())).thenReturn(Optional.empty());
+//        Building farma = new Building("farm");
+//        farma.setId(3L);
+//        farma.setLevel(1);
+//        Mockito.when(buildingRepo.findById(2L)).thenReturn(Optional.of(farma));
+//        Mockito.when(purchaseService.purchasableItem(2l, "gold", 2)).thenReturn(true);
+//        Mockito.when(purchaseService.priceOfItem("gold", 2)).thenReturn((long) 2);
+//        Mockito.when(purchaseService.currentGoldAmount(1L)).thenReturn(3L);
+//        mockMvc.perform(MockMvcRequestBuilders.put("/kingdom/buildings/{id}", "2")
+//                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+//                .content(buildingInputJson))
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.type", Matchers.is("farm")))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.id", Matchers.is(3)))
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.level", Matchers.is(2)));
+//    }
 
     @Test
-    public void buildingUploadedOK() {
-        String json = "{\n" +
+    public void missingParametr() throws Exception {
+        String buildingInputJson = "{\n" +
                 "  \"level\": \"\"\n" +
                 "}";
+        Optional<Kingdom> kingdom = KingdomFactory.createOptionalValidSampleKingdom();
+        Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
+        buildingRestController.setKingdomRepository(kingdomRepository);
+        when(kingdomRepository.findKingdomById(any())).thenReturn(Optional.empty());
+        Building farma = new Building("farm");
+        farma.setId(3L);
+        farma.setLevel(1);
+        Mockito.when(buildingRepo.findById(2L)).thenReturn(Optional.of(farma));
+        Mockito.when(purchaseService.purchasableItem(2l, "gold", 2)).thenReturn(true);
+        Mockito.when(purchaseService.priceOfItem("gold", 2)).thenReturn((long) 2);
+        Mockito.when(purchaseService.currentGoldAmount(1L)).thenReturn(3L);
+        mockMvc.perform(MockMvcRequestBuilders.put("/kingdom/buildings/{id}", "2")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(buildingInputJson))
+                .andExpect(MockMvcResultMatchers.status().isBadRequest())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Missing parameter(s): level !")));
 
     }
 
+    @Test
+    public void idNotFound() throws Exception {
+        String buildingInputJson = "{\n" +
+                "  \"level\": \"2\"\n" +
+                "}";
+        //buildingRepo.findById(id).isPresent()))
+        Optional<Kingdom> kingdom = KingdomFactory.createOptionalValidSampleKingdom();
+        Mockito.when(kingdomRepository.findKingdomByTribesUserUsername("Vojtisek")).thenReturn(kingdom);
+        buildingRestController.setKingdomRepository(kingdomRepository);
+        //   when((buildingRepo.findById(156L).isPresent())).thenReturn(Optional <T>false); any())
+        when(kingdomRepository.findKingdomById(2L)).thenReturn(Optional.empty());
+//        Building farma = new Building("farm");
+//        farma.setId(3L);
+//        farma.setLevel(1);
+//Optional.of(farma)
+        Mockito.when(buildingRepo.findById(156L)).thenReturn(Optional.empty());
+        Mockito.when(purchaseService.purchasableItem(156L, "gold", 2)).thenReturn(false);
+        Mockito.when(purchaseService.priceOfItem("gold", 2)).thenReturn((long) 2);
+        Mockito.when(purchaseService.currentGoldAmount(1L)).thenReturn(3L);
+        mockMvc.perform(MockMvcRequestBuilders.put("/kingdom/buildings/{id}", "156")
+                .contentType(MediaType.APPLICATION_JSON_UTF8_VALUE)
+                .content(buildingInputJson))
+                .andExpect(MockMvcResultMatchers.status().isNotFound())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.status", Matchers.is("error")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.message", Matchers.is("Id not found")));
+
+    }
 }
+
+
+
+

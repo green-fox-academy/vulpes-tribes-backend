@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
+import java.util.List;
 
 @Entity
 @Table(name = "troops")
@@ -32,6 +33,14 @@ public class Troop {
     @ManyToOne
     @JoinColumn(name = "kingdom_id")
     private Kingdom kingdom;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            },
+            mappedBy = "attackerTroops")
+    List<Battle> battlesParticipated;
 
     public Troop() {
     }
@@ -184,5 +193,13 @@ public class Troop {
     public Troop setKingdom(Kingdom kingdom) {
         this.kingdom = kingdom;
         return this;
+    }
+
+    public List<Battle> getBattlesParticipated() {
+        return battlesParticipated;
+    }
+
+    public void setBattlesParticipated(List<Battle> battlesParticipated) {
+        this.battlesParticipated = battlesParticipated;
     }
 }
