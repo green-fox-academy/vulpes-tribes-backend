@@ -1,2 +1,0 @@
-ALTER TABLE resources
-ADD FOREIGN KEY (kingdom) REFERENCES kingdoms(id);

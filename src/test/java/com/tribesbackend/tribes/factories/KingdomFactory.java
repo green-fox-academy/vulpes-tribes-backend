@@ -6,6 +6,7 @@ import java.util.Optional;
 
 public class KingdomFactory {
 
+
     public static Kingdom createInvalidSampleKingdom(){
         return new Kingdom("name", TribesUserFactory.createInvalidSampleTribesUser());
     }
@@ -13,7 +14,6 @@ public class KingdomFactory {
     public static Kingdom createValidSampleKingdom(){
         return new Kingdom("mightykingdom", TribesUserFactory.createValidSampleTribesUser());
     }
-
 
     public static Optional<Kingdom> createOptionalValidSampleKingdom() {
         Optional<Kingdom> kingdom = Optional.of(createValidSampleKingdom());

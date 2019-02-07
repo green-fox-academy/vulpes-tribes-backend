@@ -37,6 +37,12 @@ public class Kingdom {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "kingdom")
     List<Building> buildings;
 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "defender")
+    List<Battle> AttackerBattles;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "attacker")
+    List<Battle> DefenderBattles;
+
     public Kingdom(String name) {
         this.kingdomname = name;
     }
@@ -105,4 +111,24 @@ public class Kingdom {
     public void setLocation(Location location) {
         this.location = location;
     }
+
+    public List<Battle> getAttackerBattles() {
+        return AttackerBattles;
+    }
+
+    public void setAttackerBattles(List<Battle> attackerBattles) {
+        AttackerBattles = attackerBattles;
+    }
+
+    public List<Battle> getDefenderBattles() {
+        return DefenderBattles;
+    }
+
+    public void setDefenderBattles(List<Battle> defenderBattles) {
+        DefenderBattles = defenderBattles;
+    }
+
+
+
+
 }

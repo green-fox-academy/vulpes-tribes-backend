@@ -1,32 +1,36 @@
 package com.tribesbackend.tribes.services.resourcesservice;
 
+import com.tribesbackend.tribes.models.Building;
 import com.tribesbackend.tribes.models.Kingdom;
+import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.KingdomService;
 import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
-import com.tribesbackend.tribes.services.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @Service
 public class ResourceService {
     ResourceRepository resourceRepository;
     KingdomRepository kingdomRepository;
     KingdomService kingdomService;
-    TimeService timeService ;
+    BuildingRepository buildingRepository;
 
     @Autowired
     public ResourceService(ResourceRepository resourceRepository, KingdomRepository kingdomRepository,
-                           KingdomService kingdomService ) {
+                           KingdomService kingdomService, BuildingRepository buildingRepository) {
         this.resourceRepository = resourceRepository;
         this.kingdomRepository = kingdomRepository;
         this.kingdomService = kingdomService;
+        this.buildingRepository = buildingRepository;
     }
 
     public List<ResourcesModel> newUserResourcesPreFill(Kingdom newKingdom) {
@@ -43,18 +47,8 @@ public class ResourceService {
         return resourcesModelsList;
     }
 
-    public List<ResourcesModel> getRMListFromDB(String username) {
-        Kingdom kingdomFromDB = kingdomService.verifyKingdom(username);
-        List<ResourcesModel> rm = kingdomFromDB.getResourcesModel();
-        return rm;
-    }
-
     public Timestamp getCurrentTimestamp() {
         return new Timestamp(System.currentTimeMillis());
-    }
-
-    public long getCurrentTimeAsLong() {
-        return getCurrentTimestamp().getTime();
     }
 
     public long timeDifferenceInMinIn(long timestamp1, long timestamp2) {
@@ -62,14 +56,44 @@ public class ResourceService {
         return TimeUnit.MILLISECONDS.toMinutes(milliseconds);
     }
 
-    public List<ResourcesModel> resourceDisplayandUpdate(String username, int amountGeneratedPerMinute) {
+    public List<Building> getGoldResources(Kingdom kingdom) {
+        return buildingRepository.findAllByKingdom(kingdom).stream()
+                .filter(building -> building.getType().equals("mine"))
+                .collect(Collectors.toList());
+    }
+
+    public int getSumOfBuildingLevels(Kingdom kingdom, String buildingType) {
+        return kingdom.getBuildings().stream()
+                .filter(b -> b.getType().equals(buildingType))
+                .mapToInt(Building::getLevel)
+                .sum();
+    }
+
+    public List<ResourcesModel> resourceDisplayandUpdate(String username) {
         Kingdom kingdomFromDB = kingdomService.verifyKingdom(username);
         List<ResourcesModel> rmListFromDB = kingdomFromDB.getResourcesModel();
-        for (ResourcesModel r : rmListFromDB) {
-            r.setAmount(r.getAmount() + (timeDifferenceInMinIn(r.getUpdatedAt(),System.currentTimeMillis()) * amountGeneratedPerMinute));
-            r.setUpdatedAt(getCurrentTimestamp().getTime());
-            r.setGenerated(timeDifferenceInMinIn(r.getUpdatedAt(),System.currentTimeMillis()));
-            resourceRepository.save(r);
+        List<String>buildingTypes = Arrays.asList("mine","farm");
+//        for (ResourcesModel r : rmListFromDB) {
+//            long OriginalUpdatedAt = r.getUpdatedAt();
+//            String buildingType = kingdomFromDB.getBuildings().get(0).getType();
+//            //long plusToOriginalResValue = timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis()) * getSumOfBuildingLevels(kingdomFromDB, buildingType);
+//            long timeDiff = timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis());
+//            long sumRes = getSumOfBuildingLevels(kingdomFromDB, buildingType);
+//            r.setAmount(r.getAmount() + (timeDiff * sumRes));
+//            r.setUpdatedAt(getCurrentTimestamp().getTime());
+//            r.setGenerated(timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis()) * getSumOfBuildingLevels(kingdomFromDB, buildingType));
+//            resourceRepository.save(r);
+//        }
+        for (int i = 0; i < 2; i++) {
+            long OriginalUpdatedAt = rmListFromDB.get(i).getUpdatedAt();
+            String buildingType = buildingTypes.get(i);
+            long timeDiff = timeDifferenceInMinIn(OriginalUpdatedAt, System.currentTimeMillis());
+            long sumRes = getSumOfBuildingLevels(kingdomFromDB, buildingType);
+
+            rmListFromDB.get(i).setAmount(rmListFromDB.get(i).getAmount() + (timeDiff * sumRes));
+            rmListFromDB.get(i).setUpdatedAt(getCurrentTimestamp().getTime());
+            rmListFromDB.get(i).setGenerated(timeDiff * sumRes);
+            resourceRepository.save(rmListFromDB.get(i));
         }
         return rmListFromDB;
     }
