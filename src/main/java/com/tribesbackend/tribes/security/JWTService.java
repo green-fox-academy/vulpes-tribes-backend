@@ -30,6 +30,7 @@ public class JWTService {
                 .build()
                 .verify(jwtToken)
                 .getSubject();
+
         return user;
     }
 
