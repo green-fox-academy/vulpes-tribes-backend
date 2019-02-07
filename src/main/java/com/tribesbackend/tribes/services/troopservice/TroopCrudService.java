@@ -5,6 +5,7 @@ import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.Troop;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.repositories.TroopRepository;
+import com.tribesbackend.tribes.services.PurchaseService;
 import com.tribesbackend.tribes.services.TimeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,14 @@ public class TroopCrudService {
     TroopRepository troopRepository;
     private TimeService timeService;
     private BuildingRepository buildingRepository;
+    private PurchaseService purchaseService;
 
     @Autowired
-    public TroopCrudService(TroopRepository troopRepository, TimeService timeService, BuildingRepository buildingRepository) {
+    public TroopCrudService(TroopRepository troopRepository, TimeService timeService, BuildingRepository buildingRepository, PurchaseService purchaseService) {
         this.troopRepository = troopRepository;
         this.timeService = timeService;
         this.buildingRepository = buildingRepository;
+        this.purchaseService = purchaseService;
     }
 
     public void save(Troop newTroop) throws Exception {
@@ -40,6 +43,7 @@ public class TroopCrudService {
         newTroop.setKingdom(kingdom);
         int maxLevel = barrackList.stream().max(Comparator.comparing(Building::getLevel)).get().getLevel();
         newTroop.setFinishedAt(timeService.finishedAtTroop(newTroop.getStartedAt(), 1, maxLevel));
+        purchaseService.decreaseGold(1, kingdom.getId(), "troop");
         troopRepository.save(newTroop);
         return newTroop;
     }
