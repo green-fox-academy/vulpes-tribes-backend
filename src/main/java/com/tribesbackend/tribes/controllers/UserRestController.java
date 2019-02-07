@@ -2,11 +2,13 @@
 package com.tribesbackend.tribes.controllers;
 
 
+import com.tribesbackend.tribes.models.Building;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.models.TribesUser;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationInputJson;
 import com.tribesbackend.tribes.models.jsonmodels.RegistrationResponseJson;
+import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.repositories.ResourceRepository;
 import com.tribesbackend.tribes.repositories.UserTRepository;
@@ -36,19 +38,21 @@ public class UserRestController extends BaseController {
     private ResourceService resourceService;
     private ResourceRepository resourceRepository;
 private KingdomRepository kingdomRepository;
+    private BuildingRepository buildingRepository;
 
 
     @Autowired
     public UserRestController(UserTRepository userTRepository, UserModelHelpersMethods userMethods,
                               UserCrudService userCrudService, KingdomRepository kingdomRepo,
                               BCryptPasswordEncoder bCryptPasswordEncoder, ResourceService resourceService,
-                              ResourceRepository resourceRepository, KingdomRepository kingdomRepository) {
+                              ResourceRepository resourceRepository, KingdomRepository kingdomRepository, BuildingRepository buildingRepository) {
         this.userTRepository = userTRepository;
         this.userMethods = userMethods;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
         this.resourceService = resourceService;
         this.resourceRepository = resourceRepository;
         this.kingdomRepository = kingdomRepository;
+        this.buildingRepository = buildingRepository;
     }
 
     @PostMapping(value = "/register")
@@ -59,6 +63,8 @@ private KingdomRepository kingdomRepository;
             return ResponseEntity.status(HttpStatus.CONFLICT).body(ErrorMessagesMethods.usernameAlreadyTaken());
         }
         Kingdom newKingdom = new Kingdom(regjson.getKingdom(), newUser);
+        Building townhall = new Building("townhall", newKingdom);
+        townhall.setFinishedAt(System.currentTimeMillis());
         newUser.setKingdom(newKingdom);
         userTRepository.save(newUser);
        kingdomRepository.save(newKingdom);
@@ -66,6 +72,7 @@ private KingdomRepository kingdomRepository;
         newKingdom.setResourcesModel(newResources);
         newUser.setKingdom(newKingdom);
         newResources.forEach(resourcesModel -> resourceRepository.save(resourcesModel));
+        buildingRepository.save(townhall);
 //        return new ResponseEntity(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),
 //                newKingdom.getId(), "No avatar yet", 0), HttpStatus.OK);
         return ResponseEntity.ok(new RegistrationResponseJson(newUser.getId(), newUser.getUsername(),

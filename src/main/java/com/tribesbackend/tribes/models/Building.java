@@ -45,6 +45,7 @@ public class Building {
         startedAt = (new Timestamp(System.currentTimeMillis())).getTime();
     }
 
+
     public Building(String type, int level, int HP) {
         this.type = type;
         this.level = level;
