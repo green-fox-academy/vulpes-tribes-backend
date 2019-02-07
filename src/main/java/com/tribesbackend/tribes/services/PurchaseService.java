@@ -15,15 +15,21 @@ import java.util.Optional;
 
 @Service
 public class PurchaseService {
+    ResourceRepository resourceRepository;
+    ItemPriceRepository itemPriceRepository;
+    BuildingRepository buildingRepo;
+    TroopRepository troopRepo;
 
     @Autowired
-    ResourceRepository resourceRepository;
-    @Autowired
-    ItemPriceRepository itemPriceRepository;
-    @Autowired
-    BuildingRepository buildingRepo;
-    @Autowired
-    TroopRepository troopRepo;
+    public PurchaseService (ResourceRepository resourceRepository,
+            ItemPriceRepository itemPriceRepository,
+            BuildingRepository buildingRepo,
+            TroopRepository troopRepo){
+        this.resourceRepository = resourceRepository;
+        this.itemPriceRepository = itemPriceRepository;
+        this.buildingRepo = buildingRepo;
+        this.troopRepo = troopRepo;
+    }
 
 
     public long priceOfItem(String type, long level) {
