@@ -33,8 +33,11 @@ public class KingdomRestController extends BaseController {
     @PutMapping(value = "/kingdom")
     public ResponseEntity putKingdom(@RequestBody KingdomInputJson kingdomInputJson) {
         Kingdom kingdom = getCurrentKingdom();
+        Location location = getCurrentKingdom().getLocation();
+        location.setX(kingdomInputJson.getLocationX());
+        location.setY(kingdomInputJson.getLocationY());
         kingdom.setName(kingdomInputJson.getName());
-        kingdom.setLocation(new Location(kingdomInputJson.getLocationX(), kingdomInputJson.getLocationY(),kingdom));
+        kingdom.setLocation(location);
         kingdomRepository.save(kingdom);
         return new ResponseEntity(new KingdomResponseJson(kingdom), HttpStatus.OK);
     }
