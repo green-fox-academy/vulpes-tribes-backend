@@ -3,6 +3,7 @@ package com.tribesbackend.tribes.services.troopservice;
 import com.tribesbackend.tribes.models.Building;
 import com.tribesbackend.tribes.models.Kingdom;
 import com.tribesbackend.tribes.models.Troop;
+import com.tribesbackend.tribes.models.jsonmodels.TroopSoloIdJson;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.repositories.TroopRepository;
 import com.tribesbackend.tribes.services.PurchaseService;
@@ -60,5 +61,16 @@ public class TroopCrudService {
             }
         }
         return (counterOfBuildingTroops < barrackList.size());
+    }
+
+    public Troop updateTroopLevel(Kingdom kingdom, Troop troop, TroopSoloIdJson troopSoloIdJson){
+        int updatedLevel = troop.getLevel() + 1;
+        List<Building> barrackList = buildingRepository.findByKingdomIdAndType(kingdom.getId(), "barracks");
+        troop.setLevel(updatedLevel);
+        troop.setStartedAt(System.currentTimeMillis());
+        troop.setFinishedAt(timeService.finishedAtTroop(troop.getStartedAt(), troop.getLevel(), barrackList.stream().max(Comparator.comparing(Building::getLevel)).get().getLevel()));
+        troopRepository.save(troop);
+        purchaseService.decreaseGold(troopSoloIdJson.getLevel(), kingdom.getId(), "troop");
+        return troop;
     }
 }

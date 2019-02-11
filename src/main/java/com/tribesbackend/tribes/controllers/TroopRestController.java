@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.Comparator;
+
 import java.util.List;
 
 @CrossOrigin("*")
@@ -46,45 +46,43 @@ public class TroopRestController extends BaseController {
     public ResponseEntity<Object> createTroop() {
         Kingdom kingdom = getCurrentKingdom();
         List<Building> barrackList = buildingRepository.findByKingdomIdAndType(kingdom.getId(), "barracks");
-        if (purchaseService.purchasableItem(kingdom.getId(), "troop", 1) == true) {
+        if (purchaseService.purchasableItem(kingdom.getId(), "troop", 1)) {
             if (troopCrudService.barrackIsAvaliable(kingdom, barrackList)) {
                 Troop newTroop = troopCrudService.createAndSaveTroop(kingdom, barrackList);
                 return new ResponseEntity(newTroop, HttpStatus.OK);
-            } else return new ResponseEntity(new ErrorResponseModel("No barracks available"), HttpStatus.CONFLICT);
-        } else return new ResponseEntity(new ErrorResponseModel("Not enough resources"), HttpStatus.CONFLICT);
+            } else return ResponseEntity.status(409).body(new ErrorResponseModel("No barracks available"));
+        } else return ResponseEntity.status(409).body(new ErrorResponseModel("Not enough resources"));
     }
 
     @GetMapping(value = "/kingdom/troops/{id}")
     public ResponseEntity<Object> listOfTroops(@PathVariable long id) {
         if (troopRepository.findById(id).isPresent()) {
             return new ResponseEntity(troopRepository.findById(id), HttpStatus.OK);
-        } else return new ResponseEntity(new ErrorResponseModel("Id not found"),
-                HttpStatus.NOT_FOUND);
+        } else return ResponseEntity.status(200).body(new ErrorResponseModel("Id not found"));
     }
 
     @PutMapping(value = "/kingdom/troops/{id}")
     public ResponseEntity<Object> upgradeTroopLevel(@PathVariable Long id, @RequestBody TroopSoloIdJson troopSoloIdJson) {
         Kingdom kingdom = getCurrentKingdom();
-        if (troopRepository.findById(id).isPresent()) {
-            Troop troop = troopRepository.findById(id).get();
-            if (troopSoloIdJson!=null) {
-                if (troopSoloIdJson.getLevel() - 1 == troop.getLevel()) {
-                    if (purchaseService.purchasableItem(kingdom.getId(), "troop", troop.getLevel() + 1) == true) {
-                        if (troop.getFinishedAt() <= System.currentTimeMillis()) {
-                            if (troopCrudService.barrackIsAvaliable(kingdom, buildingRepository.findByKingdomIdAndType(kingdom.getId(), "barracks")) == true) {
-                                int updatedLevel = troop.getLevel() + 1;
-                                List<Building> barrackList = buildingRepository.findByKingdomIdAndType(kingdom.getId(), "barracks");
-                                troop.setLevel(updatedLevel);
-                                troop.setStartedAt(System.currentTimeMillis());
-                                troop.setFinishedAt(timeService.finishedAtTroop(troop.getStartedAt(), troop.getLevel(), barrackList.stream().max(Comparator.comparing(Building::getLevel)).get().getLevel()));
-                                troopRepository.save(troop);
-                                purchaseService.decreaseGold(troopSoloIdJson.getLevel(), kingdom.getId(), "troop");
-                                return new ResponseEntity(troop, HttpStatus.OK);
-                            } else return new ResponseEntity(new ErrorResponseModel("No barracks available."), HttpStatus.CONFLICT);
-                        } else return new ResponseEntity(new ErrorResponseModel("Troop is still creating."), HttpStatus.NOT_ACCEPTABLE);
-                    } else return new ResponseEntity(new ErrorResponseModel("Not enough resource."), HttpStatus.CONFLICT);
-                } else return new ResponseEntity(new ErrorResponseModel("Invalid troop level."), HttpStatus.NOT_ACCEPTABLE);
-            } else return new ResponseEntity(new ErrorResponseModel("Missing parameter/(s)!"), HttpStatus.BAD_REQUEST);
-        } else return new ResponseEntity(new ErrorResponseModel("Id not found."), HttpStatus.NOT_FOUND);
+        Troop troop = troopRepository.findById(id).get();
+        if (!troopRepository.findById(id).isPresent()) {
+            return ResponseEntity.status(400).body(new ErrorResponseModel("Id not found."));
+        }
+        if (troopSoloIdJson == null) {
+            return ResponseEntity.status(400).body(new ErrorResponseModel("Missing parameter/(s)!"));
+        }
+
+        if (troopSoloIdJson.getLevel() - 1 != troop.getLevel()) {
+            return ResponseEntity.status(406).body(new ErrorResponseModel("Invalid troop level."));
+        }
+        if (!purchaseService.purchasableItem(kingdom.getId(), "troop", troop.getLevel() + 1)) {
+            return ResponseEntity.status(409).body(new ErrorResponseModel("Not enough resource."));
+        }
+        if (troop.getFinishedAt() <= System.currentTimeMillis()) {
+            return ResponseEntity.status(406).body(new ErrorResponseModel("Troop is still creating."));
+        }
+        if (troopCrudService.barrackIsAvaliable(kingdom, buildingRepository.findByKingdomIdAndType(kingdom.getId(), "barracks"))) {
+            return ResponseEntity.status(200).body(troopCrudService.updateTroopLevel(kingdom,troop,troopSoloIdJson));
+        } else return ResponseEntity.status(409).body(new ErrorResponseModel("No barracks available."));
     }
 }
