@@ -37,6 +37,6 @@ public class MockBattleRestController extends BaseController{
         if (enemyKingdom.isPresent()) {
             return new ResponseEntity(new OKstatus("Battle started against " + enemyKingdom.get().getName()), HttpStatus.OK);
         }
-        else return new ResponseEntity(new ErrorResponseModel("No such kingdom"), HttpStatus.CONFLICT);
+        else return ResponseEntity.status(409).body(new ErrorResponseModel("No such kingdom"));
     }
 }

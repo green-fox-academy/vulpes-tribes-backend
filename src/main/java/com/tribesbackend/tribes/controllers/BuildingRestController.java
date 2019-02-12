@@ -23,16 +23,12 @@ public class BuildingRestController extends BaseController {
     private BuildingRepository buildingRepo;
     private PurchaseService purchaseService;
     private TimeService timeService;
-    private ResourceRepository resourceRepository;
-
 
     @Autowired
-    BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService, TimeService timeService,
-                           ResourceRepository resourceRepository) {
+    BuildingRestController(BuildingRepository buildingRepo, PurchaseService purchaseService, TimeService timeService) {
         this.buildingRepo = buildingRepo;
         this.purchaseService = purchaseService;
         this.timeService = timeService;
-        this.resourceRepository = resourceRepository;
     }
 
     @GetMapping(value = "/kingdom/buildings")
@@ -46,7 +42,7 @@ public class BuildingRestController extends BaseController {
     @PostMapping(value = "/kingdom/buildings")
     public ResponseEntity<Object> createBuilding(@RequestBody CreateBuildingJson createBuildingJson) {
         if (createBuildingJson.getType() == null || createBuildingJson.getType().equals("")) {
-            return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): type!"), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(400).body(new ErrorResponseModel("Missing parameter(s): type!"));
         } else if (createBuildingJson.getType().equals("farm") || createBuildingJson.getType().equals("mine") || createBuildingJson.getType().equals("barracks") || createBuildingJson.getType().equals("townhall")) {
             Kingdom kingdom = getCurrentKingdom();
             if (purchaseService.purchasableItem(kingdom.getId(), createBuildingJson.getType(), 1)) {
@@ -55,8 +51,8 @@ public class BuildingRestController extends BaseController {
                 buildingRepo.save(newBuilding);
                 purchaseService.decreaseGold(1L,getCurrentKingdom().getId(),createBuildingJson.getType());
                 return new ResponseEntity(newBuilding, HttpStatus.OK);
-            } else return new ResponseEntity(new ErrorResponseModel("Not enough resources"), HttpStatus.CONFLICT);
-        } else return new ResponseEntity(new ErrorResponseModel("Invalid building type"), HttpStatus.NOT_ACCEPTABLE);
+            } else return ResponseEntity.status(409).body(new ErrorResponseModel("Not enough resources"));
+        } else return ResponseEntity.status(406).body(new ErrorResponseModel("Invalid building type"));
     }
 
     @GetMapping(value = "/kingdom/buildings/{id}")
@@ -64,22 +60,21 @@ public class BuildingRestController extends BaseController {
     public ResponseEntity<Object> listTheBuilding(@PathVariable long id) {
         if (buildingRepo.findById(id).isPresent()) {
             return new ResponseEntity(buildingRepo.findById(id), HttpStatus.OK);
-        } else return new ResponseEntity(new ErrorResponseModel("Id not found"),
-                HttpStatus.NOT_FOUND);
+        } else return ResponseEntity.status(404).body(new ErrorResponseModel("Id not found"));
     }
 
     @PutMapping(value = "/kingdom/buildings/{id}")
     public ResponseEntity<Object> upgradeOrDowngradeBuilding(@PathVariable Long id,
                                                              @RequestBody BuildingInputJson buildingInputJson) {
         if (buildingInputJson.getLevel() == null || buildingInputJson.getLevel().toString().isEmpty()) {
-            return new ResponseEntity(new ErrorResponseModel("Missing parameter(s): level !"), HttpStatus.BAD_REQUEST);
+            return ResponseEntity.status(400).body(new ErrorResponseModel("Missing parameter(s): level !"));
             //not valid level of the building
         } else if (!(buildingRepo.findById(id).isPresent())) {
-            return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(404).body(new ErrorResponseModel("Id not found"));
         } else if ((buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() != 1) || buildingInputJson.getLevel() > 5) {
-            return new ResponseEntity(new ErrorResponseModel("Invalid building level"), HttpStatus.NOT_ACCEPTABLE);
+            return ResponseEntity.status(406).body(new ErrorResponseModel("Invalid building level"));
         }else if (buildingRepo.findById(id).get().getFinishedAt()> System.currentTimeMillis()){
-            return new ResponseEntity(new ErrorResponseModel("Building is not created yet, cannot be updated"), HttpStatus.NOT_ACCEPTABLE);
+            return ResponseEntity.status(406).body(new ErrorResponseModel("Building is not created yet, cannot be updated"));
         } else if (buildingRepo.findById(id).isPresent()
                 && (buildingInputJson.getLevel() - buildingRepo.findById(id).get().getLevel() == 1)
                 && (purchaseService.purchasableItem(getCurrentKingdom().getId(), buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel()))
@@ -98,7 +93,7 @@ public class BuildingRestController extends BaseController {
         //not enough resource
         else if (purchaseService.priceOfItem(buildingRepo.findById(id).get().getType(), buildingInputJson.getLevel())
                 > purchaseService.currentGoldAmount(getCurrentKingdom().getId())) {
-            return new ResponseEntity(new ErrorResponseModel("Not enough resource"), HttpStatus.CONFLICT);
-        } else return new ResponseEntity(new ErrorResponseModel("This never can happen"), HttpStatus.IM_USED);
+            return ResponseEntity.status(409).body(new ErrorResponseModel("Not enough resource"));
+        } else return ResponseEntity.status(226).body(new ErrorResponseModel("This never can happen"));
     }
 }

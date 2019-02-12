@@ -9,7 +9,6 @@ import com.tribesbackend.tribes.models.jsonmodels.TroopSoloIdJson;
 import com.tribesbackend.tribes.repositories.BuildingRepository;
 import com.tribesbackend.tribes.repositories.TroopRepository;
 import com.tribesbackend.tribes.services.PurchaseService;
-import com.tribesbackend.tribes.services.TimeService;
 import com.tribesbackend.tribes.services.responseservice.ErrorResponseModel;
 import com.tribesbackend.tribes.services.troopservice.TroopCrudService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,15 +25,14 @@ public class TroopRestController extends BaseController {
     private PurchaseService purchaseService;
     private TroopCrudService troopCrudService;
     private BuildingRepository buildingRepository;
-    private TimeService timeService;
+
 
     @Autowired
-    public TroopRestController(TroopRepository troopRepository, PurchaseService purchaseService, TroopCrudService troopCrudService, BuildingRepository buildingRepository, TimeService timeService) {
+    public TroopRestController(TroopRepository troopRepository, PurchaseService purchaseService, TroopCrudService troopCrudService, BuildingRepository buildingRepository) {
         this.troopRepository = troopRepository;
         this.purchaseService = purchaseService;
         this.troopCrudService = troopCrudService;
         this.buildingRepository = buildingRepository;
-        this.timeService = timeService;
     }
 
     @GetMapping(value = "/kingdom/troops")
@@ -71,7 +69,6 @@ public class TroopRestController extends BaseController {
         if (troopSoloIdJson == null) {
             return ResponseEntity.status(400).body(new ErrorResponseModel("Missing parameter/(s)!"));
         }
-
         if (troopSoloIdJson.getLevel() - 1 != troop.getLevel()) {
             return ResponseEntity.status(406).body(new ErrorResponseModel("Invalid troop level."));
         }
@@ -83,6 +80,7 @@ public class TroopRestController extends BaseController {
         }
         if (troopCrudService.barrackIsAvaliable(kingdom, buildingRepository.findByKingdomIdAndType(kingdom.getId(), "barracks"))) {
             return ResponseEntity.status(200).body(troopCrudService.updateTroopLevel(kingdom,troop,troopSoloIdJson));
-        } else return ResponseEntity.status(409).body(new ErrorResponseModel("No barracks available."));
+        }
+        else return ResponseEntity.status(409).body(new ErrorResponseModel("No barracks available."));
     }
 }

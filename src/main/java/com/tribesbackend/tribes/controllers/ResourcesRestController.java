@@ -1,16 +1,13 @@
 
 package com.tribesbackend.tribes.controllers;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import com.tribesbackend.tribes.models.ResourcesModel;
 import com.tribesbackend.tribes.models.jsonmodels.ResourcesModelListResponseJson;
 import com.tribesbackend.tribes.repositories.KingdomRepository;
 import com.tribesbackend.tribes.services.resourcesservice.ResourceService;
 import com.tribesbackend.tribes.services.responseservice.ErrorMessagesMethods;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

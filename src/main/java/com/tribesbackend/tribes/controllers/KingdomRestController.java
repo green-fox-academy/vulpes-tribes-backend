@@ -42,7 +42,7 @@ public class KingdomRestController extends BaseController {
     @GetMapping(value = "/kingdom/{id}")
     public ResponseEntity getKingdomId(@PathVariable Long id) {
         if (!kingdomRepository.findKingdomById(id).isPresent()) {
-            return new ResponseEntity(new ErrorResponseModel("Id not found"), HttpStatus.NOT_FOUND);
+            return ResponseEntity.status(404).body(new ErrorResponseModel("Id not found"));
         } else {
 
             Kingdom kingdom = kingdomRepository.findKingdomById(id).orElseThrow(NoSuchElementException::new);
